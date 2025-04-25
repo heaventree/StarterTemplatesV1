@@ -107,7 +107,7 @@ export default function TemplatesSection() {
             {[...Array(12)].map((_, index) => (
               <div 
                 key={index} 
-                className="bg-gray-100 rounded-lg aspect-[4/3] animate-pulse"
+                className="bg-gray-100 rounded-lg aspect-[2/3] animate-pulse"
               ></div>
             ))}
           </div>

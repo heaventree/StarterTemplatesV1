@@ -37,7 +37,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
   };
 
   return (
-    <div className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+    <div className="group bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
       {/* Page builder label at top */}
       <div className={`${getPageBuilderColor(template.pageBuilder)} text-xs font-medium px-2 py-1 text-center sticky top-0 z-10`}>
         {template.pageBuilder}
@@ -49,7 +49,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           href={template.demoUrl || '#'} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="block aspect-[4/3]"
+          className="block aspect-[2/3]"
         >
           <img 
             src={getImagePath(template.imageUrl)} 
