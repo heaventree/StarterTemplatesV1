@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Lexend+Deca:wght@400;500;600;700&display=swap');
+
+/* Font faces for ProximaNova */
+@font-face {
+  font-family: 'ProximaNova-Regular';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://startertemplates.com/wp-content/uploads/2020/08/398675_8_0-1.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'ProximaNova-Bold';
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://startertemplates.com/wp-content/uploads/2020/08/398675_5_0-1-1.woff2') format('woff2');
+}
+
+.font-proxima {
+  font-family: 'ProximaNova-Regular', sans-serif;
+}
+
+.font-proxima-bold {
+  font-family: 'ProximaNova-Bold', sans-serif;
+}
+
+.font-figtree {
+  font-family: 'Figtree', sans-serif;
+}
+
+.font-lexend {
+  font-family: 'Lexend Deca', sans-serif;
+}
