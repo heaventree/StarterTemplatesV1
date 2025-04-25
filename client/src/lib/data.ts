@@ -102,8 +102,8 @@ export const footerLinks = {
 
 // Stats
 export const stats = [
-  { value: "600+", label: "Templates" },
+  { value: "164+", label: "Templates" },
   { value: "4", label: "Page Builders" },
-  { value: "50+", label: "Categories" },
+  { value: "7+", label: "Categories" },
   { value: "100K+", label: "Happy Users" }
 ];

@@ -1,6 +1,21 @@
 import { stats } from "@/lib/data";
+import { useQuery } from "@tanstack/react-query";
+import type { Template } from "@shared/schema";
 
 export default function Hero() {
+  // Get actual template count from API
+  const { data: templates = [] } = useQuery<Template[]>({
+    queryKey: ["/api/templates"]
+  });
+  
+  // Create dynamic stats with actual template count
+  const dynamicStats = [
+    { value: `${templates.length}+`, label: "Templates" },
+    { value: "4", label: "Page Builders" },
+    { value: "7+", label: "Categories" },
+    { value: "100K+", label: "Happy Users" }
+  ];
+  
   return (
     <section className="pt-28 pb-16 lg:pt-40 lg:pb-24 relative bg-gradient-to-br from-[#dd4f93] via-[#8c21a1] to-[#1e056f] overflow-hidden">
       {/* Hero overlay pattern */}
@@ -22,7 +37,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto">
-            Build a stunning website in minutes with Starter Templates. Choose from 600+ ready-to-use website templates and blocks for your favorite page builder.
+            Build a stunning website in minutes with Starter Templates. Choose from {templates.length}+ ready-to-use website templates and blocks for your favorite page builder.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
@@ -41,7 +56,7 @@ export default function Hero() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
-            {stats.map((stat, index) => (
+            {dynamicStats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-white mb-1 count-animation">
                   {stat.value}
