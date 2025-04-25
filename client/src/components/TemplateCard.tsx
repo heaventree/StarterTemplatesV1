@@ -39,7 +39,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
   return (
     <div className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
       {/* Page builder label at top */}
-      <div className={`${getPageBuilderColor(template.pageBuilder)} text-xs font-medium px-2 py-1 text-center`}>
+      <div className={`${getPageBuilderColor(template.pageBuilder)} text-xs font-medium px-2 py-1 text-center sticky top-0 z-10`}>
         {template.pageBuilder}
       </div>
 
@@ -54,7 +54,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           <img 
             src={getImagePath(template.imageUrl)} 
             alt={template.title} 
-            className="w-full h-48 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {
               // Fallback if image doesn't load
               const target = e.target as HTMLImageElement;
