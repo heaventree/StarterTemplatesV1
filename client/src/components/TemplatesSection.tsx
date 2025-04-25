@@ -8,6 +8,8 @@ export default function TemplatesSection() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTemplates, setFilteredTemplates] = useState<Template[]>([]);
+  const [displayCount, setDisplayCount] = useState(12); // Initial display count
+  const [showViewMore, setShowViewMore] = useState(true);
 
   const { data: templates = [], isLoading } = useQuery<Template[]>({
     queryKey: ["/api/templates"],
@@ -34,8 +36,24 @@ export default function TemplatesSection() {
       }
       
       setFilteredTemplates(filtered);
+      
+      // Reset display count when filters change
+      setDisplayCount(12);
+      // Update view more button visibility
+      setShowViewMore(filtered.length > 12);
     }
   }, [templates, activeCategory, searchTerm]);
+
+  const handleViewMore = () => {
+    // Increase display count by 14 (as suggested)
+    const newCount = Math.min(displayCount + 14, filteredTemplates.length);
+    setDisplayCount(newCount);
+    
+    // Hide button if all templates are displayed
+    if (newCount >= filteredTemplates.length) {
+      setShowViewMore(false);
+    }
+  };
 
   return (
     <section id="templates" className="py-16 bg-[#f9fafb]">
@@ -85,8 +103,8 @@ export default function TemplatesSection() {
         
         {/* Templates Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(12)].map((_, index) => (
               <div 
                 key={index} 
                 className="bg-gray-100 rounded-lg h-72 animate-pulse"
@@ -94,27 +112,37 @@ export default function TemplatesSection() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {filteredTemplates.map((template) => (
-              <TemplateCard 
-                key={template.id} 
-                template={template} 
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredTemplates.slice(0, displayCount).map((template) => (
+                <TemplateCard 
+                  key={template.id} 
+                  template={template} 
+                />
+              ))}
+            </div>
+            
+            {/* Template Count Display */}
+            <div className="mt-8 text-center text-gray-500 text-sm">
+              Showing {Math.min(displayCount, filteredTemplates.length)} of {filteredTemplates.length} templates
+            </div>
+          </>
         )}
         
-        <div className="mt-12 text-center">
-          <a 
-            href="#" 
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white font-proxima-bold py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg"
-          >
-            VIEW ALL TEMPLATES
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
+        {/* View More Button */}
+        {showViewMore && !isLoading && (
+          <div className="mt-12 text-center">
+            <button 
+              onClick={handleViewMore}
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white font-proxima-bold py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg"
+            >
+              VIEW ALL TEMPLATES
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
