@@ -133,7 +133,8 @@ export class MemStorage implements IStorage {
         category: "E-Commerce",
         tags: ["Fashion", "Store", "E-commerce"],
         pageBuilder: "Elementor",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/fashion-store-04"
       },
       {
         title: "Fitness",
@@ -141,7 +142,8 @@ export class MemStorage implements IStorage {
         category: "Health & Fitness",
         tags: ["Fitness", "Gym", "Health"],
         pageBuilder: "Beaver Builder",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/fitness-04"
       },
       {
         title: "Health Coach",
@@ -149,7 +151,8 @@ export class MemStorage implements IStorage {
         category: "Health & Fitness",
         tags: ["Health", "Coaching", "Wellness"],
         pageBuilder: "Brizy",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/health-coach-04"
       },
       {
         title: "Interior Designer",
@@ -157,7 +160,8 @@ export class MemStorage implements IStorage {
         category: "Design",
         tags: ["Interior", "Design", "Decoration"],
         pageBuilder: "Elementor",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/interior-designer-04"
       },
       {
         title: "Pet Adoption Agency",
