@@ -80,247 +80,250 @@ export class MemStorage implements IStorage {
       this.createPageBuilder(builder);
     });
 
-    // Initialize templates with images from the original StarterTemplates.com site
+    // Initialize templates with actual images from the StarterTemplates.com repository
     const templateData: InsertTemplate[] = [
       {
-        title: "Business Pro",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/06/business-template-768x576.jpg",
+        title: "Business Consulting",
+        imageUrl: "/images/business-consulting-02-home.jpg",
         category: "Business",
-        tags: ["Business", "Corporate"],
+        tags: ["Business", "Corporate", "Consulting"],
         pageBuilder: "Elementor",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/business-consulting-02"
       },
       {
-        title: "Shop Elegance",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/05/ecommerce-template-768x576.jpg",
-        category: "E-Commerce",
-        tags: ["E-commerce", "Retail"],
+        title: "Cafe",
+        imageUrl: "/images/cafe-04.jpg",
+        category: "Food & Drink",
+        tags: ["Cafe", "Restaurant", "Food"],
         pageBuilder: "Gutenberg",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/cafe-04"
       },
       {
-        title: "Creative Blog",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/04/blog-template-768x576.jpg",
-        category: "Blog",
-        tags: ["Blog", "Magazine"],
+        title: "Car Repair",
+        imageUrl: "/attached_assets/images/car-repair-02-homepage.jpg",
+        category: "Automotive",
+        tags: ["Automotive", "Service", "Repair"],
         pageBuilder: "Beaver Builder",
         isPro: false
-      },
-      {
-        title: "Portfolio Pro",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/03/portfolio-template-768x576.jpg",
-        category: "Portfolio",
-        tags: ["Portfolio", "Creative"],
-        pageBuilder: "Brizy",
-        isPro: true
-      },
-      {
-        title: "Real Estate",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/02/real-estate-template-768x576.jpg",
-        category: "Business",
-        tags: ["Real Estate", "Property"],
-        pageBuilder: "Elementor",
-        isPro: true
-      },
-      {
-        title: "Restaurant",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/01/restaurant-template-768x576.jpg",
-        category: "Business",
-        tags: ["Restaurant", "Food"],
-        pageBuilder: "Gutenberg",
-        isPro: false
-      },
-      {
-        title: "Agency Pro",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/12/agency-template-768x576.jpg",
-        category: "Business",
-        tags: ["Agency", "Marketing"],
-        pageBuilder: "Beaver Builder",
-        isPro: true
-      },
-      {
-        title: "Travel Blog",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/11/travel-template-768x576.jpg",
-        category: "Blog",
-        tags: ["Travel", "Tourism"],
-        pageBuilder: "Brizy",
-        isPro: false
-      },
-      {
-        title: "Fitness Studio",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/10/fitness-template-768x576.jpg",
-        category: "Business",
-        tags: ["Fitness", "Health"],
-        pageBuilder: "Elementor",
-        isPro: false
-      },
-      {
-        title: "Beauty Salon",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/09/beauty-template-768x576.jpg",
-        category: "Business",
-        tags: ["Beauty", "Salon"],
-        pageBuilder: "Gutenberg",
-        isPro: true
-      },
-      {
-        title: "Wedding Pro",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/08/wedding-template-768x576.jpg",
-        category: "Portfolio",
-        tags: ["Wedding", "Event"],
-        pageBuilder: "Elementor",
-        isPro: true
-      },
-      {
-        title: "Charity Foundation",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/07/charity-template-768x576.jpg",
-        category: "Nonprofit",
-        tags: ["Charity", "Nonprofit"],
-        pageBuilder: "Beaver Builder",
-        isPro: false
-      },
-      {
-        title: "Education Academy",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/05/education-template-768x576.jpg",
-        category: "Education",
-        tags: ["Education", "School"],
-        pageBuilder: "Elementor",
-        isPro: false
-      },
-      {
-        title: "Medical Clinic",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/04/medical-template-768x576.jpg",
-        category: "Business",
-        tags: ["Medical", "Healthcare"],
-        pageBuilder: "Gutenberg",
-        isPro: true
-      },
-      {
-        title: "Law Firm",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/03/law-template-768x576.jpg",
-        category: "Business",
-        tags: ["Law", "Legal"],
-        pageBuilder: "Brizy",
-        isPro: true
       },
       {
         title: "Digital Marketing",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/02/marketing-template-768x576.jpg",
-        category: "Business",
-        tags: ["Marketing", "Digital"],
+        imageUrl: "/attached_assets/images/digital-marketing-04-home.jpg",
+        category: "Marketing",
+        tags: ["Digital", "Marketing", "SEO"],
         pageBuilder: "Elementor",
-        isPro: false
+        isPro: true
       },
       {
-        title: "Coffee Shop",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/01/coffee-template-768x576.jpg",
-        category: "Business",
-        tags: ["Cafe", "Coffee"],
-        pageBuilder: "Beaver Builder",
+        title: "E-Learning",
+        imageUrl: "/attached_assets/images/e-learning-04-landing-page.jpg",
+        category: "Education",
+        tags: ["Education", "Learning", "Online"],
+        pageBuilder: "Gutenberg",
         isPro: false
       },
       {
         title: "Fashion Store",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/12/fashion-template-768x576.jpg",
+        imageUrl: "/attached_assets/images/fashion-store-04-home.jpg",
         category: "E-Commerce",
-        tags: ["Fashion", "Store"],
+        tags: ["Fashion", "Store", "E-commerce"],
         pageBuilder: "Elementor",
         isPro: true
       },
       {
-        title: "Photography",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/11/photography-template-768x576.jpg",
-        category: "Portfolio",
-        tags: ["Photography", "Art"],
-        pageBuilder: "Gutenberg",
-        isPro: true
-      },
-      {
-        title: "Tech Startup",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/10/startup-template-768x576.jpg",
-        category: "Business",
-        tags: ["Startup", "Technology"],
-        pageBuilder: "Elementor",
+        title: "Fitness",
+        imageUrl: "/attached_assets/images/fitness-04-homepage.jpg",
+        category: "Health & Fitness",
+        tags: ["Fitness", "Gym", "Health"],
+        pageBuilder: "Beaver Builder",
         isPro: false
       },
       {
-        title: "Music Studio",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/09/music-template-768x576.jpg",
-        category: "Entertainment",
-        tags: ["Music", "Arts"],
-        pageBuilder: "Beaver Builder",
-        isPro: true
-      },
-      {
-        title: "Hotel & Resort",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/08/hotel-template-768x576.jpg",
-        category: "Business",
-        tags: ["Hotel", "Resort"],
+        title: "Health Coach",
+        imageUrl: "/attached_assets/images/health-coach-04-home.jpg",
+        category: "Health & Fitness",
+        tags: ["Health", "Coaching", "Wellness"],
         pageBuilder: "Brizy",
         isPro: true
       },
       {
-        title: "Pet Care",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/07/pet-template-768x576.jpg",
-        category: "Business",
-        tags: ["Pet", "Animal"],
+        title: "Interior Designer",
+        imageUrl: "/attached_assets/images/interior-designer-04-homepage.jpg",
+        category: "Design",
+        tags: ["Interior", "Design", "Decoration"],
         pageBuilder: "Elementor",
         isPro: false
       },
       {
-        title: "Food Blog",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/06/food-blog-template-768x576.jpg",
-        category: "Blog",
-        tags: ["Food", "Recipe"],
+        title: "Pet Adoption Agency",
+        imageUrl: "/attached_assets/images/pet-adoption-agency-04-home.jpg",
+        category: "Pets & Animals",
+        tags: ["Pet", "Adoption", "Animals"],
         pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Photographer Portfolio",
+        imageUrl: "/attached_assets/images/photographer-portfolio-04-home.jpg",
+        category: "Portfolio",
+        tags: ["Photography", "Portfolio", "Creative"],
+        pageBuilder: "Beaver Builder",
         isPro: false
       },
       {
-        title: "Art Gallery",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/05/art-gallery-template-768x576.jpg",
-        category: "Portfolio",
-        tags: ["Art", "Gallery"],
+        title: "Restaurant",
+        imageUrl: "/attached_assets/images/restaurant-04-home.jpg",
+        category: "Food & Drink",
+        tags: ["Restaurant", "Food", "Dining"],
         pageBuilder: "Elementor",
         isPro: true
+      },
+      {
+        title: "Wedding Organizer",
+        imageUrl: "/attached_assets/images/wedding-organizer-homepage.jpg",
+        category: "Events",
+        tags: ["Wedding", "Event", "Planning"],
+        pageBuilder: "Brizy",
+        isPro: false
       },
       {
         title: "Yoga Studio",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/04/yoga-template-768x576.jpg",
-        category: "Business",
-        tags: ["Yoga", "Wellness"],
-        pageBuilder: "Beaver Builder",
-        isPro: false
-      },
-      {
-        title: "Construction",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/03/construction-template-768x576.jpg",
-        category: "Business",
-        tags: ["Construction", "Building"],
+        imageUrl: "/attached_assets/images/yoga-studio-04-home.jpg",
+        category: "Health & Fitness",
+        tags: ["Yoga", "Wellness", "Fitness"],
         pageBuilder: "Elementor",
         isPro: true
       },
       {
-        title: "Interior Design",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/02/interior-template-768x576.jpg",
-        category: "Portfolio",
-        tags: ["Interior", "Design"],
-        pageBuilder: "Brizy",
+        title: "Spa & Wellness",
+        imageUrl: "/attached_assets/images/spa-04-1.jpg",
+        category: "Health & Fitness",
+        tags: ["Spa", "Wellness", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      // Additional templates to have more than 30 in total for pagination
+      {
+        title: "Accountant",
+        imageUrl: "/attached_assets/images/accountant-02.jpg",
+        category: "Business",
+        tags: ["Accounting", "Finance", "Tax"],
+        pageBuilder: "Elementor",
         isPro: true
       },
       {
-        title: "Landscaping",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2023/01/landscaping-template-768x576.jpg",
-        category: "Business",
-        tags: ["Garden", "Landscaping"],
+        title: "AC Technician",
+        imageUrl: "/attached_assets/images/ac-technician-elementor-homepage-sceenshot.jpg",
+        category: "Services",
+        tags: ["AC", "Technician", "Repair"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Animal Welfare",
+        imageUrl: "/attached_assets/images/animal-welfare-home-page.jpg",
+        category: "Nonprofit",
+        tags: ["Animal", "Welfare", "Charity"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "App Landing Page",
+        imageUrl: "/attached_assets/images/appplus-landing-page-04-600x3298.jpg",
+        category: "Technology",
+        tags: ["App", "Mobile", "Landing"],
         pageBuilder: "Gutenberg",
         isPro: false
       },
       {
-        title: "Sports Club",
-        imageUrl: "https://startertemplates.com/wp-content/uploads/2022/12/sports-template-768x576.jpg",
-        category: "Business",
-        tags: ["Sports", "Club"],
+        title: "Aquarium",
+        imageUrl: "/attached_assets/images/aquarium-04-home.jpg",
+        category: "Pets & Animals",
+        tags: ["Aquarium", "Fish", "Marine"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Architects",
+        imageUrl: "/attached_assets/images/architects-home-page.jpg",
+        category: "Architecture",
+        tags: ["Architecture", "Design", "Building"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Arch Masters",
+        imageUrl: "/attached_assets/images/archmasters-architecture-02-600x2302.jpg",
+        category: "Architecture",
+        tags: ["Architecture", "Design", "Construction"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Artist Christine",
+        imageUrl: "/attached_assets/images/artist-christine-home-page.jpg",
+        category: "Art & Creative",
+        tags: ["Artist", "Creative", "Portfolio"],
+        pageBuilder: "Brizy",
+        isPro: false
+      },
+      {
+        title: "Artist Feb 20",
+        imageUrl: "/attached_assets/images/artist-feb-20-home.jpg",
+        category: "Art & Creative",
+        tags: ["Artist", "Creative", "Gallery"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Artist Multipurpose",
+        imageUrl: "/attached_assets/images/artist-multipurpose-02-1-600x1546.jpg",
+        category: "Art & Creative",
+        tags: ["Artist", "Creative", "Portfolio"],
         pageBuilder: "Elementor",
         isPro: false
+      },
+      {
+        title: "Author",
+        imageUrl: "/attached_assets/images/author-home.jpg",
+        category: "Blog & Writing",
+        tags: ["Author", "Writer", "Books"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Ayurveda",
+        imageUrl: "/attached_assets/images/ayurveda-04-home-1.jpg",
+        category: "Health & Wellness",
+        tags: ["Ayurveda", "Wellness", "Holistic"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Baby Store",
+        imageUrl: "/attached_assets/images/baby-stores-04-600x2813.jpg",
+        category: "E-Commerce",
+        tags: ["Baby", "Store", "Kids"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Barber Shop",
+        imageUrl: "/attached_assets/images/barber-shop-02-home-2.jpg",
+        category: "Beauty & Care",
+        tags: ["Barber", "Haircut", "Grooming"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "BBQ Food Truck",
+        imageUrl: "/attached_assets/images/bbq-food-truck-04.jpg",
+        category: "Food & Drink",
+        tags: ["BBQ", "Food Truck", "Restaurant"],
+        pageBuilder: "Elementor",
+        isPro: true
       }
     ];
 
@@ -370,7 +373,14 @@ export class MemStorage implements IStorage {
 
   async createTemplate(insertTemplate: InsertTemplate): Promise<Template> {
     const id = this.templateId++;
-    const template: Template = { ...insertTemplate, id };
+    // Ensure all required fields have values to fix LSP error
+    const template: Template = { 
+      ...insertTemplate, 
+      id,
+      tags: insertTemplate.tags || [],
+      isPro: insertTemplate.isPro === undefined ? false : insertTemplate.isPro,
+      demoUrl: insertTemplate.demoUrl || null
+    };
     this.templates.set(id, template);
     return template;
   }

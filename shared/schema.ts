@@ -16,6 +16,7 @@ export const templates = pgTable("templates", {
   tags: text("tags").array(),
   pageBuilder: text("page_builder").notNull(),
   isPro: boolean("is_pro").notNull().default(false),
+  demoUrl: text("demo_url"),
 });
 
 export const pageBuilders = pgTable("page_builders", {
