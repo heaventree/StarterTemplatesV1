@@ -1669,7 +1669,7 @@ export class MemStorage implements IStorage {
       {
         title: "Digital Marketing Agency",
         imageUrl: "/images/digital-marketing-agency-04-home.jpg",
-        category: "Professional",
+        category: "eLearning",
         tags: ["Digital", "Marketing", "Agency"],
         pageBuilder: "Gutenberg",
         isPro: false
@@ -1685,7 +1685,7 @@ export class MemStorage implements IStorage {
       {
         title: "Digital Services",
         imageUrl: "/images/digital-services-04-home.jpg",
-        category: "Professional",
+        category: "eLearning",
         tags: ["Digital", "Services", "Online"],
         pageBuilder: "Beaver Builder",
         isPro: false
@@ -1901,7 +1901,7 @@ export class MemStorage implements IStorage {
       {
         title: "Health Coach",
         imageUrl: "/images/health-coach-02-home.jpg",
-        category: "Professional",
+        category: "eLearning",
         tags: ["Health", "Coach", "Wellness"],
         pageBuilder: "Elementor",
         isPro: true
@@ -2077,7 +2077,7 @@ export class MemStorage implements IStorage {
       {
         title: "Meditation Center",
         imageUrl: "/images/meditation-center-04-home.jpg",
-        category: "Local Business",
+        category: "eLearning",
         tags: ["Meditation", "Center", "Wellness"],
         pageBuilder: "Elementor",
         isPro: true
@@ -2085,7 +2085,7 @@ export class MemStorage implements IStorage {
       {
         title: "Mindfulness Coach",
         imageUrl: "/images/mindfulness-coach-02-home.jpg",
-        category: "Personal",
+        category: "eLearning",
         tags: ["Mindfulness", "Coach", "Wellness"],
         pageBuilder: "Beaver Builder",
         isPro: false
