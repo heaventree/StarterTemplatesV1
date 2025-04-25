@@ -1412,8 +1412,12 @@ export class MemStorage implements IStorage {
       }
     ];
 
-    templateData.forEach(template => {
+    console.log(`Initializing ${templateData.length} templates...`);
+    templateData.forEach((template, index) => {
       this.createTemplate(template);
+      if (index === templateData.length - 1) {
+        console.log(`Finished initializing templates. Total templates: ${this.templates.size}`);
+      }
     });
   }
 
