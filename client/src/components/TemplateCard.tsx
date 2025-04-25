@@ -49,12 +49,12 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           href={template.demoUrl || '#'} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="block h-full"
+          className="block aspect-[1/2.2]"
         >
           <img 
             src={getImagePath(template.imageUrl)} 
             alt={template.title} 
-            className="w-full h-80 object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {
               // Fallback if image doesn't load
               const target = e.target as HTMLImageElement;
