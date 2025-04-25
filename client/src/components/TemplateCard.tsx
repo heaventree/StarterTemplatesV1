@@ -49,7 +49,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           href={template.demoUrl || '#'} 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="block aspect-[1/2.2]"
+          className="block aspect-[4/3]"
         >
           <img 
             src={getImagePath(template.imageUrl)} 

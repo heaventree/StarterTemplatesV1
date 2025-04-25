@@ -103,17 +103,17 @@ export default function TemplatesSection() {
         
         {/* Templates Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(12)].map((_, index) => (
               <div 
                 key={index} 
-                className="bg-gray-100 rounded-lg h-72 animate-pulse"
+                className="bg-gray-100 rounded-lg aspect-[4/3] animate-pulse"
               ></div>
             ))}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredTemplates.slice(0, displayCount).map((template) => (
                 <TemplateCard 
                   key={template.id} 
