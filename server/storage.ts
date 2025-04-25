@@ -337,6 +337,702 @@ export class MemStorage implements IStorage {
         tags: ["BBQ", "Food Truck", "Restaurant"],
         pageBuilder: "Elementor",
         isPro: true
+      },
+      {
+        title: "Accountant",
+        imageUrl: "/images/accountant-02.jpg",
+        category: "Professional",
+        tags: ["Finance", "Accounting", "Business"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "AC Technician",
+        imageUrl: "/images/ac-technician-elementor-homepage-sceenshot.jpg",
+        category: "Local Business",
+        tags: ["HVAC", "Repair", "Service"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Adham Hoffman Designer",
+        imageUrl: "/images/adham-hoffman-designer-600x900.jpg",
+        category: "Professional",
+        tags: ["Design", "Portfolio", "Creative"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Alexandrina Designer",
+        imageUrl: "/images/alexandrina-designer-600x900.jpg",
+        category: "Professional",
+        tags: ["Design", "Portfolio", "Creative"],
+        pageBuilder: "Brizy",
+        isPro: true
+      },
+      {
+        title: "Animal Welfare",
+        imageUrl: "/images/animal-welfare-home-page.jpg",
+        category: "Non Profit",
+        tags: ["Animal", "NGO", "Charity"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "App Plus Landing Page",
+        imageUrl: "/images/appplus-landing-page-04-600x3298.jpg",
+        category: "Professional",
+        tags: ["App", "Technology", "SaaS"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Aquarium",
+        imageUrl: "/images/aquarium-04-home.jpg",
+        category: "Local Business",
+        tags: ["Aquarium", "Pets", "Marine"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Architects",
+        imageUrl: "/images/architects-home-page.jpg",
+        category: "Professional",
+        tags: ["Architecture", "Design", "Construction"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Archmasters Architecture",
+        imageUrl: "/images/archmasters-architecture-02-600x2302.jpg",
+        category: "Professional",
+        tags: ["Architecture", "Building", "Design"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Artist Christine",
+        imageUrl: "/images/artist-christine-home-page.jpg",
+        category: "Personal",
+        tags: ["Artist", "Creative", "Portfolio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Artist Feb",
+        imageUrl: "/images/artist-feb-20-home.jpg",
+        category: "Personal",
+        tags: ["Artist", "Creative", "Portfolio"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Artist Multipurpose",
+        imageUrl: "/images/artist-multipurpose-02-1-600x1546.jpg",
+        category: "Personal",
+        tags: ["Artist", "Creative", "Portfolio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Author Home",
+        imageUrl: "/images/author-home.jpg",
+        category: "Personal",
+        tags: ["Author", "Writer", "Books"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Ayurveda",
+        imageUrl: "/images/ayurveda-04-home-1.jpg",
+        category: "Professional",
+        tags: ["Health", "Wellness", "Medicine"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Baby Stores",
+        imageUrl: "/images/baby-stores-04-600x2813.jpg",
+        category: "eCommerce",
+        tags: ["Baby", "Kids", "Store"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Barber Shop",
+        imageUrl: "/images/barber-shop-02-home-2.jpg",
+        category: "Local Business",
+        tags: ["Barber", "Haircut", "Grooming"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Beauty Products Store",
+        imageUrl: "/images/beauty-products-store-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Beauty", "Cosmetics", "Store"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Be Bold Beauty Store",
+        imageUrl: "/images/be-bold-beauty-store-04-600x2255.jpg",
+        category: "eCommerce",
+        tags: ["Beauty", "Cosmetics", "Store"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Beer Launch",
+        imageUrl: "/images/beer-launch-02.jpg",
+        category: "Restaurant",
+        tags: ["Beer", "Brewery", "Drinks"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Bestselling Author",
+        imageUrl: "/images/bestselling-author-02-home.jpg",
+        category: "Personal",
+        tags: ["Author", "Books", "Writer"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Bike Modification",
+        imageUrl: "/images/bike-modification-04.jpg",
+        category: "Local Business",
+        tags: ["Bikes", "Motorcycle", "Custom"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Bizpulse",
+        imageUrl: "/images/bizpulse-04-600x3156.jpg",
+        category: "Professional",
+        tags: ["Business", "Corporate", "Consulting"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Black Friday",
+        imageUrl: "/images/black-friday-04-600x2701.jpg",
+        category: "eCommerce",
+        tags: ["Sale", "Promotion", "Shopping"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Black Friday Bonanza",
+        imageUrl: "/images/black-friday-bonanza-04-600x2062.jpg",
+        category: "eCommerce",
+        tags: ["Sale", "Promotion", "Shopping"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Black Friday Sale",
+        imageUrl: "/images/black-friday-sale-04-600x2927.jpg",
+        category: "eCommerce",
+        tags: ["Sale", "Promotion", "Shopping"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Blingg Jewellery",
+        imageUrl: "/images/blingg-jewellery-04-600x2006.jpg",
+        category: "eCommerce",
+        tags: ["Jewelry", "Accessories", "Store"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Blockchain Technology",
+        imageUrl: "/images/blockchain-technology-04-600x2398.jpg",
+        category: "Professional",
+        tags: ["Blockchain", "Technology", "Crypto"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Blog",
+        imageUrl: "/images/blog-02-1.jpg",
+        category: "Personal",
+        tags: ["Blog", "Writing", "Content"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Book Store",
+        imageUrl: "/images/book-store-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Books", "Store", "Reading"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Budget Hotel",
+        imageUrl: "/images/budget-hotel-04-home-page.jpg",
+        category: "Local Business",
+        tags: ["Hotel", "Accommodation", "Hospitality"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Business Blog",
+        imageUrl: "/images/business-blog-04-home.jpg",
+        category: "Professional",
+        tags: ["Business", "Blog", "Corporate"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Business Consultancy",
+        imageUrl: "/images/business-consultancy-firm-04-home.jpg",
+        category: "Professional",
+        tags: ["Business", "Consulting", "Corporate"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Business Consulting",
+        imageUrl: "/images/business-consulting-02-home.jpg",
+        category: "Professional",
+        tags: ["Business", "Consulting", "Corporate"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Business Magazine",
+        imageUrl: "/images/business-magazine-04-home.jpg",
+        category: "Professional",
+        tags: ["Magazine", "News", "Business"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Cafe",
+        imageUrl: "/images/cafe-04.jpg",
+        category: "Restaurant",
+        tags: ["Cafe", "Coffee", "Food"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Cafe Library",
+        imageUrl: "/images/cafe-library-02-home.jpg",
+        category: "Restaurant",
+        tags: ["Cafe", "Library", "Books"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Cake Shop",
+        imageUrl: "/images/cake-shop-04.jpg",
+        category: "eCommerce",
+        tags: ["Cake", "Bakery", "Food"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Calligraphy Artist",
+        imageUrl: "/images/calligraphy-artist-02-home.jpg",
+        category: "Personal",
+        tags: ["Calligraphy", "Art", "Portfolio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Car Repair",
+        imageUrl: "/images/car-repair-02-homepage.jpg",
+        category: "Local Business",
+        tags: ["Car", "Repair", "Automotive"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Car Wash",
+        imageUrl: "/images/car-wash-02-homepage.jpg",
+        category: "Local Business",
+        tags: ["Car", "Wash", "Service"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Catering Services",
+        imageUrl: "/images/catering-services-04-home.jpg",
+        category: "Restaurant",
+        tags: ["Catering", "Food", "Events"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Ceramic Products Store",
+        imageUrl: "/images/ceramic-products-store-04-600x3357.jpg",
+        category: "eCommerce",
+        tags: ["Ceramic", "Pottery", "Crafts"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Certified Life Coach",
+        imageUrl: "/images/certified-life-coach-04.jpg",
+        category: "Professional",
+        tags: ["Coach", "Life", "Motivation"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Charity",
+        imageUrl: "/images/charity-02.jpg",
+        category: "Non Profit",
+        tags: ["Charity", "Donation", "NGO"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Charity Home",
+        imageUrl: "/images/charity-04-home.jpg",
+        category: "Non Profit",
+        tags: ["Charity", "Donation", "NGO"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Chartered Accountant",
+        imageUrl: "/images/chartered-accountant-02-homepage.jpg",
+        category: "Professional",
+        tags: ["Accountant", "Finance", "Tax"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Childcare Blog",
+        imageUrl: "/images/childcare-blog-02-home.jpg",
+        category: "Professional",
+        tags: ["Childcare", "Parenting", "Blog"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Christmas Shop",
+        imageUrl: "/images/christmas-shop-04-600x2803.jpg",
+        category: "eCommerce",
+        tags: ["Christmas", "Holiday", "Seasonal"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Christmas Party",
+        imageUrl: "/images/christmass-part-04-600x2430.jpg",
+        category: "Professional",
+        tags: ["Christmas", "Party", "Event"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Christmas Store",
+        imageUrl: "/images/christmas-store-04-600x1880.jpg",
+        category: "eCommerce",
+        tags: ["Christmas", "Holiday", "Seasonal"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Church",
+        imageUrl: "/images/church-04-home.jpg",
+        category: "Non Profit",
+        tags: ["Church", "Religion", "Faith"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Cleaning Agency",
+        imageUrl: "/images/cleaning-agency-04-homepage.jpg",
+        category: "Local Business",
+        tags: ["Cleaning", "Service", "Home"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Cleaning Services",
+        imageUrl: "/images/cleaning-services-04-homepage.jpg",
+        category: "Local Business",
+        tags: ["Cleaning", "Service", "Home"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Cleaning Services Home",
+        imageUrl: "/images/cleaning-services-home-page.jpg",
+        category: "Local Business",
+        tags: ["Cleaning", "Service", "Home"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Clothing Store",
+        imageUrl: "/images/clothing-store-02-600x3249.jpg",
+        category: "eCommerce",
+        tags: ["Clothing", "Fashion", "Store"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Coach",
+        imageUrl: "/images/coach-02.jpg",
+        category: "Professional",
+        tags: ["Coach", "Mentor", "Training"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Coffee House",
+        imageUrl: "/images/coffee-house-02-home-1.jpg",
+        category: "Restaurant",
+        tags: ["Coffee", "Cafe", "Food"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Coffee Shop",
+        imageUrl: "/images/coffee-shop-02.jpg",
+        category: "Restaurant",
+        tags: ["Coffee", "Cafe", "Food"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Coffee Shop Modern",
+        imageUrl: "/images/coffee-shop-04.jpg",
+        category: "Restaurant",
+        tags: ["Coffee", "Cafe", "Food"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Communities",
+        imageUrl: "/images/communities-02-home.jpg",
+        category: "Non Profit",
+        tags: ["Community", "Social", "Neighborhood"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Conference Event",
+        imageUrl: "/images/conference-event-02-1.jpg",
+        category: "Professional",
+        tags: ["Conference", "Event", "Business"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Construction",
+        imageUrl: "/images/construction-04-600x2626.jpg",
+        category: "Professional",
+        tags: ["Construction", "Building", "Contractor"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Construction Homepage",
+        imageUrl: "/images/construction-04-homepage.jpg",
+        category: "Professional",
+        tags: ["Construction", "Building", "Contractor"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Construction Co",
+        imageUrl: "/images/construction-co-homepage.jpg",
+        category: "Professional",
+        tags: ["Construction", "Building", "Contractor"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Construction Company",
+        imageUrl: "/images/construction-company-02-600x3410.jpg",
+        category: "Professional",
+        tags: ["Construction", "Building", "Contractor"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Construction Equipment",
+        imageUrl: "/images/construction-equipments-04-600x1646.jpg",
+        category: "eCommerce",
+        tags: ["Construction", "Equipment", "Machinery"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Consultant",
+        imageUrl: "/images/consultant-04-home.jpg",
+        category: "Professional",
+        tags: ["Consultant", "Business", "Advisor"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Consultant Firm",
+        imageUrl: "/images/consultant-firm-04.jpg",
+        category: "Professional",
+        tags: ["Consultant", "Firm", "Business"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Cosmetic Store",
+        imageUrl: "/images/cosmetic-store-homepage.jpg",
+        category: "eCommerce",
+        tags: ["Cosmetic", "Beauty", "Store"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Courier",
+        imageUrl: "/images/courier-04-home.jpg",
+        category: "Local Business",
+        tags: ["Courier", "Delivery", "Shipping"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Covid Prevention",
+        imageUrl: "/images/covid-prevention-02-home1.jpg",
+        category: "Professional",
+        tags: ["Covid", "Health", "Medical"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Co-Working Space",
+        imageUrl: "/images/co-working-space-02-home.jpg",
+        category: "Local Business",
+        tags: ["Co-Working", "Office", "Space"],
+        pageBuilder: "Gutenberg",
+        isPro: true
+      },
+      {
+        title: "Co-Working Space Modern",
+        imageUrl: "/images/co-working-space-04.jpg",
+        category: "Local Business",
+        tags: ["Co-Working", "Office", "Space"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Creative Agency",
+        imageUrl: "/images/creative-agency-04-1.jpg",
+        category: "Professional",
+        tags: ["Creative", "Agency", "Design"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Creative Blog",
+        imageUrl: "/images/creative-blog-02-600x1468.jpg",
+        category: "Personal",
+        tags: ["Creative", "Blog", "Writing"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Creative Podcaster",
+        imageUrl: "/images/creative-podcaster-02-home.jpg",
+        category: "Personal",
+        tags: ["Podcast", "Audio", "Media"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Criminal Lawyer",
+        imageUrl: "/images/criminal-lawyer-04-home.jpg",
+        category: "Professional",
+        tags: ["Lawyer", "Legal", "Criminal"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Custom Printing",
+        imageUrl: "/images/custom-printing-02-homepage.jpg",
+        category: "eCommerce",
+        tags: ["Printing", "Custom", "Service"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Custom Printing Modern",
+        imageUrl: "/images/custom-printing-04.jpg",
+        category: "eCommerce",
+        tags: ["Printing", "Custom", "Service"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Cycle Shop",
+        imageUrl: "/images/cycle-shop-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Cycle", "Bike", "Sports"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Daycare",
+        imageUrl: "/images/daycare-600x4393.jpg",
+        category: "Local Business",
+        tags: ["Daycare", "Children", "Childcare"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Dental Clinic",
+        imageUrl: "/images/dental-clinic-home-page.jpg",
+        category: "Professional",
+        tags: ["Dental", "Clinic", "Healthcare"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Dental Clinic Homepage",
+        imageUrl: "/images/dental-clinic-homepage.jpg",
+        category: "Professional",
+        tags: ["Dental", "Clinic", "Healthcare"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Dentalist",
+        imageUrl: "/images/dentalist-04-600x2683.jpg",
+        category: "Professional",
+        tags: ["Dental", "Dentist", "Healthcare"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Design Resource",
+        imageUrl: "/images/design-resource-02-600x2475.jpg",
+        category: "eCommerce",
+        tags: ["Design", "Resource", "Creative"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Diagnostics Lab",
+        imageUrl: "/images/diagnostics-lab-04.jpg",
+        category: "Professional",
+        tags: ["Diagnostics", "Lab", "Medical"],
+        pageBuilder: "Beaver Builder",
+        isPro: true
+      },
+      {
+        title: "Digital Agency",
+        imageUrl: "/images/digital-agency-02-home.jpg",
+        category: "Professional",
+        tags: ["Digital", "Agency", "Marketing"],
+        pageBuilder: "Elementor",
+        isPro: false
       }
     ];
 
