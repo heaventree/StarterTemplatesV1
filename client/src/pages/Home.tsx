@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TemplatesSection from "@/components/TemplatesSection";
-import PageBuildersSection from "@/components/PageBuildersSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CallToAction from "@/components/CallToAction";
@@ -15,7 +14,6 @@ export default function Home() {
       <main>
         <Hero />
         <TemplatesSection />
-        <PageBuildersSection />
         <FeaturesSection />
         <TestimonialsSection />
         <CallToAction />

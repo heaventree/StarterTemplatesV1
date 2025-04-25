@@ -11,7 +11,6 @@ export default function Hero() {
   // Create dynamic stats with actual template count
   const dynamicStats = [
     { value: `${templates.length}+`, label: "Templates" },
-    { value: "4", label: "Page Builders" },
     { value: "7+", label: "Categories" },
     { value: "100K+", label: "Happy Users" }
   ];
@@ -40,18 +39,12 @@ export default function Hero() {
             Build a stunning website in minutes with Starter Templates. Choose from {templates.length}+ ready-to-use website templates and blocks for your favorite page builder.
           </p>
           
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+          <div className="flex justify-center mb-12">
             <a 
               href="#templates" 
               className="bg-white hover:bg-gray-100 text-[#8c21a1] font-proxima-bold py-3 px-8 rounded-md text-center transition-colors"
             >
               BROWSE TEMPLATES
-            </a>
-            <a 
-              href="#page-builders" 
-              className="bg-transparent border-2 border-white hover:bg-white/10 text-white font-proxima-bold py-3 px-8 rounded-md text-center transition-colors"
-            >
-              EXPLORE PAGE BUILDERS
             </a>
           </div>
           
