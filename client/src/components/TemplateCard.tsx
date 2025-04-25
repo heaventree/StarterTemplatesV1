@@ -5,6 +5,21 @@ interface TemplateCardProps {
 }
 
 export default function TemplateCard({ template }: TemplateCardProps) {
+  // Helper function to normalize image paths
+  const getImagePath = (path: string): string => {
+    if (!path) return '/images/templates-cta-img-scaled.webp';
+    
+    // If it's already a full path or external URL, return as is
+    if (path.startsWith('http')) return path;
+    
+    // Fix attached_assets path to use /images/ instead
+    if (path.includes('attached_assets/images/')) {
+      return path.replace('attached_assets/images/', 'images/');
+    }
+    
+    return path;
+  };
+
   // Get page builder color
   const getPageBuilderColor = (builder: string) => {
     switch(builder.toLowerCase()) {
@@ -37,7 +52,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           className="block h-full"
         >
           <img 
-            src={template.imageUrl} 
+            src={getImagePath(template.imageUrl)} 
             alt={template.title} 
             className="w-full h-48 object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {

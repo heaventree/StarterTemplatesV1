@@ -129,7 +129,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Fashion Store",
-        imageUrl: "/attached_assets/images/fashion-store-04-home.jpg",
+        imageUrl: "/images/fashion-store-04-home.jpg",
         category: "E-Commerce",
         tags: ["Fashion", "Store", "E-commerce"],
         pageBuilder: "Elementor",
@@ -138,7 +138,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Fitness",
-        imageUrl: "/attached_assets/images/fitness-04-homepage.jpg",
+        imageUrl: "/images/fitness-04-homepage.jpg",
         category: "Health & Fitness",
         tags: ["Fitness", "Gym", "Health"],
         pageBuilder: "Beaver Builder",
@@ -169,7 +169,8 @@ export class MemStorage implements IStorage {
         category: "Pets & Animals",
         tags: ["Pet", "Adoption", "Animals"],
         pageBuilder: "Gutenberg",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/pet-adoption-agency-04"
       },
       {
         title: "Photographer Portfolio",
@@ -177,7 +178,8 @@ export class MemStorage implements IStorage {
         category: "Portfolio",
         tags: ["Photography", "Portfolio", "Creative"],
         pageBuilder: "Beaver Builder",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/photographer-portfolio-04"
       },
       {
         title: "Restaurant",
@@ -185,7 +187,8 @@ export class MemStorage implements IStorage {
         category: "Food & Drink",
         tags: ["Restaurant", "Food", "Dining"],
         pageBuilder: "Elementor",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/restaurant-04"
       },
       {
         title: "Wedding Organizer",
@@ -193,7 +196,8 @@ export class MemStorage implements IStorage {
         category: "Events",
         tags: ["Wedding", "Event", "Planning"],
         pageBuilder: "Brizy",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/wedding-organizer"
       },
       {
         title: "Yoga Studio",
