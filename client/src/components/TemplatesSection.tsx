@@ -21,9 +21,11 @@ export default function TemplatesSection() {
       
       // Apply category filter if not 'all'
       if (activeCategory !== "all") {
-        filtered = filtered.filter(
-          template => template.category.toLowerCase() === activeCategory.toLowerCase()
-        );
+        filtered = filtered.filter(template => {
+          // Convert spaces to hyphens and lowercase for comparison
+          const normalizedTemplateCategory = template.category.toLowerCase().replace(/\s+/g, '-');
+          return normalizedTemplateCategory === activeCategory;
+        });
       }
       
       // Apply search filter

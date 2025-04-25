@@ -1,11 +1,14 @@
 // Template categories
 export const categories = [
   { id: "all", name: "All Templates" },
-  { id: "business", name: "Business" },
   { id: "ecommerce", name: "E-Commerce" },
-  { id: "blog", name: "Blog" },
-  { id: "portfolio", name: "Portfolio" },
-  { id: "landing", name: "Landing Page" }
+  { id: "business", name: "Business" },
+  { id: "local-business", name: "Local Business" },
+  { id: "professional", name: "Professional" },
+  { id: "personal", name: "Personal" },
+  { id: "restaurant", name: "Restaurant" },
+  { id: "non-profit", name: "Non Profit" },
+  { id: "elearning", name: "E-Learning" }
 ];
 
 // Features list
