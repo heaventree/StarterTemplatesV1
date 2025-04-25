@@ -13,6 +13,9 @@ export default function TemplatesSection() {
 
   const { data: templates = [], isLoading } = useQuery<Template[]>({
     queryKey: ["/api/templates"],
+    onSuccess: (data) => {
+      console.log(`Total templates loaded from API: ${data.length}`);
+    },
   });
 
   useEffect(() => {
