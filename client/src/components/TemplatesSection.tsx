@@ -57,7 +57,7 @@ export default function TemplatesSection() {
 
   return (
     <section id="templates" className="py-16 bg-[#f9fafb]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-lexend font-bold text-gray-800 mb-4">
             Beautiful Website Templates
@@ -103,17 +103,17 @@ export default function TemplatesSection() {
         
         {/* Templates Grid */}
         {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
             {[...Array(12)].map((_, index) => (
               <div 
                 key={index} 
-                className="bg-gray-100 rounded-lg aspect-[2/3] animate-pulse"
+                className="bg-gray-100 rounded-lg aspect-[1/1] sm:aspect-[4/5] animate-pulse"
               ></div>
             ))}
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
               {filteredTemplates.slice(0, displayCount).map((template) => (
                 <TemplateCard 
                   key={template.id} 
