@@ -795,6 +795,398 @@ export class MemStorage implements IStorage {
         isPro: false
       },
       {
+        title: "Gift Shop",
+        imageUrl: "/images/gift-shop-04-home-1.jpg",
+        category: "eCommerce",
+        tags: ["Gifts", "Shop", "Presents"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Guitarist",
+        imageUrl: "/images/guitarist-02-home.jpg",
+        category: "Personal",
+        tags: ["Music", "Guitar", "Artist"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Gym Pro",
+        imageUrl: "/images/gym-pro-04-600x3496.jpg",
+        category: "Professional",
+        tags: ["Fitness", "Gym", "Health"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Hair Salon",
+        imageUrl: "/images/hair-salon-04-home.jpg",
+        category: "Local Business",
+        tags: ["Salon", "Hair", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Halloween Event",
+        imageUrl: "/images/halloween-event-04-600x3358.jpg",
+        category: "Professional",
+        tags: ["Halloween", "Event", "Holiday"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Halloween Party",
+        imageUrl: "/images/halloween-party-04-600x2209.jpg",
+        category: "Professional",
+        tags: ["Halloween", "Party", "Event"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Halloween Shop",
+        imageUrl: "/images/halloween-shop-04-600x2926.jpg",
+        category: "eCommerce",
+        tags: ["Halloween", "Shop", "Holiday"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Health & Wellness",
+        imageUrl: "/images/health-wellness-02-home.jpg",
+        category: "Professional",
+        tags: ["Health", "Wellness", "Fitness"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Heating & AC Technician",
+        imageUrl: "/images/heating-and-ac-technician-02-home.jpg",
+        category: "Local Business",
+        tags: ["HVAC", "AC", "Technician"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Heritage Hotel",
+        imageUrl: "/images/heritage-hotel-04-home-01.jpg",
+        category: "Local Business",
+        tags: ["Hotel", "Heritage", "Accommodation"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Home Decor",
+        imageUrl: "/images/home-decor-04.jpg",
+        category: "eCommerce",
+        tags: ["Decor", "Home", "Interior"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Home Garden Decor",
+        imageUrl: "/images/home-garden-decor-02-600x2687.jpg",
+        category: "eCommerce",
+        tags: ["Garden", "Decor", "Home"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Home Painting",
+        imageUrl: "/images/home-painting-04-600x2893.jpg",
+        category: "Local Business",
+        tags: ["Painting", "Home", "Service"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Home Remodeling",
+        imageUrl: "/images/home-remodeling-04-homepage.jpg",
+        category: "Local Business",
+        tags: ["Remodeling", "Home", "Construction"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Home Stay",
+        imageUrl: "/images/home-stay-02-home.jpg",
+        category: "Local Business",
+        tags: ["Stay", "Accommodation", "Lodging"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Homestays",
+        imageUrl: "/images/homestays-04-600x1992.jpg",
+        category: "Local Business",
+        tags: ["Homestay", "Accommodation", "Travel"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Hope",
+        imageUrl: "/images/hope-design.jpg",
+        category: "Non Profit",
+        tags: ["Hope", "Charity", "Organization"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Horticulture",
+        imageUrl: "/images/horticulture-02.jpg",
+        category: "Professional",
+        tags: ["Horticulture", "Plants", "Gardening"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Mountain Hotel",
+        imageUrl: "/images/hotel-mountain-homepage.jpg",
+        category: "Local Business",
+        tags: ["Hotel", "Mountain", "Resort"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Wanderlust Travel Diary",
+        imageUrl: "/images/id-18124-wanderlust-travel-diary-resize.jpg",
+        category: "Personal",
+        tags: ["Travel", "Diary", "Blog"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Travel Agency",
+        imageUrl: "/images/id-22058-travel-agency-resize.jpg",
+        category: "Professional",
+        tags: ["Travel", "Agency", "Tourism"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Illustrator Portfolio",
+        imageUrl: "/images/illustrator-portfolio-04-600x2438.jpg",
+        category: "Personal",
+        tags: ["Illustrator", "Portfolio", "Art"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Inessa Perfumes",
+        imageUrl: "/images/inessa-perfumes-04-600x2287.jpg",
+        category: "eCommerce",
+        tags: ["Perfume", "Fragrance", "Beauty"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Injury & Accident Lawyer",
+        imageUrl: "/images/injury-accident-lawyer-02-home.jpg",
+        category: "Professional",
+        tags: ["Lawyer", "Legal", "Injury"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Inspirational Speaker",
+        imageUrl: "/images/inspirational-speaker-03-home.jpg",
+        category: "Professional",
+        tags: ["Speaker", "Motivation", "Inspiration"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Interior Designer",
+        imageUrl: "/images/interior-designer-02-homepage.jpg",
+        category: "Professional",
+        tags: ["Designer", "Interior", "Home"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Interior Firm",
+        imageUrl: "/images/interior-firm-02-home.jpg",
+        category: "Professional",
+        tags: ["Interior", "Design", "Firm"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Italian Restaurant",
+        imageUrl: "/images/italian-restaurant-02-home-1.jpg",
+        category: "Restaurant",
+        tags: ["Italian", "Restaurant", "Food"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Jewellery",
+        imageUrl: "/images/jewellery-04.jpg",
+        category: "eCommerce",
+        tags: ["Jewellery", "Accessories", "Fashion"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Jewellery Store",
+        imageUrl: "/images/jewellery-store-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Jewellery", "Store", "Accessories"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Joan Thomas - Travel Blogger",
+        imageUrl: "/images/joanthomas-traveller-bio-600x900.jpg",
+        category: "Personal",
+        tags: ["Travel", "Blogger", "Bio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Kate Stone Designer",
+        imageUrl: "/images/kate-stone-designer-600x900.jpg",
+        category: "Professional",
+        tags: ["Designer", "Portfolio", "Creative"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Kathryn eBook Author",
+        imageUrl: "/images/kathryn-ebook-author-02-600x2456.jpg",
+        category: "Personal",
+        tags: ["Author", "eBook", "Writer"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Kindergarten",
+        imageUrl: "/images/kindergarten-04-home.jpg",
+        category: "eLearning",
+        tags: ["Education", "Kids", "School"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Language Tutors",
+        imageUrl: "/images/language-tutors-02-600x2574.jpg",
+        category: "eLearning",
+        tags: ["Language", "Tutors", "Education"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Law Firm",
+        imageUrl: "/images/law-firm-home-page.jpg",
+        category: "Professional",
+        tags: ["Law", "Legal", "Firm"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Law Firm Homepage",
+        imageUrl: "/images/law-firm-homepage.jpg",
+        category: "Professional",
+        tags: ["Law", "Legal", "Firm"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Learn Baking",
+        imageUrl: "/images/learn-baking-02-homepage.jpg",
+        category: "eLearning",
+        tags: ["Baking", "Cooking", "Course"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "LearnDash Academy",
+        imageUrl: "/images/learndash-academy-02-home.jpg",
+        category: "eLearning",
+        tags: ["LearnDash", "Academy", "Education"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Learn Digital Marketing",
+        imageUrl: "/images/learn-digital-marketing-02-homepage.jpg",
+        category: "eLearning",
+        tags: ["Marketing", "Digital", "Course"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Learn Meditations",
+        imageUrl: "/images/learn-meditations-02-600x2852.jpg",
+        category: "eLearning",
+        tags: ["Meditation", "Wellness", "Course"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Learn Oil Painting",
+        imageUrl: "/images/learn-oil-painting-02-homepage.jpg",
+        category: "eLearning",
+        tags: ["Painting", "Art", "Course"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Life Coach",
+        imageUrl: "/images/life-coach-homepage.jpg",
+        category: "Professional",
+        tags: ["Coach", "Life", "Mentor"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Life Coach Sara John",
+        imageUrl: "/images/life-coach-sara-john-1.jpg",
+        category: "Professional",
+        tags: ["Coach", "Life", "Personal"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Lifestyle Blogger",
+        imageUrl: "/images/lifestyle-blogger-04-600x2304.jpg",
+        category: "Personal",
+        tags: ["Lifestyle", "Blogger", "Writing"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Local Bakery",
+        imageUrl: "/images/local-bakery-600x900.jpg",
+        category: "Local Business",
+        tags: ["Bakery", "Food", "Local"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Local Business",
+        imageUrl: "/images/local-business-02.jpg",
+        category: "Local Business",
+        tags: ["Business", "Local", "Service"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Locksmith",
+        imageUrl: "/images/locksmith-02-600x3651.jpg",
+        category: "Local Business",
+        tags: ["Locksmith", "Security", "Service"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Lotus Spa",
+        imageUrl: "/images/lotus-spa-02home-600x2915.jpg",
+        category: "Local Business",
+        tags: ["Spa", "Wellness", "Relaxation"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
         title: "Communities",
         imageUrl: "/images/communities-02-home.jpg",
         category: "Non Profit",
