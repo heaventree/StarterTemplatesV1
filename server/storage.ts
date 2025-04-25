@@ -83,137 +83,139 @@ export class MemStorage implements IStorage {
     // Initialize templates with actual images from the locally cloned repository
     const templateData: InsertTemplate[] = [
       {
-        title: "Business Consulting",
-        imageUrl: "/images/business-consulting-02-home.jpg",
-        category: "Business",
-        tags: ["Business", "Corporate", "Consulting"],
+        title: "Love Nature",
+        imageUrl: "/images/love-nature-02-600x1449.jpg",
+        category: "Environment",
+        tags: ["Nature", "Conservation", "Green"],
         pageBuilder: "Elementor",
         isPro: false,
-        demoUrl: "https://websitedemos.net/business-consulting-02"
+        demoUrl: "https://websitedemos.net/love-nature-02"
       },
       {
-        title: "Cafe",
-        imageUrl: "/images/cafe-04.jpg",
-        category: "Food & Drink",
-        tags: ["Cafe", "Restaurant", "Food"],
+        title: "Outdoor Adventure",
+        imageUrl: "/images/outdoor-adventure-02-home.jpg",
+        category: "Sports & Recreation",
+        tags: ["Outdoor", "Adventure", "Travel"],
         pageBuilder: "Gutenberg",
         isPro: true,
-        demoUrl: "https://websitedemos.net/cafe-04"
+        demoUrl: "https://websitedemos.net/outdoor-adventure-02"
       },
       {
-        title: "Car Repair",
-        imageUrl: "/images/car-repair-02-homepage.jpg",
-        category: "Automotive",
-        tags: ["Automotive", "Service", "Repair"],
-        pageBuilder: "Beaver Builder",
-        isPro: false,
-        demoUrl: "https://websitedemos.net/car-repair-02"
-      },
-      {
-        title: "Digital Marketing",
-        imageUrl: "/images/digital-marketing-04-home.jpg",
-        category: "Marketing",
-        tags: ["Digital", "Marketing", "SEO"],
-        pageBuilder: "Elementor",
-        isPro: true,
-        demoUrl: "https://websitedemos.net/digital-marketing-04"
-      },
-      {
-        title: "E-Learning",
-        imageUrl: "/images/e-learning-04-landing-page.jpg",
-        category: "Education",
-        tags: ["Education", "Learning", "Online"],
-        pageBuilder: "Gutenberg",
-        isPro: false,
-        demoUrl: "https://websitedemos.net/e-learning-04"
-      },
-      {
-        title: "Fashion Store",
-        imageUrl: "/images/fashion-store-04-home.jpg",
+        title: "Brandstore",
+        imageUrl: "/images/brandstore-02-1-600x1856.jpg",
         category: "E-Commerce",
-        tags: ["Fashion", "Store", "E-commerce"],
-        pageBuilder: "Elementor",
-        isPro: true,
-        demoUrl: "https://websitedemos.net/fashion-store-04"
-      },
-      {
-        title: "Fitness",
-        imageUrl: "/images/fitness-04-homepage.jpg",
-        category: "Health & Fitness",
-        tags: ["Fitness", "Gym", "Health"],
+        tags: ["Brand", "Store", "Shopping"],
         pageBuilder: "Beaver Builder",
         isPro: false,
-        demoUrl: "https://websitedemos.net/fitness-04"
+        demoUrl: "https://websitedemos.net/brandstore-02"
       },
       {
-        title: "Health Coach",
-        imageUrl: "/images/health-coach-04-home.jpg",
-        category: "Health & Fitness",
-        tags: ["Health", "Coaching", "Wellness"],
+        title: "Electronic Store",
+        imageUrl: "/images/electronic-stores-04-600x4955.jpg",
+        category: "E-Commerce",
+        tags: ["Electronics", "Gadgets", "Tech"],
+        pageBuilder: "Elementor",
+        isPro: true,
+        demoUrl: "https://websitedemos.net/electronic-store-04"
+      },
+      {
+        title: "Wellness Coach",
+        imageUrl: "/images/wellness-coach-02-1-600x1726.jpg",
+        category: "Health & Wellness",
+        tags: ["Wellness", "Coaching", "Health"],
+        pageBuilder: "Gutenberg",
+        isPro: false,
+        demoUrl: "https://websitedemos.net/wellness-coach-02"
+      },
+      {
+        title: "Planet Earth",
+        imageUrl: "/images/earth-02-600x1189.jpg",
+        category: "Environment",
+        tags: ["Earth", "Environment", "Conservation"],
+        pageBuilder: "Elementor",
+        isPro: true,
+        demoUrl: "https://websitedemos.net/earth-02"
+      },
+      {
+        title: "Fashion Photography Portfolio",
+        imageUrl: "/images/fashion-photography-04-600x2547.jpg",
+        category: "Photography",
+        tags: ["Fashion", "Photography", "Portfolio"],
+        pageBuilder: "Beaver Builder",
+        isPro: false,
+        demoUrl: "https://websitedemos.net/fashion-photography-04"
+      },
+      {
+        title: "Hope",
+        imageUrl: "/images/hope-design.jpg",
+        category: "Non-Profit",
+        tags: ["Charity", "Hope", "Donation"],
         pageBuilder: "Brizy",
         isPro: true,
-        demoUrl: "https://websitedemos.net/health-coach-04"
+        demoUrl: "https://websitedemos.net/hope"
       },
       {
-        title: "Interior Designer",
-        imageUrl: "/images/interior-designer-04-homepage.jpg",
+        title: "Politician",
+        imageUrl: "/images/politician-04-600x2550.jpg",
+        category: "Politics",
+        tags: ["Politician", "Campaign", "Government"],
+        pageBuilder: "Elementor",
+        isPro: false,
+        demoUrl: "https://websitedemos.net/politician-04"
+      },
+      {
+        title: "Alexandrina Kennedy – Designer",
+        imageUrl: "/images/alexandrina-designer-600x900.jpg",
         category: "Design",
-        tags: ["Interior", "Design", "Decoration"],
-        pageBuilder: "Elementor",
-        isPro: false,
-        demoUrl: "https://websitedemos.net/interior-designer-04"
-      },
-      {
-        title: "Pet Adoption Agency",
-        imageUrl: "/images/pet-adoption-agency-04-home.jpg",
-        category: "Pets & Animals",
-        tags: ["Pet", "Adoption", "Animals"],
+        tags: ["Designer", "Portfolio", "Creative"],
         pageBuilder: "Gutenberg",
         isPro: true,
-        demoUrl: "https://websitedemos.net/pet-adoption-agency-04"
+        demoUrl: "https://websitedemos.net/alexandrina-designer"
       },
       {
-        title: "Photographer Portfolio",
-        imageUrl: "/images/photographer-portfolio-04-home.jpg",
-        category: "Portfolio",
-        tags: ["Photography", "Portfolio", "Creative"],
+        title: "Lifestyle Blogger",
+        imageUrl: "/images/lifestyle-blogger-04-600x2304.jpg",
+        category: "Blog",
+        tags: ["Lifestyle", "Blogger", "Writing"],
         pageBuilder: "Beaver Builder",
         isPro: false,
-        demoUrl: "https://websitedemos.net/photographer-portfolio-04"
+        demoUrl: "https://websitedemos.net/lifestyle-blogger-04"
       },
       {
-        title: "Restaurant",
-        imageUrl: "/images/restaurant-04-home.jpg",
-        category: "Food & Drink",
-        tags: ["Restaurant", "Food", "Dining"],
+        title: "Planet Earth Store",
+        imageUrl: "/images/earth-store-02-600x1210.jpg",
+        category: "E-Commerce",
+        tags: ["Eco", "Store", "Sustainable"],
         pageBuilder: "Elementor",
         isPro: true,
-        demoUrl: "https://websitedemos.net/restaurant-04"
+        demoUrl: "https://websitedemos.net/earth-store-02"
       },
       {
-        title: "Wedding Organizer",
-        imageUrl: "/images/wedding-organizer-homepage.jpg",
-        category: "Events",
-        tags: ["Wedding", "Event", "Planning"],
+        title: "Nexus News",
+        imageUrl: "/images/news-blog-04-600x2428.jpg",
+        category: "News",
+        tags: ["News", "Blog", "Media"],
         pageBuilder: "Brizy",
         isPro: false,
-        demoUrl: "https://websitedemos.net/wedding-organizer"
+        demoUrl: "https://websitedemos.net/news-blog-04"
       },
       {
-        title: "Yoga Studio",
-        imageUrl: "/images/yoga-studio-04-home.jpg",
-        category: "Health & Fitness",
-        tags: ["Yoga", "Wellness", "Fitness"],
+        title: "Black Friday",
+        imageUrl: "/images/black-friday-bonanza-04-600x2062.jpg",
+        category: "E-Commerce",
+        tags: ["Sale", "Shopping", "Black Friday"],
         pageBuilder: "Elementor",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/black-friday-bonanza-04"
       },
       {
-        title: "Spa & Wellness",
-        imageUrl: "/images/spa-04-1.jpg",
-        category: "Health & Fitness",
-        tags: ["Spa", "Wellness", "Beauty"],
+        title: "Earthly Elegance",
+        imageUrl: "/images/gardening-and-landscape-02-600x2964.jpg",
+        category: "Gardening",
+        tags: ["Gardening", "Landscape", "Nature"],
         pageBuilder: "Gutenberg",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/gardening-and-landscape-02"
       },
       // Additional templates to have more than 30 in total for pagination
       {
