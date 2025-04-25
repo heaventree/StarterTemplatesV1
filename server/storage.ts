@@ -103,7 +103,7 @@ export class MemStorage implements IStorage {
       {
         title: "Brandstore",
         imageUrl: "/images/brandstore-02-1-600x1856.jpg",
-        category: "E-Commerce",
+        category: "eCommerce",
         tags: ["Brand", "Store", "Shopping"],
         pageBuilder: "Beaver Builder",
         isPro: false,
@@ -112,7 +112,7 @@ export class MemStorage implements IStorage {
       {
         title: "Electronic Store",
         imageUrl: "/images/electronic-stores-04-600x4955.jpg",
-        category: "E-Commerce",
+        category: "eCommerce",
         tags: ["Electronics", "Gadgets", "Tech"],
         pageBuilder: "Elementor",
         isPro: true,
@@ -139,7 +139,7 @@ export class MemStorage implements IStorage {
       {
         title: "Fashion Photography Portfolio",
         imageUrl: "/images/fashion-photography-04-600x2547.jpg",
-        category: "Photography",
+        category: "Personal",
         tags: ["Fashion", "Photography", "Portfolio"],
         pageBuilder: "Beaver Builder",
         isPro: false,
@@ -157,7 +157,7 @@ export class MemStorage implements IStorage {
       {
         title: "Politician",
         imageUrl: "/images/politician-04-600x2550.jpg",
-        category: "Politics",
+        category: "Professional",
         tags: ["Politician", "Campaign", "Government"],
         pageBuilder: "Elementor",
         isPro: false,
@@ -166,7 +166,7 @@ export class MemStorage implements IStorage {
       {
         title: "Alexandrina Kennedy – Designer",
         imageUrl: "/images/alexandrina-designer-600x900.jpg",
-        category: "Design",
+        category: "Professional",
         tags: ["Designer", "Portfolio", "Creative"],
         pageBuilder: "Gutenberg",
         isPro: true,
@@ -175,7 +175,7 @@ export class MemStorage implements IStorage {
       {
         title: "Lifestyle Blogger",
         imageUrl: "/images/lifestyle-blogger-04-600x2304.jpg",
-        category: "Blog",
+        category: "Personal",
         tags: ["Lifestyle", "Blogger", "Writing"],
         pageBuilder: "Beaver Builder",
         isPro: false,
@@ -184,7 +184,7 @@ export class MemStorage implements IStorage {
       {
         title: "Planet Earth Store",
         imageUrl: "/images/earth-store-02-600x1210.jpg",
-        category: "E-Commerce",
+        category: "eCommerce",
         tags: ["Eco", "Store", "Sustainable"],
         pageBuilder: "Elementor",
         isPro: true,
@@ -193,7 +193,7 @@ export class MemStorage implements IStorage {
       {
         title: "Nexus News",
         imageUrl: "/images/news-blog-04-600x2428.jpg",
-        category: "News",
+        category: "Professional",
         tags: ["News", "Blog", "Media"],
         pageBuilder: "Brizy",
         isPro: false,
@@ -202,7 +202,7 @@ export class MemStorage implements IStorage {
       {
         title: "Black Friday",
         imageUrl: "/images/black-friday-bonanza-04-600x2062.jpg",
-        category: "E-Commerce",
+        category: "eCommerce",
         tags: ["Sale", "Shopping", "Black Friday"],
         pageBuilder: "Elementor",
         isPro: true,
@@ -211,7 +211,7 @@ export class MemStorage implements IStorage {
       {
         title: "Earthly Elegance",
         imageUrl: "/images/gardening-and-landscape-02-600x2964.jpg",
-        category: "Gardening",
+        category: "Professional",
         tags: ["Gardening", "Landscape", "Nature"],
         pageBuilder: "Gutenberg",
         isPro: false,
@@ -221,7 +221,7 @@ export class MemStorage implements IStorage {
       {
         title: "Accountant",
         imageUrl: "/images/accountant-02.jpg",
-        category: "Business",
+        category: "Professional",
         tags: ["Accounting", "Finance", "Tax"],
         pageBuilder: "Elementor",
         isPro: true
@@ -229,7 +229,7 @@ export class MemStorage implements IStorage {
       {
         title: "AC Technician",
         imageUrl: "/images/ac-technician-elementor-homepage-sceenshot.jpg",
-        category: "Services",
+        category: "Local Business",
         tags: ["AC", "Technician", "Repair"],
         pageBuilder: "Elementor",
         isPro: false
@@ -237,7 +237,7 @@ export class MemStorage implements IStorage {
       {
         title: "Animal Welfare",
         imageUrl: "/images/animal-welfare-home-page.jpg",
-        category: "Nonprofit",
+        category: "Non Profit",
         tags: ["Animal", "Welfare", "Charity"],
         pageBuilder: "Beaver Builder",
         isPro: true
@@ -245,7 +245,7 @@ export class MemStorage implements IStorage {
       {
         title: "App Landing Page",
         imageUrl: "/images/appplus-landing-page-04-600x3298.jpg",
-        category: "Technology",
+        category: "Professional",
         tags: ["App", "Mobile", "Landing"],
         pageBuilder: "Gutenberg",
         isPro: false
@@ -253,7 +253,7 @@ export class MemStorage implements IStorage {
       {
         title: "Aquarium",
         imageUrl: "/images/aquarium-04-home.jpg",
-        category: "Pets & Animals",
+        category: "Local Business",
         tags: ["Aquarium", "Fish", "Marine"],
         pageBuilder: "Elementor",
         isPro: true
@@ -261,7 +261,7 @@ export class MemStorage implements IStorage {
       {
         title: "Architects",
         imageUrl: "/images/architects-home-page.jpg",
-        category: "Architecture",
+        category: "Professional",
         tags: ["Architecture", "Design", "Building"],
         pageBuilder: "Beaver Builder",
         isPro: false
@@ -269,7 +269,7 @@ export class MemStorage implements IStorage {
       {
         title: "Arch Masters",
         imageUrl: "/images/archmasters-architecture-02-600x2302.jpg",
-        category: "Architecture",
+        category: "Professional",
         tags: ["Architecture", "Design", "Construction"],
         pageBuilder: "Elementor",
         isPro: true
@@ -277,7 +277,7 @@ export class MemStorage implements IStorage {
       {
         title: "Artist Christine",
         imageUrl: "/images/artist-christine-home-page.jpg",
-        category: "Art & Creative",
+        category: "Personal",
         tags: ["Artist", "Creative", "Portfolio"],
         pageBuilder: "Brizy",
         isPro: false
@@ -285,7 +285,7 @@ export class MemStorage implements IStorage {
       {
         title: "Artist Feb 20",
         imageUrl: "/images/artist-feb-20-home.jpg",
-        category: "Art & Creative",
+        category: "Personal",
         tags: ["Artist", "Creative", "Gallery"],
         pageBuilder: "Gutenberg",
         isPro: true
@@ -293,7 +293,7 @@ export class MemStorage implements IStorage {
       {
         title: "Artist Multipurpose",
         imageUrl: "/images/artist-multipurpose-02-1-600x1546.jpg",
-        category: "Art & Creative",
+        category: "Personal",
         tags: ["Artist", "Creative", "Portfolio"],
         pageBuilder: "Elementor",
         isPro: false
@@ -301,7 +301,7 @@ export class MemStorage implements IStorage {
       {
         title: "Author",
         imageUrl: "/images/author-home.jpg",
-        category: "Blog & Writing",
+        category: "Personal",
         tags: ["Author", "Writer", "Books"],
         pageBuilder: "Beaver Builder",
         isPro: true
@@ -309,7 +309,7 @@ export class MemStorage implements IStorage {
       {
         title: "Ayurveda",
         imageUrl: "/images/ayurveda-04-home-1.jpg",
-        category: "Health & Wellness",
+        category: "Professional",
         tags: ["Ayurveda", "Wellness", "Holistic"],
         pageBuilder: "Elementor",
         isPro: false
@@ -317,7 +317,7 @@ export class MemStorage implements IStorage {
       {
         title: "Baby Store",
         imageUrl: "/images/baby-stores-04-600x2813.jpg",
-        category: "E-Commerce",
+        category: "eCommerce",
         tags: ["Baby", "Store", "Kids"],
         pageBuilder: "Gutenberg",
         isPro: true
@@ -325,7 +325,7 @@ export class MemStorage implements IStorage {
       {
         title: "Barber Shop",
         imageUrl: "/images/barber-shop-02-home-2.jpg",
-        category: "Beauty & Care",
+        category: "Local Business",
         tags: ["Barber", "Haircut", "Grooming"],
         pageBuilder: "Beaver Builder",
         isPro: false
@@ -335,22 +335,6 @@ export class MemStorage implements IStorage {
         imageUrl: "/images/bbq-food-truck-04.jpg",
         category: "Restaurant",
         tags: ["BBQ", "Food Truck", "Restaurant"],
-        pageBuilder: "Elementor",
-        isPro: true
-      },
-      {
-        title: "Accountant",
-        imageUrl: "/images/accountant-02.jpg",
-        category: "Professional",
-        tags: ["Finance", "Accounting", "Business"],
-        pageBuilder: "Gutenberg",
-        isPro: false
-      },
-      {
-        title: "AC Technician",
-        imageUrl: "/images/ac-technician-elementor-homepage-sceenshot.jpg",
-        category: "Local Business",
-        tags: ["HVAC", "Repair", "Service"],
         pageBuilder: "Elementor",
         isPro: true
       },

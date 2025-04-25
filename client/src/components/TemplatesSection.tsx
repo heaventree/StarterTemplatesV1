@@ -11,11 +11,9 @@ export default function TemplatesSection() {
   const [displayCount, setDisplayCount] = useState(12); // Initial display count
   const [showViewMore, setShowViewMore] = useState(true);
 
+  // Using TanStack Query v5 with proper type annotations
   const { data: templates = [], isLoading } = useQuery<Template[]>({
-    queryKey: ["/api/templates"],
-    onSuccess: (data) => {
-      console.log(`Total templates loaded from API: ${data.length}`);
-    },
+    queryKey: ["/api/templates"]
   });
 
   useEffect(() => {
@@ -36,7 +34,7 @@ export default function TemplatesSection() {
         const lowerSearch = searchTerm.toLowerCase();
         filtered = filtered.filter(template => 
           template.title.toLowerCase().includes(lowerSearch) || 
-          template.tags?.some(tag => tag.toLowerCase().includes(lowerSearch)) || false
+          template.tags?.some((tag: string) => tag.toLowerCase().includes(lowerSearch)) || false
         );
       }
       

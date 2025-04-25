@@ -17,14 +17,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       let templates;
       if (category) {
         templates = await storage.getTemplatesByCategory(category);
+        console.log(`Fetched ${templates.length} templates for category: ${category}`);
       } else if (pageBuilder) {
         templates = await storage.getTemplatesByPageBuilder(pageBuilder);
+        console.log(`Fetched ${templates.length} templates for page builder: ${pageBuilder}`);
       } else {
         templates = await storage.getAllTemplates();
+        console.log(`Fetched ${templates.length} templates total`);
       }
       
       res.json(templates);
     } catch (error) {
+      console.error("Error fetching templates:", error);
       res.status(500).json({ message: "Failed to fetch templates" });
     }
   });
