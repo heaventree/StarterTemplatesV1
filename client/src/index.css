@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* StarterTemplates.com Theme Colors */
 :root {
   --background: 0 0% 100%;
   --foreground: 222 47% 11%;
@@ -13,16 +14,21 @@
   --card-foreground: 222 47% 11%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --primary: 221.2 83.2% 53.3%;
+  
+  /* Primary colors from StarterTemplates.com */
+  --primary: 335 72% 59%; /* #dd4f93 */
   --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --secondary: 296 66% 38%; /* #8c21a1 */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 254 89% 27%; /* #1e056f */
+  --accent-foreground: 210 40% 98%;
   --destructive: 0 84.2% 60.2%;
   --destructive-foreground: 210 40% 98%;
-  --ring: 215 20.2% 65.1%;
+  --ring: 296 66% 38%; /* #8c21a1 */
   --radius: 0.5rem;
+  
+  --text-dark: 220 17% 20%; /* #2a3342 */
+  --background-light: 210 33% 98%; /* #f9fafb */
 }
 
 .dark {
@@ -36,15 +42,44 @@
   --card-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
+  --primary: 335 72% 59%; /* #dd4f93 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 296 66% 38%; /* #8c21a1 */
+  --secondary-foreground: 0 0% 100%;
+  --accent: 254 89% 27%; /* #1e056f */
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 85.7% 97.3%;
-  --ring: 217.2 32.6% 17.5%;
+  --ring: 296 66% 38%; /* #8c21a1 */
+}
+
+/* Font imports */
+@font-face {
+  font-family: 'Figtree';
+  src: url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&display=swap');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Lexend';
+  src: url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: local('Proxima Nova');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Proxima Nova Bold';
+  src: local('Proxima Nova Bold');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer base {
@@ -54,7 +89,20 @@
   
   body {
     @apply antialiased bg-background text-foreground;
-    font-family: 'Figtree', sans-serif;
+    font-family: 'Figtree', system-ui, sans-serif;
+  }
+
+  .font-lexend {
+    font-family: 'Lexend', system-ui, sans-serif;
+  }
+
+  .font-proxima {
+    font-family: 'Proxima Nova', 'Figtree', system-ui, sans-serif;
+  }
+
+  .font-proxima-bold {
+    font-family: 'Proxima Nova Bold', 'Figtree', system-ui, sans-serif;
+    font-weight: 700;
   }
 }
 
@@ -62,18 +110,16 @@ html {
   scroll-behavior: smooth;
 }
 
-.template-card:hover .hover-overlay {
-  opacity: 1;
+/* Gradient backgrounds like StarterTemplates.com */
+.bg-gradient-hero {
+  background: linear-gradient(135deg, #dd4f93 0%, #8c21a1 50%, #1e056f 100%);
 }
 
-.template-card img {
-  transition: transform 0.3s ease;
+.bg-gradient-cta {
+  background: linear-gradient(135deg, #8c21a1 0%, #1e056f 100%);
 }
 
-.template-card:hover img {
-  transform: scale(1.05);
-}
-
+/* Animation effects */
 @keyframes countUp {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -81,4 +127,22 @@ html {
 
 .count-animation {
   animation: countUp 0.8s ease forwards;
+}
+
+/* Hover effects */
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
