@@ -1883,6 +1883,238 @@ export class MemStorage implements IStorage {
         isPro: false
       },
       {
+        title: "Handmade Crafts",
+        imageUrl: "/images/handmade-crafts-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Handmade", "Crafts", "Artisan"],
+        pageBuilder: "Elementor", 
+        isPro: true
+      },
+      {
+        title: "Health Blog",
+        imageUrl: "/images/health-blog-04-home.jpg",
+        category: "Personal",
+        tags: ["Health", "Blog", "Wellness"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Health Coach",
+        imageUrl: "/images/health-coach-02-home.jpg",
+        category: "Professional",
+        tags: ["Health", "Coach", "Wellness"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Healthy Food",
+        imageUrl: "/images/healthy-food-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Healthy", "Food", "Nutrition"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Hiking Club",
+        imageUrl: "/images/hiking-club-02-home.jpg",
+        category: "Non Profit",
+        tags: ["Hiking", "Club", "Outdoor"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Home Cleaning",
+        imageUrl: "/images/home-cleaning-02-home.jpg",
+        category: "Local Business",
+        tags: ["Cleaning", "Home", "Service"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Home Interior",
+        imageUrl: "/images/home-interior-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Interior", "Home", "Design"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Home Maintenance",
+        imageUrl: "/images/home-maintenance-02-home.jpg",
+        category: "Local Business",
+        tags: ["Maintenance", "Home", "Service"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Home Renovation",
+        imageUrl: "/images/home-renovation-04-home.jpg",
+        category: "Professional",
+        tags: ["Renovation", "Home", "Construction"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Hostel",
+        imageUrl: "/images/hostel-02-home.jpg",
+        category: "Local Business",
+        tags: ["Hostel", "Accommodation", "Travel"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Hot Yoga",
+        imageUrl: "/images/hot-yoga-04-home.jpg",
+        category: "Local Business",
+        tags: ["Yoga", "Hot", "Fitness"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Hotel",
+        imageUrl: "/images/hotel-02-home.jpg",
+        category: "Local Business",
+        tags: ["Hotel", "Accommodation", "Hospitality"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "IT Consulting",
+        imageUrl: "/images/it-consulting-04-home.jpg",
+        category: "Professional",
+        tags: ["IT", "Consulting", "Technology"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Insurance",
+        imageUrl: "/images/insurance-02-home.jpg",
+        category: "Professional",
+        tags: ["Insurance", "Financial", "Service"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Interior Design",
+        imageUrl: "/images/interior-design-04-home.jpg",
+        category: "Professional",
+        tags: ["Interior", "Design", "Decor"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Investment Advisor",
+        imageUrl: "/images/investment-advisor-02-home.jpg",
+        category: "Professional",
+        tags: ["Investment", "Advisor", "Financial"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Kids Store",
+        imageUrl: "/images/kids-store-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Kids", "Store", "Toys"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Landing Page",
+        imageUrl: "/images/landing-page-02-home.jpg",
+        category: "Professional",
+        tags: ["Landing", "Page", "Marketing"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Language School",
+        imageUrl: "/images/language-school-04-home.jpg",
+        category: "eLearning",
+        tags: ["Language", "School", "Education"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Laundry Service",
+        imageUrl: "/images/laundry-service-02-home.jpg",
+        category: "Local Business",
+        tags: ["Laundry", "Service", "Cleaning"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Landscaping",
+        imageUrl: "/images/landscaping-04-home.jpg",
+        category: "Local Business",
+        tags: ["Landscaping", "Garden", "Outdoor"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Lawyer",
+        imageUrl: "/images/lawyer-02-home.jpg",
+        category: "Professional",
+        tags: ["Lawyer", "Legal", "Attorney"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Luxury Spa",
+        imageUrl: "/images/luxury-spa-04-home.jpg",
+        category: "Local Business",
+        tags: ["Spa", "Luxury", "Wellness"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Makeup Artist",
+        imageUrl: "/images/makeup-artist-02-home.jpg",
+        category: "Personal",
+        tags: ["Makeup", "Artist", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Meditation Center",
+        imageUrl: "/images/meditation-center-04-home.jpg",
+        category: "Local Business",
+        tags: ["Meditation", "Center", "Wellness"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Mindfulness Coach",
+        imageUrl: "/images/mindfulness-coach-02-home.jpg",
+        category: "Personal",
+        tags: ["Mindfulness", "Coach", "Wellness"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Music School",
+        imageUrl: "/images/music-school-04-home.jpg",
+        category: "eLearning",
+        tags: ["Music", "School", "Education"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Nail Salon",
+        imageUrl: "/images/nail-salon-02-home.jpg",
+        category: "Local Business",
+        tags: ["Nail", "Salon", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Online Education",
+        imageUrl: "/images/online-education-04-home.jpg",
+        category: "eLearning",
+        tags: ["Education", "Online", "Learning"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
         title: "Communities",
         imageUrl: "/images/communities-02-home.jpg",
         category: "Non Profit",
