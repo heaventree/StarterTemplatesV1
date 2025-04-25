@@ -38,10 +38,7 @@ export default function TemplateCard({ template }: TemplateCardProps) {
 
   return (
     <div className="group bg-white rounded-lg shadow-sm overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 flex flex-col h-full max-w-sm mx-auto">
-      {/* Page builder label at top */}
-      <div className={`${getPageBuilderColor(template.pageBuilder)} text-xs font-medium px-2 py-1 text-center sticky top-0 z-10`}>
-        {template.pageBuilder}
-      </div>
+      {/* Page builder label removed as requested */}
 
       <div className="relative overflow-hidden flex-1">
         {/* Template Image - align to top with object-top */}
