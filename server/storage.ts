@@ -85,7 +85,7 @@ export class MemStorage implements IStorage {
       {
         title: "Love Nature",
         imageUrl: "/images/love-nature-02-600x1449.jpg",
-        category: "Environment",
+        category: "Personal",
         tags: ["Nature", "Conservation", "Green"],
         pageBuilder: "Elementor",
         isPro: false,
@@ -94,7 +94,7 @@ export class MemStorage implements IStorage {
       {
         title: "Outdoor Adventure",
         imageUrl: "/images/outdoor-adventure-02-home.jpg",
-        category: "Sports & Recreation",
+        category: "Personal",
         tags: ["Outdoor", "Adventure", "Travel"],
         pageBuilder: "Gutenberg",
         isPro: true,
@@ -121,7 +121,7 @@ export class MemStorage implements IStorage {
       {
         title: "Wellness Coach",
         imageUrl: "/images/wellness-coach-02-1-600x1726.jpg",
-        category: "Health & Wellness",
+        category: "Professional",
         tags: ["Wellness", "Coaching", "Health"],
         pageBuilder: "Gutenberg",
         isPro: false,
@@ -130,7 +130,7 @@ export class MemStorage implements IStorage {
       {
         title: "Planet Earth",
         imageUrl: "/images/earth-02-600x1189.jpg",
-        category: "Environment",
+        category: "Non Profit",
         tags: ["Earth", "Environment", "Conservation"],
         pageBuilder: "Elementor",
         isPro: true,
@@ -148,7 +148,7 @@ export class MemStorage implements IStorage {
       {
         title: "Hope",
         imageUrl: "/images/hope-design.jpg",
-        category: "Non-Profit",
+        category: "Non Profit",
         tags: ["Charity", "Hope", "Donation"],
         pageBuilder: "Brizy",
         isPro: true,
@@ -333,7 +333,7 @@ export class MemStorage implements IStorage {
       {
         title: "BBQ Food Truck",
         imageUrl: "/images/bbq-food-truck-04.jpg",
-        category: "Food & Drink",
+        category: "Restaurant",
         tags: ["BBQ", "Food Truck", "Restaurant"],
         pageBuilder: "Elementor",
         isPro: true
@@ -369,15 +369,19 @@ export class MemStorage implements IStorage {
   }
 
   async getTemplatesByCategory(category: string): Promise<Template[]> {
-    return Array.from(this.templates.values()).filter(
-      (template) => template.category === category,
-    );
+    return Array.from(this.templates.values()).filter(template => {
+      // Case-insensitive matching with normalization of spaces to hyphens for comparison
+      const normalizedTemplateCategory = template.category.toLowerCase().replace(/\s+/g, '-');
+      const normalizedCategory = category.toLowerCase().replace(/\s+/g, '-');
+      return normalizedTemplateCategory === normalizedCategory;
+    });
   }
 
   async getTemplatesByPageBuilder(pageBuilder: string): Promise<Template[]> {
-    return Array.from(this.templates.values()).filter(
-      (template) => template.pageBuilder === pageBuilder,
-    );
+    return Array.from(this.templates.values()).filter(template => {
+      // Case-insensitive matching for page builders
+      return template.pageBuilder.toLowerCase() === pageBuilder.toLowerCase();
+    });
   }
 
   async getTemplateById(id: number): Promise<Template | undefined> {
