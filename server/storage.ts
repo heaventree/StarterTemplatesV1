@@ -1187,6 +1187,158 @@ export class MemStorage implements IStorage {
         isPro: true
       },
       {
+        title: "Luxury Hotel",
+        imageUrl: "/images/luxury-hotel-02-600x989.jpg",
+        category: "Local Business",
+        tags: ["Hotel", "Luxury", "Accommodation"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Luxury Watches",
+        imageUrl: "/images/luxury-watches-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Watches", "Luxury", "Accessories"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Mark Thompson Portfolio",
+        imageUrl: "/images/mark-thompson-02-home.jpg",
+        category: "Personal",
+        tags: ["Portfolio", "Designer", "Creative"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Marketing Agency",
+        imageUrl: "/images/marketing-agency-02-home-1.jpg",
+        category: "Professional",
+        tags: ["Marketing", "Agency", "Business"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Marketing Freelancer",
+        imageUrl: "/images/marketing-freelancer-04-home.jpg",
+        category: "Professional",
+        tags: ["Marketing", "Freelancer", "Services"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Medical",
+        imageUrl: "/images/medical-04-home.jpg",
+        category: "Professional",
+        tags: ["Medical", "Healthcare", "Doctor"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Meal Plan",
+        imageUrl: "/images/meal-plan-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Meal", "Plan", "Food"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Mobile App",
+        imageUrl: "/images/mobile-app-02-home.jpg",
+        category: "Professional",
+        tags: ["App", "Mobile", "Technology"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Mobile App Development",
+        imageUrl: "/images/mobile-app-development-02-home-page-600x3111.jpg",
+        category: "Professional",
+        tags: ["App", "Development", "Technology"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Modern Cafe",
+        imageUrl: "/images/modern-cafe-04-home-600x2782.jpg",
+        category: "Restaurant",
+        tags: ["Cafe", "Coffee", "Modern"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Modern Home Decor",
+        imageUrl: "/images/modern-home-decor-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Decor", "Home", "Interior"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Music Band",
+        imageUrl: "/images/music-band-04-600x2475.jpg",
+        category: "Personal",
+        tags: ["Music", "Band", "Entertainment"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Music Producer",
+        imageUrl: "/images/music-producer-02-600x2475.jpg",
+        category: "Personal",
+        tags: ["Music", "Producer", "Entertainment"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Nature Conservation",
+        imageUrl: "/images/nature-conservation-02-home.jpg",
+        category: "Non Profit",
+        tags: ["Nature", "Conservation", "Environment"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "NGO",
+        imageUrl: "/images/ngo-04-home.jpg",
+        category: "Non Profit",
+        tags: ["NGO", "Charity", "Organization"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Non Profit",
+        imageUrl: "/images/non-profit-02-home.jpg",
+        category: "Non Profit",
+        tags: ["Charity", "Organization", "Donation"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Nutritionist",
+        imageUrl: "/images/nutritionist-02-home.jpg",
+        category: "Professional",
+        tags: ["Nutrition", "Health", "Wellness"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Online Course",
+        imageUrl: "/images/online-course-04-home.jpg",
+        category: "eLearning",
+        tags: ["Course", "Online", "Education"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Online Training",
+        imageUrl: "/images/online-training-04-home.jpg",
+        category: "eLearning",
+        tags: ["Training", "Online", "Education"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
         title: "Communities",
         imageUrl: "/images/communities-02-home.jpg",
         category: "Non Profit",
