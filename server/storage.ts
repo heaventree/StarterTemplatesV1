@@ -102,27 +102,30 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Car Repair",
-        imageUrl: "/attached_assets/images/car-repair-02-homepage.jpg",
+        imageUrl: "/images/car-repair-02-homepage.jpg",
         category: "Automotive",
         tags: ["Automotive", "Service", "Repair"],
         pageBuilder: "Beaver Builder",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/car-repair-02"
       },
       {
         title: "Digital Marketing",
-        imageUrl: "/attached_assets/images/digital-marketing-04-home.jpg",
+        imageUrl: "/images/digital-marketing-04-home.jpg",
         category: "Marketing",
         tags: ["Digital", "Marketing", "SEO"],
         pageBuilder: "Elementor",
-        isPro: true
+        isPro: true,
+        demoUrl: "https://websitedemos.net/digital-marketing-04"
       },
       {
         title: "E-Learning",
-        imageUrl: "/attached_assets/images/e-learning-04-landing-page.jpg",
+        imageUrl: "/images/e-learning-04-landing-page.jpg",
         category: "Education",
         tags: ["Education", "Learning", "Online"],
         pageBuilder: "Gutenberg",
-        isPro: false
+        isPro: false,
+        demoUrl: "https://websitedemos.net/e-learning-04"
       },
       {
         title: "Fashion Store",
