@@ -74,9 +74,19 @@ export default function TemplateCard({ template }: TemplateCardProps) {
       </div>
       
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2 group-hover:text-[#dd4f93] transition-colors">
-          {template.title}
-        </h3>
+        <div className="flex items-center justify-between mb-2">
+          <h3 className="text-lg font-semibold text-gray-800 group-hover:text-[#dd4f93] transition-colors">
+            {template.title}
+          </h3>
+          
+          <span className={`text-xs py-1 px-3 rounded-full font-semibold ml-auto ${
+            template.isPro 
+              ? 'bg-[#dd4f93]/10 text-[#dd4f93]' 
+              : 'bg-emerald-100 text-emerald-600'
+          }`}>
+            {template.isPro ? 'Pro' : 'Free'}
+          </span>
+        </div>
         
         <div className="flex flex-wrap gap-2 mb-3">
           {template.tags?.slice(0, 2).map((tag, index) => (
@@ -90,14 +100,6 @@ export default function TemplateCard({ template }: TemplateCardProps) {
             </span>
           )}
         </div>
-          
-        <span className={`text-xs py-1 px-3 rounded-full font-semibold ${
-          template.isPro 
-            ? 'bg-[#dd4f93]/10 text-[#dd4f93]' 
-            : 'bg-emerald-100 text-emerald-600'
-        }`}>
-          {template.isPro ? 'Pro' : 'Free'}
-        </span>
       </div>
     </div>
   );
