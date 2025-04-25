@@ -1,14 +1,13 @@
-// Template categories
+// Template categories - exactly matching the original HTML
 export const categories = [
   { id: "all", name: "All Templates" },
-  { id: "ecommerce", name: "E-Commerce" },
-  { id: "business", name: "Business" },
+  { id: "ecommerce", name: "eCommerce" },
+  { id: "elearning", name: "eLearning" },
   { id: "local-business", name: "Local Business" },
-  { id: "professional", name: "Professional" },
-  { id: "personal", name: "Personal" },
-  { id: "restaurant", name: "Restaurant" },
   { id: "non-profit", name: "Non Profit" },
-  { id: "elearning", name: "E-Learning" }
+  { id: "personal", name: "Personal" },
+  { id: "professional", name: "Professional" },
+  { id: "restaurant", name: "Restaurant" }
 ];
 
 // Features list
