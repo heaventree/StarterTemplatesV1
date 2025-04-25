@@ -80,7 +80,7 @@ export class MemStorage implements IStorage {
       this.createPageBuilder(builder);
     });
 
-    // Initialize templates with actual images from the StarterTemplates.com repository
+    // Initialize templates with actual images from the locally cloned repository
     const templateData: InsertTemplate[] = [
       {
         title: "Business Consulting",
@@ -147,7 +147,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Health Coach",
-        imageUrl: "/attached_assets/images/health-coach-04-home.jpg",
+        imageUrl: "/images/health-coach-04-home.jpg",
         category: "Health & Fitness",
         tags: ["Health", "Coaching", "Wellness"],
         pageBuilder: "Brizy",
@@ -156,7 +156,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Interior Designer",
-        imageUrl: "/attached_assets/images/interior-designer-04-homepage.jpg",
+        imageUrl: "/images/interior-designer-04-homepage.jpg",
         category: "Design",
         tags: ["Interior", "Design", "Decoration"],
         pageBuilder: "Elementor",
@@ -165,7 +165,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Pet Adoption Agency",
-        imageUrl: "/attached_assets/images/pet-adoption-agency-04-home.jpg",
+        imageUrl: "/images/pet-adoption-agency-04-home.jpg",
         category: "Pets & Animals",
         tags: ["Pet", "Adoption", "Animals"],
         pageBuilder: "Gutenberg",
@@ -174,7 +174,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Photographer Portfolio",
-        imageUrl: "/attached_assets/images/photographer-portfolio-04-home.jpg",
+        imageUrl: "/images/photographer-portfolio-04-home.jpg",
         category: "Portfolio",
         tags: ["Photography", "Portfolio", "Creative"],
         pageBuilder: "Beaver Builder",
@@ -183,7 +183,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Restaurant",
-        imageUrl: "/attached_assets/images/restaurant-04-home.jpg",
+        imageUrl: "/images/restaurant-04-home.jpg",
         category: "Food & Drink",
         tags: ["Restaurant", "Food", "Dining"],
         pageBuilder: "Elementor",
@@ -192,7 +192,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Wedding Organizer",
-        imageUrl: "/attached_assets/images/wedding-organizer-homepage.jpg",
+        imageUrl: "/images/wedding-organizer-homepage.jpg",
         category: "Events",
         tags: ["Wedding", "Event", "Planning"],
         pageBuilder: "Brizy",
@@ -201,7 +201,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Yoga Studio",
-        imageUrl: "/attached_assets/images/yoga-studio-04-home.jpg",
+        imageUrl: "/images/yoga-studio-04-home.jpg",
         category: "Health & Fitness",
         tags: ["Yoga", "Wellness", "Fitness"],
         pageBuilder: "Elementor",
@@ -209,7 +209,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Spa & Wellness",
-        imageUrl: "/attached_assets/images/spa-04-1.jpg",
+        imageUrl: "/images/spa-04-1.jpg",
         category: "Health & Fitness",
         tags: ["Spa", "Wellness", "Beauty"],
         pageBuilder: "Gutenberg",
@@ -218,7 +218,7 @@ export class MemStorage implements IStorage {
       // Additional templates to have more than 30 in total for pagination
       {
         title: "Accountant",
-        imageUrl: "/attached_assets/images/accountant-02.jpg",
+        imageUrl: "/images/accountant-02.jpg",
         category: "Business",
         tags: ["Accounting", "Finance", "Tax"],
         pageBuilder: "Elementor",
@@ -226,7 +226,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "AC Technician",
-        imageUrl: "/attached_assets/images/ac-technician-elementor-homepage-sceenshot.jpg",
+        imageUrl: "/images/ac-technician-elementor-homepage-sceenshot.jpg",
         category: "Services",
         tags: ["AC", "Technician", "Repair"],
         pageBuilder: "Elementor",
@@ -234,7 +234,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Animal Welfare",
-        imageUrl: "/attached_assets/images/animal-welfare-home-page.jpg",
+        imageUrl: "/images/animal-welfare-home-page.jpg",
         category: "Nonprofit",
         tags: ["Animal", "Welfare", "Charity"],
         pageBuilder: "Beaver Builder",
@@ -242,7 +242,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "App Landing Page",
-        imageUrl: "/attached_assets/images/appplus-landing-page-04-600x3298.jpg",
+        imageUrl: "/images/appplus-landing-page-04-600x3298.jpg",
         category: "Technology",
         tags: ["App", "Mobile", "Landing"],
         pageBuilder: "Gutenberg",
@@ -250,7 +250,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Aquarium",
-        imageUrl: "/attached_assets/images/aquarium-04-home.jpg",
+        imageUrl: "/images/aquarium-04-home.jpg",
         category: "Pets & Animals",
         tags: ["Aquarium", "Fish", "Marine"],
         pageBuilder: "Elementor",
@@ -258,7 +258,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Architects",
-        imageUrl: "/attached_assets/images/architects-home-page.jpg",
+        imageUrl: "/images/architects-home-page.jpg",
         category: "Architecture",
         tags: ["Architecture", "Design", "Building"],
         pageBuilder: "Beaver Builder",
@@ -266,7 +266,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Arch Masters",
-        imageUrl: "/attached_assets/images/archmasters-architecture-02-600x2302.jpg",
+        imageUrl: "/images/archmasters-architecture-02-600x2302.jpg",
         category: "Architecture",
         tags: ["Architecture", "Design", "Construction"],
         pageBuilder: "Elementor",
@@ -274,7 +274,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Artist Christine",
-        imageUrl: "/attached_assets/images/artist-christine-home-page.jpg",
+        imageUrl: "/images/artist-christine-home-page.jpg",
         category: "Art & Creative",
         tags: ["Artist", "Creative", "Portfolio"],
         pageBuilder: "Brizy",
@@ -282,7 +282,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Artist Feb 20",
-        imageUrl: "/attached_assets/images/artist-feb-20-home.jpg",
+        imageUrl: "/images/artist-feb-20-home.jpg",
         category: "Art & Creative",
         tags: ["Artist", "Creative", "Gallery"],
         pageBuilder: "Gutenberg",
@@ -290,7 +290,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Artist Multipurpose",
-        imageUrl: "/attached_assets/images/artist-multipurpose-02-1-600x1546.jpg",
+        imageUrl: "/images/artist-multipurpose-02-1-600x1546.jpg",
         category: "Art & Creative",
         tags: ["Artist", "Creative", "Portfolio"],
         pageBuilder: "Elementor",
@@ -298,7 +298,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Author",
-        imageUrl: "/attached_assets/images/author-home.jpg",
+        imageUrl: "/images/author-home.jpg",
         category: "Blog & Writing",
         tags: ["Author", "Writer", "Books"],
         pageBuilder: "Beaver Builder",
@@ -306,7 +306,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Ayurveda",
-        imageUrl: "/attached_assets/images/ayurveda-04-home-1.jpg",
+        imageUrl: "/images/ayurveda-04-home-1.jpg",
         category: "Health & Wellness",
         tags: ["Ayurveda", "Wellness", "Holistic"],
         pageBuilder: "Elementor",
@@ -314,7 +314,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Baby Store",
-        imageUrl: "/attached_assets/images/baby-stores-04-600x2813.jpg",
+        imageUrl: "/images/baby-stores-04-600x2813.jpg",
         category: "E-Commerce",
         tags: ["Baby", "Store", "Kids"],
         pageBuilder: "Gutenberg",
@@ -322,7 +322,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "Barber Shop",
-        imageUrl: "/attached_assets/images/barber-shop-02-home-2.jpg",
+        imageUrl: "/images/barber-shop-02-home-2.jpg",
         category: "Beauty & Care",
         tags: ["Barber", "Haircut", "Grooming"],
         pageBuilder: "Beaver Builder",
@@ -330,7 +330,7 @@ export class MemStorage implements IStorage {
       },
       {
         title: "BBQ Food Truck",
-        imageUrl: "/attached_assets/images/bbq-food-truck-04.jpg",
+        imageUrl: "/images/bbq-food-truck-04.jpg",
         category: "Food & Drink",
         tags: ["BBQ", "Food Truck", "Restaurant"],
         pageBuilder: "Elementor",
