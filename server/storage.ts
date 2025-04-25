@@ -1339,6 +1339,550 @@ export class MemStorage implements IStorage {
         isPro: false
       },
       {
+        title: "Online Yoga Classes",
+        imageUrl: "/images/online-yoga-classes-02-600x1808.jpg",
+        category: "eLearning",
+        tags: ["Yoga", "Fitness", "Online"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Organic Cosmetics",
+        imageUrl: "/images/organic-cosmetics-02-homepage-600x1750.jpg",
+        category: "eCommerce",
+        tags: ["Organic", "Cosmetics", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Organic Food",
+        imageUrl: "/images/organic-food-homepage.jpg",
+        category: "eCommerce",
+        tags: ["Organic", "Food", "Health"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Outdoor Adventure",
+        imageUrl: "/images/outdoor-adventure-04-home.jpg",
+        category: "Professional",
+        tags: ["Outdoor", "Adventure", "Activities"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Parfume",
+        imageUrl: "/images/parfume-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Parfume", "Fragrance", "Luxury"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Pet Shop",
+        imageUrl: "/images/pet-shop-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Pet", "Shop", "Animals"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Photo Gallery",
+        imageUrl: "/images/photo-gallery-02-600x1750.jpg",
+        category: "Personal",
+        tags: ["Photo", "Gallery", "Portfolio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Photographer Portfolio",
+        imageUrl: "/images/photographer-portfolio-02-home.jpg",
+        category: "Personal",
+        tags: ["Photographer", "Portfolio", "Creative"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Photography Portfolio",
+        imageUrl: "/images/photography-portfolio-home-page.jpg",
+        category: "Personal",
+        tags: ["Photography", "Portfolio", "Creative"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Pizza Restaurant",
+        imageUrl: "/images/pizza-restaurant-04-home.jpg",
+        category: "Restaurant",
+        tags: ["Pizza", "Restaurant", "Food"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Plant Nursery",
+        imageUrl: "/images/plant-nursery-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Plant", "Nursery", "Garden"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Podcast",
+        imageUrl: "/images/podcast-04-home.jpg",
+        category: "Personal",
+        tags: ["Podcast", "Audio", "Media"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Portrait Photographer",
+        imageUrl: "/images/portrait-photographer-02-home.jpg",
+        category: "Personal",
+        tags: ["Portrait", "Photographer", "Photography"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Product Landing",
+        imageUrl: "/images/product-landing-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Product", "Landing", "Marketing"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Property",
+        imageUrl: "/images/property-02-home.jpg",
+        category: "Professional",
+        tags: ["Property", "Real Estate", "Home"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Real Estate",
+        imageUrl: "/images/real-estate-04-home.jpg",
+        category: "Professional",
+        tags: ["Real Estate", "Property", "Business"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Real Estate Homepage",
+        imageUrl: "/images/real-estate-homepage.jpg",
+        category: "Professional",
+        tags: ["Real Estate", "Property", "Business"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Recipe Blog",
+        imageUrl: "/images/recipe-blog-04-home.jpg",
+        category: "Personal",
+        tags: ["Recipe", "Blog", "Food"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Restaurant",
+        imageUrl: "/images/restaurant-02-home.jpg",
+        category: "Restaurant",
+        tags: ["Restaurant", "Food", "Dining"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Restaurant Homepage",
+        imageUrl: "/images/restaurant-homepage.jpg",
+        category: "Restaurant",
+        tags: ["Restaurant", "Food", "Dining"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Resort",
+        imageUrl: "/images/resort-04-home.jpg",
+        category: "Local Business",
+        tags: ["Resort", "Hotel", "Vacation"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Roofing Company",
+        imageUrl: "/images/roofing-company-homepage.jpg",
+        category: "Professional",
+        tags: ["Roofing", "Construction", "Service"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "SaaS Company",
+        imageUrl: "/images/saas-company-02-home.jpg",
+        category: "Professional",
+        tags: ["SaaS", "Software", "Technology"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Salon",
+        imageUrl: "/images/salon-02-home.jpg",
+        category: "Local Business",
+        tags: ["Salon", "Beauty", "Hair"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Service Business",
+        imageUrl: "/images/service-business-02-home.jpg",
+        category: "Local Business",
+        tags: ["Service", "Business", "Local"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Shoe Store",
+        imageUrl: "/images/shoe-store-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Shoe", "Store", "Fashion"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Shop",
+        imageUrl: "/images/shop-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Shop", "Store", "Retail"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Smart Home",
+        imageUrl: "/images/smart-home-02-600x3040.jpg",
+        category: "eCommerce",
+        tags: ["Smart", "Home", "Technology"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Soccer Team",
+        imageUrl: "/images/soccer-team-02-home.jpg",
+        category: "Professional",
+        tags: ["Soccer", "Team", "Sports"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Social Media Agency",
+        imageUrl: "/images/social-media-agency-04-home.jpg",
+        category: "Professional",
+        tags: ["Social Media", "Agency", "Marketing"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Spa",
+        imageUrl: "/images/spa-02-home.jpg",
+        category: "Local Business",
+        tags: ["Spa", "Wellness", "Relaxation"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Spa Resort",
+        imageUrl: "/images/spa-resort-04-home.jpg",
+        category: "Local Business",
+        tags: ["Spa", "Resort", "Wellness"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Sushi Restaurant",
+        imageUrl: "/images/sushi-restaurant-02-home.jpg",
+        category: "Restaurant",
+        tags: ["Sushi", "Restaurant", "Japanese"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Tutoring Academy",
+        imageUrl: "/images/tutoring-academy-homepage.jpg",
+        category: "eLearning",
+        tags: ["Tutoring", "Academy", "Education"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Travel Agency",
+        imageUrl: "/images/travel-agency-02-home.jpg",
+        category: "Professional",
+        tags: ["Travel", "Agency", "Tourism"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Travel Blog",
+        imageUrl: "/images/travel-blog-02-home.jpg",
+        category: "Personal",
+        tags: ["Travel", "Blog", "Tourism"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Web Designer",
+        imageUrl: "/images/web-designer-04-home.jpg",
+        category: "Personal",
+        tags: ["Web", "Designer", "Portfolio"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Web Development Agency",
+        imageUrl: "/images/web-development-agency-02-home.jpg",
+        category: "Professional",
+        tags: ["Web", "Development", "Agency"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Wedding",
+        imageUrl: "/images/wedding-02-home.jpg",
+        category: "Personal",
+        tags: ["Wedding", "Event", "Celebration"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Yoga",
+        imageUrl: "/images/yoga-04-home.jpg",
+        category: "Local Business",
+        tags: ["Yoga", "Fitness", "Wellness"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Zoo",
+        imageUrl: "/images/zoo-02-home.jpg",
+        category: "Local Business",
+        tags: ["Zoo", "Animals", "Entertainment"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Digital Marketing Agency",
+        imageUrl: "/images/digital-marketing-agency-04-home.jpg",
+        category: "Professional",
+        tags: ["Digital", "Marketing", "Agency"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Digital Products",
+        imageUrl: "/images/digital-products-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Digital", "Products", "Downloads"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Digital Services",
+        imageUrl: "/images/digital-services-04-home.jpg",
+        category: "Professional",
+        tags: ["Digital", "Services", "Online"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Doctor",
+        imageUrl: "/images/doctor-02-home.jpg",
+        category: "Professional",
+        tags: ["Doctor", "Medical", "Healthcare"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Drone Store",
+        imageUrl: "/images/drone-store-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Drone", "Store", "Technology"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "eBook Author",
+        imageUrl: "/images/ebook-author-02-home.jpg",
+        category: "Personal",
+        tags: ["eBook", "Author", "Writer"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "eBook Landing",
+        imageUrl: "/images/ebook-landing-02-home.jpg",
+        category: "Personal",
+        tags: ["eBook", "Landing", "Author"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "eCommerce",
+        imageUrl: "/images/ecommerce-02-home.jpg",
+        category: "eCommerce",
+        tags: ["eCommerce", "Shop", "Store"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Elementor Pro Templates",
+        imageUrl: "/images/elementor-pro-templates-02-home.jpg",
+        category: "Professional",
+        tags: ["Elementor", "Templates", "Professional"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Environmental",
+        imageUrl: "/images/environmental-02-home.jpg",
+        category: "Non Profit",
+        tags: ["Environmental", "Nature", "Conservation"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Event",
+        imageUrl: "/images/event-04-home.jpg",
+        category: "Professional",
+        tags: ["Event", "Conference", "Meetup"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Event Management",
+        imageUrl: "/images/event-management-02-home.jpg",
+        category: "Professional",
+        tags: ["Event", "Management", "Planning"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Family Doctor",
+        imageUrl: "/images/family-doctor-02-home.jpg",
+        category: "Professional",
+        tags: ["Doctor", "Family", "Healthcare"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Farm",
+        imageUrl: "/images/farm-02-home.jpg",
+        category: "Local Business",
+        tags: ["Farm", "Agriculture", "Organic"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Fashion",
+        imageUrl: "/images/fashion-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Fashion", "Clothing", "Style"],
+        pageBuilder: "Elementor",
+        isPro: false
+      },
+      {
+        title: "Finance",
+        imageUrl: "/images/finance-02-home.jpg",
+        category: "Professional",
+        tags: ["Finance", "Business", "Consulting"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Financial Advisor",
+        imageUrl: "/images/financial-advisor-02-home.jpg",
+        category: "Professional",
+        tags: ["Financial", "Advisor", "Consulting"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Food Delivery",
+        imageUrl: "/images/food-delivery-04-home.jpg",
+        category: "eCommerce",
+        tags: ["Food", "Delivery", "Restaurant"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Food Truck",
+        imageUrl: "/images/food-truck-02-home.jpg",
+        category: "Restaurant",
+        tags: ["Food", "Truck", "Mobile"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Freelancer",
+        imageUrl: "/images/freelancer-02-home.jpg",
+        category: "Personal",
+        tags: ["Freelancer", "Portfolio", "Creative"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Furniture Store",
+        imageUrl: "/images/furniture-store-02-home.jpg",
+        category: "eCommerce",
+        tags: ["Furniture", "Store", "Home"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Game Studio",
+        imageUrl: "/images/game-studio-04-home.jpg",
+        category: "Professional",
+        tags: ["Game", "Studio", "Development"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Gaming Blog",
+        imageUrl: "/images/gaming-blog-02-home.jpg",
+        category: "Personal",
+        tags: ["Gaming", "Blog", "Entertainment"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
+        title: "Gardening Services",
+        imageUrl: "/images/gardening-services-02-home.jpg",
+        category: "Local Business",
+        tags: ["Gardening", "Services", "Landscaping"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Gardener",
+        imageUrl: "/images/gardener-04-home.jpg",
+        category: "Local Business",
+        tags: ["Gardener", "Landscaping", "Services"],
+        pageBuilder: "Beaver Builder",
+        isPro: false
+      },
+      {
+        title: "Gym",
+        imageUrl: "/images/gym-02-home.jpg",
+        category: "Local Business",
+        tags: ["Gym", "Fitness", "Health"],
+        pageBuilder: "Elementor",
+        isPro: true
+      },
+      {
+        title: "Hair Salon",
+        imageUrl: "/images/hair-salon-04-home.jpg",
+        category: "Local Business",
+        tags: ["Hair", "Salon", "Beauty"],
+        pageBuilder: "Gutenberg",
+        isPro: false
+      },
+      {
         title: "Communities",
         imageUrl: "/images/communities-02-home.jpg",
         category: "Non Profit",
