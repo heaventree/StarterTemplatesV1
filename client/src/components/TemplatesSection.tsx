@@ -29,7 +29,7 @@ export default function TemplatesSection() {
         const lowerSearch = searchTerm.toLowerCase();
         filtered = filtered.filter(template => 
           template.title.toLowerCase().includes(lowerSearch) || 
-          template.tags.some(tag => tag.toLowerCase().includes(lowerSearch))
+          template.tags?.some(tag => tag.toLowerCase().includes(lowerSearch)) || false
         );
       }
       
