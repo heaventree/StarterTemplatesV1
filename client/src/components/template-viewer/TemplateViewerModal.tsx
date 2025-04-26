@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/components/ui/badge';
 import { Template } from '@shared/schema';
 import { useQuery } from '@tanstack/react-query';
 import { 
@@ -205,7 +206,7 @@ export default function TemplateViewerModal({
                   <Button 
                     variant="default" 
                     size="sm"
-                    onClick={() => window.location.href = `/download?template=${template.id}`}
+                    onClick={() => template && window.location.href = `/download?template=${template.id}`}
                   >
                     <Download className="w-4 h-4 mr-1" />
                     <span className="hidden sm:inline">Download Free</span>
@@ -213,7 +214,7 @@ export default function TemplateViewerModal({
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => window.location.href = `/subscribe?ref=${template.id}`}
+                    onClick={() => template && window.location.href = `/subscribe?ref=${template.id}`}
                     className="hidden sm:flex"
                   >
                     <Tag className="w-4 h-4 mr-1" />
