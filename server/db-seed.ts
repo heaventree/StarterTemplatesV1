@@ -2,6 +2,7 @@ import { db } from './db';
 import { users, templates, pageBuilders, tasks } from '@shared/schema';
 import { eq } from 'drizzle-orm';
 import * as bcrypt from 'bcrypt';
+import { fullTemplateData } from '@shared/data/template-data';
 
 async function seedDatabase() {
   console.log('Starting database seeding...');
@@ -58,39 +59,18 @@ async function seedDatabase() {
   
   await db.insert(pageBuilders).values(pageBuilderData);
 
-  // Only need a few templates for demo
-  console.log('Seeding templates...');
-  const templateData = [
-    {
-      title: "Love Nature",
-      imageUrl: "/images/love-nature-02-600x1449.jpg",
-      category: "Personal",
-      tags: ["Nature", "Conservation", "Green"],
-      pageBuilder: "Elementor",
-      isPro: false,
-      demoUrl: "https://websitedemos.net/love-nature-02"
-    },
-    {
-      title: "Outdoor Adventure",
-      imageUrl: "/images/outdoor-adventure-02-home.jpg",
-      category: "Personal",
-      tags: ["Outdoor", "Adventure", "Travel"],
-      pageBuilder: "Gutenberg",
-      isPro: true,
-      demoUrl: "https://websitedemos.net/outdoor-adventure-02"
-    },
-    {
-      title: "Brandstore",
-      imageUrl: "/images/brandstore-02-1-600x1856.jpg",
-      category: "eCommerce",
-      tags: ["Brand", "Store", "Shopping"],
-      pageBuilder: "Beaver Builder",
-      isPro: false,
-      demoUrl: "https://websitedemos.net/brandstore-02"
-    }
-  ];
+  // Seed all templates (approx. 280+ items)
+  console.log(`Seeding ${fullTemplateData.length} templates...`);
   
-  await db.insert(templates).values(templateData);
+  // Insert templates in batches to avoid overwhelming the database
+  const BATCH_SIZE = 50;
+  for (let i = 0; i < fullTemplateData.length; i += BATCH_SIZE) {
+    const batch = fullTemplateData.slice(i, i + BATCH_SIZE);
+    await db.insert(templates).values(batch);
+    console.log(`Seeded templates batch ${Math.floor(i / BATCH_SIZE) + 1}/${Math.ceil(fullTemplateData.length / BATCH_SIZE)}`);
+  }
+  
+  console.log(`Successfully seeded ${fullTemplateData.length} templates`);
 
   // Seed CMS roadmap tasks
   console.log('Seeding roadmap tasks...');

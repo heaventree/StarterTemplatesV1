@@ -2259,4 +2259,4 @@ export const fullTemplateData: InsertTemplate[] = [
       }
     ];
 
-    console.log(`Initializing ${templateData.length} templates...`);
+    // End of template data
