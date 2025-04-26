@@ -125,17 +125,17 @@ export default function TemplatePreviewButton({
           </div>
 
           {/* iframe container - truly full screen with no gaps */}
-          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-10 flex items-center justify-center bg-gray-800' : ''}`}>
+          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
               <iframe
                 src={template.demoUrl || ''}
                 className="w-full absolute top-0 left-0 right-0 bottom-0"
                 style={{ 
                   position: 'fixed',
-                  top: '40px', /* Height of the header */
+                  top: '48px', /* Height of the header (12*4=48px) */
                   left: 0,
                   width: '100%',
-                  height: 'calc(100vh - 40px)', /* Viewport height minus header height */
+                  height: 'calc(100vh - 48px)', /* Viewport height minus header height */
                   border: 'none',
                   margin: 0,
                   padding: 0,
