@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
-import { Eye, X, Monitor, Tablet, Smartphone, RefreshCw, ShoppingCart } from 'lucide-react';
-import LocalTemplatePreview from './LocalTemplatePreview';
+import { Eye, X, Monitor, Tablet, Smartphone } from 'lucide-react';
 
 interface TemplatePreviewButtonProps {
   template: Template;
@@ -25,129 +24,6 @@ export default function TemplatePreviewButton({
 }: TemplatePreviewButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
-  const [showCustomizer, setShowCustomizer] = useState(false);
-  const [selectedFont, setSelectedFont] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  
-  // Font options available for customization
-  const fontOptions = [
-    { name: 'Default', value: 'inherit' },
-    { name: 'Sans', value: '"DM Sans", sans-serif' },
-    { name: 'Serif', value: '"Playfair Display", serif' },
-    { name: 'Mono', value: '"JetBrains Mono", monospace' },
-    { name: 'Round', value: '"Varela Round", sans-serif' },
-    { name: 'Modern', value: '"Montserrat", sans-serif' },
-    { name: 'Classic', value: '"Merriweather", serif' },
-  ];
-  
-  // Color options for customization
-  const colorOptions = [
-    { name: 'Teal', primary: '#0D9488', secondary: '#CCFBF1' },
-    { name: 'Gray', primary: '#1F2937', secondary: '#F3F4F6' },
-    { name: 'Blue', primary: '#2563EB', secondary: '#DBEAFE' },
-    { name: 'Green', primary: '#16A34A', secondary: '#DCFCE7' },
-    { name: 'Red', primary: '#DC2626', secondary: '#FEE2E2' },
-    { name: 'Pink', primary: '#DB2777', secondary: '#FCE7F3' },
-    { name: 'Orange', primary: '#EA580C', secondary: '#FFEDD5' },
-    { name: 'Purple', primary: '#9333EA', secondary: '#F3E8FF' },
-    { name: 'Yellow', primary: '#CA8A04', secondary: '#FEF9C3' },
-  ];
-  
-  // Apply styles to the iframe
-  const applyStyles = (font: string | null, color: { primary: string, secondary: string } | null) => {
-    const iframes = document.querySelectorAll('iframe');
-    if (!iframes.length) return;
-    
-    // Apply to all iframes (mobile/desktop/tablet)
-    iframes.forEach(iframe => {
-      try {
-        if (!iframe.contentDocument || !iframe.contentWindow) return;
-        
-        // Create or update style element in iframe
-        let styleEl = iframe.contentDocument.getElementById('custom-preview-styles');
-        if (!styleEl) {
-          styleEl = iframe.contentDocument.createElement('style');
-          if (styleEl) {
-            styleEl.id = 'custom-preview-styles';
-            iframe.contentDocument.head.appendChild(styleEl);
-          }
-        }
-        
-        if (!styleEl) return;
-        
-        // Build custom CSS
-        let css = '';
-        if (font) {
-          css += `
-            body, h1, h2, h3, h4, h5, h6, p, button, a, input, textarea, select {
-              font-family: ${font} !important;
-            }
-          `;
-        }
-        
-        if (color) {
-          css += `
-            :root {
-              --primary-color: ${color.primary} !important;
-              --secondary-color: ${color.secondary} !important;
-            }
-            
-            /* Primary buttons and CTA elements */
-            .wp-block-button__link,
-            button.primary,
-            .button.primary,
-            .wp-element-button,
-            .wp-block-button .wp-block-button__link,
-            .elementor-button,
-            .btn-primary,
-            [data-element_type="button"] {
-              background-color: ${color.primary} !important;
-              border-color: ${color.primary} !important;
-            }
-            
-            /* Links and accent text */
-            a:not(.wp-element-button):not(.wp-block-button__link):not(.btn-primary),
-            .elementor-icon,
-            .elementor-heading-title,
-            .has-accent-color {
-              color: ${color.primary} !important;
-            }
-            
-            /* Background elements */
-            .has-background-color,
-            .elementor-section[data-settings*="background_background"],
-            .elementor-column[data-settings*="background_background"] {
-              background-color: ${color.primary} !important;
-            }
-            
-            /* Secondary elements */
-            .has-accent-background-color {
-              color: ${color.secondary} !important;
-              background-color: ${color.primary} !important;
-            }
-          `;
-        }
-        
-        styleEl.textContent = css;
-      } catch (error) {
-        console.error("Error injecting styles into iframe:", error);
-      }
-    });
-  };
-  
-  // Handle iframe load events
-  const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
-    // Re-apply styles when iframe loads
-    if (selectedFont || selectedColor) {
-      const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
-      const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
-      
-      // Small delay to ensure iframe content is fully loaded
-      setTimeout(() => {
-        applyStyles(fontValue, colorValue);
-      }, 500);
-    }
-  };
 
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
@@ -219,17 +95,7 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'desktop' ? 'default' : 'ghost'}
-                  onClick={() => {
-                    setDeviceView('desktop');
-                    // Re-apply any styles after a short delay for iframe to load
-                    setTimeout(() => {
-                      if (selectedFont || selectedColor) {
-                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
-                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
-                        applyStyles(fontValue, colorValue);
-                      }
-                    }, 800);
-                  }}
+                  onClick={() => setDeviceView('desktop')}
                   className={`h-7 w-7 p-0 ${deviceView === 'desktop' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Desktop view"
                 >
@@ -238,17 +104,7 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'tablet' ? 'default' : 'ghost'}
-                  onClick={() => {
-                    setDeviceView('tablet');
-                    // Re-apply any styles after a short delay for iframe to load
-                    setTimeout(() => {
-                      if (selectedFont || selectedColor) {
-                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
-                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
-                        applyStyles(fontValue, colorValue);
-                      }
-                    }, 800);
-                  }}
+                  onClick={() => setDeviceView('tablet')}
                   className={`h-7 w-7 p-0 ${deviceView === 'tablet' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Tablet view"
                 >
@@ -257,17 +113,7 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'mobile' ? 'default' : 'ghost'}
-                  onClick={() => {
-                    setDeviceView('mobile');
-                    // Re-apply any styles after a short delay for iframe to load
-                    setTimeout(() => {
-                      if (selectedFont || selectedColor) {
-                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
-                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
-                        applyStyles(fontValue, colorValue);
-                      }
-                    }, 800);
-                  }}
+                  onClick={() => setDeviceView('mobile')}
                   className={`h-7 w-7 p-0 ${deviceView === 'mobile' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Mobile view"
                 >
@@ -288,140 +134,43 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* Local template preview container */}
+          {/* Direct template preview with iframe pointing to original source */}
           <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
-              <div 
-                className="w-full absolute" 
+              <iframe
+                src={template.demoUrl || ''}
+                className="w-full absolute"
                 style={{ 
                   position: 'fixed',
                   top: '48px', /* Height of the header (12*4=48px) */
                   left: 0,
                   width: '100%',
                   height: 'calc(100vh - 48px)', /* Viewport height minus header height */
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
                   overflow: 'hidden',
                   zIndex: 1
                 }}
-              >
-                <LocalTemplatePreview 
-                  template={template} 
-                  selectedFont={selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null}
-                  selectedColor={selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null}
-                />
-              </div>
+                title={`${template.title} preview`}
+                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+              />
             ) : (
               <div style={getDeviceStyles()}>
-                <LocalTemplatePreview 
-                  template={template} 
-                  selectedFont={selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null}
-                  selectedColor={selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null}
+                <iframe
+                  src={template.demoUrl || ''}
+                  className="w-full h-full"
+                  title={`${template.title} preview`}
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
                 />
               </div>
             )}
           </div>
 
-          {/* Right side customizer panel - similar to the screenshot */}
-          {showCustomizer && (
-            <div className="fixed top-12 right-0 bottom-0 w-80 bg-white z-50 shadow-lg border-l border-gray-200 overflow-y-auto">
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="font-semibold text-xl">{template.title}</h3>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    className="h-8 w-8 p-0" 
-                    onClick={() => setShowCustomizer(false)}
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-
-                <p className="text-gray-600 mb-6">
-                  Use the template as-is or try different colors and fonts from the options below.
-                </p>
-
-                <div className="mb-6">
-                  <h4 className="text-gray-800 font-medium mb-3 flex justify-between">
-                    Try Other Fonts
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-6 w-6 p-0 text-gray-500 hover:text-gray-700" 
-                      onClick={() => {
-                        setSelectedFont(null);
-                        applyStyles(null, selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null);
-                      }}
-                    >
-                      <RefreshCw className="h-4 w-4" />
-                    </Button>
-                  </h4>
-                  <div className="grid grid-cols-3 gap-2">
-                    {fontOptions.map((font, i) => (
-                      <div 
-                        key={i} 
-                        style={{fontFamily: font.value}}
-                        className={`border rounded p-2 h-14 flex items-center justify-center text-center cursor-pointer ${selectedFont === font.name ? 'border-pink-500 ring-2 ring-pink-200' : 'hover:border-pink-500'}`}
-                        onClick={() => {
-                          setSelectedFont(font.name);
-                          applyStyles(
-                            font.value, 
-                            selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null
-                          );
-                        }}
-                      >
-                        <span className="text-xl">Aa</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mb-8">
-                  <h4 className="text-gray-800 font-medium mb-3 flex justify-between">
-                    Try Other Colors
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-6 w-6 p-0 text-gray-500 hover:text-gray-700" 
-                      onClick={() => {
-                        setSelectedColor(null);
-                        applyStyles(
-                          selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null, 
-                          null
-                        );
-                      }}
-                    >
-                      <RefreshCw className="h-4 w-4" />
-                    </Button>
-                  </h4>
-                  <div className="grid grid-cols-3 gap-3">
-                    {colorOptions.map((color, i) => (
-                      <div 
-                        key={i} 
-                        className={`h-12 rounded flex cursor-pointer ${selectedColor === color.name ? 'ring-2 ring-pink-500' : 'hover:ring-2 hover:ring-pink-300'}`}
-                        onClick={() => {
-                          setSelectedColor(color.name);
-                          applyStyles(
-                            selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null, 
-                            color
-                          );
-                        }}
-                      >
-                        <div style={{backgroundColor: color.primary}} className="w-1/2 rounded-l"></div>
-                        <div style={{backgroundColor: color.primary, opacity: 0.2}} className="w-1/2 rounded-r"></div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Buttons removed per user request */}
-              </div>
-            </div>
-          )}
-
-          {/* Customize floating bar at the bottom */}
+          {/* Bottom info bar */}
           <div style={{ borderRadius: '0' }} className="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 text-white py-3 px-4 flex justify-between items-center shadow-lg border-t border-gray-800">
             <div className="flex items-center gap-2">
-              <span className="font-medium">Ready to customize this template?</span>
+              <span className="font-medium">{template.title}</span>
             </div>
             <div className="flex gap-3">
               <Button 
@@ -429,13 +178,13 @@ export default function TemplatePreviewButton({
                 className="text-white bg-gray-800 hover:bg-gray-700 border border-gray-700"
                 onClick={() => setIsOpen(false)}
               >
-                More Details
+                Close Preview
               </Button>
               <Button 
                 className="bg-pink-600 hover:bg-pink-700 text-white"
-                onClick={() => setShowCustomizer(!showCustomizer)}
+                onClick={() => template.demoUrl ? window.open(template.demoUrl as string, '_blank') : null}
               >
-                {showCustomizer ? 'Hide Options' : 'Customize'}
+                View Full Demo
               </Button>
             </div>
           </div>
