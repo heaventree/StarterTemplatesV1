@@ -80,11 +80,11 @@ export default function TemplatePreviewButton({
         open={isOpen} 
         onOpenChange={(open) => setIsOpen(open)}
       >
-        <DialogContent className="w-screen h-screen p-0 m-0 rounded-none border-0 overflow-hidden max-w-none [&>*]:rounded-none" aria-describedby="template-preview-description">
+        <DialogContent style={{ borderRadius: '0', border: 'none' }} className="w-screen h-screen p-0 m-0 !rounded-none !border-0 overflow-hidden max-w-none [&>*]:!rounded-none" aria-describedby="template-preview-description">
           <DialogTitle className="sr-only">Preview of {template.title}</DialogTitle>
           <div id="template-preview-description" className="sr-only">Interactive preview of the template with responsive viewing options</div>
-          {/* Header with controls - now in dark mode with square corners */}
-          <div className="bg-gray-900 backdrop-blur-sm border-b border-gray-800 border-t-0 rounded-none shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
+          {/* Header with controls - completely square with no borders or rounded corners */}
+          <div style={{ borderRadius: '0', borderTop: 'none' }} className="bg-gray-900 backdrop-blur-sm border-b border-gray-800 !border-t-0 !rounded-tl-0 !rounded-tr-0 !rounded-0 shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
             <div className="flex items-center gap-4">
               <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-6 text-white">{template.title}</h3>
             </div>
