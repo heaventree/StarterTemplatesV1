@@ -1,7 +1,9 @@
 import { 
   users, type User, type InsertUser,
   templates, type Template, type InsertTemplate,
-  pageBuilders, type PageBuilder, type InsertPageBuilder
+  pageBuilders, type PageBuilder, type InsertPageBuilder,
+  tasks, type Task, type InsertTask,
+  taskComments, type TaskComment, type InsertTaskComment
 } from "@shared/schema";
 
 export interface IStorage {
@@ -9,6 +11,7 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  updateUser(id: number, userData: Partial<InsertUser>): Promise<User | undefined>;
   
   // Template methods
   getAllTemplates(): Promise<Template[]>;
@@ -21,6 +24,21 @@ export interface IStorage {
   getAllPageBuilders(): Promise<PageBuilder[]>;
   getPageBuilderById(id: number): Promise<PageBuilder | undefined>;
   createPageBuilder(pageBuilder: InsertPageBuilder): Promise<PageBuilder>;
+
+  // Task methods
+  getAllTasks(): Promise<Task[]>;
+  getTasksByPhase(phase: string): Promise<Task[]>;
+  getTasksByCategory(category: string): Promise<Task[]>;
+  getTasksByStatus(status: string): Promise<Task[]>;
+  getTasksByAssignee(userId: number): Promise<Task[]>;
+  getTaskById(id: number): Promise<Task | undefined>;
+  createTask(task: InsertTask): Promise<Task>;
+  updateTask(id: number, taskData: Partial<InsertTask>): Promise<Task | undefined>;
+  deleteTask(id: number): Promise<boolean>;
+  
+  // Task Comment methods
+  getTaskComments(taskId: number): Promise<TaskComment[]>;
+  createTaskComment(comment: InsertTaskComment): Promise<TaskComment>;
 }
 
 export class MemStorage implements IStorage {
