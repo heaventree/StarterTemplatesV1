@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
 import { Eye, X, Monitor, Tablet, Smartphone } from 'lucide-react';
+import { trackTemplateView, endTemplateView, trackCategoryView, trackPageBuilderView } from '@/services/recommendationEngine';
 
 interface TemplatePreviewButtonProps {
   template: Template;
@@ -25,6 +26,27 @@ export default function TemplatePreviewButton({
   const [isOpen, setIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
   const [showInfoModal, setShowInfoModal] = useState(false);
+  
+  // Track template viewing for recommendation engine
+  useEffect(() => {
+    if (isOpen && template) {
+      // Start tracking when template preview opens
+      trackTemplateView(template.id);
+      
+      // Track category and page builder preferences
+      if (template.category) {
+        trackCategoryView(template.category);
+      }
+      if (template.pageBuilder) {
+        trackPageBuilderView(template.pageBuilder);
+      }
+      
+      // End tracking when preview closes or component unmounts
+      return () => {
+        endTemplateView(template.id);
+      };
+    }
+  }, [isOpen, template]);
 
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
