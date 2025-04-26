@@ -1,6 +1,7 @@
-import { pgTable, text, serial, integer, boolean, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, PgTableFn } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { relations } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -52,6 +53,38 @@ export const taskComments = pgTable("task_comments", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  assignedTasks: many(tasks, { relationName: "assignedTasks" }),
+  createdTasks: many(tasks, { relationName: "createdTasks" }),
+  comments: many(taskComments),
+}));
+
+export const tasksRelations = relations(tasks, ({ one, many }) => ({
+  assignee: one(users, {
+    fields: [tasks.assignedTo],
+    references: [users.id],
+    relationName: "assignedTasks",
+  }),
+  creator: one(users, {
+    fields: [tasks.createdBy],
+    references: [users.id],
+    relationName: "createdTasks",
+  }),
+  comments: many(taskComments),
+}));
+
+export const taskCommentsRelations = relations(taskComments, ({ one }) => ({
+  task: one(tasks, {
+    fields: [taskComments.taskId],
+    references: [tasks.id],
+  }),
+  user: one(users, {
+    fields: [taskComments.userId],
+    references: [users.id],
+  }),
+}));
 
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
