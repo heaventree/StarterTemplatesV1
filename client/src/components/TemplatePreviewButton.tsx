@@ -83,10 +83,10 @@ export default function TemplatePreviewButton({
         <DialogContent className="w-screen h-screen p-0 m-0 rounded-none border-0 overflow-hidden max-w-none" aria-describedby="template-preview-description">
           <DialogTitle className="sr-only">Preview of {template.title}</DialogTitle>
           <div id="template-preview-description" className="sr-only">Interactive preview of the template with responsive viewing options</div>
-          {/* Header with controls - now in dark mode */}
-          <div className="bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
+          {/* Header with controls - now in dark mode with square corners */}
+          <div className="bg-gray-900 backdrop-blur-sm border-b border-gray-800 shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
             <div className="flex items-center gap-4">
-              <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-4 text-white">{template.title}</h3>
+              <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-6 text-white">{template.title}</h3>
             </div>
 
             {/* Device controls - centered more to the left */}
@@ -121,12 +121,12 @@ export default function TemplatePreviewButton({
                 </Button>
               </div>
               
-              {/* Prominent yet subtle close button */}
+              {/* Square close button to match design */}
               <Button 
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setIsOpen(false)} 
-                className="h-9 w-9 bg-gray-800/80 hover:bg-gray-700 border border-gray-700 rounded-full absolute top-1.5 right-3 text-white"
+                className="h-9 w-9 bg-gray-800 hover:bg-gray-700 border-0 absolute top-1.5 right-6 text-gray-300 hover:text-white"
                 title="Close preview"
               >
                 <X className="h-5 w-5" />
