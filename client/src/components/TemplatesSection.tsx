@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import TemplateCard from "@/components/TemplateCard";
 import { categories } from "@/lib/data";
 import type { Template } from "@shared/schema";
+import { getAIRecommendedTemplates, getTemplatesByCategory } from "@/services/templateRecommender";
 
 export default function TemplatesSection() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -10,6 +11,13 @@ export default function TemplatesSection() {
   const [filteredTemplates, setFilteredTemplates] = useState<Template[]>([]);
   const [displayCount, setDisplayCount] = useState(12); // Initial display count
   const [showViewMore, setShowViewMore] = useState(true);
+  
+  // AI recommendation states
+  const [userPrompt, setUserPrompt] = useState("");
+  const [isRecommending, setIsRecommending] = useState(false);
+  const [recommendedTemplates, setRecommendedTemplates] = useState<Template[]>([]);
+  const [showRecommended, setShowRecommended] = useState(false);
+  const promptInputRef = useRef<HTMLTextAreaElement>(null);
 
   // Using TanStack Query v5 with proper type annotations
   const { data: templates = [], isLoading } = useQuery<Template[]>({
@@ -57,6 +65,46 @@ export default function TemplatesSection() {
       setShowViewMore(false);
     }
   };
+  
+  // Handle AI template recommendation based on user prompt
+  const handleFindTemplates = () => {
+    if (!userPrompt?.trim()) return;
+    
+    setIsRecommending(true);
+    setShowRecommended(true);
+    
+    // Reset any existing search/filter
+    setActiveCategory("all");
+    setSearchTerm("");
+    
+    // Get recommendations using our AI matching function
+    const recommendations = getAIRecommendedTemplates(templates, userPrompt, 12);
+    setRecommendedTemplates(recommendations);
+    setIsRecommending(false);
+    
+    // Update filtered templates to show recommendations
+    setFilteredTemplates(recommendations);
+  };
+  
+  // Handle popular category selection
+  const handleCategorySelect = (category: string) => {
+    // Get templates for this category
+    const categoryTemplates = getTemplatesByCategory(templates, category, 12);
+    
+    // Update filtered templates
+    setFilteredTemplates(categoryTemplates);
+    setShowRecommended(true);
+    
+    // Reset other filters
+    setActiveCategory("all");
+    setSearchTerm("");
+    
+    // Set recommendation prompt
+    setUserPrompt(`I'm looking for a ${category} website`);
+    if (promptInputRef.current) {
+      promptInputRef.current.value = `I'm looking for a ${category} website`;
+    }
+  };
 
   return (
     <section id="templates" className="py-16 bg-[#f9fafb]">
@@ -66,8 +114,46 @@ export default function TemplatesSection() {
             Beautiful Website Templates
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Choose from hundreds of professionally designed templates for any industry. Import with a single click and customize to your needs.
+            Choose from <span className="text-[#dd4f93] font-semibold">{templates.length}+</span> ready-to-use website templates and blocks.
           </p>
+          
+          {/* AI Recommendation Text Area - Lovable Style */}
+          <div className="max-w-3xl mx-auto mt-8 mb-10">
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
+              <textarea 
+                ref={promptInputRef}
+                placeholder="Describe your business or the website you want to build..." 
+                className="w-full resize-none min-h-[80px] p-4 focus:outline-none focus:ring-2 focus:ring-[#dd4f93]/20 focus:border-[#dd4f93] text-gray-700 placeholder-gray-400 border-b border-gray-200"
+                rows={2}
+                value={userPrompt}
+                onChange={(e) => setUserPrompt(e.target.value)}
+              />
+              <div className="flex justify-between items-center p-3 bg-gray-50">
+                <div className="text-sm text-gray-500">AI-powered recommendations</div>
+                <button 
+                  className="bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white font-proxima-bold py-2 px-6 rounded-full transition-all shadow-sm hover:shadow-md"
+                  onClick={handleFindTemplates}
+                  disabled={isRecommending || !userPrompt?.trim()}
+                >
+                  {isRecommending ? 'Finding...' : 'Find Templates'}
+                </button>
+              </div>
+            </div>
+            
+            {/* Popular Template Categories */}
+            <div className="flex flex-wrap justify-center gap-3 mt-4">
+              <div className="text-sm font-medium text-gray-600 py-2">Popular themes: </div>
+              {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
+                <button
+                  key={category}
+                  className="px-5 py-2 rounded-full font-proxima-bold transition-colors bg-white text-gray-700 hover:bg-gray-100 shadow-sm border border-gray-100"
+                  onClick={() => handleCategorySelect(category)}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         
         {/* Filters */}
