@@ -45,23 +45,201 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private templates: Map<number, Template>;
   private pageBuilders: Map<number, PageBuilder>;
+  private tasks: Map<number, Task>;
+  private taskComments: Map<number, TaskComment>;
   private userId: number;
   private templateId: number;
   private pageBuilderId: number;
+  private taskId: number;
+  private taskCommentId: number;
+  
+  // Helper method to create roadmap tasks from the CMS_Roadmap.md content
+  private createRoadmapTasks() {
+    // Phase 1: Foundation (Q2 2025)
+    const phase1AuthTasks: InsertTask[] = [
+      {
+        title: "Role-based access control",
+        description: "Implement role-based access control (Admin, Editor, Contributor)",
+        status: "todo",
+        priority: "high",
+        phase: "Phase 1",
+        category: "Authentication & User Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 3, 30) // April 30, 2025
+      },
+      {
+        title: "Secure authentication system",
+        description: "Set up a secure authentication system with JWT",
+        status: "todo",
+        priority: "high",
+        phase: "Phase 1",
+        category: "Authentication & User Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 3, 15) // April 15, 2025
+      },
+      {
+        title: "User profile management",
+        description: "Create user profile management functionality",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 1",
+        category: "Authentication & User Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 4, 15) // May 15, 2025
+      },
+      {
+        title: "Password reset functionality",
+        description: "Implement password reset functionality with email verification",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 1",
+        category: "Authentication & User Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 4, 30) // May 30, 2025
+      }
+    ];
+
+    const phase1ContentTasks: InsertTask[] = [
+      {
+        title: "Template CRUD operations",
+        description: "Implement Create, Read, Update, Delete operations for templates",
+        status: "in-progress",
+        priority: "high",
+        phase: "Phase 1",
+        category: "Basic Content Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 4, 1) // May 1, 2025
+      },
+      {
+        title: "Category management",
+        description: "Create category management system for templates",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 1",
+        category: "Basic Content Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 5, 15) // June 15, 2025
+      },
+      {
+        title: "Tag management",
+        description: "Implement tag management system for templates",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 1",
+        category: "Basic Content Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 5, 30) // June 30, 2025
+      },
+      {
+        title: "Basic media library",
+        description: "Create a basic media library for storing and managing images",
+        status: "todo",
+        priority: "high",
+        phase: "Phase 1",
+        category: "Basic Content Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 6, 15) // July 15, 2025
+      }
+    ];
+
+    // Phase 2: Enhanced Features (Q3 2025)
+    const phase2TemplateTasks: InsertTask[] = [
+      {
+        title: "Template versioning",
+        description: "Implement template versioning to track changes",
+        status: "todo",
+        priority: "high",
+        phase: "Phase 2",
+        category: "Advanced Template Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 6, 30) // July 30, 2025
+      },
+      {
+        title: "Template previews",
+        description: "Add template preview functionality",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 2",
+        category: "Advanced Template Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 7, 15) // August 15, 2025
+      },
+      {
+        title: "Batch operations",
+        description: "Implement batch operations for templates",
+        status: "todo",
+        priority: "medium",
+        phase: "Phase 2",
+        category: "Advanced Template Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 7, 30) // August 30, 2025
+      },
+      {
+        title: "Import/export functionality",
+        description: "Create import/export functionality for templates",
+        status: "todo",
+        priority: "low",
+        phase: "Phase 2",
+        category: "Advanced Template Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 8, 15) // September 15, 2025
+      },
+      {
+        title: "Template analytics",
+        description: "Implement template analytics (views, downloads)",
+        status: "todo",
+        priority: "low",
+        phase: "Phase 2",
+        category: "Advanced Template Management",
+        createdBy: 1,
+        dueDate: new Date(2025, 8, 30) // September 30, 2025
+      }
+    ];
+
+    // Add more tasks for Phase 3 and Phase 4 if needed
+    
+    // Create all tasks
+    const allTasks = [
+      ...phase1AuthTasks,
+      ...phase1ContentTasks,
+      ...phase2TemplateTasks
+    ];
+    
+    allTasks.forEach(task => {
+      this.createTask(task);
+    });
+  }
 
   constructor() {
     this.users = new Map();
     this.templates = new Map();
     this.pageBuilders = new Map();
+    this.tasks = new Map();
+    this.taskComments = new Map();
     this.userId = 1;
     this.templateId = 1;
     this.pageBuilderId = 1;
+    this.taskId = 1;
+    this.taskCommentId = 1;
     
     // Initialize with sample data
     this.initializeData();
   }
 
   private initializeData() {
+    // Initialize users with admin role
+    const adminUser: InsertUser = {
+      username: "admin",
+      password: "admin123", // In a production app, this would be hashed
+      role: "admin"
+    };
+
+    this.createUser(adminUser);
+
+    // Initialize roadmap tasks from CMS_Roadmap.md
+    // Phase 1 tasks
+    this.createRoadmapTasks();
+    
     // Initialize page builders
     const pageBuilderData: InsertPageBuilder[] = [
       {
@@ -2438,6 +2616,120 @@ export class MemStorage implements IStorage {
     const pageBuilder: PageBuilder = { ...insertPageBuilder, id };
     this.pageBuilders.set(id, pageBuilder);
     return pageBuilder;
+  }
+
+  // User methods implementation
+  async updateUser(id: number, userData: Partial<InsertUser>): Promise<User | undefined> {
+    const existingUser = await this.getUser(id);
+    if (!existingUser) {
+      return undefined;
+    }
+
+    const updatedUser: User = { 
+      ...existingUser, 
+      ...userData,
+      // Ensure we don't override these fields
+      id: existingUser.id
+    };
+
+    this.users.set(id, updatedUser);
+    return updatedUser;
+  }
+
+  // Task methods implementation
+  async getAllTasks(): Promise<Task[]> {
+    return Array.from(this.tasks.values());
+  }
+
+  async getTasksByPhase(phase: string): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => task.phase === phase);
+  }
+
+  async getTasksByCategory(category: string): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => task.category === category);
+  }
+
+  async getTasksByStatus(status: string): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => task.status === status);
+  }
+
+  async getTasksByAssignee(userId: number): Promise<Task[]> {
+    return Array.from(this.tasks.values()).filter(task => task.assignedTo === userId);
+  }
+
+  async getTaskById(id: number): Promise<Task | undefined> {
+    return this.tasks.get(id);
+  }
+
+  async createTask(task: InsertTask): Promise<Task> {
+    const id = this.taskId++;
+    const now = new Date();
+    
+    const newTask: Task = {
+      ...task,
+      id,
+      createdAt: now,
+      updatedAt: now
+    };
+    
+    this.tasks.set(id, newTask);
+    return newTask;
+  }
+
+  async updateTask(id: number, taskData: Partial<InsertTask>): Promise<Task | undefined> {
+    const existingTask = await this.getTaskById(id);
+    if (!existingTask) {
+      return undefined;
+    }
+
+    const updatedTask: Task = {
+      ...existingTask,
+      ...taskData,
+      // Ensure we don't override these fields
+      id: existingTask.id,
+      createdAt: existingTask.createdAt,
+      updatedAt: new Date()
+    };
+
+    this.tasks.set(id, updatedTask);
+    return updatedTask;
+  }
+
+  async deleteTask(id: number): Promise<boolean> {
+    const exists = this.tasks.has(id);
+    if (!exists) {
+      return false;
+    }
+    
+    this.tasks.delete(id);
+    
+    // Also delete related comments
+    const relatedComments = await this.getTaskComments(id);
+    relatedComments.forEach(comment => {
+      this.taskComments.delete(comment.id);
+    });
+    
+    return true;
+  }
+
+  // Task Comment methods implementation
+  async getTaskComments(taskId: number): Promise<TaskComment[]> {
+    return Array.from(this.taskComments.values())
+      .filter(comment => comment.taskId === taskId);
+  }
+
+  async createTaskComment(comment: InsertTaskComment): Promise<TaskComment> {
+    const id = this.taskCommentId++;
+    const now = new Date();
+    
+    const newComment: TaskComment = {
+      ...comment,
+      id,
+      createdAt: now
+    };
+    
+    this.taskComments.set(id, newComment);
+    return newComment;
   }
 }
 
