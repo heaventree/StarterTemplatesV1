@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Template } from '@shared/schema';
-import { TemplateCard } from '@/components/TemplateCard';
+import TemplateCard from '@/components/TemplateCard';
 import { getRecommendedTemplates } from '@/services/recommendationEngine';
 import { useState, useEffect } from 'react';
 import { Sparkles } from 'lucide-react';
@@ -10,7 +10,7 @@ export function RecommendedTemplates() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Fetch all templates
-  const { data: templates, isLoading, error } = useQuery({
+  const { data: templates = [], isLoading, error } = useQuery<Template[]>({
     queryKey: ['/api/templates'],
   });
 
