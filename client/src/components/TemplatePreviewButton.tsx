@@ -28,14 +28,42 @@ export default function TemplatePreviewButton({
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
     const device = DEVICE_PRESETS[deviceView];
-    return {
-      width: device.width,
-      height: device.height,
-      maxWidth: '100%',
-      maxHeight: deviceView === 'desktop' ? '100%' : '80vh',
-      margin: '0 auto',
-      transition: 'all 0.3s ease'
-    };
+    
+    if (deviceView === 'desktop') {
+      return {
+        width: '100%',
+        height: '100%',
+        maxWidth: '100%',
+        maxHeight: '100%',
+        margin: '0',
+        transition: 'all 0.3s ease',
+        border: 'none'
+      };
+    } else if (deviceView === 'tablet') {
+      return {
+        width: '768px',
+        height: '100%',
+        maxWidth: '100%',
+        maxHeight: '100vh',
+        margin: '0 auto',
+        transition: 'all 0.3s ease',
+        border: '8px solid #222',
+        borderRadius: '12px',
+        boxShadow: '0 0 0 1px rgba(0,0,0,0.1), 0 4px 20px rgba(0,0,0,0.1)'
+      };
+    } else { // mobile
+      return {
+        width: '375px',
+        height: '100%',
+        maxWidth: '100%',
+        maxHeight: '100vh',
+        margin: '0 auto',
+        transition: 'all 0.3s ease',
+        border: '8px solid #222',
+        borderRadius: '12px',
+        boxShadow: '0 0 0 1px rgba(0,0,0,0.1), 0 4px 20px rgba(0,0,0,0.1)'
+      };
+    }
   };
 
   return (
@@ -52,24 +80,25 @@ export default function TemplatePreviewButton({
         open={isOpen} 
         onOpenChange={(open) => setIsOpen(open)}
       >
-        <DialogContent className="max-w-[90vw] h-[90vh] p-0 flex flex-col">
-          {/* Header with controls */}
-          <div className="bg-background border-b p-3 flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
+        <DialogContent className="w-screen h-screen p-0 m-0 rounded-none border-0 overflow-hidden max-w-none">
+          {/* Header with controls - now smaller and more compact */}
+          <div className="bg-background/95 backdrop-blur-sm border-b shadow-sm z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8">
                 <X className="h-4 w-4" />
               </Button>
-              <h3 className="font-semibold">{template.title}</h3>
+              <h3 className="font-semibold text-sm md:text-base line-clamp-1">{template.title}</h3>
             </div>
 
-            {/* Device controls */}
-            <div className="flex items-center space-x-2">
-              <div className="bg-muted rounded-lg p-1 flex">
+            {/* Device controls - moved far away from close button */}
+            <div className="flex items-center">
+              <div className="bg-muted/80 rounded-lg p-1 flex mr-4">
                 <Button
                   size="sm"
                   variant={deviceView === 'desktop' ? 'secondary' : 'ghost'}
                   onClick={() => setDeviceView('desktop')}
-                  className="rounded-md"
+                  className="h-7 w-7 rounded-md p-0"
+                  title="Desktop view"
                 >
                   <Monitor className="h-4 w-4" />
                 </Button>
@@ -77,7 +106,8 @@ export default function TemplatePreviewButton({
                   size="sm"
                   variant={deviceView === 'tablet' ? 'secondary' : 'ghost'}
                   onClick={() => setDeviceView('tablet')}
-                  className="rounded-md"
+                  className="h-7 w-7 rounded-md p-0"
+                  title="Tablet view"
                 >
                   <Tablet className="h-4 w-4" />
                 </Button>
@@ -85,7 +115,8 @@ export default function TemplatePreviewButton({
                   size="sm"
                   variant={deviceView === 'mobile' ? 'secondary' : 'ghost'}
                   onClick={() => setDeviceView('mobile')}
-                  className="rounded-md"
+                  className="h-7 w-7 rounded-md p-0"
+                  title="Mobile view"
                 >
                   <Smartphone className="h-4 w-4" />
                 </Button>
@@ -93,16 +124,37 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* iframe container */}
-          <div className="flex-1 bg-muted/40 p-4 overflow-auto flex items-center justify-center">
-            <div style={getDeviceStyles()}>
+          {/* iframe container - truly full screen with no gaps */}
+          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-10 flex items-center justify-center bg-gray-800' : ''}`}>
+            {deviceView === 'desktop' ? (
               <iframe
                 src={template.demoUrl || ''}
-                className="w-full h-full border shadow-md bg-white"
+                className="w-full absolute top-0 left-0 right-0 bottom-0"
+                style={{ 
+                  position: 'fixed',
+                  top: '40px', /* Height of the header */
+                  left: 0,
+                  width: '100%',
+                  height: 'calc(100vh - 40px)', /* Viewport height minus header height */
+                  border: 'none',
+                  margin: 0,
+                  padding: 0,
+                  overflow: 'hidden',
+                  zIndex: 1
+                }}
                 title={`${template.title} preview`}
                 sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
               />
-            </div>
+            ) : (
+              <div style={getDeviceStyles()}>
+                <iframe
+                  src={template.demoUrl || ''}
+                  className="w-full h-full"
+                  title={`${template.title} preview`}
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                />
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
