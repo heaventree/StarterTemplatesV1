@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
 import { Eye, X, Monitor, Tablet, Smartphone } from 'lucide-react';
@@ -80,39 +80,41 @@ export default function TemplatePreviewButton({
         open={isOpen} 
         onOpenChange={(open) => setIsOpen(open)}
       >
-        <DialogContent className="w-screen h-screen p-0 m-0 rounded-none border-0 overflow-hidden max-w-none">
-          {/* Header with controls - now smaller and more compact */}
-          <div className="bg-background/95 backdrop-blur-sm border-b shadow-sm z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
+        <DialogContent className="w-screen h-screen p-0 m-0 rounded-none border-0 overflow-hidden max-w-none" aria-describedby="template-preview-description">
+          <DialogTitle className="sr-only">Preview of {template.title}</DialogTitle>
+          <div id="template-preview-description" className="sr-only">Interactive preview of the template with responsive viewing options</div>
+          {/* Header with controls - now in dark mode */}
+          <div className="bg-gray-900/95 backdrop-blur-sm border-b border-gray-800 shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
             <div className="flex items-center gap-4">
-              <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-4">{template.title}</h3>
+              <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-4 text-white">{template.title}</h3>
             </div>
 
             {/* Device controls - centered more to the left */}
             <div className="flex items-center ml-auto">
-              <div className="bg-muted/80 rounded-lg p-1 flex mr-[100px]">
+              <div className="bg-gray-800/90 rounded-lg p-1 flex mr-[100px]">
                 <Button
                   size="sm"
-                  variant={deviceView === 'desktop' ? 'secondary' : 'ghost'}
+                  variant={deviceView === 'desktop' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('desktop')}
-                  className="h-7 w-7 rounded-md p-0"
+                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'desktop' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Desktop view"
                 >
                   <Monitor className="h-4 w-4" />
                 </Button>
                 <Button
                   size="sm"
-                  variant={deviceView === 'tablet' ? 'secondary' : 'ghost'}
+                  variant={deviceView === 'tablet' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('tablet')}
-                  className="h-7 w-7 rounded-md p-0"
+                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'tablet' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Tablet view"
                 >
                   <Tablet className="h-4 w-4" />
                 </Button>
                 <Button
                   size="sm"
-                  variant={deviceView === 'mobile' ? 'secondary' : 'ghost'}
+                  variant={deviceView === 'mobile' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('mobile')}
-                  className="h-7 w-7 rounded-md p-0"
+                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'mobile' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Mobile view"
                 >
                   <Smartphone className="h-4 w-4" />
@@ -124,10 +126,10 @@ export default function TemplatePreviewButton({
                 variant="ghost" 
                 size="icon" 
                 onClick={() => setIsOpen(false)} 
-                className="h-9 w-9 bg-background/70 hover:bg-background/90 border border-gray-200 rounded-full absolute top-1.5 right-3"
+                className="h-9 w-9 bg-gray-800/80 hover:bg-gray-700 border border-gray-700 rounded-full absolute top-1.5 right-3 text-white"
                 title="Close preview"
               >
-                <X className="h-5 w-5 text-gray-600" />
+                <X className="h-5 w-5" />
               </Button>
             </div>
           </div>
