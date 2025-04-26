@@ -70,6 +70,14 @@ export default function Header() {
             >
               FEATURES
             </a>
+            <Link 
+              href="/roadmap" 
+              className={`font-proxima-bold text-sm transition-colors ${
+                scrolled ? "text-gray-800 hover:text-[#dd4f93]" : "text-white hover:text-white/80"
+              }`}
+            >
+              ROADMAP
+            </Link>
             <a 
               href="#" 
               className={`font-proxima-bold text-sm transition-colors ${
@@ -138,6 +146,13 @@ export default function Header() {
           >
             FEATURES
           </a>
+          <Link 
+            href="/roadmap" 
+            className="block text-gray-800 hover:text-[#dd4f93] font-proxima-bold text-sm py-2 transition-colors"
+            onClick={closeMobileMenu}
+          >
+            ROADMAP
+          </Link>
           <a 
             href="#" 
             className="block text-gray-800 hover:text-[#dd4f93] font-proxima-bold text-sm py-2 transition-colors"
