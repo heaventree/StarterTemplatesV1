@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
 import { Eye, X, Monitor, Tablet, Smartphone, RefreshCw, ShoppingCart } from 'lucide-react';
+import LocalTemplatePreview from './LocalTemplatePreview';
 
 interface TemplatePreviewButtonProps {
   template: Template;
@@ -287,36 +288,33 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* iframe container - truly full screen with no gaps */}
+          {/* Local template preview container */}
           <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
-              <iframe
-                src={template.demoUrl || ''}
-                className="w-full absolute top-0 left-0 right-0 bottom-0"
+              <div 
+                className="w-full absolute" 
                 style={{ 
                   position: 'fixed',
                   top: '48px', /* Height of the header (12*4=48px) */
                   left: 0,
                   width: '100%',
                   height: 'calc(100vh - 48px)', /* Viewport height minus header height */
-                  border: 'none',
-                  margin: 0,
-                  padding: 0,
                   overflow: 'hidden',
                   zIndex: 1
                 }}
-                title={`${template.title} preview`}
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                onLoad={handleIframeLoad}
-              />
+              >
+                <LocalTemplatePreview 
+                  template={template} 
+                  selectedFont={selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null}
+                  selectedColor={selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null}
+                />
+              </div>
             ) : (
               <div style={getDeviceStyles()}>
-                <iframe
-                  src={template.demoUrl || ''}
-                  className="w-full h-full"
-                  title={`${template.title} preview`}
-                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                  onLoad={handleIframeLoad}
+                <LocalTemplatePreview 
+                  template={template} 
+                  selectedFont={selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null}
+                  selectedColor={selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null}
                 />
               </div>
             )}
@@ -415,15 +413,7 @@ export default function TemplatePreviewButton({
                   </div>
                 </div>
 
-                <div className="space-y-3">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                    <ShoppingCart className="h-4 w-4 mr-2" />
-                    Buy Now
-                  </Button>
-                  <Button variant="outline" className="w-full">
-                    Learn how to use this template
-                  </Button>
-                </div>
+                {/* Buttons removed per user request */}
               </div>
             </div>
           )}
