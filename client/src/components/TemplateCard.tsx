@@ -1,4 +1,5 @@
 import type { Template } from "@shared/schema";
+import TemplatePreviewButton from "./TemplatePreviewButton";
 
 interface TemplateCardProps {
   template: Template;
@@ -62,14 +63,9 @@ export default function TemplateCard({ template }: TemplateCardProps) {
         
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#dd4f93]/80 to-[#8c21a1]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <a 
-            href={template.demoUrl || '#'} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white font-semibold bg-white/20 backdrop-blur-sm rounded-full py-2.5 px-6 hover:bg-white/30 transition-colors transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
-          >
-            Preview
-          </a>
+          <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            <TemplatePreviewButton template={template} />
+          </div>
         </div>
       </div>
       

@@ -206,7 +206,7 @@ export default function TemplateViewerModal({
                   <Button 
                     variant="default" 
                     size="sm"
-                    onClick={() => template && window.location.href = `/download?template=${template.id}`}
+                    onClick={() => template?.id && (window.location.href = `/download?template=${template.id}`)}
                   >
                     <Download className="w-4 h-4 mr-1" />
                     <span className="hidden sm:inline">Download Free</span>
@@ -214,7 +214,7 @@ export default function TemplateViewerModal({
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={() => template && window.location.href = `/subscribe?ref=${template.id}`}
+                    onClick={() => template?.id && (window.location.href = `/subscribe?ref=${template.id}`)}
                     className="hidden sm:flex"
                   >
                     <Tag className="w-4 h-4 mr-1" />
