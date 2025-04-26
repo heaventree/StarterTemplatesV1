@@ -24,6 +24,7 @@ export default function TemplatePreviewButton({
 }: TemplatePreviewButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
+  const [showInfoModal, setShowInfoModal] = useState(false);
 
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
@@ -182,11 +183,68 @@ export default function TemplatePreviewButton({
               </Button>
               <Button 
                 className="bg-pink-600 hover:bg-pink-700 text-white"
-                onClick={() => template.demoUrl ? window.open(template.demoUrl as string, '_blank') : null}
+                onClick={() => setShowInfoModal(true)}
               >
-                View Full Demo
+                More Info
               </Button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Info Modal */}
+      <Dialog 
+        open={showInfoModal} 
+        onOpenChange={(open) => setShowInfoModal(open)}
+      >
+        <DialogContent className="max-w-lg">
+          <DialogTitle className="text-2xl font-bold text-gray-900">
+            About Our Templates
+          </DialogTitle>
+          
+          <div className="space-y-4 text-gray-700">
+            <p>
+              <strong className="text-gray-900">{template.title}</strong> and all our templates are designed as 
+              starter themes that can be customized to suit a wide range of businesses and purposes.
+            </p>
+            
+            <p>
+              These professionally designed templates provide a solid foundation for your website, 
+              saving you time and effort while ensuring a polished, engaging user experience.
+            </p>
+            
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2 text-gray-900">Key Features:</h3>
+              <ul className="list-disc pl-5 space-y-1">
+                <li>Fully responsive design for all devices</li>
+                <li>Customizable layouts and color schemes</li>
+                <li>Built with performance and SEO best practices</li>
+                <li>Compatible with major page builders</li>
+                <li>Regular updates and technical support</li>
+              </ul>
+            </div>
+            
+            <p>
+              Our templates are licensed for use on a single website. Once purchased, 
+              you'll have access to the complete template files and detailed documentation
+              for customization.
+            </p>
+          </div>
+          
+          <div className="flex justify-end mt-6">
+            <Button 
+              variant="outline" 
+              onClick={() => setShowInfoModal(false)}
+              className="mr-2"
+            >
+              Close
+            </Button>
+            <Button onClick={() => {
+              setShowInfoModal(false);
+              setIsOpen(false);
+            }}>
+              Back to Templates
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
