@@ -190,6 +190,32 @@ export default function TemplatesSection() {
           </div>
         </div>
         
+        {/* Recommendation Results Label */}
+        {showRecommended && !isLoading && (
+          <div className="mb-8 text-center">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f0f4ff] text-[#5469d4] border border-[#cbd5e1]">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
+              </svg>
+              <span className="font-proxima-bold">AI Recommended Templates</span>
+              <button 
+                onClick={() => {
+                  setShowRecommended(false);
+                  setActiveCategory("all");
+                  setUserPrompt("");
+                  setFilteredTemplates(templates);
+                }} 
+                className="ml-3 text-gray-500 hover:text-gray-700"
+                title="Clear recommendations"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
+        
         {/* Templates Grid */}
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-auto">
@@ -214,6 +240,7 @@ export default function TemplatesSection() {
             {/* Template Count Display */}
             <div className="mt-8 text-center text-gray-500 text-sm">
               Showing {Math.min(displayCount, filteredTemplates.length)} of {filteredTemplates.length} templates
+              {showRecommended && <span> based on your requirements</span>}
             </div>
           </>
         )}
