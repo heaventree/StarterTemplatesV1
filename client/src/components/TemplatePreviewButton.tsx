@@ -91,12 +91,12 @@ export default function TemplatePreviewButton({
 
             {/* Device controls - centered more to the left */}
             <div className="flex items-center ml-auto">
-              <div className="bg-gray-800/90 rounded-lg p-1 flex mr-[100px]">
+              <div className="bg-gray-800/90 p-1 flex mr-[100px]">
                 <Button
                   size="sm"
                   variant={deviceView === 'desktop' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('desktop')}
-                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'desktop' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
+                  className={`h-7 w-7 p-0 ${deviceView === 'desktop' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Desktop view"
                 >
                   <Monitor className="h-4 w-4" />
@@ -105,7 +105,7 @@ export default function TemplatePreviewButton({
                   size="sm"
                   variant={deviceView === 'tablet' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('tablet')}
-                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'tablet' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
+                  className={`h-7 w-7 p-0 ${deviceView === 'tablet' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Tablet view"
                 >
                   <Tablet className="h-4 w-4" />
@@ -114,7 +114,7 @@ export default function TemplatePreviewButton({
                   size="sm"
                   variant={deviceView === 'mobile' ? 'default' : 'ghost'}
                   onClick={() => setDeviceView('mobile')}
-                  className={`h-7 w-7 rounded-md p-0 ${deviceView === 'mobile' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
+                  className={`h-7 w-7 p-0 ${deviceView === 'mobile' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Mobile view"
                 >
                   <Smartphone className="h-4 w-4" />
