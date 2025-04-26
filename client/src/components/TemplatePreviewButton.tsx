@@ -25,6 +25,128 @@ export default function TemplatePreviewButton({
   const [isOpen, setIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
   const [showCustomizer, setShowCustomizer] = useState(false);
+  const [selectedFont, setSelectedFont] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  
+  // Font options available for customization
+  const fontOptions = [
+    { name: 'Default', value: 'inherit' },
+    { name: 'Sans', value: '"DM Sans", sans-serif' },
+    { name: 'Serif', value: '"Playfair Display", serif' },
+    { name: 'Mono', value: '"JetBrains Mono", monospace' },
+    { name: 'Round', value: '"Varela Round", sans-serif' },
+    { name: 'Modern', value: '"Montserrat", sans-serif' },
+    { name: 'Classic', value: '"Merriweather", serif' },
+  ];
+  
+  // Color options for customization
+  const colorOptions = [
+    { name: 'Teal', primary: '#0D9488', secondary: '#CCFBF1' },
+    { name: 'Gray', primary: '#1F2937', secondary: '#F3F4F6' },
+    { name: 'Blue', primary: '#2563EB', secondary: '#DBEAFE' },
+    { name: 'Green', primary: '#16A34A', secondary: '#DCFCE7' },
+    { name: 'Red', primary: '#DC2626', secondary: '#FEE2E2' },
+    { name: 'Pink', primary: '#DB2777', secondary: '#FCE7F3' },
+    { name: 'Orange', primary: '#EA580C', secondary: '#FFEDD5' },
+    { name: 'Purple', primary: '#9333EA', secondary: '#F3E8FF' },
+    { name: 'Yellow', primary: '#CA8A04', secondary: '#FEF9C3' },
+  ];
+  
+  // Apply styles to the iframe
+  const applyStyles = (font: string | null, color: { primary: string, secondary: string } | null) => {
+    const iframes = document.querySelectorAll('iframe');
+    if (!iframes.length) return;
+    
+    // Apply to all iframes (mobile/desktop/tablet)
+    iframes.forEach(iframe => {
+      try {
+        if (!iframe.contentDocument || !iframe.contentWindow) return;
+        
+        // Create or update style element in iframe
+        let styleEl = iframe.contentDocument.getElementById('custom-preview-styles');
+        if (!styleEl) {
+          styleEl = iframe.contentDocument.createElement('style');
+          if (styleEl) {
+            styleEl.id = 'custom-preview-styles';
+            iframe.contentDocument.head.appendChild(styleEl);
+          }
+        }
+        
+        if (!styleEl) return;
+        
+        // Build custom CSS
+        let css = '';
+        if (font) {
+          css += `
+            body, h1, h2, h3, h4, h5, h6, p, button, a, input, textarea, select {
+              font-family: ${font} !important;
+            }
+          `;
+        }
+        
+        if (color) {
+          css += `
+            :root {
+              --primary-color: ${color.primary} !important;
+              --secondary-color: ${color.secondary} !important;
+            }
+            
+            /* Primary buttons and CTA elements */
+            .wp-block-button__link,
+            button.primary,
+            .button.primary,
+            .wp-element-button,
+            .wp-block-button .wp-block-button__link,
+            .elementor-button,
+            .btn-primary,
+            [data-element_type="button"] {
+              background-color: ${color.primary} !important;
+              border-color: ${color.primary} !important;
+            }
+            
+            /* Links and accent text */
+            a:not(.wp-element-button):not(.wp-block-button__link):not(.btn-primary),
+            .elementor-icon,
+            .elementor-heading-title,
+            .has-accent-color {
+              color: ${color.primary} !important;
+            }
+            
+            /* Background elements */
+            .has-background-color,
+            .elementor-section[data-settings*="background_background"],
+            .elementor-column[data-settings*="background_background"] {
+              background-color: ${color.primary} !important;
+            }
+            
+            /* Secondary elements */
+            .has-accent-background-color {
+              color: ${color.secondary} !important;
+              background-color: ${color.primary} !important;
+            }
+          `;
+        }
+        
+        styleEl.textContent = css;
+      } catch (error) {
+        console.error("Error injecting styles into iframe:", error);
+      }
+    });
+  };
+  
+  // Handle iframe load events
+  const handleIframeLoad = (event: React.SyntheticEvent<HTMLIFrameElement>) => {
+    // Re-apply styles when iframe loads
+    if (selectedFont || selectedColor) {
+      const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
+      const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
+      
+      // Small delay to ensure iframe content is fully loaded
+      setTimeout(() => {
+        applyStyles(fontValue, colorValue);
+      }, 500);
+    }
+  };
 
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
@@ -96,7 +218,17 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'desktop' ? 'default' : 'ghost'}
-                  onClick={() => setDeviceView('desktop')}
+                  onClick={() => {
+                    setDeviceView('desktop');
+                    // Re-apply any styles after a short delay for iframe to load
+                    setTimeout(() => {
+                      if (selectedFont || selectedColor) {
+                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
+                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
+                        applyStyles(fontValue, colorValue);
+                      }
+                    }, 800);
+                  }}
                   className={`h-7 w-7 p-0 ${deviceView === 'desktop' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Desktop view"
                 >
@@ -105,7 +237,17 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'tablet' ? 'default' : 'ghost'}
-                  onClick={() => setDeviceView('tablet')}
+                  onClick={() => {
+                    setDeviceView('tablet');
+                    // Re-apply any styles after a short delay for iframe to load
+                    setTimeout(() => {
+                      if (selectedFont || selectedColor) {
+                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
+                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
+                        applyStyles(fontValue, colorValue);
+                      }
+                    }, 800);
+                  }}
                   className={`h-7 w-7 p-0 ${deviceView === 'tablet' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Tablet view"
                 >
@@ -114,7 +256,17 @@ export default function TemplatePreviewButton({
                 <Button
                   size="sm"
                   variant={deviceView === 'mobile' ? 'default' : 'ghost'}
-                  onClick={() => setDeviceView('mobile')}
+                  onClick={() => {
+                    setDeviceView('mobile');
+                    // Re-apply any styles after a short delay for iframe to load
+                    setTimeout(() => {
+                      if (selectedFont || selectedColor) {
+                        const fontValue = selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null;
+                        const colorValue = selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null;
+                        applyStyles(fontValue, colorValue);
+                      }
+                    }, 800);
+                  }}
                   className={`h-7 w-7 p-0 ${deviceView === 'mobile' ? 'bg-pink-600 hover:bg-pink-700' : 'hover:bg-gray-700 text-gray-300'}`}
                   title="Mobile view"
                 >
@@ -155,6 +307,7 @@ export default function TemplatePreviewButton({
                 }}
                 title={`${template.title} preview`}
                 sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                onLoad={handleIframeLoad}
               />
             ) : (
               <div style={getDeviceStyles()}>
@@ -163,6 +316,7 @@ export default function TemplatePreviewButton({
                   className="w-full h-full"
                   title={`${template.title} preview`}
                   sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                  onLoad={handleIframeLoad}
                 />
               </div>
             )}
@@ -191,11 +345,32 @@ export default function TemplatePreviewButton({
                 <div className="mb-6">
                   <h4 className="text-gray-800 font-medium mb-3 flex justify-between">
                     Try Other Fonts
-                    <RefreshCw className="h-4 w-4 text-gray-500" />
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-6 w-6 p-0 text-gray-500 hover:text-gray-700" 
+                      onClick={() => {
+                        setSelectedFont(null);
+                        applyStyles(null, selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null);
+                      }}
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                    </Button>
                   </h4>
                   <div className="grid grid-cols-3 gap-2">
-                    {[1, 2, 3, 4, 5, 6, 7].map((i) => (
-                      <div key={i} className="border rounded p-2 h-14 flex items-center justify-center text-center hover:border-pink-500 cursor-pointer">
+                    {fontOptions.map((font, i) => (
+                      <div 
+                        key={i} 
+                        style={{fontFamily: font.value}}
+                        className={`border rounded p-2 h-14 flex items-center justify-center text-center cursor-pointer ${selectedFont === font.name ? 'border-pink-500 ring-2 ring-pink-200' : 'hover:border-pink-500'}`}
+                        onClick={() => {
+                          setSelectedFont(font.name);
+                          applyStyles(
+                            font.value, 
+                            selectedColor ? colorOptions.find(c => c.name === selectedColor) || null : null
+                          );
+                        }}
+                      >
                         <span className="text-xl">Aa</span>
                       </div>
                     ))}
@@ -205,17 +380,36 @@ export default function TemplatePreviewButton({
                 <div className="mb-8">
                   <h4 className="text-gray-800 font-medium mb-3 flex justify-between">
                     Try Other Colors
-                    <RefreshCw className="h-4 w-4 text-gray-500" />
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-6 w-6 p-0 text-gray-500 hover:text-gray-700" 
+                      onClick={() => {
+                        setSelectedColor(null);
+                        applyStyles(
+                          selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null, 
+                          null
+                        );
+                      }}
+                    >
+                      <RefreshCw className="h-4 w-4" />
+                    </Button>
                   </h4>
                   <div className="grid grid-cols-3 gap-3">
-                    {[
-                      'bg-teal-500', 'bg-gray-900', 'bg-blue-500', 
-                      'bg-green-500', 'bg-red-500', 'bg-pink-500',
-                      'bg-orange-500', 'bg-purple-500', 'bg-yellow-500'
-                    ].map((color, i) => (
-                      <div key={i} className="h-12 rounded flex cursor-pointer hover:ring-2 hover:ring-pink-500">
-                        <div className={`${color} w-1/2 rounded-l`}></div>
-                        <div className={`${color} bg-opacity-20 w-1/2 rounded-r`}></div>
+                    {colorOptions.map((color, i) => (
+                      <div 
+                        key={i} 
+                        className={`h-12 rounded flex cursor-pointer ${selectedColor === color.name ? 'ring-2 ring-pink-500' : 'hover:ring-2 hover:ring-pink-300'}`}
+                        onClick={() => {
+                          setSelectedColor(color.name);
+                          applyStyles(
+                            selectedFont ? fontOptions.find(f => f.name === selectedFont)?.value || null : null, 
+                            color
+                          );
+                        }}
+                      >
+                        <div style={{backgroundColor: color.primary}} className="w-1/2 rounded-l"></div>
+                        <div style={{backgroundColor: color.primary, opacity: 0.2}} className="w-1/2 rounded-r"></div>
                       </div>
                     ))}
                   </div>
