@@ -84,15 +84,12 @@ export default function TemplatePreviewButton({
           {/* Header with controls - now smaller and more compact */}
           <div className="bg-background/95 backdrop-blur-sm border-b shadow-sm z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8">
-                <X className="h-4 w-4" />
-              </Button>
-              <h3 className="font-semibold text-sm md:text-base line-clamp-1">{template.title}</h3>
+              <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-4">{template.title}</h3>
             </div>
 
-            {/* Device controls - moved far away from close button */}
-            <div className="flex items-center">
-              <div className="bg-muted/80 rounded-lg p-1 flex mr-4">
+            {/* Device controls - centered more to the left */}
+            <div className="flex items-center ml-auto">
+              <div className="bg-muted/80 rounded-lg p-1 flex mr-[100px]">
                 <Button
                   size="sm"
                   variant={deviceView === 'desktop' ? 'secondary' : 'ghost'}
@@ -121,6 +118,17 @@ export default function TemplatePreviewButton({
                   <Smartphone className="h-4 w-4" />
                 </Button>
               </div>
+              
+              {/* Prominent yet subtle close button */}
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setIsOpen(false)} 
+                className="h-9 w-9 bg-background/70 hover:bg-background/90 border border-gray-200 rounded-full absolute top-1.5 right-3"
+                title="Close preview"
+              >
+                <X className="h-5 w-5 text-gray-600" />
+              </Button>
             </div>
           </div>
 
