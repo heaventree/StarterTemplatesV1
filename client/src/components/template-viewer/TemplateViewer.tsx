@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -18,10 +18,9 @@ const DEVICE_PRESETS = {
 
 export default function TemplateViewer() {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const [location, setLocation] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   // Fetch template details
   const { data: template, isLoading: isLoadingTemplate } = useQuery({
@@ -36,12 +35,18 @@ export default function TemplateViewer() {
     enabled: !!id && !isNaN(parseInt(id)),
   });
 
-  // Handle iframe load event
-  const handleIframeLoad = () => {
-    setIsLoading(false);
-  };
+  // Simulate loading time
+  useEffect(() => {
+    if (template) {
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [template]);
 
-  // Apply device dimensions to iframe wrapper
+  // Apply device dimensions to content wrapper
   const getDeviceStyles = () => {
     const device = DEVICE_PRESETS[deviceView];
     return {
@@ -55,7 +60,7 @@ export default function TemplateViewer() {
 
   // Return to templates page
   const handleBack = () => {
-    navigate('/templates');
+    setLocation('/templates');
   };
 
   // Open demo in new tab
@@ -63,6 +68,133 @@ export default function TemplateViewer() {
     if (template?.demoUrl) {
       window.open(template.demoUrl, '_blank');
     }
+  };
+  
+  // Template preview content
+  const renderTemplatePreview = () => {
+    if (!template) return null;
+    
+    return (
+      <div className="w-full h-full bg-white overflow-auto p-6">
+        <div className="max-w-5xl mx-auto">
+          <h1 className="text-3xl font-bold mb-6 text-gray-900">{template.title}</h1>
+          
+          {/* Template image */}
+          <div className="aspect-video bg-gray-100 rounded-lg mb-8 flex items-center justify-center">
+            {template.imageUrl ? (
+              <img 
+                src={template.imageUrl} 
+                alt={template.title} 
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ) : (
+              <div className="text-gray-500">Template Preview Image</div>
+            )}
+          </div>
+          
+          {/* Template details grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">Type</h3>
+              <p>{template.category}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">Page Builder</h3>
+              <p>{template.pageBuilder}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">License</h3>
+              <p>{template.isPro ? 'Premium' : 'Free'}</p>
+            </div>
+          </div>
+          
+          {/* Template description */}
+          <p className="text-lg text-gray-700 mb-6">
+            This template is designed for {template.category} websites and offers a professional, 
+            mobile-responsive layout. Built with {template.pageBuilder} for easy customization without coding knowledge.
+          </p>
+          
+          {/* Template tags */}
+          <div className="flex flex-wrap gap-3 mb-8">
+            {template.tags?.map((tag, idx) => (
+              <span key={idx} className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          {/* Features section */}
+          <div className="mb-8">
+            <h2 className="text-xl font-bold mb-4 text-gray-900">Key Features</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Responsive Design</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>SEO Optimized</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Cross-browser Compatible</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Fast Loading</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Documentation</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Technical Support</span>
+              </li>
+            </ul>
+          </div>
+          
+          {/* CTA section */}
+          <div className="bg-gray-50 p-6 rounded-lg mb-8">
+            <h3 className="text-lg font-semibold mb-3">Get This Template</h3>
+            <p className="mb-4">
+              {template.isPro 
+                ? "This premium template includes advanced features and dedicated support."
+                : "This free template is perfect for getting started quickly with your website project."}
+            </p>
+            <div className="flex gap-3">
+              {template.isPro ? (
+                <Button className="bg-amber-500 hover:bg-amber-600">
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Purchase Pro ($49)
+                </Button>
+              ) : (
+                <Button>
+                  <Download className="w-4 h-4 mr-2" />
+                  Download Free
+                </Button>
+              )}
+              <Button variant="outline" onClick={handleOpenInNewTab}>
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Live Demo
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -153,7 +285,7 @@ export default function TemplateViewer() {
         </div>
       </div>
 
-      {/* Device view & iframe container */}
+      {/* Device view & content container */}
       <div className="flex-1 bg-muted/50 overflow-auto p-4 flex flex-col">
         {isLoadingTemplate ? (
           <div className="flex flex-col items-center justify-center h-full">
@@ -168,14 +300,11 @@ export default function TemplateViewer() {
                 <p>Loading preview...</p>
               </div>
             )}
-            <iframe
-              ref={iframeRef}
-              src={template.demoUrl}
-              className="w-full h-full border border-border shadow-md bg-white"
-              onLoad={handleIframeLoad}
-              title={`${template.title} preview`}
-              sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-            />
+            
+            {/* Template preview content */}
+            <div className="w-full h-full border border-border shadow-md bg-white overflow-auto">
+              {renderTemplatePreview()}
+            </div>
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
