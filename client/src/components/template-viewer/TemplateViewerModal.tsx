@@ -78,8 +78,10 @@ export default function TemplateViewerModal({
 
   // Open demo in new tab
   const handleOpenInNewTab = () => {
-    if (template?.demoUrl) {
-      window.open(template.demoUrl, '_blank');
+    if (template) {
+      // Use the demoUrl from the template if available, otherwise fall back to our generated URL
+      const url = template.demoUrl || getTemplateUrl(template.title);
+      window.open(url, '_blank');
     }
   };
 
