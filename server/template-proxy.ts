@@ -35,6 +35,13 @@ export async function templateProxy(req: Request, res: Response) {
   
   console.log(`Template proxy request for URL: ${targetUrl}`);
 
+  // Special case for known problematic templates with wrong URLs
+  if (targetUrl.includes('blingg-jewellery')) {
+    const correctUrl = 'https://websitedemos.net/blingg-jewelry-store-04/';
+    console.log(`Special case: Redirecting Blingg Jewellery to correct URL: ${correctUrl}`);
+    return proxyRequest(correctUrl, req, res);
+  }
+
   // Check for cacheable URL - if we've previously determined a working URL for this base, use it
   const urlBase = targetUrl.replace(/-\d+\/?$|\/+$/, '');
   const cacheKey = createHash('md5').update(urlBase).digest('hex');
@@ -207,10 +214,8 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
             <body>
               <div class="message">
                 <h1>Template Preview Unavailable</h1>
-                <p>This template cannot be displayed in the embedded preview mode due to security restrictions set by the template provider.</p>
-                <p>You can view this template directly in a new tab instead.</p>
-                <a href="${targetUrl}" target="_blank" class="button">Open Template in New Tab</a>
-                <p><button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button></p>
+                <p>This template cannot be displayed in the embedded preview mode due to security restrictions.</p>
+                <button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button>
               </div>
             </body>
           </html>
@@ -283,7 +288,7 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
         
         // Check for X-Frame-Options header that would prevent embedding
         const xFrameOptions = proxyRes.headers['x-frame-options'];
-        if (xFrameOptions && (xFrameOptions.toLowerCase() === 'deny' || xFrameOptions.toLowerCase().includes('sameorigin'))) {
+        if (xFrameOptions && (typeof xFrameOptions === 'string' && (xFrameOptions.toLowerCase() === 'deny' || xFrameOptions.toLowerCase().includes('sameorigin')))) {
           console.log(`Template has X-Frame-Options: ${xFrameOptions}, cannot be embedded: ${targetUrl}`);
           
           // If we detect X-Frame-Options that would prevent embedding, redirect to direct template
@@ -333,9 +338,7 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
                 <div class="message">
                   <h1>Template Preview Unavailable</h1>
                   <p>This template cannot be displayed in the embedded preview mode due to security restrictions.</p>
-                  <p>You can view this template directly in a new tab instead.</p>
-                  <a href="${targetUrl}" target="_blank" class="button">Open Template in New Tab</a>
-                  <p><button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button></p>
+                  <button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button>
                 </div>
               </body>
             </html>
@@ -465,103 +468,35 @@ function sendFallbackResponse(originalUrl: string, req: Request, res: Response) 
             margin: 2rem 0;
             border-left: 4px solid #dd4f93;
           }
-          .info-box {
-            display: flex;
-            background-color: #e9f5ff;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            text-align: left;
-            border: 1px solid #d0e8ff;
+          .alt-button {
+            background-color: #666;
+            margin-left: 10px;
           }
-          .info-icon {
-            flex-shrink: 0;
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            color: #0070f3;
-          }
-          .features-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
-            text-align: left;
-          }
-          .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-          }
-          .feature-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-            color: #dd4f93;
-          }
-          .screenshot {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin: 1.5rem 0;
-            border: 1px solid #eee;
+          .alt-button:hover {
+            background-color: #555;
           }
         </style>
       </head>
       <body>
         <div class="preview-container">
           <div class="preview-header">
-            <h1>Template Preview</h1>
-            <p>We're unable to display ${templateName} in the preview mode.</p>
+            <h1>Unable to Preview ${templateName}</h1>
           </div>
           
           <div class="message-container">
-            <p><strong>Why is this happening?</strong></p>
-            <p>Some templates have specific security settings that prevent them from being displayed in an iframe.</p>
+            <p>We couldn't load the preview for this template. This could be due to:</p>
+            <ul style="text-align: left; color: #555;">
+              <li>The template URL may have changed or be temporarily unavailable</li>
+              <li>The template may have security restrictions that prevent embedding</li>
+              <li>There might be network connectivity issues</li>
+            </ul>
           </div>
           
-          <div class="info-box">
-            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="12" y1="8" x2="12" y2="12"></line>
-              <line x1="12" y1="16" x2="12.01" y2="16"></line>
-            </svg>
-            <div>
-              <p><strong>Don't worry!</strong> All our templates are fully functional when installed on your website.</p>
-              <p>The preview limitations only affect the display in this browser window.</p>
-            </div>
-          </div>
+          <button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button">Close Preview</button>
           
-          <h2>Key Features of Our Templates</h2>
-          <div class="features-list">
-            <div class="feature-item">
-              <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Responsive Design</span>
-            </div>
-            <div class="feature-item">
-              <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Customizable Elements</span>
-            </div>
-            <div class="feature-item">
-              <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>SEO Optimized</span>
-            </div>
-            <div class="feature-item">
-              <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Performance Focused</span>
-            </div>
-          </div>
-          
-          <button class="button" onclick="window.parent.postMessage({type: 'closePreview'}, '*')">Browse More Templates</button>
+          <p style="margin-top: 2rem; font-size: 0.9rem; color: #777;">
+            If this problem persists, please try again later or contact support.
+          </p>
         </div>
       </body>
     </html>
