@@ -221,12 +221,18 @@ export default function TemplatePreviewButton({
                       title={`${template.title} preview`}
                       onLoad={(e) => {
                         // Hide loading indicator when iframe loads
-                        const loadingEl = e.currentTarget.previousSibling.previousSibling as HTMLElement;
-                        if (loadingEl) {
-                          loadingEl.style.opacity = '0';
-                          setTimeout(() => {
-                            loadingEl.style.display = 'none';
-                          }, 500);
+                        try {
+                          // Safely navigate to the loading element, accounting for the parent structure
+                          const iframeParent = e.currentTarget.parentElement;
+                          if (iframeParent && iframeParent.previousSibling) {
+                            const loadingEl = iframeParent.previousSibling as HTMLElement;
+                            loadingEl.style.opacity = '0';
+                            setTimeout(() => {
+                              loadingEl.style.display = 'none';
+                            }, 500);
+                          }
+                        } catch (err) {
+                          console.log('Could not find loading element to hide');
                         }
                       }}
                     />
