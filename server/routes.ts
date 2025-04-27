@@ -15,7 +15,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static image files
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
   
-  // Enhanced template proxy endpoint to bypass CORS issues
+  // Template proxy endpoint
   app.get('/template-proxy', async (req, res) => {
     try {
       const url = req.query.url as string;
@@ -24,202 +24,83 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ error: 'URL parameter is required' });
       }
 
-      // Always return a direct embedded preview instead of trying to proxy
-      // This completely avoids CORS issues by rendering our own content
-      
-      const templateName = url.split('/').pop() || "template";
-      console.log(`Rendering template preview for: ${templateName}`);
-
-      // Return an embedded preview that looks like a template
+      // For any template page, just return a simple static HTML page
+      // This avoids CORS issues and provides a consistent preview
       return res.status(200).send(`
         <!DOCTYPE html>
         <html>
           <head>
             <title>Template Preview</title>
             <style>
-              * { margin: 0; padding: 0; box-sizing: border-box; }
-              body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #333; line-height: 1.5; }
-              
-              .template-preview { width: 100%; height: 100vh; overflow: auto; }
-              
-              /* Header */
-              header { background-color: #1a1a2e; color: #fff; padding: 1.5rem 5%; }
-              nav { display: flex; justify-content: space-between; align-items: center; }
-              .logo { font-weight: 700; font-size: 1.5rem; letter-spacing: -0.5px; }
-              .nav-links { display: flex; gap: 2rem; }
-              .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; }
-              
-              /* Hero */
-              .hero { padding: 5rem 5%; background-color: #f8f8fc; min-height: 60vh; display: flex; align-items: center; justify-content: space-between; }
-              .hero-content { width: 50%; }
-              .hero h1 { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.2; color: #1a1a2e; }
-              .hero p { font-size: 1.1rem; margin-bottom: 2rem; color: #666; }
-              .hero-image { width: 45%; height: 350px; background-color: #e6e6e6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #999; }
-              
-              /* Features */
-              .features { padding: 5rem 5%; background-color: #fff; }
-              .section-heading { text-align: center; margin-bottom: 3rem; }
-              .section-heading h2 { font-size: 2.2rem; margin-bottom: 1rem; color: #1a1a2e; }
-              .section-heading p { font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto; }
-              .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-              .feature-card { background-color: #f8f8fc; padding: 2rem; border-radius: 8px; transition: transform 0.3s ease; }
-              .feature-card:hover { transform: translateY(-5px); }
-              .feature-icon { width: 50px; height: 50px; background-color: #e6e6e6; border-radius: 50%; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.5rem; }
-              .feature-card h3 { margin-bottom: 1rem; font-size: 1.3rem; }
-              
-              /* Footer */
-              footer { background-color: #1a1a2e; color: rgba(255,255,255,0.8); padding: 3rem 5%; }
-              .footer-content { display: flex; justify-content: space-between; }
-              .footer-col { width: 23%; }
-              .footer-col h4 { color: #fff; margin-bottom: 1.5rem; font-size: 1.1rem; }
-              .footer-col ul { list-style: none; }
-              .footer-col ul li { margin-bottom: 0.8rem; }
-              .footer-col a { color: rgba(255,255,255,0.6); text-decoration: none; }
-              .footer-col a:hover { color: #fff; }
-              .copyright { text-align: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
-
-              /* Buttons */
-              .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 4px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; }
-              .btn-primary { background-color: #dd4f93; color: white; }
-              .btn-primary:hover { background-color: #c13a7c; }
-              .btn-secondary { background-color: transparent; color: #333; border: 1px solid #ddd; margin-left: 1rem; }
-              .btn-secondary:hover { background-color: #f8f8fc; }
-              
-              @media (max-width: 768px) {
-                .hero { flex-direction: column; text-align: center; }
-                .hero-content, .hero-image { width: 100%; }
-                .hero-image { margin-top: 2rem; }
-                .footer-content { flex-direction: column; }
-                .footer-col { width: 100%; margin-bottom: 2rem; }
+              body { 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                color: #333;
+              }
+              .preview-container {
+                text-align: center;
+                max-width: 800px;
+                padding: 2rem;
+              }
+              h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+                color: #111;
+              }
+              p {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: #555;
+                margin-bottom: 2rem;
+              }
+              .button {
+                background-color: #dd4f93;
+                color: white;
+                padding: 12px 24px;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: 500;
+                display: inline-block;
+                transition: background-color 0.2s;
+              }
+              .button:hover {
+                background-color: #c13a7c;
+              }
+              .preview-image {
+                width: 100%;
+                max-width: 500px;
+                height: 300px;
+                margin: 2rem 0;
+                background-color: #f5f5f5;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #666;
+                font-size: 1.2rem;
               }
             </style>
           </head>
           <body>
-            <div class="template-preview">
-              <header>
-                <nav>
-                  <div class="logo">Template Demo</div>
-                  <div class="nav-links">
-                    <a href="#">Home</a>
-                    <a href="#">Features</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                  </div>
-                </nav>
-              </header>
-              
-              <section class="hero">
-                <div class="hero-content">
-                  <h1>Modern Design for Your Website</h1>
-                  <p>This is a preview of how this template would look when implemented on your website. All key features are showcased with a clean, modern design.</p>
-                  <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Get Started</a>
-                    <a href="#" class="btn btn-secondary">Learn More</a>
-                  </div>
-                </div>
-                <div class="hero-image">Image Placeholder</div>
-              </section>
-              
-              <section class="features">
-                <div class="section-heading">
-                  <h2>Key Features</h2>
-                  <p>This template comes with everything you need to get your website up and running quickly.</p>
-                </div>
-                <div class="feature-grid">
-                  <div class="feature-card">
-                    <div class="feature-icon">1</div>
-                    <h3>Responsive Design</h3>
-                    <p>Fully responsive layout that looks great on all devices from mobile to desktop.</p>
-                  </div>
-                  <div class="feature-card">
-                    <div class="feature-icon">2</div>
-                    <h3>Modern UI Elements</h3>
-                    <p>Beautiful UI components designed with user experience in mind.</p>
-                  </div>
-                  <div class="feature-card">
-                    <div class="feature-icon">3</div>
-                    <h3>Fast Performance</h3>
-                    <p>Optimized code ensures your website loads quickly and runs smoothly.</p>
-                  </div>
-                </div>
-              </section>
-              
-              <footer>
-                <div class="footer-content">
-                  <div class="footer-col">
-                    <h4>Template Demo</h4>
-                    <p>A modern website template perfect for businesses and personal websites.</p>
-                  </div>
-                  <div class="footer-col">
-                    <h4>Links</h4>
-                    <ul>
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#">Features</a></li>
-                      <li><a href="#">Pricing</a></li>
-                      <li><a href="#">Contact</a></li>
-                    </ul>
-                  </div>
-                  <div class="footer-col">
-                    <h4>Support</h4>
-                    <ul>
-                      <li><a href="#">Documentation</a></li>
-                      <li><a href="#">FAQs</a></li>
-                      <li><a href="#">Community</a></li>
-                      <li><a href="#">Support</a></li>
-                    </ul>
-                  </div>
-                  <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                      <li>Email: info@example.com</li>
-                      <li>Phone: +1 234 567 890</li>
-                      <li>Address: 123 Template St, City</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="copyright">
-                  <p>&copy; 2025 Template Demo. All rights reserved.</p>
-                </div>
-              </footer>
+            <div class="preview-container">
+              <h1>Template Preview</h1>
+              <p>This template is now available for viewing. To see all details and features, please click the "More Info" button at the bottom of the preview.</p>
+              <div class="preview-image">Template Preview Image</div>
+              <p>This template includes responsive design, modern UI elements, and is optimized for performance.</p>
             </div>
           </body>
         </html>
       `);
     } catch (error) {
       console.error('Template proxy error:', error);
-      
-      // Provide a fallback HTML response for any error
-      res.status(200).send(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Template Preview</title>
-            <style>
-              * { margin: 0; padding: 0; box-sizing: border-box; }
-              body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #333; line-height: 1.5; }
-              
-              .error-container { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; text-align: center; background-color: #f8f8fc; }
-              .error-card { max-width: 500px; padding: 3rem; background-color: white; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-              .error-icon { font-size: 3rem; margin-bottom: 1.5rem; color: #dd4f93; }
-              h1 { font-size: 1.8rem; margin-bottom: 1rem; color: #1a1a2e; }
-              p { margin-bottom: 1.5rem; color: #666; }
-              .btn { display: inline-block; padding: 0.8rem 1.8rem; border-radius: 4px; font-weight: 500; text-decoration: none; transition: all 0.3s ease; background-color: #dd4f93; color: white; }
-              .btn:hover { background-color: #c13a7c; }
-            </style>
-          </head>
-          <body>
-            <div class="error-container">
-              <div class="error-card">
-                <div class="error-icon">⚙️</div>
-                <h1>Template Preview</h1>
-                <p>This is a simplified preview of the template. The actual template includes more features and customization options.</p>
-                <p>To explore the full template and all its features, please use the "More Info" button.</p>
-                <a href="#" class="btn">Return to Templates</a>
-              </div>
-            </div>
-          </body>
-        </html>
-      `);
+      res.status(500).json({ error: 'Failed to proxy template' });
     }
   });
   
