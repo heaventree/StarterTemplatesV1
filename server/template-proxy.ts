@@ -7,8 +7,8 @@ import { createHash } from 'crypto';
 // Ordered by probability of success based on observed template patterns
 const COMMON_TEMPLATE_SUFFIXES = [
   '-02/', // Most common pattern observed (e.g., yoga-instructor-02/)
+  '-04/', // Some templates use this suffix (e.g., aquarium-04/, movie-04/)
   '/',    // Plain path (e.g., aquarium/)
-  '-04/', // Less common but works for electronic-store, movie, etc.
   '',     // No trailing slash
   '-02',  // No trailing slash version
   '-04',  // No trailing slash version

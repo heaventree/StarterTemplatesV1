@@ -64,12 +64,11 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Movie": "https://websitedemos.net/movie-04/",
   "Watch Shop": "https://websitedemos.net/watch-shop-04/",
   "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
+  "Aquarium": "https://websitedemos.net/aquarium-04/",
   
   // GROUP 3: Templates that redirect to /astra-site/ subdirectory
   // These must use the final redirect destination or they won't work
-  "Aquarium": "https://websitedemos.net/astra-site/aquarium/",
   "BBQ Food Truck": "https://websitedemos.net/astra-site/bbq-food-truck/",
-  "Alexandrina": "https://websitedemos.net/astra-site/alexandrina-designer/",
   "Bike Modification": "https://websitedemos.net/astra-site/bike-modification/",
   "Bizpulse": "https://websitedemos.net/astra-site/bizpulse/",
   "Love Nature": "https://websitedemos.net/astra-site/love-nature/",
