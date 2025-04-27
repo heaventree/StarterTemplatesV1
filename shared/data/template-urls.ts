@@ -177,11 +177,19 @@ export function getTemplateUrl(title: string, demoUrl?: string | null): string {
     return `/api/template-proxy?url=${encodeURIComponent(TEMPLATE_URLS[titleWithoutSuffix])}`;
   }
   
-  // Fallback to URL pattern based on slug
+  // Try to generate a URL based on known working patterns
   const slug = titleToSlug(title);
-  const targetUrl = `https://websitedemos.net/${slug}-02/`;
+
+  // Test a series of patterns in order of likelihood
+  const patterns = [
+    `https://websitedemos.net/${slug}-02/`,
+    `https://websitedemos.net/${slug}/`,
+    `https://websitedemos.net/${slug}-04/`,
+    `https://websitedemos.net/${slug}`,
+  ];
   
-  return `/api/template-proxy?url=${encodeURIComponent(targetUrl)}`;
+  // Use the first pattern as the fallback
+  return `/api/template-proxy?url=${encodeURIComponent(patterns[0])}`;
 }
 
 /**
