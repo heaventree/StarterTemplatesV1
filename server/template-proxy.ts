@@ -35,11 +35,26 @@ export async function templateProxy(req: Request, res: Response) {
   
   console.log(`Template proxy request for URL: ${targetUrl}`);
 
-  // Special case for known problematic templates with wrong URLs
-  if (targetUrl.includes('blingg-jewellery')) {
-    const correctUrl = 'https://websitedemos.net/blingg-jewelry-store-04/';
-    console.log(`Special case: Redirecting Blingg Jewellery to correct URL: ${correctUrl}`);
-    return proxyRequest(correctUrl, req, res);
+  // Table of URL corrections for templates with known issues
+  const urlCorrections: Record<string, string> = {
+    'blingg-jewellery': 'https://websitedemos.net/blingg-jewelry-store-04/',
+    'blingg-jewelry-store-02': 'https://websitedemos.net/blingg-jewelry-store-04/',
+    'jwellery': 'https://websitedemos.net/jewelry-store-04/',
+    'jewellery': 'https://websitedemos.net/jewelry-store-04/',
+    'nexus-news': 'https://websitedemos.net/news-blog-04/',
+    'temple': 'https://websitedemos.net/religious-place-04/',
+    'religious': 'https://websitedemos.net/religious-place-04/',
+    'church': 'https://websitedemos.net/religious-place-04/'
+  };
+  
+  // Check if this URL needs correction
+  let correctedUrl = targetUrl;
+  for (const [pattern, correction] of Object.entries(urlCorrections)) {
+    if (targetUrl.toLowerCase().includes(pattern.toLowerCase())) {
+      correctedUrl = correction;
+      console.log(`URL correction applied: ${targetUrl} → ${correctedUrl}`);
+      break;
+    }
   }
 
   // Check for cacheable URL - if we've previously determined a working URL for this base, use it
@@ -52,7 +67,22 @@ export async function templateProxy(req: Request, res: Response) {
     return proxyRequest(cachedUrl as string, req, res);
   }
   
-  // Try the original URL first
+  // First try the corrected URL if available, then the original URL
+  if (correctedUrl !== targetUrl) {
+    try {
+      console.log(`Trying corrected URL first: ${correctedUrl}`);
+      const success = await proxyRequest(correctedUrl, req, res);
+      if (success) {
+        // Cache this successful URL
+        URL_CACHE.set(cacheKey, correctedUrl);
+        return;
+      }
+    } catch (error) {
+      console.error(`Error with corrected URL: ${correctedUrl}`, error);
+    }
+  }
+  
+  // Try the original URL if corrected URL didn't work or wasn't changed
   try {
     const success = await proxyRequest(targetUrl, req, res);
     if (success) {
@@ -159,7 +189,11 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
       // Special case for known problematic templates that can't be embedded in iframes
       const problematicTemplates = [
         'politician-04',
-        'news-blog-04'
+        'news-blog-04',
+        'nexus-news',
+        'blingg-jewelry-store-02',
+        'religious-place',
+        'church'
       ];
       
       // Check if this is a problematic template
