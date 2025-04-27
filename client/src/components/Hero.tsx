@@ -3,6 +3,7 @@ import { stats } from "@/lib/data";
 import { useQuery } from "@tanstack/react-query";
 import type { Template } from "@shared/schema";
 import { getAIRecommendedTemplates, getTemplatesByCategory } from "@/services/templateRecommender";
+import { Sparkles } from "lucide-react";
 
 export default function Hero() {
   // AI recommendation states
@@ -102,9 +103,7 @@ export default function Hero() {
                 onClick={handleFindTemplates}
                 disabled={isRecommending || !userPrompt?.trim()}
               >
-                <svg className="h-5 w-5 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3l1.87 6.63L20 12l-6.13 2.37L12 21l-1.87-6.63L4 12l6.13-2.37L12 3z" />
-                </svg>
+                <Sparkles className="h-5 w-5 mr-2" />
                 {isRecommending ? 'Thinking...' : 'Get AI Recommendations'}
               </button>
             </div>
