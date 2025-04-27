@@ -92,7 +92,7 @@ export default function Hero() {
             <div className="flex items-center bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden pl-6 pr-2 py-2">
               <input
                 ref={promptInputRef}
-                placeholder="Describe your business or the website you want to build..." 
+                placeholder="Briefly describe the website you want to build..." 
                 className="flex-grow bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400 text-base"
                 value={userPrompt}
                 onChange={(e) => setUserPrompt(e.target.value)}
