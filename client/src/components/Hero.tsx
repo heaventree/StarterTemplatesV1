@@ -103,9 +103,7 @@ export default function Hero() {
                 disabled={isRecommending || !userPrompt?.trim()}
               >
                 <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M14.25 14.25L17.25 17.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9 9.75C9 8.5074 9.5074 8 10.75 8H13.25C14.4926 8 15 8.5074 15 9.75V10.25C15 11.4926 14.4926 12 13.25 12H10.75C9.5074 12 9 12.5074 9 13.75V14.25C9 15.4926 9.5074 16 10.75 16H13.25C14.4926 16 15 15.4926 15 14.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
                 {isRecommending ? 'Thinking...' : 'Get AI Recommendations'}
               </button>
