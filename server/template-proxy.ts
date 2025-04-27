@@ -4,7 +4,16 @@ import http from 'http';
 import url from 'url';
 import { createHash } from 'crypto';
 
-const COMMON_TEMPLATE_SUFFIXES = ['', '/', '-02', '-02/', '-04', '-04/', '/index.html'];
+// Ordered by probability of success based on observed template patterns
+const COMMON_TEMPLATE_SUFFIXES = [
+  '-02/', // Most common pattern observed (e.g., yoga-instructor-02/)
+  '/',    // Plain path (e.g., aquarium/)
+  '-04/', // Less common but works for electronic-store, movie, etc.
+  '',     // No trailing slash
+  '-02',  // No trailing slash version
+  '-04',  // No trailing slash version
+  '/index.html', // Explicit index
+];
 const URL_CACHE = new Map<string, string>();
 
 /**
@@ -45,6 +54,7 @@ export async function templateProxy(req: Request, res: Response) {
   if (targetUrl.includes('websitedemos.net')) {
     const urlBase = targetUrl.replace(/-\d+\/?$|\/+$/, '');
     
+    // First try patterns with the base URL
     for (const suffix of COMMON_TEMPLATE_SUFFIXES) {
       if (res.headersSent) break;
       
@@ -62,6 +72,26 @@ export async function templateProxy(req: Request, res: Response) {
         }
       } catch (error) {
         console.error(`Error with alternate URL: ${alternateUrl}`, error);
+      }
+    }
+    
+    // If that doesn't work, try replacing the base URL with a known pattern
+    const templateName = urlBase.split('/').pop();
+    if (templateName) {
+      // Try with "astra-site" subdirectory which sometimes works
+      const astraUrl = `https://websitedemos.net/astra-site/${templateName}/`;
+      if (astraUrl !== targetUrl) {
+        console.log(`Trying alternate URL: ${astraUrl}`);
+        try {
+          const success = await proxyRequest(astraUrl, req, res);
+          if (success) {
+            // Cache this successful URL
+            URL_CACHE.set(cacheKey, astraUrl);
+            return;
+          }
+        } catch (error) {
+          console.error(`Error with alternate URL: ${astraUrl}`, error);
+        }
       }
     }
   }

@@ -3,17 +3,16 @@
  * This ensures consistent behavior for template previews
  */
 
-// Map of template names to their demo URLs
+// Map of template names to their working demo URLs with verified patterns
+// Key format is standard
 export const TEMPLATE_URLS: Record<string, string> = {
+  // Patterns verified working with -02 suffix
   "Love Nature": "https://websitedemos.net/love-nature-02/",
   "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
   "Wedding": "https://websitedemos.net/wedding-02/",
   "Accountant": "https://websitedemos.net/accountant-02/",
   "Digital Agency": "https://websitedemos.net/digital-agency-02/",
   "Fashion Designer": "https://websitedemos.net/fashion-designer-02/",
-  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
-  "Main Spa": "https://websitedemos.net/main-spa-02/",
-  "Mountain": "https://websitedemos.net/mountain-02/",
   "Home Decor": "https://websitedemos.net/home-decor-02/",
   "Hair Salon": "https://websitedemos.net/hair-salon-02/",
   "Finance": "https://websitedemos.net/finance-02/",
@@ -22,7 +21,6 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Gardener": "https://websitedemos.net/gardener-02/",
   "Electrician": "https://websitedemos.net/electrician-02/",
   "Charity": "https://websitedemos.net/charity-02/",
-  "Movie": "https://websitedemos.net/movie-04/",
   "Tennis Club": "https://websitedemos.net/tennis-club-02/",
   "Plumber": "https://websitedemos.net/plumber-02/",
   "Investment Company": "https://websitedemos.net/investment-company-02/",
@@ -53,18 +51,35 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Locksmith": "https://websitedemos.net/locksmith-02/",
   "Art Gallery": "https://websitedemos.net/art-gallery-02/",
   "Pet Care": "https://websitedemos.net/pet-care-02/",
+  
+  // Patterns verified working with -04 suffix
+  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
+  "Movie": "https://websitedemos.net/movie-04/",
   "Watch Shop": "https://websitedemos.net/watch-shop-04/",
+  
+  // Other common templates
+  "Main Spa": "https://websitedemos.net/main-spa-02/",
+  "Mountain": "https://websitedemos.net/mountain-02/",
+  
+  // Problematic templates with alternative URL formats
+  "Aquarium": "https://websitedemos.net/aquarium/", // Note: -02 suffix doesn't work
+  "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
+  "Alexandrina": "https://websitedemos.net/alexandrina-designer/",
+  "Earth": "https://websitedemos.net/earth-02/",
+  "Brand Store": "https://websitedemos.net/brandstore-02/",
+  "Bike Modification": "https://websitedemos.net/bike-modification/",
+  "Bizpulse": "https://websitedemos.net/bizpulse/",
 };
 
-// Map of template names to their image filenames
+// Map of template names to their image filenames 
 export const TEMPLATE_IMAGES: Record<string, string> = {
+  // Common patterns with -02 suffix
   "Love Nature": "love-nature-02.jpg",
   "Yoga Instructor": "yoga-instructor-02.jpg",
   "Wedding": "wedding-02.jpg",
   "Accountant": "accountant-02.jpg",
   "Digital Agency": "digital-agency-02.jpg",
   "Fashion Designer": "fashion-designer-02.jpg",
-  "Electronic Store": "electronic-store-04.jpg",
   "Main Spa": "main-spa-02.jpg",
   "Mountain": "mountain-02.jpg",
   "Home Decor": "home-decor-02.jpg",
@@ -75,7 +90,6 @@ export const TEMPLATE_IMAGES: Record<string, string> = {
   "Gardener": "gardener-02.jpg",
   "Electrician": "electrician-02.jpg",
   "Charity": "charity-02.jpg",
-  "Movie": "movie-04.jpg",
   "Tennis Club": "tennis-club-02.jpg",
   "Plumber": "plumber-02.jpg",
   "Investment Company": "investment-company-02.jpg",
@@ -106,7 +120,21 @@ export const TEMPLATE_IMAGES: Record<string, string> = {
   "Locksmith": "locksmith-02.jpg",
   "Art Gallery": "art-gallery-02.jpg",
   "Pet Care": "pet-care-02.jpg",
+  "Earth": "earth-02.jpg",
+  "Brand Store": "brandstore-02.jpg",
+  
+  // Patterns with -04 suffix
+  "Electronic Store": "electronic-store-04.jpg",
+  "Movie": "movie-04.jpg",
   "Watch Shop": "watch-shop-04.jpg",
+  "Fashion Photography": "fashion-photography-04.jpg",
+  
+  // Special cases with no suffix in image name
+  "Aquarium": "aquarium.jpg", 
+  "Alexandrina": "alexandrina-designer.jpg",
+  "Bike Modification": "bike-modification.jpg",
+  "Bizpulse": "bizpulse.jpg",
+  "Politician": "politician-04.jpg"
 };
 
 /**

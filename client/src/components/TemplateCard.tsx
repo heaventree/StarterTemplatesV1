@@ -63,10 +63,15 @@ export default function TemplateCard({ template }: TemplateCardProps) {
       <div className="relative overflow-hidden flex-1">
         {/* Template Image - align to top with object-top */}
         <a 
-          href={`/api/template-proxy?url=${encodeURIComponent(template.demoUrl || '')}`} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="block aspect-[1/1] sm:aspect-[4/5]"
+          href={`/api/template-proxy?url=${encodeURIComponent(template.demoUrl || '')}`}
+          onClick={(e) => {
+            // Prevent direct link and use our preview button instead
+            e.preventDefault();
+            // Find the preview button in this card and click it programmatically
+            const previewBtn = e.currentTarget.parentElement?.querySelector('button');
+            if (previewBtn) previewBtn.click();
+          }}
+          className="block aspect-[1/1] sm:aspect-[4/5] cursor-pointer"
         >
           <img 
             src={getImagePath(template.imageUrl || '')}
