@@ -2,13 +2,15 @@
  * Reliable mapping of template URLs based on template name
  * This ensures consistent behavior for template previews
  * 
- * IMPORTANT: URLs come directly from the original site and don't follow a consistent pattern
- * Some end with -02, some with -04, etc. based on the actual live site.
+ * IMPORTANT: URLs are extracted directly from the original site
+ * Some end with -02, some with -04, some with other suffixes.
+ * These are the exact URLs used on the startertemplates.com website.
  */
 
 // Map of template names to their VERIFIED working demo URLs
-// These have been extracted from the original site
+// These have been extracted from the original StarterTemplates HTML file
 export const TEMPLATE_URLS: Record<string, string> = {
+  // Standard templates 
   "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
   "Wedding": "https://websitedemos.net/wedding-02/",
   "Accountant": "https://websitedemos.net/accountant-02/",
@@ -56,20 +58,18 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Main Spa": "https://websitedemos.net/main-spa-02/",
   "Mountain": "https://websitedemos.net/mountain-02/",
   
-  // Templates with -04 suffix
+  // Templates extracted from the HTML file with verified URLs
   "Electronic Store": "https://websitedemos.net/electronic-store-04/",
   "Movie": "https://websitedemos.net/movie-04/",
   "Watch Shop": "https://websitedemos.net/watch-shop-04/",
   "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
   "Aquarium": "https://websitedemos.net/aquarium-04/",
   "BBQ Food Truck": "https://websitedemos.net/bbq-food-truck-04/",
-  
-  // Templates with special URL formats
   "Love Nature": "https://websitedemos.net/love-nature-02/",
   "Adventure": "https://websitedemos.net/outdoor-adventure-02/",
   "Alexandrina": "https://websitedemos.net/alexandrina-designer-bio-02/",
+  "Bizpulse": "https://websitedemos.net/bizpulse-04/",
   "Bike Modification": "https://websitedemos.net/bike-modification-02/",
-  "Bizpulse": "https://websitedemos.net/bizpulse-02/",
 };
 
 // Map of template names to their image filenames 
