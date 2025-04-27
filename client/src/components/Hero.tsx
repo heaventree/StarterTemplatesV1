@@ -87,51 +87,43 @@ export default function Hero() {
             Choose from <span className="text-white font-semibold">{templates.length}+</span> ready-to-use website templates.
           </p>
           
-          {/* AI Recommendation Text Area - Modern Sleek Style */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="bg-white/10 backdrop-blur-md shadow-xl rounded-2xl overflow-hidden border border-white/20">
+          {/* AI Recommendation Text Area - Exactly as shown in screenshot */}
+          <div className="max-w-3xl mx-auto mb-10">
+            <div className="rounded-lg overflow-hidden">
               <textarea 
                 ref={promptInputRef}
                 placeholder="Describe your business or the website you want to build..." 
-                className="w-full resize-none p-5 min-h-[80px] bg-white/90 text-gray-700 placeholder-gray-500 focus:outline-none focus:bg-white transition-all duration-300 text-base"
+                className="w-full resize-none p-5 min-h-[80px] bg-white/95 text-gray-700 placeholder-gray-500 focus:outline-none"
                 rows={2}
                 value={userPrompt}
                 onChange={(e) => setUserPrompt(e.target.value)}
               />
-              <div className="flex justify-between items-center px-5 py-3 bg-[rgba(255,255,255,0.02)]">
-                <div className="text-white/80 text-sm font-medium">AI-powered recommendations</div>
+              <div className="flex justify-between items-center px-5 py-3" style={{ backgroundColor: 'rgba(156, 39, 176, 0.8)' }}>
+                <div className="text-white/90 text-sm">AI-powered recommendations</div>
                 <button 
-                  className="bg-white text-[#9c27b0] hover:bg-[#f5f5f5] font-proxima-bold py-2.5 px-8 rounded-full transition-all shadow-sm hover:shadow-md"
+                  className="bg-white hover:bg-gray-50 text-[#9c27b0] font-proxima-bold py-2 px-8 rounded-full transition-all"
                   onClick={handleFindTemplates}
                   disabled={isRecommending || !userPrompt?.trim()}
                 >
-                  {isRecommending ? (
-                    <span className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#9c27b0]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Finding...
-                    </span>
-                  ) : (
-                    'Find Templates'
-                  )}
+                  {isRecommending ? 'Finding...' : 'Find Templates'}
                 </button>
               </div>
             </div>
             
-            {/* Popular Template Categories */}
-            <div className="flex flex-wrap justify-center gap-3 mt-5">
-              <div className="text-sm font-medium text-white/90 py-2">Popular themes: </div>
-              {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
-                <button
-                  key={category}
-                  className="px-6 py-2.5 rounded-full font-proxima-bold transition-all bg-[rgba(255,255,255,0.1)] text-white hover:bg-[rgba(255,255,255,0.2)] border border-white/20"
-                  onClick={() => handleCategorySelect(category)}
-                >
-                  {category}
-                </button>
-              ))}
+            {/* Popular Template Categories - Exactly as shown in screenshot */}
+            <div className="flex items-center justify-center gap-4 mt-5">
+              <span className="text-sm font-medium text-white">Popular themes:</span>
+              <div className="flex items-center space-x-3 overflow-x-auto">
+                {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
+                  <button
+                    key={category}
+                    className="px-6 py-2 whitespace-nowrap rounded-full font-proxima-bold transition-colors text-white bg-[rgba(156,39,176,0.4)] hover:bg-[rgba(156,39,176,0.6)]"
+                    onClick={() => handleCategorySelect(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           
