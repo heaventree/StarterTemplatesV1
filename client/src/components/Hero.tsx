@@ -87,57 +87,31 @@ export default function Hero() {
             Choose from <span className="text-white font-semibold">{templates.length}+</span> ready-to-use website templates.
           </p>
           
-          {/* AI Recommendation Text Area - Stunning Modern Design */}
+          {/* AI Recommendation Text Area - Clean & Elegant */}
           <div className="max-w-3xl mx-auto mb-10">
-            <div className="rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] backdrop-blur-lg border border-white/20">
-              <div className="relative">
-                <textarea 
-                  ref={promptInputRef}
-                  placeholder="Describe your business or the website you want to build..." 
-                  className="w-full resize-none p-6 min-h-[90px] bg-white/95 text-gray-700 placeholder-gray-500 focus:outline-none font-medium text-base"
-                  rows={2}
-                  value={userPrompt}
-                  onChange={(e) => setUserPrompt(e.target.value)}
-                />
-                {userPrompt.length > 0 && (
-                  <button 
-                    onClick={() => setUserPrompt("")}
-                    className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 bg-white/80 rounded-full p-1"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
-              </div>
-              <div 
-                className="flex justify-between items-center px-6 py-4" 
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(221, 79, 147, 0.9) 0%, rgba(140, 33, 161, 0.9) 100%)' 
-                }}
-              >
-                <div className="flex items-center text-white text-sm font-medium">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9.493 2.853a1 1 0 00-1.986 0A5.5 5.5 0 003.5 8a1 1 0 00.5.866V17a1 1 0 001 1h10a1 1 0 001-1V8.866A1 1 0 0016.5 8a5.5 5.5 0 00-4.007-5.147zM12 18H8v-5h4v5zm1-6H7v-2h6v2z" clipRule="evenodd" />
+            <div className="rounded-lg overflow-hidden shadow-lg">
+              <textarea 
+                ref={promptInputRef}
+                placeholder="Describe your business or the website you want to build..." 
+                className="w-full resize-none p-5 min-h-[100px] bg-white text-gray-700 placeholder-gray-500 focus:outline-none text-base"
+                rows={2}
+                value={userPrompt}
+                onChange={(e) => setUserPrompt(e.target.value)}
+              />
+              <div className="flex justify-between items-center px-5 py-3" style={{ backgroundColor: 'rgba(156, 39, 176, 0.9)' }}>
+                <div className="flex items-center text-white text-sm">
+                  <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.633V8c0-1.103-.897-2-2-2h-6V4.61c.305-.274.5-.668.5-1.11a1.5 1.5 0 0 0-3 0c0 .442.195.836.5 1.11V6H5c-1.103 0-2 .897-2 2v2.997l-.082.006A1 1 0 0 0 1.99 12v2a1 1 0 0 0 1 1H3v5c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5a1 1 0 0 0 1-1v-1.938a1.006 1.006 0 0 0-.072-.455zM5 20V8h14l.001 3.996L19 12v2l.001.005.001 5.995H5z"></path>
+                    <path d="M12 14a2 2 0 0 0-2 2c0 .736.405 1.375 1 1.722V19h2v-1.278c.595-.347 1-.986 1-1.722a2 2 0 0 0-2-2z"></path>
                   </svg>
                   AI-powered recommendations
                 </div>
                 <button 
-                  className="bg-white hover:bg-gray-50 text-[#8c21a1] hover:text-[#dd4f93] font-proxima-bold py-2.5 px-8 rounded-full transition-all transform hover:scale-105 hover:shadow-lg"
+                  className="bg-white hover:bg-gray-50 text-[#9c27b0] font-proxima-bold py-2 px-8 rounded-full transition-all"
                   onClick={handleFindTemplates}
                   disabled={isRecommending || !userPrompt?.trim()}
                 >
-                  {isRecommending ? (
-                    <span className="flex items-center">
-                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#8c21a1]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Finding...
-                    </span>
-                  ) : (
-                    'Find Templates'
-                  )}
+                  {isRecommending ? 'Finding...' : 'Find Templates'}
                 </button>
               </div>
             </div>
