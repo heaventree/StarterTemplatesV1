@@ -30,6 +30,7 @@ export default function TemplatePreviewButton({
   const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
   const [showInfoModal, setShowInfoModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   // Use external state if provided, otherwise use internal state
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
@@ -62,10 +63,20 @@ export default function TemplatePreviewButton({
     }
   }, [isOpen, template]);
 
-  // Apply device dimensions to iframe wrapper
+  // Hide loading indicator after a delay
+  useEffect(() => {
+    if (isOpen) {
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, deviceView]);
+
+  // Apply device dimensions to preview container
   const getDeviceStyles = () => {
-    const device = DEVICE_PRESETS[deviceView];
-    
     if (deviceView === 'desktop') {
       return {
         width: '100%',
@@ -103,6 +114,104 @@ export default function TemplatePreviewButton({
     }
   };
 
+  // Create a template preview without external iframes
+  const renderTemplatePreview = () => {
+    return (
+      <div className="w-full h-full bg-white overflow-auto">
+        <div className="max-w-4xl mx-auto p-8">
+          <h1 className="text-3xl font-bold mb-6 text-gray-900">{template.title}</h1>
+          
+          {/* Template image */}
+          <div className="aspect-video bg-gray-100 rounded-lg mb-8 flex items-center justify-center">
+            {template.imageUrl ? (
+              <img 
+                src={template.imageUrl} 
+                alt={template.title} 
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ) : (
+              <div className="text-gray-500">Template Preview Image</div>
+            )}
+          </div>
+          
+          {/* Template details grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">Type</h3>
+              <p>{template.category}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">Page Builder</h3>
+              <p>{template.pageBuilder}</p>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <h3 className="font-semibold mb-3">License</h3>
+              <p>{template.isPro ? 'Premium' : 'Free'}</p>
+            </div>
+          </div>
+          
+          {/* Template description */}
+          <p className="text-lg text-gray-700 mb-6">
+            This template is designed for {template.category} websites and offers a professional, mobile-responsive layout.
+            Built with {template.pageBuilder} for easy customization without coding knowledge.
+          </p>
+          
+          {/* Template tags */}
+          <div className="flex flex-wrap gap-3 mb-6">
+            {template.tags?.map((tag, idx) => (
+              <span key={idx} className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-700">
+                {tag}
+              </span>
+            ))}
+          </div>
+          
+          {/* Features section */}
+          <div className="mb-8">
+            <h2 className="text-xl font-bold mb-4 text-gray-900">Key Features</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Responsive Design</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>SEO Optimized</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Cross-browser Compatible</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Fast Loading</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Documentation</span>
+              </li>
+              <li className="flex items-center">
+                <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span>Technical Support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <Button 
@@ -120,13 +229,14 @@ export default function TemplatePreviewButton({
         <DialogContent style={{ borderRadius: '0', border: 'none' }} className="w-screen h-screen p-0 m-0 !rounded-none !border-0 overflow-hidden max-w-none [&>*]:!rounded-none" aria-describedby="template-preview-description">
           <DialogTitle className="sr-only">Preview of {template.title}</DialogTitle>
           <div id="template-preview-description" className="sr-only">Interactive preview of the template with responsive viewing options</div>
-          {/* Header with controls - completely square with no borders or rounded corners */}
+          
+          {/* Header with controls */}
           <div style={{ borderRadius: '0', borderTop: 'none' }} className="bg-gray-900 backdrop-blur-sm border-b border-gray-800 !border-t-0 !rounded-tl-0 !rounded-tr-0 !rounded-0 shadow-md z-50 h-12 flex items-center justify-between absolute top-0 left-0 right-0">
             <div className="flex items-center gap-4">
               <h3 className="font-semibold text-sm md:text-base line-clamp-1 ml-6 text-white">{template.title}</h3>
             </div>
 
-            {/* Device controls - centered more to the left */}
+            {/* Device controls */}
             <div className="flex items-center ml-auto">
               <div className="bg-gray-800/90 p-1 flex mr-[100px]">
                 <Button
@@ -158,7 +268,7 @@ export default function TemplatePreviewButton({
                 </Button>
               </div>
               
-              {/* Square close button to match design */}
+              {/* Close button */}
               <Button 
                 variant="ghost" 
                 size="icon" 
@@ -171,86 +281,36 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* Direct iframe embed to the demo URL with loading state */}
+          {/* Template preview with device wrapper */}
           <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
               <div className="fixed top-[48px] left-0 w-full h-[calc(100vh-48px)]">
-                {/* Show warning if template doesn't have a demo URL */}
-                {!template.demoUrl ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 p-8">
-                    <div className="max-w-2xl text-center">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-amber-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3">Preview Unavailable</h2>
-                      <p className="text-gray-600 mb-6">
-                        A live preview is not available for this template. Please use the "More Info" button below to see 
-                        details about this template.
-                      </p>
-                      <Button 
-                        onClick={() => setShowInfoModal(true)}
-                        className="bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white"
-                      >
-                        Template Details
-                      </Button>
-                    </div>
+                {/* Loading indicator */}
+                {isLoading && (
+                  <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center transition-opacity duration-500" 
+                       style={{ opacity: 1 }}>
+                    <div className="w-10 h-10 border-4 border-[#dd4f93] border-t-transparent rounded-full animate-spin mb-4"></div>
+                    <p className="text-gray-600">Loading template preview...</p>
                   </div>
-                ) : (
-                  <>
-                    {/* Loading indicator */}
-                    <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center transition-opacity duration-500" 
-                         style={{ opacity: 1 }}>
-                      <div className="w-10 h-10 border-4 border-[#dd4f93] border-t-transparent rounded-full animate-spin mb-4"></div>
-                      <p className="text-gray-600">Loading template preview...</p>
-                    </div>
-                    
-                    {/* Info bar completely removed as requested */}
-                    
-                    {/* Actual iframe with proxy */}
-                    <iframe
-                      src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
-                      className="w-full h-full border-0"
-                      title={`${template.title} preview`}
-                      onLoad={(e) => {
-                        // Hide loading indicator when iframe loads
-                        try {
-                          // Safely navigate to the loading element, accounting for the parent structure
-                          const iframeParent = e.currentTarget.parentElement;
-                          if (iframeParent && iframeParent.previousSibling) {
-                            const loadingEl = iframeParent.previousSibling as HTMLElement;
-                            loadingEl.style.opacity = '0';
-                            setTimeout(() => {
-                              loadingEl.style.display = 'none';
-                            }, 500);
-                          }
-                        } catch (err) {
-                          console.log('Could not find loading element to hide');
-                        }
-                      }}
-                    />
-                  </>
                 )}
+                
+                {/* Template preview content */}
+                {renderTemplatePreview()}
               </div>
             ) : (
               <div style={getDeviceStyles()} className="bg-white overflow-hidden">
-                {!template.demoUrl ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-amber-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                    </svg>
-                    <h3 className="text-sm font-medium mb-1">Preview Unavailable</h3>
-                    <p className="text-xs text-gray-600">Details in "More Info"</p>
-                  </div>
-                ) : (
-                  <div className="relative w-full h-full">
-                    {/* Info bar completely removed as requested */}
-                    <iframe
-                      src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
-                      className="w-full h-full border-0"
-                      title={`${template.title} preview - ${DEVICE_PRESETS[deviceView].label}`}
-                    />
+                {/* Loading indicator for mobile/tablet */}
+                {isLoading && (
+                  <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center transition-opacity duration-500">
+                    <div className="w-8 h-8 border-4 border-[#dd4f93] border-t-transparent rounded-full animate-spin mb-3"></div>
+                    <p className="text-sm text-gray-600">Loading...</p>
                   </div>
                 )}
+                
+                {/* Mobile/tablet preview with scrolling */}
+                <div className="w-full h-full overflow-auto p-4">
+                  {renderTemplatePreview()}
+                </div>
               </div>
             )}
           </div>
@@ -365,8 +425,6 @@ export default function TemplatePreviewButton({
                 </li>
               </ul>
             </div>
-            
-            {/* CORS warnings removed as requested */}
             
             <div className="flex flex-wrap gap-2">
               {template.tags?.map((tag, i) => (
