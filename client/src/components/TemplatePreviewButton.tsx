@@ -204,6 +204,16 @@ export default function TemplatePreviewButton({
                       <p className="text-gray-600">Loading template preview...</p>
                     </div>
                     
+                    {/* Information banner for preview warnings */}
+                    <div className="absolute top-0 left-0 right-0 bg-blue-50 text-blue-800 px-4 py-2 text-sm z-20 flex items-center border-b border-blue-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                      <span>
+                        Viewing template preview. Some templates may display simplified previews due to cross-origin restrictions.
+                      </span>
+                    </div>
+                    
                     {/* Actual iframe with proxy */}
                     <iframe
                       src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
@@ -211,7 +221,7 @@ export default function TemplatePreviewButton({
                       title={`${template.title} preview`}
                       onLoad={(e) => {
                         // Hide loading indicator when iframe loads
-                        const loadingEl = e.currentTarget.previousSibling as HTMLElement;
+                        const loadingEl = e.currentTarget.previousSibling.previousSibling as HTMLElement;
                         if (loadingEl) {
                           loadingEl.style.opacity = '0';
                           setTimeout(() => {
@@ -234,11 +244,19 @@ export default function TemplatePreviewButton({
                     <p className="text-xs text-gray-600">Details in "More Info"</p>
                   </div>
                 ) : (
-                  <iframe
-                    src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
-                    className="w-full h-full border-0"
-                    title={`${template.title} preview - ${DEVICE_PRESETS[deviceView].label}`}
-                  />
+                  <div className="relative w-full h-full">
+                    <div className="absolute top-0 left-0 right-0 bg-blue-50 text-blue-800 px-4 py-2 text-xs z-20 flex items-center border-b border-blue-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                      </svg>
+                      <span>Preview may be simplified due to cross-origin restrictions.</span>
+                    </div>
+                    <iframe
+                      src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
+                      className="w-full h-full border-0 pt-8"
+                      title={`${template.title} preview - ${DEVICE_PRESETS[deviceView].label}`}
+                    />
+                  </div>
                 )}
               </div>
             )}
