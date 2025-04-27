@@ -1,90 +1,154 @@
 /**
- * This file provides utility functions for working with template URLs
- * It helps map template names to their demo URLs
- * If a template's demo URL is not in the database, we can generate a fallback URL
+ * Reliable mapping of template URLs based on template name
+ * This ensures consistent behavior for template previews
  */
 
-// Import comprehensive template URL map
-import { TEMPLATE_URL_MAP, getWorkingTemplateUrl } from '@/utils/templateUrls';
-
-// Common URL patterns for various template domains
-const URL_PATTERNS = {
-  websiteDemos: 'https://websitedemos.net/',
-  astra: 'https://websitedemos.net/wp-content/uploads/',
-  divi: 'https://www.elegantthemes.com/layouts/',
+// Map of template names to their demo URLs
+export const TEMPLATE_URLS: Record<string, string> = {
+  "Love Nature": "https://websitedemos.net/love-nature-02/",
+  "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
+  "Wedding": "https://websitedemos.net/wedding-02/",
+  "Accountant": "https://websitedemos.net/accountant-02/",
+  "Digital Agency": "https://websitedemos.net/digital-agency-02/",
+  "Fashion Designer": "https://websitedemos.net/fashion-designer-02/",
+  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
+  "Main Spa": "https://websitedemos.net/main-spa-02/",
+  "Mountain": "https://websitedemos.net/mountain-02/",
+  "Home Decor": "https://websitedemos.net/home-decor-02/",
+  "Hair Salon": "https://websitedemos.net/hair-salon-02/",
+  "Finance": "https://websitedemos.net/finance-02/",
+  "Photography": "https://websitedemos.net/photography-agency-02/",
+  "Carpenter": "https://websitedemos.net/carpenter-02/",
+  "Gardener": "https://websitedemos.net/gardener-02/",
+  "Electrician": "https://websitedemos.net/electrician-02/",
+  "Charity": "https://websitedemos.net/charity-02/",
+  "Movie": "https://websitedemos.net/movie-04/",
+  "Tennis Club": "https://websitedemos.net/tennis-club-02/",
+  "Plumber": "https://websitedemos.net/plumber-02/",
+  "Investment Company": "https://websitedemos.net/investment-company-02/",
+  "Mechanic": "https://websitedemos.net/mechanic-02/",
+  "Restaurant": "https://websitedemos.net/restaurant-02/",
+  "Coach": "https://websitedemos.net/coach-02/",
+  "IT Company": "https://websitedemos.net/it-company-02/",
+  "Luxury Hotel": "https://websitedemos.net/luxury-hotel-02/",
+  "Architecture": "https://websitedemos.net/architecture-firm-02/",
+  "Landscaper": "https://websitedemos.net/landscaper-02/",
+  "Water Company": "https://websitedemos.net/water-company-02/",
+  "Online Education": "https://websitedemos.net/online-education-02/",
+  "Fitness": "https://websitedemos.net/fitness-02/",
+  "Doctors": "https://websitedemos.net/doctors-02/",
+  "Bakery": "https://websitedemos.net/bakery-shop-02/",
+  "Car Rental": "https://websitedemos.net/car-rental-02/",
+  "Marketing": "https://websitedemos.net/marketing-agency-02/",
+  "Real Estate": "https://websitedemos.net/real-estate-02/",
+  "Local Business": "https://websitedemos.net/local-business-02/",
+  "Coffee Shop": "https://websitedemos.net/coffee-shop-02/",
+  "Adventure": "https://websitedemos.net/outdoor-adventure-02/",
+  "Interior Design": "https://websitedemos.net/interior-design-02/",
+  "Resume": "https://websitedemos.net/resume-02/",
+  "Cleaning": "https://websitedemos.net/cleaning-services-02/",
+  "Florist": "https://websitedemos.net/florist-02/",
+  "Handyman": "https://websitedemos.net/handyman-02/",
+  "IT Consultant": "https://websitedemos.net/it-consultant-02/",
+  "Locksmith": "https://websitedemos.net/locksmith-02/",
+  "Art Gallery": "https://websitedemos.net/art-gallery-02/",
+  "Pet Care": "https://websitedemos.net/pet-care-02/",
+  "Watch Shop": "https://websitedemos.net/watch-shop-04/",
 };
 
-// Common suffixes for template URLs
-const COMMON_SUFFIXES = ['-02', '-04', '', '/'];
-
-// Common domains for templates
-const TEMPLATE_DOMAINS = [
-  'websitedemos.net',
-  'elegantthemes.com',
-  'wpengine.com',
-  'wp-themes.com',
-  'elementor.com',
-  'beaverbuilder.com',
-  'wpbeaverbuilder.com',
-  'websitedemos.net/wp-content/uploads',
-];
-
-// Use our comprehensive URL map as the source of truth for template URLs
-const KNOWN_TEMPLATES: Record<string, string> = Object.entries(TEMPLATE_URL_MAP).reduce(
-  (acc, [key, value]) => {
-    acc[key.toLowerCase()] = value;
-    return acc;
-  }, 
-  {} as Record<string, string>
-);
+// Map of template names to their image filenames
+export const TEMPLATE_IMAGES: Record<string, string> = {
+  "Love Nature": "love-nature-02.jpg",
+  "Yoga Instructor": "yoga-instructor-02.jpg",
+  "Wedding": "wedding-02.jpg",
+  "Accountant": "accountant-02.jpg",
+  "Digital Agency": "digital-agency-02.jpg",
+  "Fashion Designer": "fashion-designer-02.jpg",
+  "Electronic Store": "electronic-store-04.jpg",
+  "Main Spa": "main-spa-02.jpg",
+  "Mountain": "mountain-02.jpg",
+  "Home Decor": "home-decor-02.jpg",
+  "Hair Salon": "hair-salon-02.jpg",
+  "Finance": "finance-02.jpg",
+  "Photography": "photography-agency-02.jpg",
+  "Carpenter": "carpenter-02.jpg",
+  "Gardener": "gardener-02.jpg",
+  "Electrician": "electrician-02.jpg",
+  "Charity": "charity-02.jpg",
+  "Movie": "movie-04.jpg",
+  "Tennis Club": "tennis-club-02.jpg",
+  "Plumber": "plumber-02.jpg",
+  "Investment Company": "investment-company-02.jpg",
+  "Mechanic": "mechanic-02.jpg",
+  "Restaurant": "restaurant-02.jpg",
+  "Coach": "coach-02.jpg",
+  "IT Company": "it-company-02.jpg",
+  "Luxury Hotel": "luxury-hotel-02.jpg",
+  "Architecture": "architecture-firm-02.jpg",
+  "Landscaper": "landscaper-02.jpg",
+  "Water Company": "water-company-02.jpg",
+  "Online Education": "online-education-02.jpg",
+  "Fitness": "fitness-02.jpg",
+  "Doctors": "doctors-02.jpg",
+  "Bakery": "bakery-shop-02.jpg",
+  "Car Rental": "car-rental-02.jpg",
+  "Marketing": "marketing-agency-02.jpg",
+  "Real Estate": "real-estate-02.jpg",
+  "Local Business": "local-business-02.jpg",
+  "Coffee Shop": "coffee-shop-02.jpg",
+  "Adventure": "outdoor-adventure-02.jpg",
+  "Interior Design": "interior-design-02.jpg",
+  "Resume": "resume-02.jpg",
+  "Cleaning": "cleaning-services-02.jpg",
+  "Florist": "florist-02.jpg",
+  "Handyman": "handyman-02.jpg",
+  "IT Consultant": "it-consultant-02.jpg",
+  "Locksmith": "locksmith-02.jpg",
+  "Art Gallery": "art-gallery-02.jpg",
+  "Pet Care": "pet-care-02.jpg",
+  "Watch Shop": "watch-shop-04.jpg",
+};
 
 /**
- * Converts a template title to a slug format for URLs
- * e.g. "Love Nature" -> "love-nature"
+ * Get the correct image URL for a template 
+ * @param title The template title
+ * @returns The image path for the template
  */
-export function titleToSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/[^a-z0-9-]/g, '') // Remove special characters
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
-    .replace(/-$/, ''); // Remove trailing hyphens
-}
-
-/**
- * Generates a list of possible template URLs for a given title
- */
-export function generatePossibleUrls(title: string): string[] {
-  if (!title) return [];
+export function getTemplateImageUrl(title: string): string {
+  // Default fallback image
+  const defaultImage = "/images/templates-cta-img-scaled.webp";
   
-  const normalizedTitle = title.toLowerCase().trim();
+  if (!title) return defaultImage;
   
-  // Check if we have a known URL for this template
-  if (KNOWN_TEMPLATES[normalizedTitle]) {
-    return [KNOWN_TEMPLATES[normalizedTitle]];
+  // Try to find direct match
+  if (TEMPLATE_IMAGES[title]) {
+    return `/images/${TEMPLATE_IMAGES[title]}`;
   }
   
-  const slug = titleToSlug(title);
-  const urls: string[] = [];
-  
-  // Generate URL variants with different domains and suffixes
-  for (const pattern of Object.values(URL_PATTERNS)) {
-    for (const suffix of COMMON_SUFFIXES) {
-      urls.push(`${pattern}${slug}${suffix}`);
+  // Try with normalized title (lowercase, trimmed)
+  const normalizedTitle = title.trim();
+  for (const [templateTitle, imagePath] of Object.entries(TEMPLATE_IMAGES)) {
+    if (templateTitle.toLowerCase() === normalizedTitle.toLowerCase()) {
+      return `/images/${imagePath}`;
     }
   }
   
-  // Add variations with common alternatives
-  urls.push(`https://websitedemos.net/${slug}-elementor`);
-  urls.push(`https://websitedemos.net/${slug}-beaver`);
-  urls.push(`https://websitedemos.net/${slug}-gutenberg`);
+  // Try matching without "Template" suffix
+  const titleWithoutSuffix = title.replace(/\s+Template$/, '').trim();
+  if (TEMPLATE_IMAGES[titleWithoutSuffix]) {
+    return `/images/${TEMPLATE_IMAGES[titleWithoutSuffix]}`;
+  }
   
-  return urls;
+  // If no match found, use the filename pattern based on slug
+  const slug = titleToSlug(title);
+  return `/images/${slug}-02.jpg`;
 }
 
 /**
- * Generates a template URL based on the template title
- * Uses our API proxy to avoid CORS issues and our comprehensive URL map
+ * Get template preview URL
+ * @param title The template title
+ * @param demoUrl Optional demo URL if already provided
+ * @returns The template preview URL through our proxy
  */
 export function getTemplateUrl(title: string, demoUrl?: string | null): string {
   // If we already have a demo URL, use it
@@ -94,36 +158,37 @@ export function getTemplateUrl(title: string, demoUrl?: string | null): string {
   
   if (!title) return '';
   
-  // First check if we have a direct mapping using the comprehensive URL map
-  const mappedUrl = getWorkingTemplateUrl(title, '');
-  if (mappedUrl) {
-    return `/api/template-proxy?url=${encodeURIComponent(mappedUrl)}`;
+  // Try to find direct match
+  if (TEMPLATE_URLS[title]) {
+    return `/api/template-proxy?url=${encodeURIComponent(TEMPLATE_URLS[title])}`;
   }
   
-  // Check known templates as backup (legacy approach)
-  const normalizedTitle = title.toLowerCase().trim();
-  if (KNOWN_TEMPLATES[normalizedTitle]) {
-    return `/api/template-proxy?url=${encodeURIComponent(KNOWN_TEMPLATES[normalizedTitle])}`;
+  // Try with normalized title (lowercase, trimmed)
+  const normalizedTitle = title.trim();
+  for (const [templateTitle, url] of Object.entries(TEMPLATE_URLS)) {
+    if (templateTitle.toLowerCase() === normalizedTitle.toLowerCase()) {
+      return `/api/template-proxy?url=${encodeURIComponent(url)}`;
+    }
   }
   
-  // Generate slug and use pattern based on words in the title
+  // Try matching without "Template" suffix
+  const titleWithoutSuffix = title.replace(/\s+Template$/, '').trim();
+  if (TEMPLATE_URLS[titleWithoutSuffix]) {
+    return `/api/template-proxy?url=${encodeURIComponent(TEMPLATE_URLS[titleWithoutSuffix])}`;
+  }
+  
+  // Fallback to URL pattern based on slug
   const slug = titleToSlug(title);
+  const targetUrl = `https://websitedemos.net/${slug}-02/`;
   
-  // For template titles with "template" in them, try removing that
-  const cleanSlug = slug.replace(/-template$/, '');
-  
-  // Try both patterns with the -02 suffix which is more common
-  const targetUrl = `${URL_PATTERNS.websiteDemos}${cleanSlug}-02/`;
-  
-  // Return the URL through our proxy
   return `/api/template-proxy?url=${encodeURIComponent(targetUrl)}`;
 }
 
 /**
- * Opens a template URL in a new tab
- * Uses direct URLs rather than the proxy for external viewing
+ * Opens a template in a new tab with direct URL (no proxy)
  */
 export function openTemplateInNewTab(title: string, demoUrl?: string | null): void {
+  // If we already have a demo URL, use it
   if (demoUrl) {
     window.open(demoUrl, '_blank');
     return;
@@ -131,24 +196,43 @@ export function openTemplateInNewTab(title: string, demoUrl?: string | null): vo
   
   if (!title) return;
   
-  // First check if we have a direct mapping using the comprehensive URL map
-  const mappedUrl = getWorkingTemplateUrl(title, '');
-  if (mappedUrl) {
-    window.open(mappedUrl, '_blank');
+  // Try to find direct match
+  if (TEMPLATE_URLS[title]) {
+    window.open(TEMPLATE_URLS[title], '_blank');
     return;
   }
   
-  // Check known templates as fallback
-  const normalizedTitle = title.toLowerCase().trim();
-  if (KNOWN_TEMPLATES[normalizedTitle]) {
-    window.open(KNOWN_TEMPLATES[normalizedTitle], '_blank');
+  // Try with normalized title (lowercase, trimmed)
+  const normalizedTitle = title.trim();
+  for (const [templateTitle, url] of Object.entries(TEMPLATE_URLS)) {
+    if (templateTitle.toLowerCase() === normalizedTitle.toLowerCase()) {
+      window.open(url, '_blank');
+      return;
+    }
+  }
+  
+  // Try matching without "Template" suffix
+  const titleWithoutSuffix = title.replace(/\s+Template$/, '').trim();
+  if (TEMPLATE_URLS[titleWithoutSuffix]) {
+    window.open(TEMPLATE_URLS[titleWithoutSuffix], '_blank');
     return;
   }
   
+  // Fallback to URL pattern based on slug
   const slug = titleToSlug(title);
-  // For template titles with "template" in them, try removing that
-  const cleanSlug = slug.replace(/-template$/, '');
-  const targetUrl = `${URL_PATTERNS.websiteDemos}${cleanSlug}-02/`;
+  const targetUrl = `https://websitedemos.net/${slug}-02/`;
   
   window.open(targetUrl, '_blank');
+}
+
+/**
+ * Convert a title to a slug
+ */
+function titleToSlug(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
