@@ -35,6 +35,7 @@ export default function TemplateViewerModal({
   const [isFrameLoading, setIsFrameLoading] = useState(true);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
   const [showFloatingControls, setShowFloatingControls] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const controlsTimeout = useRef<NodeJS.Timeout | null>(null);
 
@@ -55,12 +56,35 @@ export default function TemplateViewerModal({
   useEffect(() => {
     if (isOpen) {
       setIsFrameLoading(true);
+      setIframeError(false);
     }
   }, [isOpen, templateId]);
 
   // Handle iframe load event
   const handleIframeLoad = () => {
     setIsFrameLoading(false);
+    
+    // Check if the iframe is empty or has errors
+    setTimeout(() => {
+      if (iframeRef.current) {
+        try {
+          // If we can't access iframe contents due to CORS, consider it an error
+          const iframeDoc = iframeRef.current.contentDocument || iframeRef.current.contentWindow?.document;
+          if (!iframeDoc || !iframeDoc.body || iframeDoc.body.innerHTML === '') {
+            setIframeError(true);
+          }
+        } catch (error) {
+          // CORS error occurs when trying to access cross-origin iframe
+          setIframeError(true);
+        }
+      }
+    }, 1000); // Give it a second to properly load
+  };
+  
+  // Handle iframe error
+  const handleIframeError = () => {
+    setIsFrameLoading(false);
+    setIframeError(true);
   };
 
   // Apply device dimensions to iframe wrapper
@@ -256,14 +280,47 @@ export default function TemplateViewerModal({
                 </div>
               )}
               
-              <iframe
-                ref={iframeRef}
-                src={template.demoUrl || getTemplateUrl(template.title)}
-                className="w-full h-full border border-border shadow-md bg-white"
-                onLoad={handleIframeLoad}
-                title={`${template.title} preview`}
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-              />
+              {iframeError ? (
+                // Fallback UI when iframe fails to load
+                <div className="w-full h-full flex flex-col items-center justify-center border border-border bg-white text-center p-6">
+                  <div className="bg-muted rounded-full p-4 mb-4">
+                    <ExternalLink className="w-12 h-12 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{template.title}</h3>
+                  <p className="text-muted-foreground mb-4">
+                    This template preview cannot be displayed in the embedded viewer due to website restrictions.
+                  </p>
+                  
+                  {template.imageUrl && (
+                    <div className="max-w-md mx-auto mb-6">
+                      <img 
+                        src={template.imageUrl} 
+                        alt={template.title} 
+                        className="rounded-md border border-border shadow-sm" 
+                      />
+                    </div>
+                  )}
+                  
+                  <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                    <Button onClick={handleOpenInNewTab} className="flex items-center gap-2">
+                      <ExternalLink className="w-4 h-4" /> Open in New Tab
+                    </Button>
+                    <Button variant="outline" onClick={onClose}>
+                      Close Preview
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <iframe
+                  ref={iframeRef}
+                  src={template.demoUrl || getTemplateUrl(template.title)}
+                  className="w-full h-full border border-border shadow-md bg-white"
+                  onLoad={handleIframeLoad}
+                  onError={handleIframeError}
+                  title={`${template.title} preview`}
+                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                />
+              )}
               
               {/* Floating controls for mobile */}
               <div 
