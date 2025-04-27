@@ -149,6 +149,76 @@ export async function templateProxy(req: Request, res: Response) {
 function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<boolean> {
   return new Promise((resolve) => {
     try {
+      // Special case for known problematic templates that can't be embedded in iframes
+      const problematicTemplates = [
+        'politician-04',
+        'news-blog-04'
+      ];
+      
+      // Check if this is a problematic template
+      const isProblematic = problematicTemplates.some(template => 
+        targetUrl.includes(template));
+      
+      // For problematic templates, send a direct redirect instead of trying to embed
+      if (isProblematic) {
+        console.log(`Known problematic template detected: ${targetUrl}`);
+        res.status(200).send(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Template Preview</title>
+              <style>
+                body { 
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+                  display: flex; 
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  height: 100vh;
+                  margin: 0;
+                  padding: 20px;
+                  text-align: center;
+                  background-color: #f9f9f9;
+                }
+                .message {
+                  max-width: 600px;
+                  background-color: white;
+                  padding: 30px;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                }
+                h1 { color: #333; margin-bottom: 20px; }
+                p { color: #666; line-height: 1.6; margin-bottom: 20px; }
+                .button {
+                  display: inline-block;
+                  background-color: #dd4f93;
+                  color: white;
+                  padding: 10px 20px;
+                  border-radius: 4px;
+                  text-decoration: none;
+                  font-weight: bold;
+                  margin-top: 10px;
+                }
+                .button:hover {
+                  background-color: #c13a7c;
+                }
+              </style>
+            </head>
+            <body>
+              <div class="message">
+                <h1>Template Preview Unavailable</h1>
+                <p>This template cannot be displayed in the embedded preview mode due to security restrictions set by the template provider.</p>
+                <p>You can view this template directly in a new tab instead.</p>
+                <a href="${targetUrl}" target="_blank" class="button">Open Template in New Tab</a>
+                <p><button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button></p>
+              </div>
+            </body>
+          </html>
+        `);
+        resolve(true);
+        return;
+      }
+      
       // Parse the URL
       const parsedUrl = url.parse(targetUrl);
       if (!parsedUrl.hostname) {
@@ -211,6 +281,69 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
           return;
         }
         
+        // Check for X-Frame-Options header that would prevent embedding
+        const xFrameOptions = proxyRes.headers['x-frame-options'];
+        if (xFrameOptions && (xFrameOptions.toLowerCase() === 'deny' || xFrameOptions.toLowerCase().includes('sameorigin'))) {
+          console.log(`Template has X-Frame-Options: ${xFrameOptions}, cannot be embedded: ${targetUrl}`);
+          
+          // If we detect X-Frame-Options that would prevent embedding, redirect to direct template
+          res.status(200).send(`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>Template Preview</title>
+                <style>
+                  body { 
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+                    display: flex; 
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    margin: 0;
+                    padding: 20px;
+                    text-align: center;
+                    background-color: #f9f9f9;
+                  }
+                  .message {
+                    max-width: 600px;
+                    background-color: white;
+                    padding: 30px;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                  }
+                  h1 { color: #333; margin-bottom: 20px; }
+                  p { color: #666; line-height: 1.6; margin-bottom: 20px; }
+                  .button {
+                    display: inline-block;
+                    background-color: #dd4f93;
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    font-weight: bold;
+                    margin-top: 10px;
+                  }
+                  .button:hover {
+                    background-color: #c13a7c;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="message">
+                  <h1>Template Preview Unavailable</h1>
+                  <p>This template cannot be displayed in the embedded preview mode due to security restrictions.</p>
+                  <p>You can view this template directly in a new tab instead.</p>
+                  <a href="${targetUrl}" target="_blank" class="button">Open Template in New Tab</a>
+                  <p><button onclick="window.parent.postMessage({type: 'closePreview'}, '*')" class="button" style="background-color: #666;">Close Preview</button></p>
+                </div>
+              </body>
+            </html>
+          `);
+          resolve(true);
+          return;
+        }
+        
         // Success - copy status code and prepare response
         res.statusCode = 200;
         
@@ -234,7 +367,8 @@ function proxyRequest(targetUrl: string, req: Request, res: Response): Promise<b
       });
       
       // Handle errors
-      proxyReq.on('error', () => {
+      proxyReq.on('error', (err) => {
+        console.error(`Request error for ${targetUrl}:`, err.message);
         clearTimeout(timeout);
         resolve(false);
       });
