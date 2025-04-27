@@ -92,7 +92,7 @@ export function generatePossibleUrls(title: string): string[] {
  * Generates a template URL based on the template title
  * Uses our API proxy to avoid CORS issues
  */
-export function getTemplateUrl(title: string, demoUrl?: string): string {
+export function getTemplateUrl(title: string, demoUrl?: string | null): string {
   // If we already have a demo URL, use it
   if (demoUrl) {
     return `/api/template-proxy?url=${encodeURIComponent(demoUrl)}`;
@@ -120,7 +120,7 @@ export function getTemplateUrl(title: string, demoUrl?: string): string {
  * Opens a template URL in a new tab
  * Uses direct URLs rather than the proxy for external viewing
  */
-export function openTemplateInNewTab(title: string, demoUrl?: string): void {
+export function openTemplateInNewTab(title: string, demoUrl?: string | null): void {
   if (demoUrl) {
     window.open(demoUrl, '_blank');
     return;

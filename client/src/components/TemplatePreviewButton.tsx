@@ -162,7 +162,7 @@ export default function TemplatePreviewButton({
           <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
               <iframe
-                src={getTemplateUrl(template.title, template.demoUrl)}
+                src={getTemplateUrl(template.title || '', template.demoUrl)}
                 className="w-full absolute"
                 style={{ 
                   position: 'fixed',
@@ -183,7 +183,7 @@ export default function TemplatePreviewButton({
             ) : (
               <div style={getDeviceStyles()}>
                 <iframe
-                  src={template.demoUrl ? `/api/template-proxy?url=${encodeURIComponent(template.demoUrl)}` : getTemplateUrl(template.title)}
+                  src={getTemplateUrl(template.title || '', template.demoUrl)}
                   className="w-full h-full"
                   title={`${template.title} preview`}
                   sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
