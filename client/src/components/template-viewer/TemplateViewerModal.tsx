@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Template } from '@shared/schema';
-import { getTemplateUrl } from '@shared/data/template-urls';
+import { getTemplateUrl, openTemplateInNewTab } from '@shared/data/template-urls';
 import { useQuery } from '@tanstack/react-query';
 import { 
   ArrowLeft, Monitor, Smartphone, Tablet, Loader2, 
@@ -103,9 +103,8 @@ export default function TemplateViewerModal({
   // Open demo in new tab
   const handleOpenInNewTab = () => {
     if (template) {
-      // Use the demoUrl from the template if available, otherwise fall back to our generated URL
-      const url = template.demoUrl || getTemplateUrl(template.title);
-      window.open(url, '_blank');
+      // Use our utility function that handles template URLs properly
+      openTemplateInNewTab(template.title, template.demoUrl);
     }
   };
 
