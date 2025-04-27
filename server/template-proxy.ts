@@ -241,18 +241,57 @@ function sendFallbackResponse(originalUrl: string, req: Request, res: Response) 
             display: inline-block;
             transition: background-color 0.2s;
             margin-top: 1rem;
+            cursor: pointer;
+            border: none;
           }
           .button:hover {
             background-color: #c13a7c;
+          }
+          .button-secondary {
+            background-color: #6c7ae0;
+            margin-left: 10px;
+          }
+          .button-secondary:hover {
+            background-color: #5a66c5;
+          }
+          .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
+          }
+          .template-alternative {
+            text-align: center;
+          }
+          .template-alternative img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            transition: transform 0.2s;
+          }
+          .template-alternative img:hover {
+            transform: scale(1.05);
+          }
+          .template-alternative p {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
           }
         </style>
       </head>
       <body>
         <div class="preview-container">
-          <h1>External Template Preview</h1>
-          <p>The template cannot be displayed in the embedded viewer due to the website's security settings.</p>
-          <p>You can view this template by visiting the website directly.</p>
-          <a href="${originalUrl}" target="_blank" class="button">Open Template in New Tab</a>
+          <h1>Template Preview</h1>
+          <p>This template is currently unavailable in the preview mode.</p>
+          <p>You can explore similar templates or browse through our collection below.</p>
+          
+          <div>
+            <button class="button" onclick="window.parent.postMessage({type: 'closePreview'}, '*')">Browse Templates</button>
+          </div>
         </div>
       </body>
     </html>

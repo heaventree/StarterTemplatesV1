@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
 import { Eye, X, Monitor, Tablet, Smartphone, ExternalLink } from 'lucide-react';
 import { trackTemplateView, endTemplateView, trackCategoryView, trackPageBuilderView } from '@/services/recommendationEngine';
-import { getTemplateUrl } from '@shared/data/template-urls';
+import { getTemplateUrl, openTemplateInNewTab } from '@shared/data/template-urls';
 
 interface TemplatePreviewButtonProps {
   template: Template;
@@ -48,6 +48,21 @@ export default function TemplatePreviewButton({
       };
     }
   }, [isOpen, template]);
+  
+  // Handle messages from iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && typeof event.data === 'object') {
+        if (event.data.type === 'closePreview') {
+          // Close the preview modal
+          setIsOpen(false);
+        }
+      }
+    };
+    
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   // Apply device dimensions to iframe wrapper
   const getDeviceStyles = () => {
