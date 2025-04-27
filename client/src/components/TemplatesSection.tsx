@@ -102,7 +102,7 @@ export default function TemplatesSection() {
       setActiveCategory("all");
       setSearchTerm("");
       
-      // Reset display count
+      // Reset display count to show initial set
       setDisplayCount(12);
     };
     
