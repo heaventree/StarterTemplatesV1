@@ -4,6 +4,9 @@
  * If a template's demo URL is not in the database, we can generate a fallback URL
  */
 
+// Import comprehensive template URL map
+import { TEMPLATE_URL_MAP, getWorkingTemplateUrl } from '@/utils/templateUrls';
+
 // Common URL patterns for various template domains
 const URL_PATTERNS = {
   websiteDemos: 'https://websitedemos.net/',
@@ -26,44 +29,14 @@ const TEMPLATE_DOMAINS = [
   'websitedemos.net/wp-content/uploads',
 ];
 
-// Known templates with specific URL patterns (manual mapping)
-const KNOWN_TEMPLATES: Record<string, string> = {
-  'love nature': 'https://websitedemos.net/love-nature-02/',
-  'outdoor adventure': 'https://websitedemos.net/outdoor-adventure-02/',
-  'mountain': 'https://websitedemos.net/mountain-02/',
-  'landscaper': 'https://websitedemos.net/landscaper-02/',
-  'organic store': 'https://websitedemos.net/organic-shop-02/',
-  'toy store': 'https://websitedemos.net/toy-store-04/',
-  'aquarium': 'https://websitedemos.net/aquarium-04/',
-  'adventure': 'https://websitedemos.net/outdoor-adventure-02/',
-  'skincare': 'https://websitedemos.net/skin-care-04/',
-  'home decor': 'https://websitedemos.net/home-decor-04/',
-  'yoga studio': 'https://websitedemos.net/yoga-instructor-08/',
-  'fitness': 'https://websitedemos.net/gym-fitness-02/',
-  'pharmacy': 'https://websitedemos.net/pharmacy-store-02/',
-  'handyman': 'https://websitedemos.net/handyman-07/',
-  'black friday': 'https://websitedemos.net/black-friday-bonanza-04/',
-  'app landing page': 'https://websitedemos.net/app-landing-page-04/',
-  'app landing': 'https://websitedemos.net/app-landing-page-04/',
-  'architects': 'https://websitedemos.net/architect-02/',
-  'architecture': 'https://websitedemos.net/architect-02/',
-  'architecture firm': 'https://websitedemos.net/architect-02/',
-  'architect studio': 'https://websitedemos.net/architect-02/',
-  'brand store': 'https://websitedemos.net/brandstore-02/',
-  'retail shop': 'https://websitedemos.net/brandstore-02/',
-  'clothing': 'https://websitedemos.net/brandstore-02/',
-  'fashion store': 'https://websitedemos.net/fashion-store-04/',
-  'fashion': 'https://websitedemos.net/fashion-store-04/',
-  'restaurant': 'https://websitedemos.net/restaurant-free/',
-  'cafe': 'https://websitedemos.net/cafe-free/',
-  'gardener': 'https://websitedemos.net/landscaper-02/',
-  'interior design': 'https://websitedemos.net/interior-designer-07/',
-  'interior designer': 'https://websitedemos.net/interior-designer-07/',
-  'furniture': 'https://websitedemos.net/furniture-store-04/',
-  'furniture store': 'https://websitedemos.net/furniture-store-04/',
-  'carpenter': 'https://websitedemos.net/furniture-store-04/',
-  'woodwork': 'https://websitedemos.net/furniture-store-04/',
-};
+// Use our comprehensive URL map as the source of truth for template URLs
+const KNOWN_TEMPLATES: Record<string, string> = Object.entries(TEMPLATE_URL_MAP).reduce(
+  (acc, [key, value]) => {
+    acc[key.toLowerCase()] = value;
+    return acc;
+  }, 
+  {} as Record<string, string>
+);
 
 /**
  * Converts a template title to a slug format for URLs
@@ -111,7 +84,7 @@ export function generatePossibleUrls(title: string): string[] {
 
 /**
  * Generates a template URL based on the template title
- * Uses our API proxy to avoid CORS issues
+ * Uses our API proxy to avoid CORS issues and our comprehensive URL map
  */
 export function getTemplateUrl(title: string, demoUrl?: string | null): string {
   // If we already have a demo URL, use it
@@ -121,17 +94,26 @@ export function getTemplateUrl(title: string, demoUrl?: string | null): string {
   
   if (!title) return '';
   
-  // Check known templates first
+  // First check if we have a direct mapping using the comprehensive URL map
+  const mappedUrl = getWorkingTemplateUrl(title, '');
+  if (mappedUrl) {
+    return `/api/template-proxy?url=${encodeURIComponent(mappedUrl)}`;
+  }
+  
+  // Check known templates as backup (legacy approach)
   const normalizedTitle = title.toLowerCase().trim();
   if (KNOWN_TEMPLATES[normalizedTitle]) {
     return `/api/template-proxy?url=${encodeURIComponent(KNOWN_TEMPLATES[normalizedTitle])}`;
   }
   
-  // Generate slug and use main pattern
+  // Generate slug and use pattern based on words in the title
   const slug = titleToSlug(title);
   
-  // First try common pattern with websitedemos.net
-  const targetUrl = `${URL_PATTERNS.websiteDemos}${slug}-02/`;
+  // For template titles with "template" in them, try removing that
+  const cleanSlug = slug.replace(/-template$/, '');
+  
+  // Try both patterns with the -02 suffix which is more common
+  const targetUrl = `${URL_PATTERNS.websiteDemos}${cleanSlug}-02/`;
   
   // Return the URL through our proxy
   return `/api/template-proxy?url=${encodeURIComponent(targetUrl)}`;
@@ -149,7 +131,14 @@ export function openTemplateInNewTab(title: string, demoUrl?: string | null): vo
   
   if (!title) return;
   
-  // Check known templates first
+  // First check if we have a direct mapping using the comprehensive URL map
+  const mappedUrl = getWorkingTemplateUrl(title, '');
+  if (mappedUrl) {
+    window.open(mappedUrl, '_blank');
+    return;
+  }
+  
+  // Check known templates as fallback
   const normalizedTitle = title.toLowerCase().trim();
   if (KNOWN_TEMPLATES[normalizedTitle]) {
     window.open(KNOWN_TEMPLATES[normalizedTitle], '_blank');
@@ -157,7 +146,9 @@ export function openTemplateInNewTab(title: string, demoUrl?: string | null): vo
   }
   
   const slug = titleToSlug(title);
-  const targetUrl = `${URL_PATTERNS.websiteDemos}${slug}-02/`;
+  // For template titles with "template" in them, try removing that
+  const cleanSlug = slug.replace(/-template$/, '');
+  const targetUrl = `${URL_PATTERNS.websiteDemos}${cleanSlug}-02/`;
   
   window.open(targetUrl, '_blank');
 }
