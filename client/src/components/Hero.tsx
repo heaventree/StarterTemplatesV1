@@ -84,7 +84,7 @@ export default function Hero() {
           </h1>
           
           <p className="text-lg md:text-xl text-white/90 mb-10 max-w-3xl mx-auto">
-            Build a stunning website in minutes with Starter Templates. Choose from {templates.length}+ ready-to-use website templates and blocks.
+            Choose from <span className="text-white font-semibold">{templates.length}+</span> ready-to-use website templates.
           </p>
           
           {/* AI Recommendation Text Area - Lovable Style */}
