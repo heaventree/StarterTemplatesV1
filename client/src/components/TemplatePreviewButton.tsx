@@ -157,102 +157,75 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* Enhanced template preview - showing template image in full-screen with info */}
-          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : 'bg-gray-100'}`}>
+          {/* Direct iframe embed to the demo URL with loading state */}
+          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
-              <div className="fixed top-[48px] left-0 w-full h-[calc(100vh-48px)] bg-gray-100 flex flex-col items-center justify-center">
-                <div className="max-w-6xl w-full h-full p-8 overflow-auto">
-                  <div className="bg-white rounded-xl shadow-xl overflow-hidden">
-                    {/* Large template image */}
-                    <div className="relative w-full aspect-video bg-gray-900 overflow-hidden">
-                      <img 
-                        src={template.imageUrl || ''} 
-                        alt={template.title}
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          // Fallback if image doesn't load
-                          const target = e.target as HTMLImageElement;
-                          target.src = '/images/templates-cta-img-scaled.webp'; 
-                        }}
-                      />
-                    </div>
-                    
-                    {/* Template details */}
-                    <div className="p-8">
-                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{template.title}</h2>
-                      
-                      <div className="grid sm:grid-cols-2 gap-6 mb-8">
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2 text-gray-800">Template Details</h3>
-                          <div className="space-y-2">
-                            <div className="flex items-center">
-                              <span className="text-gray-500 w-32">Category:</span>
-                              <span className="text-gray-900 font-medium">{template.category}</span>
-                            </div>
-                            <div className="flex items-center">
-                              <span className="text-gray-500 w-32">Page Builder:</span>
-                              <span className="text-gray-900 font-medium">{template.pageBuilder}</span>
-                            </div>
-                            <div className="flex items-center">
-                              <span className="text-gray-500 w-32">License:</span>
-                              <span className="text-gray-900 font-medium">{template.isPro ? 'Premium' : 'Free'}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h3 className="text-lg font-semibold mb-2 text-gray-800">Features</h3>
-                          <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                            <li>Fully responsive design</li>
-                            <li>SEO optimized</li>
-                            <li>Customizable sections</li>
-                            <li>Browser compatibility</li>
-                            <li>Modern and clean design</li>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                      <div className="p-4 bg-blue-50 rounded-lg mb-6">
-                        <p className="text-blue-700">
-                          <strong>Note:</strong> External template previews are temporarily unavailable. 
-                          We're working on a solution to allow seamless integration of template previews within our platform.
-                        </p>
-                      </div>
-                      
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {template.tags?.map((tag, i) => (
-                          <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+              <div className="fixed top-[48px] left-0 w-full h-[calc(100vh-48px)]">
+                {/* Show warning if template doesn't have a demo URL */}
+                {!template.demoUrl ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100 p-8">
+                    <div className="max-w-2xl text-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-amber-500 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                      </svg>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">Preview Unavailable</h2>
+                      <p className="text-gray-600 mb-6">
+                        A live preview is not available for this template. Please use the "More Info" button below to see 
+                        details about this template.
+                      </p>
+                      <Button 
+                        onClick={() => setShowInfoModal(true)}
+                        className="bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white"
+                      >
+                        Template Details
+                      </Button>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <>
+                    {/* Loading indicator */}
+                    <div className="absolute inset-0 z-10 bg-white flex flex-col items-center justify-center transition-opacity duration-500" 
+                         style={{ opacity: 1 }}>
+                      <div className="w-10 h-10 border-4 border-[#dd4f93] border-t-transparent rounded-full animate-spin mb-4"></div>
+                      <p className="text-gray-600">Loading template preview...</p>
+                    </div>
+                    
+                    {/* Actual iframe */}
+                    <iframe
+                      src={template.demoUrl}
+                      className="w-full h-full border-0"
+                      title={`${template.title} preview`}
+                      onLoad={(e) => {
+                        // Hide loading indicator when iframe loads
+                        const loadingEl = e.currentTarget.previousSibling as HTMLElement;
+                        if (loadingEl) {
+                          loadingEl.style.opacity = '0';
+                          setTimeout(() => {
+                            loadingEl.style.display = 'none';
+                          }, 500);
+                        }
+                      }}
+                    />
+                  </>
+                )}
               </div>
             ) : (
-              <div style={getDeviceStyles()} className="bg-white overflow-auto">
-                <div className="relative w-full aspect-video bg-gray-900 overflow-hidden">
-                  <img 
-                    src={template.imageUrl || ''} 
-                    alt={template.title}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      // Fallback if image doesn't load
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/images/templates-cta-img-scaled.webp'; 
-                    }}
+              <div style={getDeviceStyles()} className="bg-white overflow-hidden">
+                {!template.demoUrl ? (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-4 text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-amber-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    <h3 className="text-sm font-medium mb-1">Preview Unavailable</h3>
+                    <p className="text-xs text-gray-600">Details in "More Info"</p>
+                  </div>
+                ) : (
+                  <iframe
+                    src={template.demoUrl}
+                    className="w-full h-full border-0"
+                    title={`${template.title} preview - ${DEVICE_PRESETS[deviceView].label}`}
                   />
-                </div>
-                <div className="p-4">
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">{template.title}</h3>
-                  <p className="text-gray-500 text-sm mb-2">
-                    {template.pageBuilder} • {template.category}
-                  </p>
-                  <p className="text-xs text-gray-700 mb-3">
-                    Preview mode: {DEVICE_PRESETS[deviceView].label}
-                  </p>
-                </div>
+                )}
               </div>
             )}
           </div>
@@ -286,7 +259,10 @@ export default function TemplatePreviewButton({
         open={showInfoModal} 
         onOpenChange={(open) => setShowInfoModal(open)}
       >
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg" aria-describedby="template-info-description">
+          <div id="template-info-description" className="sr-only">
+            Detailed information about the {template.title} template including features, compatibility, and specifications.
+          </div>
           <DialogTitle className="text-2xl font-bold text-gray-900">
             {template.title} Details
           </DialogTitle>
