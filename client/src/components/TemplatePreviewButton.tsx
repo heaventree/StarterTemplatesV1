@@ -9,6 +9,8 @@ interface TemplatePreviewButtonProps {
   template: Template;
   buttonText?: string;
   showText?: boolean;
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 // Device presets for responsive viewing
@@ -21,11 +23,23 @@ const DEVICE_PRESETS = {
 export default function TemplatePreviewButton({ 
   template, 
   buttonText = "Preview", 
-  showText = true 
+  showText = true,
+  isOpen: externalIsOpen,
+  onOpenChange: externalOnOpenChange
 }: TemplatePreviewButtonProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
   const [deviceView, setDeviceView] = useState<keyof typeof DEVICE_PRESETS>('desktop');
   const [showInfoModal, setShowInfoModal] = useState(false);
+  
+  // Use external state if provided, otherwise use internal state
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+  const setIsOpen = (open: boolean) => {
+    if (externalOnOpenChange) {
+      externalOnOpenChange(open);
+    } else {
+      setInternalIsOpen(open);
+    }
+  };
   
   // Track template viewing for recommendation engine
   useEffect(() => {
