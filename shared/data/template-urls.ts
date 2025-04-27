@@ -2,14 +2,13 @@
  * Reliable mapping of template URLs based on template name
  * This ensures consistent behavior for template previews
  * 
- * All URLs follow the consistent pattern:
- * https://websitedemos.net/template-name-02/
+ * IMPORTANT: URLs come directly from the original site and don't follow a consistent pattern
+ * Some end with -02, some with -04, etc. based on the actual live site.
  */
 
 // Map of template names to their VERIFIED working demo URLs
-// These have been individually tested to ensure they work
+// These have been extracted from the original site
 export const TEMPLATE_URLS: Record<string, string> = {
-  // Most templates follow the standard -02 suffix pattern
   "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
   "Wedding": "https://websitedemos.net/wedding-02/",
   "Accountant": "https://websitedemos.net/accountant-02/",
@@ -56,17 +55,21 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Brand Store": "https://websitedemos.net/brandstore-02/",
   "Main Spa": "https://websitedemos.net/main-spa-02/",
   "Mountain": "https://websitedemos.net/mountain-02/",
-  "Electronic Store": "https://websitedemos.net/electronic-store-02/",
-  "Movie": "https://websitedemos.net/movie-02/",
-  "Watch Shop": "https://websitedemos.net/watch-shop-02/",
-  "Fashion Photography": "https://websitedemos.net/fashion-photography-02/",
-  "Aquarium": "https://websitedemos.net/aquarium-02/",
-  "BBQ Food Truck": "https://websitedemos.net/bbq-food-truck-02/", 
-  "Bike Modification": "https://websitedemos.net/bike-modification-02/",
-  "Bizpulse": "https://websitedemos.net/bizpulse-02/",
+  
+  // Templates with -04 suffix
+  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
+  "Movie": "https://websitedemos.net/movie-04/",
+  "Watch Shop": "https://websitedemos.net/watch-shop-04/",
+  "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
+  "Aquarium": "https://websitedemos.net/aquarium-04/",
+  "BBQ Food Truck": "https://websitedemos.net/bbq-food-truck-04/",
+  
+  // Templates with special URL formats
   "Love Nature": "https://websitedemos.net/love-nature-02/",
   "Adventure": "https://websitedemos.net/outdoor-adventure-02/",
-  "Alexandrina": "https://websitedemos.net/alexandrina-designer-02/",
+  "Alexandrina": "https://websitedemos.net/alexandrina-designer-bio-02/",
+  "Bike Modification": "https://websitedemos.net/bike-modification-02/",
+  "Bizpulse": "https://websitedemos.net/bizpulse-02/",
 };
 
 // Map of template names to their image filenames 
