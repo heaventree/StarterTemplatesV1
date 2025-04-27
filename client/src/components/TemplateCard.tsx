@@ -6,9 +6,9 @@ interface TemplateCardProps {
 }
 
 export default function TemplateCard({ template }: TemplateCardProps) {
-  // Helper function to normalize image paths
+  // Helper function to normalize image paths and avoid random thumbnails
   const getImagePath = (path: string): string => {
-    if (!path) return '/images/templates-cta-img-scaled.webp';
+    if (!path) return '/images/template-fallback.jpg';
     
     // If it's already a full path or external URL, return as is
     if (path.startsWith('http')) return path;
@@ -16,6 +16,20 @@ export default function TemplateCard({ template }: TemplateCardProps) {
     // Fix attached_assets path to use /images/ instead
     if (path.includes('attached_assets/images/')) {
       return path.replace('attached_assets/images/', 'images/');
+    }
+
+    // Ensure the image path is consistent for each specific template
+    // This prevents random thumbnails from appearing
+    const templateId = template.id || 0;
+    const seed = templateId % 12; // Deterministic selection from 12 possible fallbacks
+    
+    // If path starts with a slash, it's a relative path from the public folder
+    if (path.startsWith('/')) {
+      // Check if it's just a placeholder like "/images/placeholder.jpg"
+      if (path.includes('placeholder') || path.length < 15) {
+        return `/images/template-${seed}.jpg`;
+      }
+      return path;
     }
     
     return path;
@@ -54,9 +68,16 @@ export default function TemplateCard({ template }: TemplateCardProps) {
             alt={template.title} 
             className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {
-              // Fallback if image doesn't load
+              // Fallback if image doesn't load - use a consistent fallback based on template ID
               const target = e.target as HTMLImageElement;
-              target.src = '/images/templates-cta-img-scaled.webp'; 
+              const templateId = template.id || 0;
+              const seed = templateId % 12; // Ensure consistent thumbnail per template
+              target.src = `/images/template-${seed}.jpg`;
+              // If that also fails, use the final fallback
+              target.onerror = () => { 
+                target.src = '/images/templates-cta-img-scaled.webp';
+                target.onerror = null; // Prevent infinite loop
+              };
             }}
           />
         </a>
