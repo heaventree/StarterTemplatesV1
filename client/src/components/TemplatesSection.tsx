@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import TemplateCard from "@/components/TemplateCard";
 import { categories } from "@/lib/data";
@@ -10,7 +10,8 @@ export default function TemplatesSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredTemplates, setFilteredTemplates] = useState<Template[]>([]);
   const [displayCount, setDisplayCount] = useState(12); // Initial display count
-  const [showViewMore, setShowViewMore] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const observerTarget = useRef<HTMLDivElement>(null);
   
   // AI recommendation states
   const [showRecommended, setShowRecommended] = useState(false);
@@ -21,6 +22,7 @@ export default function TemplatesSection() {
     queryKey: ["/api/templates"]
   });
 
+  // Filter templates when criteria change
   useEffect(() => {
     if (templates && templates.length > 0) {
       let filtered = [...templates];
@@ -47,21 +49,44 @@ export default function TemplatesSection() {
       
       // Reset display count when filters change
       setDisplayCount(12);
-      // Update view more button visibility
-      setShowViewMore(filtered.length > 12);
     }
   }, [templates, activeCategory, searchTerm]);
 
-  const handleViewMore = () => {
-    // Increase display count by 14 (as suggested)
-    const newCount = Math.min(displayCount + 14, filteredTemplates.length);
-    setDisplayCount(newCount);
+  // Load more templates when scrolling
+  const loadMoreTemplates = useCallback(() => {
+    if (loading || displayCount >= filteredTemplates.length) return;
     
-    // Hide button if all templates are displayed
-    if (newCount >= filteredTemplates.length) {
-      setShowViewMore(false);
+    setLoading(true);
+    setTimeout(() => {
+      setDisplayCount(prevCount => {
+        const newCount = Math.min(prevCount + 12, filteredTemplates.length);
+        return newCount;
+      });
+      setLoading(false);
+    }, 500); // Short timeout to prevent multiple rapid loads
+  }, [displayCount, filteredTemplates.length, loading]);
+
+  // Setup intersection observer for infinite scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting && !loading && displayCount < filteredTemplates.length) {
+          loadMoreTemplates();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    
+    if (observerTarget.current) {
+      observer.observe(observerTarget.current);
     }
-  };
+    
+    return () => {
+      if (observerTarget.current) {
+        observer.unobserve(observerTarget.current);
+      }
+    };
+  }, [displayCount, filteredTemplates.length, loadMoreTemplates, loading]);
   
   // Listen for AI recommendation events from Hero component
   useEffect(() => {
@@ -77,9 +102,8 @@ export default function TemplatesSection() {
       setActiveCategory("all");
       setSearchTerm("");
       
-      // Reset display count and show more button
+      // Reset display count
       setDisplayCount(12);
-      setShowViewMore(recommendations.length > 12);
     };
     
     // Add event listener
@@ -195,18 +219,21 @@ export default function TemplatesSection() {
           </>
         )}
         
-        {/* View More Button */}
-        {showViewMore && !isLoading && (
-          <div className="mt-12 text-center">
-            <button 
-              onClick={handleViewMore}
-              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white font-proxima-bold py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg"
-            >
-              VIEW ALL TEMPLATES
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+        {/* Loading indicator and intersection observer target */}
+        {!isLoading && displayCount < filteredTemplates.length && (
+          <div 
+            ref={observerTarget} 
+            className="mt-12 text-center py-8"
+          >
+            {loading ? (
+              <div className="inline-flex items-center justify-center space-x-2">
+                <div className="h-4 w-4 bg-[#dd4f93] rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="h-4 w-4 bg-[#8c21a1] rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="h-4 w-4 bg-[#dd4f93] rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            ) : (
+              <span className="text-gray-400">Scroll for more templates</span>
+            )}
           </div>
         )}
       </div>

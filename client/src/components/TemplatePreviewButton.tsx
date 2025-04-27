@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Template } from '@shared/schema';
-import { Eye, X, Monitor, Tablet, Smartphone } from 'lucide-react';
+import { Eye, X, Monitor, Tablet, Smartphone, ExternalLink } from 'lucide-react';
 import { trackTemplateView, endTemplateView, trackCategoryView, trackPageBuilderView } from '@/services/recommendationEngine';
+import { getTemplateUrl } from '@shared/data/template-urls';
 
 interface TemplatePreviewButtonProps {
   template: Template;
@@ -157,11 +158,11 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* Direct template preview with iframe pointing to original source */}
+          {/* Template preview with iframe using our proxy endpoint */}
           <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
             {deviceView === 'desktop' ? (
               <iframe
-                src={template.demoUrl || ''}
+                src={template.demoUrl ? `/api/template-proxy?url=${encodeURIComponent(template.demoUrl)}` : getTemplateUrl(template.title)}
                 className="w-full absolute"
                 style={{ 
                   position: 'fixed',
@@ -177,14 +178,16 @@ export default function TemplatePreviewButton({
                 }}
                 title={`${template.title} preview`}
                 sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                onError={(e) => console.error("Iframe error:", e)}
               />
             ) : (
               <div style={getDeviceStyles()}>
                 <iframe
-                  src={template.demoUrl || ''}
+                  src={template.demoUrl ? `/api/template-proxy?url=${encodeURIComponent(template.demoUrl)}` : getTemplateUrl(template.title)}
                   className="w-full h-full"
                   title={`${template.title} preview`}
                   sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                  onError={(e) => console.error("Iframe error:", e)}
                 />
               </div>
             )}
