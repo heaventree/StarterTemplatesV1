@@ -6,9 +6,14 @@ interface TemplateCardProps {
 }
 
 export default function TemplateCard({ template }: TemplateCardProps) {
-  // Helper function to normalize image paths and avoid random thumbnails
+  // Helper function to normalize image paths and ensure consistent thumbnails
   const getImagePath = (path: string): string => {
-    if (!path) return '/images/template-fallback.jpg';
+    // Initial null check
+    if (!path) {
+      // Choose a specific fallback image from our list of thumbnails based on template ID
+      const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+      return `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+    }
     
     // If it's already a full path or external URL, return as is
     if (path.startsWith('http')) return path;
@@ -17,22 +22,22 @@ export default function TemplateCard({ template }: TemplateCardProps) {
     if (path.includes('attached_assets/images/')) {
       return path.replace('attached_assets/images/', 'images/');
     }
-
-    // Ensure the image path is consistent for each specific template
-    // This prevents random thumbnails from appearing
-    const templateId = template.id || 0;
-    const seed = templateId % 12; // Deterministic selection from 12 possible fallbacks
+    
+    // Handle bad image paths - if the path is too short or just a placeholder
+    if (path.length < 15 || path.includes('placeholder')) {
+      // Use a specific template image based on the template ID
+      // This ensures each template always gets the same fallback image
+      const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+      return `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+    }
     
     // If path starts with a slash, it's a relative path from the public folder
     if (path.startsWith('/')) {
-      // Check if it's just a placeholder like "/images/placeholder.jpg"
-      if (path.includes('placeholder') || path.length < 15) {
-        return `/images/template-${seed}.jpg`;
-      }
       return path;
     }
     
-    return path;
+    // Add leading slash if missing
+    return path.startsWith('/') ? path : `/${path}`;
   };
 
   // Get page builder color
@@ -68,12 +73,12 @@ export default function TemplateCard({ template }: TemplateCardProps) {
             alt={template.title} 
             className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {
-              // Fallback if image doesn't load - use a consistent fallback based on template ID
+              // Fallback if image doesn't load - use a consistent thumbnail based on template ID
               const target = e.target as HTMLImageElement;
-              const templateId = template.id || 0;
-              const seed = templateId % 12; // Ensure consistent thumbnail per template
-              target.src = `/images/template-${seed}.jpg`;
-              // If that also fails, use the final fallback
+              const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+              target.src = `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+              
+              // If that also fails, use a general fallback
               target.onerror = () => { 
                 target.src = '/images/templates-cta-img-scaled.webp';
                 target.onerror = null; // Prevent infinite loop
