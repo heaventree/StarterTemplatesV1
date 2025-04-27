@@ -87,42 +87,77 @@ export default function Hero() {
             Choose from <span className="text-white font-semibold">{templates.length}+</span> ready-to-use website templates.
           </p>
           
-          {/* AI Recommendation Text Area - Exactly as shown in screenshot */}
+          {/* AI Recommendation Text Area - Stunning Modern Design */}
           <div className="max-w-3xl mx-auto mb-10">
-            <div className="rounded-lg overflow-hidden">
-              <textarea 
-                ref={promptInputRef}
-                placeholder="Describe your business or the website you want to build..." 
-                className="w-full resize-none p-5 min-h-[80px] bg-white/95 text-gray-700 placeholder-gray-500 focus:outline-none"
-                rows={2}
-                value={userPrompt}
-                onChange={(e) => setUserPrompt(e.target.value)}
-              />
-              <div className="flex justify-between items-center px-5 py-3" style={{ backgroundColor: 'rgba(156, 39, 176, 0.8)' }}>
-                <div className="text-white/90 text-sm">AI-powered recommendations</div>
+            <div className="rounded-xl overflow-hidden shadow-[0_10px_25px_-5px_rgba(0,0,0,0.3)] backdrop-blur-lg border border-white/20">
+              <div className="relative">
+                <textarea 
+                  ref={promptInputRef}
+                  placeholder="Describe your business or the website you want to build..." 
+                  className="w-full resize-none p-6 min-h-[90px] bg-white/95 text-gray-700 placeholder-gray-500 focus:outline-none font-medium text-base"
+                  rows={2}
+                  value={userPrompt}
+                  onChange={(e) => setUserPrompt(e.target.value)}
+                />
+                {userPrompt.length > 0 && (
+                  <button 
+                    onClick={() => setUserPrompt("")}
+                    className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 bg-white/80 rounded-full p-1"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                )}
+              </div>
+              <div 
+                className="flex justify-between items-center px-6 py-4" 
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(221, 79, 147, 0.9) 0%, rgba(140, 33, 161, 0.9) 100%)' 
+                }}
+              >
+                <div className="flex items-center text-white text-sm font-medium">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M9.493 2.853a1 1 0 00-1.986 0A5.5 5.5 0 003.5 8a1 1 0 00.5.866V17a1 1 0 001 1h10a1 1 0 001-1V8.866A1 1 0 0016.5 8a5.5 5.5 0 00-4.007-5.147zM12 18H8v-5h4v5zm1-6H7v-2h6v2z" clipRule="evenodd" />
+                  </svg>
+                  AI-powered recommendations
+                </div>
                 <button 
-                  className="bg-white hover:bg-gray-50 text-[#9c27b0] font-proxima-bold py-2 px-8 rounded-full transition-all"
+                  className="bg-white hover:bg-gray-50 text-[#8c21a1] hover:text-[#dd4f93] font-proxima-bold py-2.5 px-8 rounded-full transition-all transform hover:scale-105 hover:shadow-lg"
                   onClick={handleFindTemplates}
                   disabled={isRecommending || !userPrompt?.trim()}
                 >
-                  {isRecommending ? 'Finding...' : 'Find Templates'}
+                  {isRecommending ? (
+                    <span className="flex items-center">
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[#8c21a1]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Finding...
+                    </span>
+                  ) : (
+                    'Find Templates'
+                  )}
                 </button>
               </div>
             </div>
             
-            {/* Popular Template Categories - Exactly as shown in screenshot */}
-            <div className="flex items-center justify-center gap-4 mt-5">
-              <span className="text-sm font-medium text-white">Popular themes:</span>
-              <div className="flex items-center space-x-3 overflow-x-auto">
-                {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
-                  <button
-                    key={category}
-                    className="px-6 py-2 whitespace-nowrap rounded-full font-proxima-bold transition-colors text-white bg-[rgba(156,39,176,0.4)] hover:bg-[rgba(156,39,176,0.6)]"
-                    onClick={() => handleCategorySelect(category)}
-                  >
-                    {category}
-                  </button>
-                ))}
+            {/* Popular Template Categories */}
+            <div className="mt-6 flex flex-col items-center">
+              <div className="inline-flex items-center bg-white/10 backdrop-blur-md rounded-full px-4 py-1 border border-white/20 mb-3">
+                <span className="text-sm font-medium text-white mr-3">Popular themes:</span>
+                <div className="h-4 w-px bg-white/30 mr-3"></div>
+                <div className="flex items-center gap-x-3">
+                  {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
+                    <button
+                      key={category}
+                      className="px-3 py-1 text-sm whitespace-nowrap rounded-full font-proxima-bold transition-all transform duration-200 text-white hover:text-[#dd4f93] hover:scale-110 hover:bg-white/10"
+                      onClick={() => handleCategorySelect(category)}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
