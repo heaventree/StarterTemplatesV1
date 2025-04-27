@@ -2,16 +2,14 @@
  * Reliable mapping of template URLs based on template name
  * This ensures consistent behavior for template previews
  * 
- * IMPORTANT: We've discovered that templates fall into THREE different URL patterns:
- * 1. https://websitedemos.net/template-name-02/ (most common)
- * 2. https://websitedemos.net/astra-site/template-name/ (redirected "newer" templates)
- * 3. https://websitedemos.net/template-name-04/ (less common variant)
+ * All URLs follow the consistent pattern:
+ * https://websitedemos.net/template-name-02/
  */
 
 // Map of template names to their VERIFIED working demo URLs
 // These have been individually tested to ensure they work
 export const TEMPLATE_URLS: Record<string, string> = {
-  // GROUP 1: Regular templates with standard -02 suffix pattern
+  // Most templates follow the standard -02 suffix pattern
   "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
   "Wedding": "https://websitedemos.net/wedding-02/",
   "Accountant": "https://websitedemos.net/accountant-02/",
@@ -58,21 +56,17 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Brand Store": "https://websitedemos.net/brandstore-02/",
   "Main Spa": "https://websitedemos.net/main-spa-02/",
   "Mountain": "https://websitedemos.net/mountain-02/",
-  
-  // GROUP 2: Templates with -04 suffix (less common)
-  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
-  "Movie": "https://websitedemos.net/movie-04/",
-  "Watch Shop": "https://websitedemos.net/watch-shop-04/",
-  "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
-  "Aquarium": "https://websitedemos.net/aquarium-04/",
-  
-  // GROUP 3: Templates that redirect to /astra-site/ subdirectory
-  // These must use the final redirect destination or they won't work
-  "BBQ Food Truck": "https://websitedemos.net/astra-site/bbq-food-truck/",
-  "Bike Modification": "https://websitedemos.net/astra-site/bike-modification/",
-  "Bizpulse": "https://websitedemos.net/astra-site/bizpulse/",
-  "Love Nature": "https://websitedemos.net/astra-site/love-nature/",
-  "Adventure": "https://websitedemos.net/astra-site/outdoor-adventure/",
+  "Electronic Store": "https://websitedemos.net/electronic-store-02/",
+  "Movie": "https://websitedemos.net/movie-02/",
+  "Watch Shop": "https://websitedemos.net/watch-shop-02/",
+  "Fashion Photography": "https://websitedemos.net/fashion-photography-02/",
+  "Aquarium": "https://websitedemos.net/aquarium-02/",
+  "BBQ Food Truck": "https://websitedemos.net/bbq-food-truck-02/", 
+  "Bike Modification": "https://websitedemos.net/bike-modification-02/",
+  "Bizpulse": "https://websitedemos.net/bizpulse-02/",
+  "Love Nature": "https://websitedemos.net/love-nature-02/",
+  "Adventure": "https://websitedemos.net/outdoor-adventure-02/",
+  "Alexandrina": "https://websitedemos.net/alexandrina-designer-02/",
 };
 
 // Map of template names to their image filenames 
