@@ -14,6 +14,13 @@ const COMMON_TEMPLATE_SUFFIXES = [
   '-04',  // No trailing slash version
   '/index.html', // Explicit index
 ];
+
+// Template sites can be in various subdirectories
+const TEMPLATE_SITE_PATTERNS = [
+  'https://websitedemos.net/{name}{suffix}',
+  'https://websitedemos.net/astra-site/{name}/',
+  'https://websitedemos.net/templates/{name}{suffix}',
+];
 const URL_CACHE = new Map<string, string>();
 
 /**
@@ -75,22 +82,56 @@ export async function templateProxy(req: Request, res: Response) {
       }
     }
     
-    // If that doesn't work, try replacing the base URL with a known pattern
+    // If that doesn't work, try ALL known URL patterns for the template
     const templateName = urlBase.split('/').pop();
+    
     if (templateName) {
-      // Try with "astra-site" subdirectory which sometimes works
-      const astraUrl = `https://websitedemos.net/astra-site/${templateName}/`;
-      if (astraUrl !== targetUrl) {
-        console.log(`Trying alternate URL: ${astraUrl}`);
-        try {
-          const success = await proxyRequest(astraUrl, req, res);
-          if (success) {
-            // Cache this successful URL
-            URL_CACHE.set(cacheKey, astraUrl);
-            return;
+      // Try all known template site patterns with all known suffixes
+      for (const pattern of TEMPLATE_SITE_PATTERNS) {
+        if (res.headersSent) break;
+        
+        // For the templates pattern (without suffix), we need to try all suffixes
+        if (pattern.includes('{suffix}')) {
+          for (const suffix of COMMON_TEMPLATE_SUFFIXES) {
+            if (res.headersSent) break;
+            
+            const alternateUrl = pattern
+              .replace('{name}', templateName)
+              .replace('{suffix}', suffix);
+              
+            // Skip if it's the same as the original URL or already tried
+            if (alternateUrl === targetUrl) continue;
+            
+            console.log(`Trying pattern URL: ${alternateUrl}`);
+            try {
+              const success = await proxyRequest(alternateUrl, req, res);
+              if (success) {
+                // Cache this successful URL
+                URL_CACHE.set(cacheKey, alternateUrl);
+                return;
+              }
+            } catch (error) {
+              console.error(`Error with pattern URL: ${alternateUrl}`, error);
+            }
           }
-        } catch (error) {
-          console.error(`Error with alternate URL: ${astraUrl}`, error);
+        } else {
+          // Pattern doesn't have suffix placeholder (like astra-site)
+          const alternateUrl = pattern.replace('{name}', templateName);
+          
+          // Skip if it's the same as the original URL
+          if (alternateUrl === targetUrl) continue;
+          
+          console.log(`Trying pattern URL: ${alternateUrl}`);
+          try {
+            const success = await proxyRequest(alternateUrl, req, res);
+            if (success) {
+              // Cache this successful URL
+              URL_CACHE.set(cacheKey, alternateUrl);
+              return;
+            }
+          } catch (error) {
+            console.error(`Error with pattern URL: ${alternateUrl}`, error);
+          }
         }
       }
     }

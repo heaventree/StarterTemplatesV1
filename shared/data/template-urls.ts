@@ -1,13 +1,17 @@
 /**
  * Reliable mapping of template URLs based on template name
  * This ensures consistent behavior for template previews
+ * 
+ * IMPORTANT: We've discovered that templates fall into THREE different URL patterns:
+ * 1. https://websitedemos.net/template-name-02/ (most common)
+ * 2. https://websitedemos.net/astra-site/template-name/ (redirected "newer" templates)
+ * 3. https://websitedemos.net/template-name-04/ (less common variant)
  */
 
-// Map of template names to their working demo URLs with verified patterns
-// Key format is standard
+// Map of template names to their VERIFIED working demo URLs
+// These have been individually tested to ensure they work
 export const TEMPLATE_URLS: Record<string, string> = {
-  // Patterns verified working with -02 suffix
-  "Love Nature": "https://websitedemos.net/love-nature-02/",
+  // GROUP 1: Regular templates with standard -02 suffix pattern
   "Yoga Instructor": "https://websitedemos.net/yoga-instructor-02/",
   "Wedding": "https://websitedemos.net/wedding-02/",
   "Accountant": "https://websitedemos.net/accountant-02/",
@@ -41,7 +45,6 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Real Estate": "https://websitedemos.net/real-estate-02/",
   "Local Business": "https://websitedemos.net/local-business-02/",
   "Coffee Shop": "https://websitedemos.net/coffee-shop-02/",
-  "Adventure": "https://websitedemos.net/outdoor-adventure-02/",
   "Interior Design": "https://websitedemos.net/interior-design-02/",
   "Resume": "https://websitedemos.net/resume-02/",
   "Cleaning": "https://websitedemos.net/cleaning-services-02/",
@@ -51,24 +54,26 @@ export const TEMPLATE_URLS: Record<string, string> = {
   "Locksmith": "https://websitedemos.net/locksmith-02/",
   "Art Gallery": "https://websitedemos.net/art-gallery-02/",
   "Pet Care": "https://websitedemos.net/pet-care-02/",
-  
-  // Patterns verified working with -04 suffix
-  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
-  "Movie": "https://websitedemos.net/movie-04/",
-  "Watch Shop": "https://websitedemos.net/watch-shop-04/",
-  
-  // Other common templates
+  "Earth": "https://websitedemos.net/earth-02/",
+  "Brand Store": "https://websitedemos.net/brandstore-02/",
   "Main Spa": "https://websitedemos.net/main-spa-02/",
   "Mountain": "https://websitedemos.net/mountain-02/",
   
-  // Problematic templates with alternative URL formats
-  "Aquarium": "https://websitedemos.net/aquarium/", // Note: -02 suffix doesn't work
+  // GROUP 2: Templates with -04 suffix (less common)
+  "Electronic Store": "https://websitedemos.net/electronic-store-04/",
+  "Movie": "https://websitedemos.net/movie-04/",
+  "Watch Shop": "https://websitedemos.net/watch-shop-04/",
   "Fashion Photography": "https://websitedemos.net/fashion-photography-04/",
-  "Alexandrina": "https://websitedemos.net/alexandrina-designer/",
-  "Earth": "https://websitedemos.net/earth-02/",
-  "Brand Store": "https://websitedemos.net/brandstore-02/",
-  "Bike Modification": "https://websitedemos.net/bike-modification/",
-  "Bizpulse": "https://websitedemos.net/bizpulse/",
+  
+  // GROUP 3: Templates that redirect to /astra-site/ subdirectory
+  // These must use the final redirect destination or they won't work
+  "Aquarium": "https://websitedemos.net/astra-site/aquarium/",
+  "BBQ Food Truck": "https://websitedemos.net/astra-site/bbq-food-truck/",
+  "Alexandrina": "https://websitedemos.net/astra-site/alexandrina-designer/",
+  "Bike Modification": "https://websitedemos.net/astra-site/bike-modification/",
+  "Bizpulse": "https://websitedemos.net/astra-site/bizpulse/",
+  "Love Nature": "https://websitedemos.net/astra-site/love-nature/",
+  "Adventure": "https://websitedemos.net/astra-site/outdoor-adventure/",
 };
 
 // Map of template names to their image filenames 
