@@ -157,35 +157,102 @@ export default function TemplatePreviewButton({
             </div>
           </div>
 
-          {/* Direct template preview with iframe pointing to original source */}
-          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : ''}`}>
+          {/* Enhanced template preview - showing template image in full-screen with info */}
+          <div className={`w-full h-full ${deviceView !== 'desktop' ? 'pt-12 flex items-center justify-center bg-gray-800' : 'bg-gray-100'}`}>
             {deviceView === 'desktop' ? (
-              <iframe
-                src={template.demoUrl || ''}
-                className="w-full absolute"
-                style={{ 
-                  position: 'fixed',
-                  top: '48px', /* Height of the header (12*4=48px) */
-                  left: 0,
-                  width: '100%',
-                  height: 'calc(100vh - 48px)', /* Viewport height minus header height */
-                  border: 'none',
-                  margin: 0,
-                  padding: 0,
-                  overflow: 'hidden',
-                  zIndex: 1
-                }}
-                title={`${template.title} preview`}
-                sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-              />
+              <div className="fixed top-[48px] left-0 w-full h-[calc(100vh-48px)] bg-gray-100 flex flex-col items-center justify-center">
+                <div className="max-w-6xl w-full h-full p-8 overflow-auto">
+                  <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+                    {/* Large template image */}
+                    <div className="relative w-full aspect-video bg-gray-900 overflow-hidden">
+                      <img 
+                        src={template.imageUrl || ''} 
+                        alt={template.title}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          // Fallback if image doesn't load
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/images/templates-cta-img-scaled.webp'; 
+                        }}
+                      />
+                    </div>
+                    
+                    {/* Template details */}
+                    <div className="p-8">
+                      <h2 className="text-2xl font-bold text-gray-900 mb-3">{template.title}</h2>
+                      
+                      <div className="grid sm:grid-cols-2 gap-6 mb-8">
+                        <div>
+                          <h3 className="text-lg font-semibold mb-2 text-gray-800">Template Details</h3>
+                          <div className="space-y-2">
+                            <div className="flex items-center">
+                              <span className="text-gray-500 w-32">Category:</span>
+                              <span className="text-gray-900 font-medium">{template.category}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="text-gray-500 w-32">Page Builder:</span>
+                              <span className="text-gray-900 font-medium">{template.pageBuilder}</span>
+                            </div>
+                            <div className="flex items-center">
+                              <span className="text-gray-500 w-32">License:</span>
+                              <span className="text-gray-900 font-medium">{template.isPro ? 'Premium' : 'Free'}</span>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <h3 className="text-lg font-semibold mb-2 text-gray-800">Features</h3>
+                          <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                            <li>Fully responsive design</li>
+                            <li>SEO optimized</li>
+                            <li>Customizable sections</li>
+                            <li>Browser compatibility</li>
+                            <li>Modern and clean design</li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 bg-blue-50 rounded-lg mb-6">
+                        <p className="text-blue-700">
+                          <strong>Note:</strong> External template previews are temporarily unavailable. 
+                          We're working on a solution to allow seamless integration of template previews within our platform.
+                        </p>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {template.tags?.map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ) : (
-              <div style={getDeviceStyles()}>
-                <iframe
-                  src={template.demoUrl || ''}
-                  className="w-full h-full"
-                  title={`${template.title} preview`}
-                  sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-                />
+              <div style={getDeviceStyles()} className="bg-white overflow-auto">
+                <div className="relative w-full aspect-video bg-gray-900 overflow-hidden">
+                  <img 
+                    src={template.imageUrl || ''} 
+                    alt={template.title}
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      // Fallback if image doesn't load
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/images/templates-cta-img-scaled.webp'; 
+                    }}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">{template.title}</h3>
+                  <p className="text-gray-500 text-sm mb-2">
+                    {template.pageBuilder} • {template.category}
+                  </p>
+                  <p className="text-xs text-gray-700 mb-3">
+                    Preview mode: {DEVICE_PRESETS[deviceView].label}
+                  </p>
+                </div>
               </div>
             )}
           </div>
@@ -221,36 +288,98 @@ export default function TemplatePreviewButton({
       >
         <DialogContent className="max-w-lg">
           <DialogTitle className="text-2xl font-bold text-gray-900">
-            About Our Templates
+            {template.title} Details
           </DialogTitle>
           
           <div className="space-y-4 text-gray-700">
-            <p>
-              <strong className="text-gray-900">{template.title}</strong> and all our templates are designed as 
-              starter themes that can be customized to suit a wide range of businesses and purposes.
-            </p>
+            <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+              <div className="flex items-center">
+                <div className="mr-3 flex-shrink-0">
+                  <div className="p-2 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white">
+                      <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="white"/>
+                      <path d="M13 4.06189C12.6724 4.02104 12.3387 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 11.6613 19.979 11.3276 19.9381 11" stroke="white" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M9 10C9 9.44772 9.44772 9 10 9H14C14.5523 9 15 9.44772 15 10V14C15 14.5523 14.5523 15 14 15H10C9.44772 15 9 14.5523 9 14V10Z" fill="white"/>
+                      <path d="M15 12H20M20 12L18 10M20 12L18 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <div>
+                  <h3 className="font-medium text-gray-900">Template Compatibility:</h3>
+                  <p className="text-sm mt-1">Works with {template.pageBuilder} version {template.pageBuilder === 'Elementor' ? '3.5+' : '6.0+'} and WordPress 6.0+</p>
+                </div>
+              </div>
+            </div>
             
-            <p>
-              These professionally designed templates provide a solid foundation for your website, 
-              saving you time and effort while ensuring a polished, engaging user experience.
-            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-900 mb-2">Category</h3>
+                <p>{template.category}</p>
+              </div>
+              
+              <div className="bg-gray-50 p-4 rounded-lg">
+                <h3 className="font-medium text-gray-900 mb-2">License</h3>
+                <p>{template.isPro ? 'Premium (Single Use)' : 'Free'}</p>
+              </div>
+            </div>
             
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="font-semibold text-lg mb-2 text-gray-900">Key Features:</h3>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Fully responsive design for all devices</li>
-                <li>Customizable layouts and color schemes</li>
-                <li>Built with performance and SEO best practices</li>
-                <li>Compatible with major page builders</li>
-                <li>Regular updates and technical support</li>
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2 mt-3">
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Responsive Design</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>SEO Optimized</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Cross-browser Compatible</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Fast Loading</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Documentation</span>
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-4 w-4 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>6 Months Support</span>
+                </li>
               </ul>
             </div>
             
-            <p>
-              Our templates are licensed for use on a single website. Once purchased, 
-              you'll have access to the complete template files and detailed documentation
-              for customization.
-            </p>
+            <div className="p-4 bg-blue-50 rounded-lg">
+              <p className="text-blue-800">
+                <strong>Note:</strong> This is an informational preview. External template previews are temporarily 
+                disabled due to cross-origin restrictions. We're working on a solution to allow seamless template 
+                previewing within our platform.
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              {template.tags?.map((tag, i) => (
+                <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
           
           <div className="flex justify-end mt-6">
@@ -261,10 +390,13 @@ export default function TemplatePreviewButton({
             >
               Close
             </Button>
-            <Button onClick={() => {
-              setShowInfoModal(false);
-              setIsOpen(false);
-            }}>
+            <Button 
+              onClick={() => {
+                setShowInfoModal(false);
+                setIsOpen(false);
+              }}
+              className="bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93]"
+            >
               Back to Templates
             </Button>
           </div>

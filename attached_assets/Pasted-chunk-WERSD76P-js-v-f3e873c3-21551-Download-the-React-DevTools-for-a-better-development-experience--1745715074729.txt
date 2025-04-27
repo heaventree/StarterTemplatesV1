@@ -1,0 +1,31 @@
+chunk-WERSD76P.js?v=f3e873c3:21551 Download the React DevTools for a better development experience: https://reactjs.org/link/react-devtools
+contentscript.js:10 Access to XMLHttpRequest at 'https://laced-brass-honeysuckle.glitch.me/get-link-info?extension=web-downlad&link==https%3A%2F%2Fb7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev%2F' from origin 'https://b7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+getYoutubeVideoInfo @ contentscript.js:10
+contentscript.js:10 
+            
+            
+           Failed to load resource: net::ERR_FAILED
+getYoutubeVideoInfo @ contentscript.js:10
+contentscript.js:10 Uncaught NetworkError: Failed to execute 'send' on 'XMLHttpRequest': Failed to load 'https://laced-brass-honeysuckle.glitch.me/get-link-info?extension=web-downlad&link==https%3A%2F%2Fb7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev%2F'.
+    at getYoutubeVideoInfo (contentscript.js:10:7)
+    at contentscript.js:45:5
+b7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev/:1 Access to font at 'https://startertemplates.com/wp-content/uploads/2020/08/398675_5_0-1-1.woff2' from origin 'https://b7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+398675_5_0-1-1.woff2:1 
+            
+            
+           Failed to load resource: net::ERR_FAILED
+b7ce7f54-d29f-4d7c-9624-0800847c8202-00-2bll586u62hj2.spock.replit.dev/:1 Unchecked runtime.lastError: The message port closed before a response was received.
+chunk-WERSD76P.js?v=f3e873c3:8438 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+appendChildToContainer @ chunk-WERSD76P.js?v=f3e873c3:8438
+@radix-ui_react-dialog.js?v=f3e873c3:1408 Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+(anonymous) @ @radix-ui_react-dialog.js?v=f3e873c3:1408
+chunk-WERSD76P.js?v=f3e873c3:8438 An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+appendChildToContainer @ chunk-WERSD76P.js?v=f3e873c3:8438
+@radix-ui_react-dialog.js?v=f3e873c3:1408 Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}.
+(anonymous) @ @radix-ui_react-dialog.js?v=f3e873c3:1408
+
+                
+          
+          
+          
+         Chrome is moving towards a new experience that allows users to choose to browse without third-party cookies.
