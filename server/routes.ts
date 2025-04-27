@@ -5,6 +5,7 @@ import path from "path";
 import { storage } from "./storage";
 import { insertTaskSchema, insertTaskCommentSchema } from "@shared/schema";
 import { z } from "zod";
+import { templateProxy } from "./template-proxy";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static image files
@@ -91,7 +92,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Template proxy endpoint using fetch to proxy content
+  // New streamlined template proxy
+  app.get('/api/template-proxy', templateProxy);
+  
+  // Legacy template proxy endpoint using fetch to proxy content
   app.get('/template-proxy', async (req, res) => {
     try {
       const url = req.query.url as string;
