@@ -94,15 +94,9 @@ export default function TemplatesSection() {
   return (
     <section id="templates" className="py-16 bg-[#f9fafb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-lexend font-bold text-gray-800 mb-4">
-            Beautiful Website Templates
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Choose from <span className="text-[#dd4f93] font-semibold">{templates.length}+</span> ready-to-use website templates and blocks.
-          </p>
-          
-          {/* Empty space since we've moved the AI recommendation to Hero section */}
+        {/* Title and subheading removed as requested */}
+        <div className="mb-10">
+          {/* Empty space to maintain layout spacing */}
         </div>
         
         {/* Filters */}
