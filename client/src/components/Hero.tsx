@@ -102,8 +102,8 @@ export default function Hero() {
                 onClick={handleFindTemplates}
                 disabled={isRecommending || !userPrompt?.trim()}
               >
-                <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 3v3M9 6h6M8 12H5M19 12h-3M7.6 17h8.8M3.5 11a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0M16.5 19a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5M14.5 11a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+                <svg className="h-5 w-5 mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 3l1.87 6.63L20 12l-6.13 2.37L12 21l-1.87-6.63L4 12l6.13-2.37L12 3z" />
                 </svg>
                 {isRecommending ? 'Thinking...' : 'Get AI Recommendations'}
               </button>
