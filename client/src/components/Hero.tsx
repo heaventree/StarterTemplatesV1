@@ -9,7 +9,7 @@ export default function Hero() {
   const [userPrompt, setUserPrompt] = useState("");
   const [isRecommending, setIsRecommending] = useState(false);
   const [recommendedTemplates, setRecommendedTemplates] = useState<Template[]>([]);
-  const promptInputRef = useRef<HTMLTextAreaElement>(null);
+  const promptInputRef = useRef<HTMLInputElement>(null);
   
   // Get actual template count from API
   const { data: templates = [] } = useQuery<Template[]>({
@@ -98,7 +98,7 @@ export default function Hero() {
                 onChange={(e) => setUserPrompt(e.target.value)}
               />
               <button 
-                className="bg-[#00c6a2] hover:bg-[#00b392] text-white font-proxima-bold py-3 px-5 rounded-full transition-all ml-2 flex items-center"
+                className="bg-[#9c27b0] hover:bg-[#8e24aa] text-white font-proxima-bold py-3 px-5 rounded-full transition-all ml-2 flex items-center"
                 onClick={handleFindTemplates}
                 disabled={isRecommending || !userPrompt?.trim()}
               >
