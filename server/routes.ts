@@ -5,10 +5,45 @@ import path from "path";
 import { storage } from "./storage";
 import { insertTaskSchema, insertTaskCommentSchema } from "@shared/schema";
 import { z } from "zod";
+import fetch from "node-fetch";
+import cors from "cors";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // CORS configuration
+  app.use(cors());
+
   // Serve static image files
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
+  
+  // Template proxy endpoint to bypass CORS issues
+  app.get('/template-proxy', async (req, res) => {
+    try {
+      const url = req.query.url as string;
+      
+      if (!url) {
+        return res.status(400).json({ error: 'URL parameter is required' });
+      }
+
+      console.log(`Proxying template request to: ${url}`);
+      
+      const response = await fetch(url);
+      const contentType = response.headers.get('content-type');
+      
+      if (contentType) {
+        res.setHeader('Content-Type', contentType);
+      }
+      
+      // Stream the response
+      if (response.body) {
+        response.body.pipe(res);
+      } else {
+        res.status(404).json({ error: 'Content not available' });
+      }
+    } catch (error) {
+      console.error('Template proxy error:', error);
+      res.status(500).json({ error: 'Failed to proxy template' });
+    }
+  });
   
   // API routes
   app.get("/api/templates", async (req, res) => {

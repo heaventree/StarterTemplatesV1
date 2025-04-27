@@ -190,9 +190,9 @@ export default function TemplatePreviewButton({
                       <p className="text-gray-600">Loading template preview...</p>
                     </div>
                     
-                    {/* Actual iframe */}
+                    {/* Actual iframe with proxy */}
                     <iframe
-                      src={template.demoUrl}
+                      src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
                       className="w-full h-full border-0"
                       title={`${template.title} preview`}
                       onLoad={(e) => {
@@ -221,7 +221,7 @@ export default function TemplatePreviewButton({
                   </div>
                 ) : (
                   <iframe
-                    src={template.demoUrl}
+                    src={`/template-proxy?url=${encodeURIComponent(template.demoUrl)}`}
                     className="w-full h-full border-0"
                     title={`${template.title} preview - ${DEVICE_PRESETS[deviceView].label}`}
                   />
