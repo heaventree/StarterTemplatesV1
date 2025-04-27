@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { Template } from '@shared/schema';
+import { getTemplateUrl } from '@shared/data/template-urls';
 import { useQuery } from '@tanstack/react-query';
 import { 
   ArrowLeft, Monitor, Smartphone, Tablet, Loader2, 
@@ -255,7 +256,7 @@ export default function TemplateViewerModal({
               
               <iframe
                 ref={iframeRef}
-                src={template.demoUrl || ''}
+                src={template.demoUrl || getTemplateUrl(template.title)}
                 className="w-full h-full border border-border shadow-md bg-white"
                 onLoad={handleIframeLoad}
                 title={`${template.title} preview`}
