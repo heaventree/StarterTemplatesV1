@@ -87,33 +87,28 @@ export default function Hero() {
             Choose from <span className="text-white font-semibold">{templates.length}+</span> ready-to-use website templates.
           </p>
           
-          {/* AI Recommendation Text Area - Clean & Elegant */}
+          {/* AI Recommendation - Simple Pill Input */}
           <div className="max-w-3xl mx-auto mb-10">
-            <div className="rounded-lg overflow-hidden shadow-lg">
-              <textarea 
+            <div className="flex items-center bg-white rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.08)] overflow-hidden pl-6 pr-2 py-2">
+              <input
                 ref={promptInputRef}
                 placeholder="Describe your business or the website you want to build..." 
-                className="w-full resize-none p-5 min-h-[100px] bg-white text-gray-700 placeholder-gray-500 focus:outline-none text-base"
-                rows={2}
+                className="flex-grow bg-transparent border-none focus:outline-none focus:ring-0 text-gray-700 placeholder-gray-400 text-base"
                 value={userPrompt}
                 onChange={(e) => setUserPrompt(e.target.value)}
               />
-              <div className="flex justify-between items-center px-5 py-3" style={{ backgroundColor: 'rgba(156, 39, 176, 0.9)' }}>
-                <div className="flex items-center text-white text-sm">
-                  <svg className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M21.928 11.607c-.202-.488-.635-.605-.928-.633V8c0-1.103-.897-2-2-2h-6V4.61c.305-.274.5-.668.5-1.11a1.5 1.5 0 0 0-3 0c0 .442.195.836.5 1.11V6H5c-1.103 0-2 .897-2 2v2.997l-.082.006A1 1 0 0 0 1.99 12v2a1 1 0 0 0 1 1H3v5c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5a1 1 0 0 0 1-1v-1.938a1.006 1.006 0 0 0-.072-.455zM5 20V8h14l.001 3.996L19 12v2l.001.005.001 5.995H5z"></path>
-                    <path d="M12 14a2 2 0 0 0-2 2c0 .736.405 1.375 1 1.722V19h2v-1.278c.595-.347 1-.986 1-1.722a2 2 0 0 0-2-2z"></path>
-                  </svg>
-                  AI-powered recommendations
-                </div>
-                <button 
-                  className="bg-white hover:bg-gray-50 text-[#9c27b0] font-proxima-bold py-2 px-8 rounded-full transition-all"
-                  onClick={handleFindTemplates}
-                  disabled={isRecommending || !userPrompt?.trim()}
-                >
-                  {isRecommending ? 'Finding...' : 'Find Templates'}
-                </button>
-              </div>
+              <button 
+                className="bg-[#00c6a2] hover:bg-[#00b392] text-white font-proxima-bold py-3 px-5 rounded-full transition-all ml-2 flex items-center"
+                onClick={handleFindTemplates}
+                disabled={isRecommending || !userPrompt?.trim()}
+              >
+                <svg className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M14.25 14.25L17.25 17.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M9 9.75C9 8.5074 9.5074 8 10.75 8H13.25C14.4926 8 15 8.5074 15 9.75V10.25C15 11.4926 14.4926 12 13.25 12H10.75C9.5074 12 9 12.5074 9 13.75V14.25C9 15.4926 9.5074 16 10.75 16H13.25C14.4926 16 15 15.4926 15 14.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                {isRecommending ? 'Thinking...' : 'Get AI Recommendations'}
+              </button>
             </div>
             
             {/* Popular Template Categories */}
