@@ -13,11 +13,8 @@ export default function TemplatesSection() {
   const [showViewMore, setShowViewMore] = useState(true);
   
   // AI recommendation states
-  const [userPrompt, setUserPrompt] = useState("");
-  const [isRecommending, setIsRecommending] = useState(false);
-  const [recommendedTemplates, setRecommendedTemplates] = useState<Template[]>([]);
   const [showRecommended, setShowRecommended] = useState(false);
-  const promptInputRef = useRef<HTMLTextAreaElement>(null);
+  const [recommendationPrompt, setRecommendationPrompt] = useState("");
 
   // Using TanStack Query v5 with proper type annotations
   const { data: templates = [], isLoading } = useQuery<Template[]>({
@@ -66,45 +63,33 @@ export default function TemplatesSection() {
     }
   };
   
-  // Handle AI template recommendation based on user prompt
-  const handleFindTemplates = () => {
-    if (!userPrompt?.trim()) return;
+  // Listen for AI recommendation events from Hero component
+  useEffect(() => {
+    const handleAIRecommendation = (event: CustomEvent) => {
+      const { recommendations, prompt } = event.detail;
+      
+      // Update filtered templates with AI recommendations
+      setFilteredTemplates(recommendations);
+      setShowRecommended(true);
+      setRecommendationPrompt(prompt);
+      
+      // Reset other filters
+      setActiveCategory("all");
+      setSearchTerm("");
+      
+      // Reset display count and show more button
+      setDisplayCount(12);
+      setShowViewMore(recommendations.length > 12);
+    };
     
-    setIsRecommending(true);
-    setShowRecommended(true);
+    // Add event listener
+    window.addEventListener('ai-recommendation', handleAIRecommendation as EventListener);
     
-    // Reset any existing search/filter
-    setActiveCategory("all");
-    setSearchTerm("");
-    
-    // Get recommendations using our AI matching function
-    const recommendations = getAIRecommendedTemplates(templates, userPrompt, 12);
-    setRecommendedTemplates(recommendations);
-    setIsRecommending(false);
-    
-    // Update filtered templates to show recommendations
-    setFilteredTemplates(recommendations);
-  };
-  
-  // Handle popular category selection
-  const handleCategorySelect = (category: string) => {
-    // Get templates for this category
-    const categoryTemplates = getTemplatesByCategory(templates, category, 12);
-    
-    // Update filtered templates
-    setFilteredTemplates(categoryTemplates);
-    setShowRecommended(true);
-    
-    // Reset other filters
-    setActiveCategory("all");
-    setSearchTerm("");
-    
-    // Set recommendation prompt
-    setUserPrompt(`I'm looking for a ${category} website`);
-    if (promptInputRef.current) {
-      promptInputRef.current.value = `I'm looking for a ${category} website`;
-    }
-  };
+    // Clean up
+    return () => {
+      window.removeEventListener('ai-recommendation', handleAIRecommendation as EventListener);
+    };
+  }, [templates]);
 
   return (
     <section id="templates" className="py-16 bg-[#f9fafb]">
@@ -117,43 +102,7 @@ export default function TemplatesSection() {
             Choose from <span className="text-[#dd4f93] font-semibold">{templates.length}+</span> ready-to-use website templates and blocks.
           </p>
           
-          {/* AI Recommendation Text Area - Lovable Style */}
-          <div className="max-w-3xl mx-auto mt-8 mb-10">
-            <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
-              <textarea 
-                ref={promptInputRef}
-                placeholder="Describe your business or the website you want to build..." 
-                className="w-full resize-none min-h-[80px] p-4 focus:outline-none focus:ring-2 focus:ring-[#dd4f93]/20 focus:border-[#dd4f93] text-gray-700 placeholder-gray-400 border-b border-gray-200"
-                rows={2}
-                value={userPrompt}
-                onChange={(e) => setUserPrompt(e.target.value)}
-              />
-              <div className="flex justify-between items-center p-3 bg-gray-50">
-                <div className="text-sm text-gray-500">AI-powered recommendations</div>
-                <button 
-                  className="bg-gradient-to-r from-[#dd4f93] to-[#8c21a1] hover:from-[#8c21a1] hover:to-[#dd4f93] text-white font-proxima-bold py-2 px-6 rounded-full transition-all shadow-sm hover:shadow-md"
-                  onClick={handleFindTemplates}
-                  disabled={isRecommending || !userPrompt?.trim()}
-                >
-                  {isRecommending ? 'Finding...' : 'Find Templates'}
-                </button>
-              </div>
-            </div>
-            
-            {/* Popular Template Categories */}
-            <div className="flex flex-wrap justify-center gap-3 mt-4">
-              <div className="text-sm font-medium text-gray-600 py-2">Popular themes: </div>
-              {['eCommerce', 'Corporate', 'Portfolio', 'Blog', 'Landing Page'].map((category) => (
-                <button
-                  key={category}
-                  className="px-5 py-2 rounded-full font-proxima-bold transition-colors bg-white text-gray-700 hover:bg-gray-100 shadow-sm border border-gray-100"
-                  onClick={() => handleCategorySelect(category)}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Empty space since we've moved the AI recommendation to Hero section */}
         </div>
         
         {/* Filters */}
@@ -202,7 +151,7 @@ export default function TemplatesSection() {
                 onClick={() => {
                   setShowRecommended(false);
                   setActiveCategory("all");
-                  setUserPrompt("");
+                  setRecommendationPrompt("");
                   setFilteredTemplates(templates);
                 }} 
                 className="ml-3 text-gray-500 hover:text-gray-700"
