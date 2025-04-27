@@ -1,12 +1,44 @@
 import type { Template } from "@shared/schema";
 import TemplatePreviewButton from "./TemplatePreviewButton";
-import { getTemplateImageUrl } from "@shared/data/template-urls";
 
 interface TemplateCardProps {
   template: Template;
 }
 
 export default function TemplateCard({ template }: TemplateCardProps) {
+  // Helper function to normalize image paths and ensure consistent thumbnails
+  const getImagePath = (path: string): string => {
+    // Initial null check
+    if (!path) {
+      // Choose a specific fallback image from our list of thumbnails based on template ID
+      const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+      return `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+    }
+    
+    // If it's already a full path or external URL, return as is
+    if (path.startsWith('http')) return path;
+    
+    // Fix attached_assets path to use /images/ instead
+    if (path.includes('attached_assets/images/')) {
+      return path.replace('attached_assets/images/', 'images/');
+    }
+    
+    // Handle bad image paths - if the path is too short or just a placeholder
+    if (path.length < 15 || path.includes('placeholder')) {
+      // Use a specific template image based on the template ID
+      // This ensures each template always gets the same fallback image
+      const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+      return `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+    }
+    
+    // If path starts with a slash, it's a relative path from the public folder
+    if (path.startsWith('/')) {
+      return path;
+    }
+    
+    // Add leading slash if missing
+    return path.startsWith('/') ? path : `/${path}`;
+  };
 
   // Get page builder color
   const getPageBuilderColor = (builder: string) => {
@@ -37,14 +69,20 @@ export default function TemplateCard({ template }: TemplateCardProps) {
           className="block aspect-[1/1] sm:aspect-[4/5]"
         >
           <img 
-            src={getTemplateImageUrl(template.title)} 
+            src={getImagePath(template.imageUrl || '')}
             alt={template.title} 
             className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
             onError={(e) => {
-              // Fallback if image doesn't load - use a placeholder
+              // Fallback if image doesn't load - use a consistent thumbnail based on template ID
               const target = e.target as HTMLImageElement;
-              target.src = '/images/templates-cta-img-scaled.webp';
-              target.onerror = null; // Prevent infinite loop
+              const thumbnailIndex = (template.id || 0) % 6; // We have 6 thumbnail files
+              target.src = `/images/thumbnail${thumbnailIndex > 0 ? ` (${thumbnailIndex})` : ''}.jpg`;
+              
+              // If that also fails, use a general fallback
+              target.onerror = () => { 
+                target.src = '/images/templates-cta-img-scaled.webp';
+                target.onerror = null; // Prevent infinite loop
+              };
             }}
           />
         </a>
