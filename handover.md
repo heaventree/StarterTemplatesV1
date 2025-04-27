@@ -75,3 +75,20 @@ The application has been successfully migrated from in-memory storage to Postgre
 
 ## Environment Setup
 The project uses PostgreSQL database with connection details stored in environment variables. The database schema is managed using Drizzle ORM with automatic migrations. The application runs on port 5000 and serves both frontend and backend.
+
+## Updates - April 27, 2025 (1:30 AM)
+During this session, I worked on improving the template preview functionality:
+
+- Examined template preview loading issues with external content
+- Implemented new approach to address persistent CORS errors preventing template loading
+- Replaced iframe-based previews with custom in-app detail views 
+- Maintained multi-device preview capability (desktop, tablet, mobile)
+- Removed all warning banners and information bars from the template preview interface
+- Added better template detail page formatting with tag displays
+- Updated server-side proxy to attempt to fetch and properly display external template content
+
+Current state:
+- Template previews still show summary information rather than live website content
+- CORS issues continue to block external template content loading
+- User requested to stop further modification of template preview system
+- All templates (267 after deduplication) still accessible from main interface
