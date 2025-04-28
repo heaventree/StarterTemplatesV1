@@ -11,10 +11,13 @@ const requireAdmin = (req: any, res: any, next: any) => {
   if (req.isAuthenticated && req.isAuthenticated() && req.user && req.user.role === 'admin') {
     return next();
   }
-  // For development purposes, we'll allow all access for now
-  // In production, uncomment the line below and remove the next() line
-  // return res.status(403).json({ error: 'Forbidden: Admin access required' });
-  return next();
+  // For development purposes, we'll allow access if NODE_ENV is not production
+  if (process.env.NODE_ENV !== 'production') {
+    console.log('Warning: Admin authentication is disabled in development mode');
+    return next();
+  }
+  // In production, require admin authentication
+  return res.status(403).json({ error: 'Forbidden: Admin access required' });
 };
 
 // Apply admin middleware to all admin routes

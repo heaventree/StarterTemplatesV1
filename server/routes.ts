@@ -7,8 +7,11 @@ import { insertTaskSchema, insertTaskCommentSchema } from "@shared/schema";
 import { z } from "zod";
 import { templateProxy } from "./template-proxy";
 import adminRouter from "./api/admin";
+import { setupAuth } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up authentication
+  setupAuth(app);
   // Serve static image files
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
   
