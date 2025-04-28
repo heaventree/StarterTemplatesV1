@@ -6,6 +6,7 @@ import { storage } from "./storage";
 import { insertTaskSchema, insertTaskCommentSchema } from "@shared/schema";
 import { z } from "zod";
 import { templateProxy } from "./template-proxy";
+import adminRouter from "./api/admin";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static image files
