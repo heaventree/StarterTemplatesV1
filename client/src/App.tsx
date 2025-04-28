@@ -10,6 +10,8 @@ import Home from "@/pages/Home";
 import Roadmap from "@/pages/Roadmap";
 import AdminLoginPage from "@/pages/admin/login-page";
 import TemplatesPage from "@/pages/admin/templates-page";
+import CategoriesPage from "@/pages/admin/categories-page";
+import TagsPage from "@/pages/admin/tags-page";
 
 function Router() {
   return (
@@ -21,6 +23,8 @@ function Router() {
       {/* Admin Routes */}
       <Route path="/admin/login" component={AdminLoginPage} />
       <ProtectedRoute path="/admin/templates" component={TemplatesPage} />
+      <ProtectedRoute path="/admin/categories" component={CategoriesPage} />
+      <ProtectedRoute path="/admin/tags" component={TagsPage} />
       
       {/* Catch-all route */}
       <Route component={NotFound} />

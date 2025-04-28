@@ -218,7 +218,7 @@ export default function TemplatesPage() {
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  onClick={() => window.open(template.demoUrl, '_blank')}
+                                  onClick={() => template.demoUrl && window.open(template.demoUrl, '_blank')}
                                 >
                                   <ExternalLink className="h-4 w-4" />
                                 </Button>
