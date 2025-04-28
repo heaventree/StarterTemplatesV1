@@ -32,10 +32,28 @@ async function comparePasswords(supplied: string, stored: string) {
 }
 
 export function setupAuth(app: Express) {
+  let store;
+  
+  // Use PostgreSQL session store in production, memory store in development
+  if (process.env.NODE_ENV === 'production') {
+    const PostgresStore = connectPgSimple(session);
+    store = new PostgresStore({
+      pool,
+      tableName: 'session',
+      createTableIfMissing: true
+    });
+  } else {
+    const MemoryStore = createMemoryStore(session);
+    store = new MemoryStore({
+      checkPeriod: 86400000, // prune expired entries every 24h
+    });
+  }
+  
   const sessionSettings: session.SessionOptions = {
     secret: process.env.SESSION_SECRET || 'template-admin-secret-key',
     resave: false,
     saveUninitialized: false,
+    store,
     cookie: {
       secure: process.env.NODE_ENV === 'production',
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
