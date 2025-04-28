@@ -70,10 +70,13 @@ router.put('/:id', async (req, res) => {
     const validatedData = insertTagSchema.partial().parse(req.body);
     
     // Add updatedAt timestamp
-    validatedData.updatedAt = new Date();
+    const updateData = {
+      ...validatedData,
+      updatedAt: new Date()
+    };
     
     const [updatedTag] = await db.update(tags)
-      .set(validatedData)
+      .set(updateData)
       .where(eq(tags.id, tagId))
       .returning();
     

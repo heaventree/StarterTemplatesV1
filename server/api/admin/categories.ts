@@ -72,10 +72,13 @@ router.put('/:id', async (req, res) => {
     const validatedData = insertCategorySchema.partial().parse(req.body);
     
     // Add updatedAt timestamp
-    validatedData.updatedAt = new Date();
+    const updateData = {
+      ...validatedData,
+      updatedAt: new Date()
+    };
     
     const [updatedCategory] = await db.update(categories)
-      .set(validatedData)
+      .set(updateData)
       .where(eq(categories.id, categoryId))
       .returning();
     

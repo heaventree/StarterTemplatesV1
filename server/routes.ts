@@ -12,6 +12,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Serve static image files
   app.use('/images', express.static(path.join(process.cwd(), 'public/images')));
   
+  // Admin routes
+  app.use('/api/admin', adminRouter);
+  
   // API routes
   app.get("/api/templates", async (req, res) => {
     try {
