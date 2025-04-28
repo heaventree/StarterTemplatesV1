@@ -227,7 +227,7 @@ export default function CategoriesPage() {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout title="Categories">
       <div className="container mx-auto p-4 py-6">
         <Card className="border-none shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
