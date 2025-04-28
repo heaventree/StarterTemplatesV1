@@ -1,6 +1,6 @@
 import { useAuth } from '@/hooks/use-auth';
 import { Loader2 } from 'lucide-react';
-import { Redirect, Route } from 'wouter';
+import { Route, useLocation } from 'wouter';
 
 export function ProtectedRoute({
   path,
@@ -10,6 +10,7 @@ export function ProtectedRoute({
   component: React.ComponentType;
 }) {
   const { user, isLoading } = useAuth();
+  const [, setLocation] = useLocation();
 
   return (
     <Route path={path}>
@@ -23,7 +24,9 @@ export function ProtectedRoute({
         }
 
         if (!user) {
-          return <Redirect to="/admin/login" />;
+          // Redirect to login page
+          setTimeout(() => setLocation('/admin/login'), 0);
+          return null;
         }
 
         return <Component />;

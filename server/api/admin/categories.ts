@@ -1,17 +1,24 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { storage } from '../../storage';
+import { insertCategorySchema } from '@shared/schema';
 import { db } from '../../db';
-import { categories, insertCategorySchema } from '@shared/schema';
+import { categories } from '@shared/schema';
 import { eq } from 'drizzle-orm';
-import { z } from 'zod';
 
-const router = Router();
+export const categoriesRouter = Router();
+
+// Middleware to check if user is authenticated
+const isAuthenticated = (req: Request, res: Response, next: Function) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: 'Unauthorized' });
+};
 
 // Get all categories
-router.get('/', async (req, res) => {
+categoriesRouter.get('/', isAuthenticated, async (req: Request, res: Response) => {
   try {
-    const allCategories = await db.query.categories.findMany({
-      orderBy: (categories, { asc }) => [asc(categories.displayOrder)]
-    });
+    const allCategories = await db.select().from(categories).orderBy(categories.displayOrder);
     res.json(allCategories);
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -19,23 +26,20 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a single category by ID
-router.get('/:id', async (req, res) => {
+// Get a specific category by ID
+categoriesRouter.get('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const categoryId = parseInt(req.params.id);
     if (isNaN(categoryId)) {
       return res.status(400).json({ error: 'Invalid category ID' });
     }
 
-    const category = await db.query.categories.findFirst({
-      where: eq(categories.id, categoryId)
-    });
-
-    if (!category) {
+    const category = await db.select().from(categories).where(eq(categories.id, categoryId)).limit(1);
+    if (!category.length) {
       return res.status(404).json({ error: 'Category not found' });
     }
 
-    res.json(category);
+    res.json(category[0]);
   } catch (error) {
     console.error('Error fetching category:', error);
     res.status(500).json({ error: 'Failed to fetch category' });
@@ -43,112 +47,130 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new category
-router.post('/', async (req, res) => {
+categoriesRouter.post('/', isAuthenticated, async (req: Request, res: Response) => {
   try {
-    const validatedData = insertCategorySchema.parse(req.body);
-    
-    const [newCategory] = await db.insert(categories)
-      .values(validatedData)
-      .returning();
-    
+    const categoryData = insertCategorySchema.parse(req.body);
+    const [newCategory] = await db.insert(categories).values(categoryData).returning();
     res.status(201).json(newCategory);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid category data', details: error.errors });
-    }
     console.error('Error creating category:', error);
-    res.status(500).json({ error: 'Failed to create category' });
+    res.status(400).json({ error: 'Failed to create category' });
   }
 });
 
 // Update a category
-router.put('/:id', async (req, res) => {
+categoriesRouter.patch('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const categoryId = parseInt(req.params.id);
     if (isNaN(categoryId)) {
       return res.status(400).json({ error: 'Invalid category ID' });
     }
 
-    const validatedData = insertCategorySchema.partial().parse(req.body);
+    const existingCategory = await db.select().from(categories).where(eq(categories.id, categoryId)).limit(1);
+    if (!existingCategory.length) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    // Validate the partial update data
+    const updateData = req.body;
     
-    // Add updatedAt timestamp
-    const updateData = {
-      ...validatedData,
-      updatedAt: new Date()
-    };
-    
-    const [updatedCategory] = await db.update(categories)
+    // Update the category in the database
+    const [updatedCategory] = await db
+      .update(categories)
       .set(updateData)
       .where(eq(categories.id, categoryId))
       .returning();
-    
-    if (!updatedCategory) {
-      return res.status(404).json({ error: 'Category not found' });
-    }
-    
+
     res.json(updatedCategory);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid category data', details: error.errors });
-    }
     console.error('Error updating category:', error);
-    res.status(500).json({ error: 'Failed to update category' });
+    res.status(400).json({ error: 'Failed to update category' });
   }
 });
 
 // Delete a category
-router.delete('/:id', async (req, res) => {
+categoriesRouter.delete('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const categoryId = parseInt(req.params.id);
     if (isNaN(categoryId)) {
       return res.status(400).json({ error: 'Invalid category ID' });
     }
 
-    const [deletedCategory] = await db.delete(categories)
-      .where(eq(categories.id, categoryId))
-      .returning();
-    
-    if (!deletedCategory) {
+    const existingCategory = await db.select().from(categories).where(eq(categories.id, categoryId)).limit(1);
+    if (!existingCategory.length) {
       return res.status(404).json({ error: 'Category not found' });
     }
-    
-    res.json({ message: 'Category deleted successfully', category: deletedCategory });
+
+    // Delete the category from the database
+    await db
+      .delete(categories)
+      .where(eq(categories.id, categoryId));
+
+    res.status(204).send();
   } catch (error) {
     console.error('Error deleting category:', error);
     res.status(500).json({ error: 'Failed to delete category' });
   }
 });
 
-// Update display order for multiple categories at once
-router.post('/reorder', async (req, res) => {
+// Update category order - Move up/down
+categoriesRouter.post('/:id/move', isAuthenticated, async (req: Request, res: Response) => {
   try {
-    const { categoryIds } = req.body;
-    
-    if (!Array.isArray(categoryIds)) {
-      return res.status(400).json({ error: 'categoryIds must be an array of category IDs' });
+    const categoryId = parseInt(req.params.id);
+    if (isNaN(categoryId)) {
+      return res.status(400).json({ error: 'Invalid category ID' });
     }
+
+    const { direction } = req.body;
+    if (!direction || (direction !== 'up' && direction !== 'down')) {
+      return res.status(400).json({ error: 'Invalid direction. Must be "up" or "down"' });
+    }
+
+    const allCategories = await db.select().from(categories).orderBy(categories.displayOrder);
+    const currentCategory = allCategories.find(c => c.id === categoryId);
     
-    // Start a transaction for reordering
-    const results = await db.transaction(async (tx) => {
-      const updates = [];
+    if (!currentCategory) {
+      return res.status(404).json({ error: 'Category not found' });
+    }
+
+    const currentIndex = allCategories.findIndex(c => c.id === categoryId);
+    if (currentIndex === -1) {
+      return res.status(404).json({ error: 'Category not found in ordered list' });
+    }
+
+    // Calculate target index based on direction
+    const targetIndex = direction === 'up' 
+      ? Math.max(0, currentIndex - 1) 
+      : Math.min(allCategories.length - 1, currentIndex + 1);
+
+    // If already at the limit, return unchanged
+    if (targetIndex === currentIndex) {
+      return res.json({ message: 'No change in position' });
+    }
+
+    // Swap display orders
+    const targetCategory = allCategories[targetIndex];
+    
+    await db.transaction(async (tx) => {
+      // Update the current category's display order
+      await tx
+        .update(categories)
+        .set({ displayOrder: targetCategory.displayOrder })
+        .where(eq(categories.id, currentCategory.id));
       
-      for (let i = 0; i < categoryIds.length; i++) {
-        updates.push(
-          tx.update(categories)
-            .set({ displayOrder: i, updatedAt: new Date() })
-            .where(eq(categories.id, categoryIds[i]))
-            .execute()
-        );
-      }
-      
-      return Promise.all(updates);
+      // Update the target category's display order
+      await tx
+        .update(categories)
+        .set({ displayOrder: currentCategory.displayOrder })
+        .where(eq(categories.id, targetCategory.id));
     });
-    
-    res.json({ message: 'Categories reordered successfully', count: results.length });
+
+    res.json({ 
+      message: `Category moved ${direction} successfully`,
+      newOrder: targetCategory.displayOrder 
+    });
   } catch (error) {
-    console.error('Error reordering categories:', error);
-    res.status(500).json({ error: 'Failed to reorder categories' });
+    console.error('Error moving category:', error);
+    res.status(500).json({ error: 'Failed to move category' });
   }
 });
-
-export default router;

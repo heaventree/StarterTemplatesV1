@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { EyeIcon, EyeOffIcon, KeyIcon, UserIcon } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
-import { Navigate, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
 
 const loginSchema = z.object({
   username: z.string().min(3, 'Username must be at least 3 characters'),
@@ -49,7 +49,8 @@ export default function AdminLoginPage() {
 
   // If user is already logged in, redirect to admin dashboard
   if (user) {
-    return <Navigate to="/admin/templates" />;
+    setLocation('/admin/templates');
+    return null;
   }
 
   return (

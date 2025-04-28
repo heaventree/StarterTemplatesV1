@@ -49,7 +49,7 @@ export default function TemplatesPage() {
   // Filter templates based on search query
   const filteredTemplates = templates?.filter(template => 
     template.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    template.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    template.metaDescription?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     template.category?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -180,7 +180,8 @@ export default function TemplatesPage() {
                           <TableCell className="font-medium">
                             <div className="flex flex-col">
                               <span>{template.title}</span>
-                              {template.isNew && (
+                              {/* New badge can be added based on creation date */}
+                              {template.createdAt && new Date(template.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) && (
                                 <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 w-fit mt-1">
                                   New
                                 </Badge>
@@ -213,11 +214,11 @@ export default function TemplatesPage() {
                               >
                                 <Eye className="h-4 w-4" />
                               </Button>
-                              {template.url && (
+                              {template.demoUrl && (
                                 <Button
                                   variant="ghost"
                                   size="icon"
-                                  onClick={() => window.open(template.url, '_blank')}
+                                  onClick={() => window.open(template.demoUrl, '_blank')}
                                 >
                                   <ExternalLink className="h-4 w-4" />
                                 </Button>

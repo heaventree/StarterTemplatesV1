@@ -1,17 +1,24 @@
-import { Router } from 'express';
+import { Request, Response, Router } from 'express';
+import { storage } from '../../storage';
+import { insertTemplateSchema } from '@shared/schema';
 import { db } from '../../db';
-import { templates, insertTemplateSchema } from '@shared/schema';
+import { templates } from '@shared/schema';
 import { eq } from 'drizzle-orm';
-import { z } from 'zod';
 
-const router = Router();
+export const templatesRouter = Router();
 
-// Get all templates with sorting options
-router.get('/', async (req, res) => {
+// Middleware to check if user is authenticated
+const isAuthenticated = (req: Request, res: Response, next: Function) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.status(401).json({ error: 'Unauthorized' });
+};
+
+// Get all templates
+templatesRouter.get('/', isAuthenticated, async (req: Request, res: Response) => {
   try {
-    const allTemplates = await db.query.templates.findMany({
-      orderBy: (templates, { asc }) => [asc(templates.displayOrder)]
-    });
+    const allTemplates = await storage.getAllTemplates();
     res.json(allTemplates);
   } catch (error) {
     console.error('Error fetching templates:', error);
@@ -19,18 +26,15 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a single template by ID
-router.get('/:id', async (req, res) => {
+// Get a specific template by ID
+templatesRouter.get('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const templateId = parseInt(req.params.id);
     if (isNaN(templateId)) {
       return res.status(400).json({ error: 'Invalid template ID' });
     }
 
-    const template = await db.query.templates.findFirst({
-      where: eq(templates.id, templateId)
-    });
-
+    const template = await storage.getTemplateById(templateId);
     if (!template) {
       return res.status(404).json({ error: 'Template not found' });
     }
@@ -43,145 +47,170 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new template
-router.post('/', async (req, res) => {
+templatesRouter.post('/', isAuthenticated, async (req: Request, res: Response) => {
   try {
-    const validatedData = insertTemplateSchema.parse(req.body);
-    
-    const [newTemplate] = await db.insert(templates)
-      .values(validatedData)
-      .returning();
-    
+    const templateData = insertTemplateSchema.parse(req.body);
+    const newTemplate = await storage.createTemplate(templateData);
     res.status(201).json(newTemplate);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid template data', details: error.errors });
-    }
     console.error('Error creating template:', error);
-    res.status(500).json({ error: 'Failed to create template' });
+    res.status(400).json({ error: 'Failed to create template' });
   }
 });
 
 // Update a template
-router.put('/:id', async (req, res) => {
+templatesRouter.patch('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const templateId = parseInt(req.params.id);
     if (isNaN(templateId)) {
       return res.status(400).json({ error: 'Invalid template ID' });
     }
 
-    const validatedData = insertTemplateSchema.partial().parse(req.body);
+    const existingTemplate = await storage.getTemplateById(templateId);
+    if (!existingTemplate) {
+      return res.status(404).json({ error: 'Template not found' });
+    }
+
+    // Validate the partial update data
+    const updateData = req.body;
     
-    // Add updatedAt timestamp
-    const updateData = {
-      ...validatedData,
-      updatedAt: new Date()
-    };
-    
-    const [updatedTemplate] = await db.update(templates)
+    // Update the template in the database
+    const [updatedTemplate] = await db
+      .update(templates)
       .set(updateData)
       .where(eq(templates.id, templateId))
       .returning();
-    
-    if (!updatedTemplate) {
-      return res.status(404).json({ error: 'Template not found' });
-    }
-    
+
     res.json(updatedTemplate);
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: 'Invalid template data', details: error.errors });
-    }
     console.error('Error updating template:', error);
-    res.status(500).json({ error: 'Failed to update template' });
+    res.status(400).json({ error: 'Failed to update template' });
   }
 });
 
 // Delete a template
-router.delete('/:id', async (req, res) => {
+templatesRouter.delete('/:id', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const templateId = parseInt(req.params.id);
     if (isNaN(templateId)) {
       return res.status(400).json({ error: 'Invalid template ID' });
     }
 
-    const [deletedTemplate] = await db.delete(templates)
-      .where(eq(templates.id, templateId))
-      .returning();
-    
-    if (!deletedTemplate) {
+    const existingTemplate = await storage.getTemplateById(templateId);
+    if (!existingTemplate) {
       return res.status(404).json({ error: 'Template not found' });
     }
-    
-    res.json({ message: 'Template deleted successfully', template: deletedTemplate });
+
+    // Delete the template from the database
+    await db
+      .delete(templates)
+      .where(eq(templates.id, templateId));
+
+    res.status(204).send();
   } catch (error) {
     console.error('Error deleting template:', error);
     res.status(500).json({ error: 'Failed to delete template' });
   }
 });
 
-// Update display order for multiple templates at once
-router.post('/reorder', async (req, res) => {
-  try {
-    const { templateIds } = req.body;
-    
-    if (!Array.isArray(templateIds)) {
-      return res.status(400).json({ error: 'templateIds must be an array of template IDs' });
-    }
-    
-    // Start a transaction for reordering
-    const results = await db.transaction(async (tx) => {
-      const updates = [];
-      
-      for (let i = 0; i < templateIds.length; i++) {
-        updates.push(
-          tx.update(templates)
-            .set({ displayOrder: i, updatedAt: new Date() })
-            .where(eq(templates.id, templateIds[i]))
-            .execute()
-        );
-      }
-      
-      return Promise.all(updates);
-    });
-    
-    res.json({ message: 'Templates reordered successfully', count: results.length });
-  } catch (error) {
-    console.error('Error reordering templates:', error);
-    res.status(500).json({ error: 'Failed to reorder templates' });
-  }
-});
-
-// Update featured status for a template
-router.post('/:id/featured', async (req, res) => {
+// Update template order - Move up/down
+templatesRouter.post('/:id/move', isAuthenticated, async (req: Request, res: Response) => {
   try {
     const templateId = parseInt(req.params.id);
     if (isNaN(templateId)) {
       return res.status(400).json({ error: 'Invalid template ID' });
     }
 
-    const { isFeatured } = req.body;
-    
-    if (typeof isFeatured !== 'boolean') {
-      return res.status(400).json({ error: 'isFeatured must be a boolean' });
+    const { direction } = req.body;
+    if (!direction || (direction !== 'up' && direction !== 'down')) {
+      return res.status(400).json({ error: 'Invalid direction. Must be "up" or "down"' });
     }
+
+    const allTemplates = await storage.getAllTemplates();
+    const currentTemplate = allTemplates.find(t => t.id === templateId);
     
-    const [updatedTemplate] = await db.update(templates)
-      .set({ 
-        isFeatured, 
-        updatedAt: new Date() 
-      })
-      .where(eq(templates.id, templateId))
-      .returning();
-    
-    if (!updatedTemplate) {
+    if (!currentTemplate) {
       return res.status(404).json({ error: 'Template not found' });
     }
+
+    // Sort templates by their display order
+    const sortedTemplates = [...allTemplates].sort((a, b) => {
+      // Handle null displayOrder values
+      const orderA = a.displayOrder ?? 9999;
+      const orderB = b.displayOrder ?? 9999;
+      return orderA - orderB;
+    });
+
+    const currentIndex = sortedTemplates.findIndex(t => t.id === templateId);
+    if (currentIndex === -1) {
+      return res.status(404).json({ error: 'Template not found in ordered list' });
+    }
+
+    // Calculate target index based on direction
+    const targetIndex = direction === 'up' 
+      ? Math.max(0, currentIndex - 1) 
+      : Math.min(sortedTemplates.length - 1, currentIndex + 1);
+
+    // If already at the limit, return unchanged
+    if (targetIndex === currentIndex) {
+      return res.json({ message: 'No change in position' });
+    }
+
+    // Swap display orders
+    const targetTemplate = sortedTemplates[targetIndex];
     
-    res.json(updatedTemplate);
+    await db.transaction(async (tx) => {
+      // Update the current template's display order
+      await tx
+        .update(templates)
+        .set({ displayOrder: targetTemplate.displayOrder })
+        .where(eq(templates.id, currentTemplate.id));
+      
+      // Update the target template's display order
+      await tx
+        .update(templates)
+        .set({ displayOrder: currentTemplate.displayOrder })
+        .where(eq(templates.id, targetTemplate.id));
+    });
+
+    res.json({ 
+      message: `Template moved ${direction} successfully`,
+      newOrder: targetTemplate.displayOrder 
+    });
   } catch (error) {
-    console.error('Error updating template featured status:', error);
-    res.status(500).json({ error: 'Failed to update template featured status' });
+    console.error('Error moving template:', error);
+    res.status(500).json({ error: 'Failed to move template' });
   }
 });
 
-export default router;
+// Toggle featured status
+templatesRouter.post('/:id/toggle-featured', isAuthenticated, async (req: Request, res: Response) => {
+  try {
+    const templateId = parseInt(req.params.id);
+    if (isNaN(templateId)) {
+      return res.status(400).json({ error: 'Invalid template ID' });
+    }
+
+    const template = await storage.getTemplateById(templateId);
+    if (!template) {
+      return res.status(404).json({ error: 'Template not found' });
+    }
+
+    const newFeaturedStatus = !template.isFeatured;
+    
+    // Update the template's featured status
+    const [updatedTemplate] = await db
+      .update(templates)
+      .set({ isFeatured: newFeaturedStatus })
+      .where(eq(templates.id, templateId))
+      .returning();
+
+    res.json({ 
+      message: `Template ${newFeaturedStatus ? 'featured' : 'unfeatured'} successfully`,
+      template: updatedTemplate
+    });
+  } catch (error) {
+    console.error('Error toggling featured status:', error);
+    res.status(500).json({ error: 'Failed to update featured status' });
+  }
+});

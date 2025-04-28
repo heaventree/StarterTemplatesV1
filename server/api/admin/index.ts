@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import templatesRouter from './templates';
-import categoriesRouter from './categories';
-import tagsRouter from './tags';
+import { templatesRouter } from './templates';
+import { categoriesRouter } from './categories';
+import { tagsRouter } from './tags';
 
 const router = Router();
 
