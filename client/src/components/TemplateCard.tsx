@@ -106,13 +106,36 @@ export default function TemplateCard({ template }: TemplateCardProps) {
             {template.title}
           </h3>
           
-          <span className={`text-xs py-1 px-3 rounded-full font-semibold ml-auto ${
-            template.isPro 
-              ? 'bg-[#dd4f93]/10 text-[#dd4f93]' 
-              : 'bg-emerald-100 text-emerald-600'
-          }`}>
-            {template.isPro ? 'Pro' : 'Free'}
-          </span>
+          <div className="flex gap-1 ml-auto">
+            {template.pillLabels && template.pillLabels.length > 0 ? (
+              template.pillLabels.map((label, index) => (
+                <span 
+                  key={index} 
+                  className="text-xs py-1 px-3 rounded-full font-semibold"
+                  // Default fallback styles if no custom styling is found
+                  style={{
+                    backgroundColor: 
+                      label.toLowerCase() === 'pro' ? '#6366f1' :
+                      label.toLowerCase() === 'free' ? '#22c55e' :
+                      label.toLowerCase() === 'new' ? '#f59e0b' :
+                      label.toLowerCase() === 'popular' ? '#ef4444' : 
+                      '#6366f1',
+                    color: '#ffffff'
+                  }}
+                >
+                  {label}
+                </span>
+              ))
+            ) : (
+              <span className={`text-xs py-1 px-3 rounded-full font-semibold ${
+                template.isPro 
+                  ? 'bg-[#6366f1] text-white' 
+                  : 'bg-[#22c55e] text-white'
+              }`}>
+                {template.isPro ? 'Pro' : 'Free'}
+              </span>
+            )}
+          </div>
         </div>
         
         <div className="flex flex-wrap gap-2 mb-3">

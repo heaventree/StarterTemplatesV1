@@ -7,6 +7,7 @@ import {
   Tag,
   LayoutTemplate,
   Users,
+  Tags,
 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/ui/button";
@@ -49,6 +50,11 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       name: "Tags",
       icon: <Tag className="mr-2 h-4 w-4" />,
       href: "/admin/tags",
+    },
+    {
+      name: "Labels",
+      icon: <Tags className="mr-2 h-4 w-4" />,
+      href: "/admin/labels",
     },
   ];
 
@@ -117,7 +123,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
 
       {/* Mobile navigation */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background border-t p-2">
-        <div className="grid grid-cols-3 gap-1">
+        <div className="grid grid-cols-4 gap-1">
           {navItems.map((item) => (
             <Link
               key={item.href}
