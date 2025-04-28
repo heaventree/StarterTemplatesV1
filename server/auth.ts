@@ -25,10 +25,21 @@ async function hashPassword(password: string) {
 }
 
 async function comparePasswords(supplied: string, stored: string) {
-  const [hashed, salt] = stored.split(".");
-  const hashedBuf = Buffer.from(hashed, "hex");
-  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
+  try {
+    const [hashed, salt] = stored.split(".");
+    if (!hashed || !salt) return false;
+    
+    const hashedBuf = Buffer.from(hashed, "hex");
+    const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
+    
+    // Make sure both buffers have the same length before comparison
+    if (hashedBuf.length !== suppliedBuf.length) return false;
+    
+    return timingSafeEqual(hashedBuf, suppliedBuf);
+  } catch (error) {
+    console.error("Error comparing passwords:", error);
+    return false;
+  }
 }
 
 export function setupAuth(app: Express) {
@@ -114,4 +125,43 @@ export function setupAuth(app: Express) {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     res.json(req.user);
   });
+
+  // Development-only route to create an admin user
+  if (process.env.NODE_ENV === 'development') {
+    app.get("/api/setup-admin", async (req, res) => {
+      try {
+        // Check for existing admin user
+        const existingUser = await storage.getUserByUsername('admin');
+        
+        if (existingUser) {
+          // If admin exists, update their password
+          await storage.updateUser(existingUser.id, {
+            password: await hashPassword('admin123')
+          });
+          
+          res.status(200).json({ 
+            message: 'Admin user updated successfully', 
+            username: 'admin', 
+            password: 'admin123' 
+          });
+        } else {
+          // Create a new admin user
+          await storage.createUser({
+            username: 'admin',
+            password: await hashPassword('admin123'),
+            role: 'admin'
+          });
+          
+          res.status(201).json({ 
+            message: 'Admin user created successfully', 
+            username: 'admin', 
+            password: 'admin123' 
+          });
+        }
+      } catch (error) {
+        console.error('Error managing admin user:', error);
+        res.status(500).json({ message: 'Failed to manage admin user' });
+      }
+    });
+  }
 }
