@@ -10,7 +10,8 @@
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "seed:admin": "tsx server/seed-admin-user.ts",
-    "reset:admin": "tsx server/reset-admin.ts"
+    "reset:admin": "tsx server/reset-admin.ts",
+    "seed:categories-labels": "tsx server/seed-categories-labels.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

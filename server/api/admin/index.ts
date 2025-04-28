@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { templatesRouter } from './templates';
 import { categoriesRouter } from './categories';
 import { tagsRouter } from './tags';
+import { labelsRouter } from './labels';
 
 const router = Router();
 
@@ -27,5 +28,6 @@ router.use(requireAdmin);
 router.use('/templates', templatesRouter);
 router.use('/categories', categoriesRouter);
 router.use('/tags', tagsRouter);
+router.use('/labels', labelsRouter);
 
 export default router;
