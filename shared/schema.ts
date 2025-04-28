@@ -19,6 +19,29 @@ export const templates = pgTable("templates", {
   pageBuilder: text("page_builder").notNull(),
   isPro: boolean("is_pro").notNull().default(false),
   demoUrl: text("demo_url"),
+  // New fields for template management
+  displayOrder: integer("display_order").default(0),
+  isFeatured: boolean("is_featured").default(false),
+  metaTitle: text("meta_title"),
+  metaDescription: text("meta_description"),
+  pillLabels: text("pill_labels").array(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  displayOrder: integer("display_order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const tags = pgTable("tags", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const pageBuilders = pgTable("page_builders", {
@@ -96,6 +119,18 @@ export const insertTemplateSchema = createInsertSchema(templates).omit({
   id: true,
 });
 
+export const insertCategorySchema = createInsertSchema(categories).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertTagSchema = createInsertSchema(tags).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const insertPageBuilderSchema = createInsertSchema(pageBuilders).omit({
   id: true,
 });
@@ -125,3 +160,9 @@ export type Task = typeof tasks.$inferSelect;
 
 export type InsertTaskComment = z.infer<typeof insertTaskCommentSchema>;
 export type TaskComment = typeof taskComments.$inferSelect;
+
+export type InsertCategory = z.infer<typeof insertCategorySchema>;
+export type Category = typeof categories.$inferSelect;
+
+export type InsertTag = z.infer<typeof insertTagSchema>;
+export type Tag = typeof tags.$inferSelect;
