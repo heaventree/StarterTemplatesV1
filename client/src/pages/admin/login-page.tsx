@@ -1,65 +1,56 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { useToast } from '@/hooks/use-toast';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { EyeIcon, EyeOffIcon, KeyIcon, UserIcon } from 'lucide-react';
-import { useAuth } from '@/hooks/use-auth';
-import { useLocation } from 'wouter';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useAuth } from "@/hooks/use-auth";
+import { useEffect } from "react";
+import { Redirect } from "wouter";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const loginSchema = z.object({
-  username: z.string().min(3, 'Username must be at least 3 characters'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
 });
 
-export default function AdminLoginPage() {
-  const { toast } = useToast();
-  const [, setLocation] = useLocation();
-  const { user, loginMutation } = useAuth();
-  const [showPassword, setShowPassword] = useState(false);
+type LoginFormValues = z.infer<typeof loginSchema>;
 
-  const form = useForm<z.infer<typeof loginSchema>>({
+export default function AdminLoginPage() {
+  const { user, isLoading, loginMutation } = useAuth();
+
+  const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    try {
-      await loginMutation.mutateAsync(values);
-      toast({
-        title: 'Login successful',
-        description: 'You have been logged in successfully.',
-      });
-      setLocation('/admin/templates');
-    } catch (error) {
-      toast({
-        title: 'Login failed',
-        description: 'Invalid username or password. Please try again.',
-        variant: 'destructive',
-      });
-    }
+  const onSubmit = (values: LoginFormValues) => {
+    loginMutation.mutate(values);
   };
 
-  // If user is already logged in, redirect to admin dashboard
+  // If already logged in, redirect to admin dashboard
   if (user) {
-    setLocation('/admin/templates');
-    return null;
+    return <Redirect to="/admin/templates" />;
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-900 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Admin Login</CardTitle>
-          <CardDescription className="text-center">
-            Enter your credentials to access the template admin dashboard
+          <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
+          <CardDescription>
+            Enter your credentials to access the admin dashboard
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -72,15 +63,7 @@ export default function AdminLoginPage() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <div className="relative">
-                        <UserIcon className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                        <Input
-                          {...field}
-                          placeholder="Enter your username"
-                          className="pl-10"
-                          disabled={loginMutation.isPending}
-                        />
-                      </div>
+                      <Input placeholder="admin" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -94,53 +77,25 @@ export default function AdminLoginPage() {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <div className="relative">
-                        <KeyIcon className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground" />
-                        <Input
-                          {...field}
-                          type={showPassword ? 'text' : 'password'}
-                          placeholder="Enter your password"
-                          className="pl-10 pr-10"
-                          disabled={loginMutation.isPending}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-3 top-2.5 text-muted-foreground"
-                          tabIndex={-1}
-                        >
-                          {showPassword ? (
-                            <EyeOffIcon className="h-5 w-5" />
-                          ) : (
-                            <EyeIcon className="h-5 w-5" />
-                          )}
-                        </button>
-                      </div>
+                      <Input type="password" placeholder="••••••••" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={loginMutation.isPending}
-              >
-                {loginMutation.isPending ? 'Signing in...' : 'Sign In'}
+              <Button type="submit" className="w-full" disabled={loginMutation.isPending}>
+                {loginMutation.isPending ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </Button>
             </form>
           </Form>
         </CardContent>
-        <CardFooter className="text-center text-sm text-muted-foreground">
-          <p className="w-full">
-            Admin access only. If you're a regular user, please return to the{' '}
-            <a href="/" className="underline hover:text-primary">
-              main site
-            </a>
-            .
-          </p>
-        </CardFooter>
       </Card>
     </div>
   );

@@ -4,17 +4,17 @@ import {
   useMutation,
   UseMutationResult,
 } from "@tanstack/react-query";
-import { User } from "@shared/schema";
+import { User as SelectUser } from "@shared/schema";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
 type AuthContextType = {
-  user: User | null;
+  user: SelectUser | null;
   isLoading: boolean;
   error: Error | null;
-  loginMutation: UseMutationResult<User, Error, LoginData>;
+  loginMutation: UseMutationResult<SelectUser, Error, LoginData>;
   logoutMutation: UseMutationResult<void, Error, void>;
-  registerMutation: UseMutationResult<User, Error, RegisterData>;
+  registerMutation: UseMutationResult<SelectUser, Error, RegisterData>;
 };
 
 type LoginData = {
@@ -23,50 +23,55 @@ type LoginData = {
 };
 
 type RegisterData = LoginData & {
-  name?: string;
-  email?: string;
+  role?: string;
 };
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
-  
   const {
     data: user,
     error,
     isLoading,
-  } = useQuery<User | null>({
+  } = useQuery<SelectUser | null, Error>({
     queryKey: ['/api/user'],
     queryFn: async () => {
       try {
         const res = await fetch('/api/user');
-        if (res.status === 401) return null;
-        if (!res.ok) throw new Error('Failed to fetch user data');
+        if (!res.ok) {
+          if (res.status === 401) {
+            return null;
+          }
+          throw new Error('Failed to fetch user data');
+        }
         return await res.json();
       } catch (error) {
-        console.error('Error fetching user:', error);
-        return null;
+        if (error instanceof Error) {
+          throw error;
+        }
+        throw new Error('Failed to fetch user data');
       }
-    },
+    }
   });
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: LoginData) => {
-      const response = await apiRequest('POST', '/api/login', credentials);
-      if (!response.ok) {
-        throw new Error('Invalid username or password');
+      const res = await apiRequest("POST", "/api/login", credentials);
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Invalid username or password');
       }
-      return await response.json();
+      return await res.json();
     },
-    onSuccess: (userData: User) => {
+    onSuccess: (userData: SelectUser) => {
       queryClient.setQueryData(['/api/user'], userData);
     },
     onError: (error: Error) => {
       toast({
-        title: 'Login failed',
+        title: "Login failed",
         description: error.message,
-        variant: 'destructive',
+        variant: "destructive",
       });
     },
   });
@@ -80,7 +85,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
       return await response.json();
     },
-    onSuccess: (userData: User) => {
+    onSuccess: (userData: SelectUser) => {
       queryClient.setQueryData(['/api/user'], userData);
     },
     onError: (error: Error) => {
