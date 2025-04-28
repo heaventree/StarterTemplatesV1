@@ -11,7 +11,8 @@
     "db:push": "drizzle-kit push",
     "seed:admin": "tsx server/seed-admin-user.ts",
     "reset:admin": "tsx server/reset-admin.ts",
-    "seed:categories-labels": "tsx server/seed-categories-labels.ts"
+    "seed:categories-labels": "tsx server/seed-categories-labels.ts",
+    "seed:metadata": "tsx server/seed-metadata.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
