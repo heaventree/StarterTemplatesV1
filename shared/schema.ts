@@ -44,6 +44,16 @@ export const tags = pgTable("tags", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+export const labels = pgTable("labels", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull().unique(),
+  color: text("color").notNull().default("#3b82f6"), // Default blue color
+  textColor: text("text_color").notNull().default("#ffffff"), // Default white text
+  displayOrder: integer("display_order").default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 export const pageBuilders = pgTable("page_builders", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -131,6 +141,12 @@ export const insertTagSchema = createInsertSchema(tags).omit({
   updatedAt: true,
 });
 
+export const insertLabelSchema = createInsertSchema(labels).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const insertPageBuilderSchema = createInsertSchema(pageBuilders).omit({
   id: true,
 });
@@ -166,3 +182,6 @@ export type Category = typeof categories.$inferSelect;
 
 export type InsertTag = z.infer<typeof insertTagSchema>;
 export type Tag = typeof tags.$inferSelect;
+
+export type InsertLabel = z.infer<typeof insertLabelSchema>;
+export type Label = typeof labels.$inferSelect;
