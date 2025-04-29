@@ -1,80 +1,78 @@
-import { Request, Response } from "express";
-import multer from "multer";
-import path from "path";
-import fs from "fs";
+import { Request, Response } from 'express';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+
+// Create the uploads directory if it doesn't exist
+const imagesDir = path.join(process.cwd(), 'public/images');
+if (!fs.existsSync(imagesDir)) {
+  fs.mkdirSync(imagesDir, { recursive: true });
+}
 
 // Configure storage
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const uploadDir = path.join(process.cwd(), "public", "images");
-    
-    // Create directory if it doesn't exist
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    
-    cb(null, uploadDir);
+  destination: (req, file, cb) => {
+    cb(null, imagesDir);
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     // Create a unique filename with original extension
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ext);
+    cb(null, `template-${uniqueSuffix}${ext}`);
   },
 });
 
-// File filter
+// File filter to only accept images
 const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
-  // Accept images only
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif|webp)$/)) {
-    return cb(new Error("Only image files are allowed!"));
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only image files are allowed'));
   }
-  cb(null, true);
 };
 
-// Create upload middleware
-const upload = multer({ 
-  storage: storage,
-  fileFilter: fileFilter,
+// Create the multer upload instance
+const upload = multer({
+  storage,
+  fileFilter,
   limits: {
-    fileSize: 5 * 1024 * 1024, // 5MB max file size
+    fileSize: 5 * 1024 * 1024, // 5MB file size limit
   },
 });
 
-// Handle image upload
-export const uploadImage = (req: Request, res: Response) => {
-  const uploadMiddleware = upload.single("image");
+// Handle the upload request
+export async function handleUpload(req: Request, res: Response) {
+  try {
+    // Use multer single file upload
+    upload.single('file')(req, res, (err) => {
+      if (err) {
+        console.error('Upload error:', err);
+        if (err instanceof multer.MulterError) {
+          if (err.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ message: 'File too large. Maximum size is 5MB.' });
+          }
+          return res.status(400).json({ message: `Upload error: ${err.message}` });
+        }
+        return res.status(400).json({ message: err.message });
+      }
 
-  uploadMiddleware(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      // A Multer error occurred
-      return res.status(400).json({ 
-        success: false, 
-        message: `Upload error: ${err.message}` 
-      });
-    } else if (err) {
-      // An unknown error occurred
-      return res.status(500).json({ 
-        success: false, 
-        message: `Server error: ${err.message}` 
-      });
-    }
+      // Get the uploaded file
+      const file = req.file;
+      if (!file) {
+        return res.status(400).json({ message: 'No file uploaded' });
+      }
 
-    // Everything went fine, file is uploaded
-    const file = req.file;
-    if (!file) {
-      return res.status(400).json({ 
-        success: false, 
-        message: "No file uploaded" 
+      // Return the file path relative to the public directory
+      const relativePath = `/images/${file.filename}`;
+      res.status(200).json({
+        message: 'File uploaded successfully',
+        filePath: relativePath,
+        fileName: file.filename,
+        fileSize: file.size,
       });
-    }
-
-    // Return the file path for use in the template
-    const filePath = `/images/${file.filename}`;
-    res.status(200).json({ 
-      success: true, 
-      filePath: filePath,
-      message: "File uploaded successfully" 
     });
-  });
-};
+  } catch (error: any) {
+    console.error('Unexpected upload error:', error);
+    res.status(500).json({ message: 'Server error during upload' });
+  }
+}
