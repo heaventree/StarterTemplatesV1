@@ -1,0 +1,13 @@
+                    <FormField
+                      control={form.control}
+                      name="imageUrl"
+                      render={({ field }) => (
+                        <FileUpload
+                          value={field.value}
+                          onChange={field.onChange}
+                          label="Template Image"
+                          description="Upload a thumbnail image for the template (recommended size: 800x600px)"
+                          error={form.formState.errors.imageUrl?.message}
+                        />
+                      )}
+                    />
