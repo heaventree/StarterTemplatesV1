@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
-import { Button } from './button';
-import { Input } from './input';
-import { FormItem, FormLabel, FormControl, FormDescription, FormMessage } from './form';
-import { Upload, Image as ImageIcon, Loader2 } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Loader2, Upload } from 'lucide-react';
+import { apiRequest } from '@/lib/queryClient';
 
 interface FileUploadProps {
   value: string;
@@ -15,47 +15,40 @@ interface FileUploadProps {
 export function FileUpload({
   value,
   onChange,
-  label = 'Image',
+  label = 'Upload a file',
   description,
   error,
 }: FileUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState<string>(value || '');
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (!file) return;
 
+    setIsUploading(true);
+    setUploadError(null);
+
+    const formData = new FormData();
+    formData.append('file', file);
+
     try {
-      setIsUploading(true);
-      
-      // Create preview URL
-      const localPreviewUrl = URL.createObjectURL(file);
-      setPreviewUrl(localPreviewUrl);
-      
-      // Create form data
-      const formData = new FormData();
-      formData.append('image', file);
-      
-      // Upload the file
       const response = await fetch('/api/admin/upload', {
         method: 'POST',
         body: formData,
       });
-      
-      const data = await response.json();
-      
+
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to upload image');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to upload file');
       }
-      
-      // Set the file path as the value
+
+      const data = await response.json();
       onChange(data.filePath);
-    } catch (error) {
-      console.error('Upload error:', error);
-      setPreviewUrl(value); // Revert to previous value
-      alert('Failed to upload image. Please try again.');
+    } catch (err: any) {
+      setUploadError(err.message || 'Error uploading file');
+      console.error('Upload error:', err);
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) {
@@ -64,80 +57,79 @@ export function FileUpload({
     }
   };
 
-  const handleClick = () => {
-    fileInputRef.current?.click();
-  };
-
   return (
-    <FormItem className="space-y-3">
-      <FormLabel>{label}</FormLabel>
-      <FormControl>
-        <div className="space-y-3">
-          <div 
-            className={`flex items-center justify-center border-2 border-dashed rounded-md min-h-[200px] relative cursor-pointer bg-muted/50 ${
-              error ? 'border-destructive' : 'border-muted-foreground/25 hover:border-muted-foreground/50'
-            }`}
-            onClick={handleClick}
-          >
+    <div className="space-y-2">
+      {label && <div className="text-sm font-medium">{label}</div>}
+      
+      <div className="grid gap-2">
+        <div className="flex items-center gap-2">
+          <div className="relative flex-1">
             <Input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={handleFileChange}
+              value={value || ''}
+              onChange={(e) => onChange(e.target.value)}
+              placeholder="No file selected"
               disabled={isUploading}
+              className="pr-20"
             />
-            
-            {isUploading ? (
-              <div className="flex flex-col items-center justify-center text-muted-foreground">
-                <Loader2 className="w-10 h-10 animate-spin mb-2" />
-                <span>Uploading...</span>
-              </div>
-            ) : previewUrl ? (
-              <div className="w-full h-full min-h-[200px] relative">
-                <img
-                  src={previewUrl}
-                  alt="Preview"
-                  className="object-contain w-full h-full rounded-md"
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col items-center justify-center text-muted-foreground">
-                <ImageIcon className="w-10 h-10 mb-2" />
-                <span>Click to upload an image</span>
-              </div>
-            )}
+            <div className="absolute inset-y-0 right-0 flex items-center">
+              <label
+                htmlFor="file-upload"
+                className={`inline-flex h-8 items-center justify-center rounded-md px-3 text-xs font-medium ring-offset-background transition-colors 
+                  ${isUploading ? 'bg-muted text-muted-foreground cursor-not-allowed' : 'bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer'}`}
+              >
+                {isUploading ? (
+                  <>
+                    <Loader2 className="mr-1 h-3 w-3 animate-spin" />
+                    Uploading...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="mr-1 h-3 w-3" />
+                    Browse
+                  </>
+                )}
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
+                disabled={isUploading}
+                className="sr-only"
+                accept="image/*"
+              />
+            </div>
           </div>
           
-          <Button 
-            type="button" 
-            variant="outline" 
-            onClick={handleClick}
-            disabled={isUploading}
-            className="w-full"
-          >
-            {isUploading ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Uploading...
-              </>
-            ) : (
-              <>
-                <Upload className="w-4 h-4 mr-2" />
-                {previewUrl ? 'Change Image' : 'Upload Image'}
-              </>
-            )}
-          </Button>
-          
           {value && (
-            <div className="text-xs text-muted-foreground break-all">
-              Path: {value}
-            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onChange('')}
+              disabled={isUploading}
+              type="button"
+            >
+              Clear
+            </Button>
           )}
         </div>
-      </FormControl>
-      {description && <FormDescription>{description}</FormDescription>}
-      {error && <FormMessage>{error}</FormMessage>}
-    </FormItem>
+
+        {value && value.startsWith('/') && !value.startsWith('http') && (
+          <div className="rounded-md border overflow-hidden w-40 h-24">
+            <img
+              src={value}
+              alt="Preview"
+              className="w-full h-full object-cover"
+              onError={(e) => (e.currentTarget.src = '/placeholder-image.png')}
+            />
+          </div>
+        )}
+        
+        {description && <p className="text-xs text-muted-foreground">{description}</p>}
+        {(error || uploadError) && (
+          <p className="text-xs text-destructive">{error || uploadError}</p>
+        )}
+      </div>
+    </div>
   );
 }

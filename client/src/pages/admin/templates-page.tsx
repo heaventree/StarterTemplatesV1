@@ -70,23 +70,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { apiRequest, queryClient } from '@/lib/queryClient';
 
-// Form schema for creating/editing templates
-const templateSchema = z.object({
-  title: z.string().min(2, 'Title must be at least 2 characters'),
-  demoUrl: z.string().url('Must be a valid URL').or(z.string().length(0)),
-  imageUrl: z.string().min(2, 'Image URL is required'),
-  category: z.string().optional(),
-  pageBuilder: z.string().optional(),
-  isPro: z.boolean().default(false),
-  isFeatured: z.boolean().default(false),
-  description: z.string().optional(),
-  metaDescription: z.string().optional(),
-  pillLabels: z.array(z.string()).optional(),
-  tags: z.array(z.string()).optional(),
-  displayOrder: z.number().optional(),
-});
-
-type TemplateFormValues = z.infer<typeof templateSchema>;
+import { TemplateForm, TemplateFormValues } from '@/components/forms/TemplateForm';
 
 export default function TemplatesPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -612,238 +596,32 @@ export default function TemplatesPage() {
                     Update the template information.
                   </DialogDescription>
                 </DialogHeader>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Template Title</FormLabel>
-                            <FormControl>
-                              <Input {...field} placeholder="Enter template title" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="demoUrl"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Demo URL</FormLabel>
-                            <FormControl>
-                              <Input {...field} placeholder="https://example.com" />
-                            </FormControl>
-                            <FormDescription className="text-xs">
-                              The URL to the live template demo.
-                            </FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="category"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Category</FormLabel>
-                            <Select 
-                              onValueChange={field.onChange} 
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select a category" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {categories?.map((category) => (
-                                  <SelectItem key={category.id} value={category.name}>
-                                    {category.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="pageBuilder"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Page Builder</FormLabel>
-                            <Select 
-                              onValueChange={field.onChange} 
-                              defaultValue={field.value}
-                              value={field.value}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select a page builder" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {pageBuilders.map((builder) => (
-                                  <SelectItem key={builder.id} value={builder.name}>
-                                    {builder.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="imageUrl"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Image URL</FormLabel>
-                          <FormControl>
-                            <Input {...field} placeholder="Enter image URL" />
-                          </FormControl>
-                          <FormDescription className="text-xs">
-                            URL to the template's thumbnail image. Use a relative path like "/images/thumbnail.jpg" for local files.
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="flex flex-row space-x-4">
-                      <FormField
-                        control={form.control}
-                        name="isPro"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                              <FormLabel>Pro Template</FormLabel>
-                              <FormDescription>
-                                Mark this template as a premium/pro option.
-                              </FormDescription>
-                            </div>
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="isFeatured"
-                        render={({ field }) => (
-                          <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                              />
-                            </FormControl>
-                            <div className="space-y-1 leading-none">
-                              <FormLabel>Featured Template</FormLabel>
-                              <FormDescription>
-                                Feature this template on the homepage.
-                              </FormDescription>
-                            </div>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Description</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              {...field} 
-                              placeholder="Enter template description" 
-                              className="min-h-[100px]"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="metaDescription"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Meta Description</FormLabel>
-                          <FormControl>
-                            <Textarea 
-                              {...field} 
-                              placeholder="Enter meta description for SEO" 
-                              className="min-h-[80px]"
-                            />
-                          </FormControl>
-                          <FormDescription className="text-xs">
-                            Short description for SEO purposes (max 160 characters recommended).
-                          </FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="displayOrder"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Display Order</FormLabel>
-                          <FormControl>
-                            <Input 
-                              type="number" 
-                              {...field} 
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
-                              placeholder="Enter display order (lower numbers appear first)" 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <DialogFooter>
-                      <Button 
-                        variant="outline" 
-                        type="button" 
-                        onClick={() => setEditingTemplate(null)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button 
-                        type="submit" 
-                        disabled={updateMutation.isPending}
-                      >
-                        {updateMutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        Update Template
-                      </Button>
-                    </DialogFooter>
-                  </form>
-                </Form>
+                {categories && labels && tags && editingTemplate && (
+                  <TemplateForm
+                    defaultValues={{
+                      title: editingTemplate.title || '',
+                      demoUrl: editingTemplate.demoUrl || '',
+                      imageUrl: editingTemplate.imageUrl || '',
+                      category: editingTemplate.category || '',
+                      pageBuilder: editingTemplate.pageBuilder || '',
+                      isPro: editingTemplate.isPro || false,
+                      isFeatured: editingTemplate.isFeatured || false,
+                      description: editingTemplate.description || '',
+                      metaDescription: editingTemplate.metaDescription || '',
+                      pillLabels: editingTemplate.pillLabels || [],
+                      tags: editingTemplate.tags || [],
+                      displayOrder: editingTemplate.displayOrder || 0,
+                    }}
+                    onSubmit={onSubmit}
+                    onCancel={() => setEditingTemplate(null)}
+                    isSubmitting={updateMutation.isPending}
+                    isEdit={true}
+                    categories={categories}
+                    pageBuilders={pageBuilders}
+                    labels={labels}
+                    tags={tags}
+                  />
+                )}
               </DialogContent>
             </Dialog>
           </CardHeader>
