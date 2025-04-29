@@ -24,6 +24,7 @@ export const templates = pgTable("templates", {
   isFeatured: boolean("is_featured").default(false),
   metaTitle: text("meta_title"),
   metaDescription: text("meta_description"),
+  description: text("description"),
   pillLabels: text("pill_labels").array(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
