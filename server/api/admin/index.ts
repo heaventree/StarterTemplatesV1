@@ -3,6 +3,7 @@ import { templatesRouter } from './templates';
 import { categoriesRouter } from './categories';
 import { tagsRouter } from './tags';
 import { labelsRouter } from './labels';
+import { uploadImage } from './upload';
 
 const router = Router();
 
@@ -29,5 +30,6 @@ router.use('/templates', templatesRouter);
 router.use('/categories', categoriesRouter);
 router.use('/tags', tagsRouter);
 router.use('/labels', labelsRouter);
+router.post('/upload', uploadImage);
 
 export default router;
