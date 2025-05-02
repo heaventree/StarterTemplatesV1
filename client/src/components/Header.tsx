@@ -36,11 +36,11 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <img 
               src={scrolled 
-                ? "https://startertemplates.com/wp-content/uploads/2020/08/starter-templates-logo.svg"
-                : "https://startertemplates.com/wp-content/uploads/2020/08/starter-templates-logo-white.svg"
+                ? "/images/logos/heaventree-logo-color.png"
+                : "/images/logos/heaventree-logo-white.png"
               }
-              alt="Starter Templates Logo" 
-              className="h-8"
+              alt="Heaventree Logo" 
+              className="h-10"
             />
           </Link>
           
