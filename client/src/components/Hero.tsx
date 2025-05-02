@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import { stats } from "@/lib/data";
 import { useQuery } from "@tanstack/react-query";
 import type { Template } from "@shared/schema";
 import { getAIRecommendedTemplates, getTemplatesByCategory } from "@/services/templateRecommender";
+import AwardsCarousel from "@/components/AwardsCarousel";
 
 export default function Hero() {
   // AI recommendation states
@@ -15,13 +15,6 @@ export default function Hero() {
   const { data: templates = [] } = useQuery<Template[]>({
     queryKey: ["/api/templates"]
   });
-  
-  // Create dynamic stats with actual template count
-  const dynamicStats = [
-    { value: `${templates.length}+`, label: "Templates" },
-    { value: "7+", label: "Categories" },
-    { value: "100K+", label: "Happy Users" }
-  ];
   
   // Handle AI template recommendation based on user prompt
   const handleFindTemplates = () => {
@@ -129,15 +122,10 @@ export default function Hero() {
             </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 mt-8">
-            {dynamicStats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1 count-animation">
-                  {stat.value}
-                </div>
-                <p className="text-sm text-white/80">{stat.label}</p>
-              </div>
-            ))}
+          {/* Award Logos */}
+          <div className="mt-4">
+            <h3 className="text-white text-lg font-semibold mb-2">Award Winning Templates</h3>
+            <AwardsCarousel />
           </div>
         </div>
       </div>
