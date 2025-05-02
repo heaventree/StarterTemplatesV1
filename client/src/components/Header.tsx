@@ -102,10 +102,10 @@ export default function Header() {
               href="https://heaventree.ie" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg ${
+              className={`font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg border-2 ${
                 scrolled 
-                  ? "bg-[#dd4f93] hover:bg-[#8c21a1] text-white" 
-                  : "bg-white hover:bg-gray-100 text-[#8c21a1]"
+                  ? "border-[#dd4f93] hover:border-[#8c21a1] text-[#dd4f93] hover:text-[#8c21a1] bg-transparent" 
+                  : "border-white text-white hover:bg-white/10 bg-transparent"
               }`}
             >
               MAIN SITE
@@ -173,7 +173,7 @@ export default function Header() {
             href="https://heaventree.ie" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="block bg-[#dd4f93] hover:bg-[#8c21a1] text-white font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg text-center"
+            className="block border-2 border-[#dd4f93] hover:border-[#8c21a1] text-[#dd4f93] hover:text-[#8c21a1] bg-transparent font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg text-center"
             onClick={closeMobileMenu}
           >
             MAIN SITE
