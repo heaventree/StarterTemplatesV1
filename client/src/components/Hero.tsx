@@ -124,7 +124,7 @@ export default function Hero() {
           
           {/* Award Logos */}
           <div className="mt-4">
-            <h3 className="text-white text-lg font-semibold mb-2">Award Winning Templates</h3>
+            <h3 className="text-white text-lg font-semibold mb-2">Award Winning Web Design</h3>
             <AwardsCarousel />
           </div>
         </div>
