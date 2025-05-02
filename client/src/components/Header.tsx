@@ -100,7 +100,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center space-x-4">
             <a 
               href="#" 
-              className={`font-proxima-bold py-2 px-6 rounded-md transition-colors ${
+              className={`font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg ${
                 scrolled 
                   ? "bg-[#dd4f93] hover:bg-[#8c21a1] text-white" 
                   : "bg-white hover:bg-gray-100 text-[#8c21a1]"
@@ -169,7 +169,7 @@ export default function Header() {
           </a>
           <a 
             href="#" 
-            className="block bg-[#dd4f93] hover:bg-[#8c21a1] text-white font-proxima-bold py-2 px-6 rounded-md transition-colors text-center"
+            className="block bg-[#dd4f93] hover:bg-[#8c21a1] text-white font-proxima-bold py-2 px-6 rounded-full transition-all shadow-md hover:shadow-lg text-center"
             onClick={closeMobileMenu}
           >
             GET STARTED
