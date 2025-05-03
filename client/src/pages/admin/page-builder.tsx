@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'wouter';
+import { useLocation } from 'wouter';
 import PageBuilder from '@/components/PageBuilder';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,7 +12,7 @@ export default function PageBuilderPage() {
   const [savedContent, setSavedContent] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
-  const [, navigate] = useNavigate();
+  const [, navigate] = useLocation();
 
   const handleSave = async (content: string) => {
     try {

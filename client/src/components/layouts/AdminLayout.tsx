@@ -56,6 +56,11 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
       icon: <Tags className="mr-2 h-4 w-4" />,
       href: "/admin/labels",
     },
+    {
+      name: "Page Builder",
+      icon: <LayoutDashboard className="mr-2 h-4 w-4" />,
+      href: "/admin/page-builder",
+    },
   ];
 
   return (

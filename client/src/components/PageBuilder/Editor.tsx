@@ -115,13 +115,17 @@ const Editor: React.FC<EditorProps> = ({ content = '', onSave }) => {
         run(editor: any, sender: any) {
           const row = this.getRowEl(editor);
           const blocksEl = this.getBlocksEl(row);
-          blocksEl.style.display = '';
+          if (blocksEl && blocksEl instanceof HTMLElement) {
+            blocksEl.style.display = '';
+          }
           sender.set('active', true);
         },
         stop(editor: any, sender: any) {
           const row = this.getRowEl(editor);
           const blocksEl = this.getBlocksEl(row);
-          blocksEl.style.display = 'none';
+          if (blocksEl && blocksEl instanceof HTMLElement) {
+            blocksEl.style.display = 'none';
+          }
           sender.set('active', false);
         }
       });

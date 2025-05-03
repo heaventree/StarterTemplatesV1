@@ -15,6 +15,7 @@ import TemplatesPage from "@/pages/admin/templates-page";
 import CategoriesPage from "@/pages/admin/categories-page";
 import TagsPage from "@/pages/admin/tags-page";
 import LabelsPage from "@/pages/admin/labels-page";
+import PageBuilderPage from "@/pages/admin/page-builder";
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
       <ProtectedRoute path="/admin/categories" component={CategoriesPage} />
       <ProtectedRoute path="/admin/tags" component={TagsPage} />
       <ProtectedRoute path="/admin/labels" component={LabelsPage} />
+      <ProtectedRoute path="/admin/page-builder" component={PageBuilderPage} />
       
       {/* Catch-all route */}
       <Route component={NotFound} />
