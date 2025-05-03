@@ -18,9 +18,21 @@ export default function FeaturesPage() {
     <div className="min-h-screen flex flex-col bg-white text-black">
       <Header />
       
-      <main className="flex-grow pt-24">
+      <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-[#5e2eff] to-[#a66fff] py-16 text-white relative overflow-hidden">
+        <section className="pt-28 pb-16 lg:pt-40 lg:pb-20 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
+          {/* Hero overlay pattern */}
+          <div className="absolute inset-0 z-0 opacity-20">
+            <img 
+              src="https://startertemplates.com/wp-content/uploads/2025/03/st-hero-overlay-scaled.webp" 
+              alt="Background pattern" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5e2eff]/80 to-[#a66fff]/80 opacity-90"></div>
+          
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Heaventree Quickstart Templates
