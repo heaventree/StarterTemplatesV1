@@ -5,22 +5,127 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Check } from "lucide-react";
 
-interface DetailedFeature {
-  id: string;
+interface FeatureHighlight {
   title: string;
   description: string;
+  icon?: string;
+  iconBgColor?: string;
+  iconColor?: string;
+}
+
+interface Feature {
+  id: number;
+  title: string;
+  slug: string;
+  icon: string;
+  shortDescription: string;
   image: string;
-  features: string[];
+  highlights: FeatureHighlight[];
 }
 
 export default function FeaturesPage() {
+  // Feature highlights data (will be fetched from API in future)
+  const featuresOverview = [
+    {
+      title: "Easy Customization",
+      icon: "/images/features/icons/Colors-Typography.svg",
+      description: "Customize every aspect of your website with intuitive controls and options",
+      features: [
+        "Global color controls",
+        "Typography options",
+        "Spacing controls",
+        "Layout customization"
+      ]
+    },
+    {
+      title: "Performance Optimized",
+      icon: "/images/features/icons/Advanced-Header.svg",
+      description: "Build websites that load quickly and provide a smooth experience for visitors",
+      features: [
+        "Lightweight code",
+        "Optimized assets",
+        "Caching integration",
+        "Mobile optimization"
+      ]
+    },
+    {
+      title: "SEO Friendly",
+      icon: "/images/features/icons/Blog-Pro.svg",
+      description: "Rank higher in search results with built-in SEO optimizations",
+      features: [
+        "Schema markup",
+        "Fast loading times",
+        "Mobile-friendly designs",
+        "Clean code structure"
+      ]
+    }
+  ];
+
+  // Testimonials data
+  const testimonials = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      role: "Web Designer",
+      company: "Creative Studios",
+      quote: "The templates and features have completely transformed my workflow. I can now build beautiful websites in half the time it used to take me.",
+      avatar: "/images/avatars/testimonial-1.jpg"
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      role: "Agency Owner",
+      company: "Digital Spark",
+      quote: "My team relies on these templates for all our client projects. The customization options and performance are unmatched.",
+      avatar: "/images/avatars/testimonial-2.jpg"
+    },
+    {
+      id: 3,
+      name: "Emily Rodriguez",
+      role: "Freelancer",
+      company: "Self-employed",
+      quote: "As a solo designer, these templates have been a game-changer for my business. I can deliver professional results to my clients quickly.",
+      avatar: "/images/avatars/testimonial-3.jpg"
+    }
+  ];
+
+  // Main features data (will be fetched from API in future)
+  const features = [
+    {
+      id: 1,
+      title: "Header Builder",
+      slug: "header-builder",
+      icon: "/images/features/icons/Advanced-Header.svg",
+      shortDescription: "Customize your site header with flexible options",
+      image: "/images/features/sticky-header-pro-new.png",
+      highlights: [
+        { title: "Sticky Headers", description: "Headers that stay visible while scrolling" },
+        { title: "Transparent Headers", description: "For beautiful hero sections with overlays" },
+        { title: "Multiple Layouts", description: "Choose from various header designs" }
+      ]
+    },
+    {
+      id: 2,
+      title: "Footer Builder",
+      slug: "footer-builder",
+      icon: "/images/features/icons/footer-builder-icon.svg",
+      shortDescription: "Design professional footers that match your brand",
+      image: "/images/features/footer-builder.png",
+      highlights: [
+        { title: "Multiple Columns", description: "Flexible column layouts" },
+        { title: "Widget Areas", description: "Add widgets to any footer section" },
+        { title: "Copyright Bar", description: "Customizable copyright section" }
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
       <Header />
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="pt-28 pb-16 lg:pt-40 lg:pb-20 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
+        <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
           {/* Hero overlay pattern */}
           <div className="absolute inset-0 z-0 opacity-20">
             <img 
@@ -37,31 +142,35 @@ export default function FeaturesPage() {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Heaventree Quickstart Templates
             </h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-6">
+            <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
               Do More in Less Time. Without Coding!
             </p>
+            
+            {/* Feature Icons */}
             <div className="flex justify-center gap-4 mb-12 flex-wrap">
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-36">
+              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
                 <img src="/images/features/icons/Advanced-Header.svg" alt="Headers" className="h-8 w-8 mb-2" />
                 <span className="text-sm">Headers</span>
               </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-36">
+              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
                 <img src="/images/features/icons/footer-builder-icon.svg" alt="Footers" className="h-8 w-8 mb-2" />
                 <span className="text-sm">Footers</span>
               </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-36">
+              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
                 <img src="/images/features/icons/Colors-Typography.svg" alt="Colors" className="h-8 w-8 mb-2" />
                 <span className="text-sm">Colors</span>
               </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-36">
+              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
                 <img src="/images/features/icons/Blog-Pro.svg" alt="Blog" className="h-8 w-8 mb-2" />
                 <span className="text-sm">Blog</span>
               </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-36">
+              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
                 <img src="/images/features/icons/WooCommerce.svg" alt="WooCommerce" className="h-8 w-8 mb-2" />
                 <span className="text-sm">WooCommerce</span>
               </div>
             </div>
+            
+            {/* Stats Box */}
             <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 max-w-4xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="text-center">
@@ -78,6 +187,8 @@ export default function FeaturesPage() {
                 </div>
               </div>
             </div>
+            
+            {/* CTA Button */}
             <Button className="mt-8 px-8 py-6 rounded-full bg-[#ff6f61] text-white hover:bg-[#ff5e50] border-0 text-lg font-semibold">
               Get Started Today
             </Button>
@@ -125,6 +236,49 @@ export default function FeaturesPage() {
           </div>
         </section>
         
+        {/* Features Showcase Section */}
+        <section className="py-20 bg-white border-b border-gray-100">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Fast Performance, Limitless Possibilities
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Create professional websites with powerful features and customization options.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              {features.map((feature) => (
+                <div key={feature.id} className="flex flex-col bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+                  <div className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-[#f4f6fa] rounded-lg flex items-center justify-center mr-4">
+                        <img src={feature.icon} alt={feature.title} className="h-6 w-6" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">{feature.title}</h3>
+                    </div>
+                    <p className="text-gray-600 mb-4">{feature.shortDescription}</p>
+                    <ul className="space-y-2 mb-6">
+                      {feature.highlights.map((highlight, idx) => (
+                        <li key={idx} className="flex items-start text-sm text-gray-600">
+                          <Check className="h-4 w-4 text-[#6f42c1] mr-2 mt-0.5" />
+                          <span>{highlight.title}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-auto p-6 border-t border-gray-100">
+                    <Link href={`/features/${feature.slug}`} className="text-[#6f42c1] flex items-center font-medium hover:text-[#5a35a0] transition-colors">
+                      Learn more <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Site Builder Section */}
         <section className="py-20 bg-[#f9f9ff]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
