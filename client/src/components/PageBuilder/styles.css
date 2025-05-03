@@ -1,104 +1,228 @@
+/* Page Builder Styles */
 .editor-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
-}
-
-.panel__devices,
-.panel__basic-actions,
-.panel__switcher {
-  display: flex;
-  background-color: #f5f5f5;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
 }
 
 .editor-row {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  min-height: 700px;
 }
 
 .editor-canvas {
-  flex: 70%;
+  flex: 75%;
   position: relative;
-  overflow-y: auto;
-  background-color: #fff;
+  border-right: 1px solid #f0f0f0;
+  background-color: #fbfbfd;
 }
 
 .blocks-container {
-  flex: 30%;
-  max-width: 300px;
-  background-color: #f5f5f5;
-  border-left: 1px solid #ddd;
-  padding: 10px;
+  flex: 25%;
+  max-width: 320px;
+  height: 700px;
   overflow-y: auto;
+  background-color: #fdfdfd;
+  border-left: 1px solid #f0f0f0;
+  padding: 15px;
 }
 
-.gjs-block {
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
+.panel__devices {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 12px 15px;
+  border-bottom: 1px solid #f0f0f0;
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+}
+
+.panel__basic-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 12px 15px;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.panel__switcher {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background-color: transparent;
+  border: none;
+}
+
+/* GrapesJS Block Categories Styling */
+.gjs-block-category {
+  background-color: #fcfcfd;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.gjs-block-category .gjs-title {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 12px 15px;
+  color: #4a6cf7;
+  font-size: 14px;
   cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.gjs-blocks-c {
+  padding: 15px 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 12px;
+}
+
+/* GrapesJS Block Styling */
+.gjs-block {
   transition: all 0.2s ease;
+  border: 1px solid #f0f0f0;
+  border-radius: 6px;
+  margin: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  background-color: #fff;
+  cursor: grab;
+  padding: 15px 10px;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .gjs-block:hover {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-color: #e4e8f7;
+}
+
+.gjs-block svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 8px;
+  color: #4a6cf7;
 }
 
 .gjs-block-label {
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
 }
 
-.gjs-block-category {
-  margin-bottom: 20px;
-}
-
-.gjs-block-category-title {
-  font-weight: bold;
-  margin-bottom: 10px;
-  font-size: 16px;
-}
-
+/* GrapesJS Color Customizations */
 .gjs-two-color {
-  color: #6f42c1;
+  color: #4a6cf7; /* Primary color */
 }
 
 .gjs-one-bg {
-  background-color: #f9f9ff;
+  background-color: #f9f9ff; /* Light background */
 }
 
 .gjs-four-color {
-  color: #554;
+  color: #444; /* Text color */
 }
 
 .gjs-four-color-h:hover {
-  color: #6f42c1;
+  color: #4a6cf7; /* Hover color */
 }
 
 /* Custom buttons */
 .btn-save {
-  background-color: #6f42c1;
+  background-color: #4a6cf7;
   color: white;
-  border: none;
-  padding: 5px 10px;
+  padding: 8px 16px;
   border-radius: 4px;
+  margin-left: 10px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  border: none;
   cursor: pointer;
 }
 
 .btn-save:hover {
-  background-color: #5a35a0;
+  background-color: #3a5df0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
+}
+
+/* GrapesJS Device Buttons Styling */
+.gjs-pn-btn {
+  margin: 0 5px;
+  background-color: transparent;
+  color: #666;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  border: 1px solid #eaeaea;
+}
+
+.gjs-pn-btn:hover {
+  background-color: #f8f9fa;
+  color: #4a6cf7;
+}
+
+.gjs-pn-btn.gjs-pn-active {
+  background-color: #f0f4ff;
+  color: #4a6cf7;
+  border-color: #d8e2ff;
+}
+
+/* GrapesJS Editor Styling */
+.gjs-editor {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+}
+
+.gjs-cv-canvas {
+  background-color: #f9fafb;
+  border-radius: 0 0 4px 4px;
 }
 
 /* Preview container */
 .preview-container {
   background-color: white;
   overflow: auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Make editor frame responsive */
+@media (max-width: 992px) {
+  .editor-row {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .editor-canvas {
+    flex: none;
+    min-height: 500px;
+    margin-bottom: 20px;
+  }
+  
+  .blocks-container {
+    flex: none;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid #f0f0f0;
+  }
 }
