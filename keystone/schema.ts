@@ -1,9 +1,36 @@
 import { list } from '@keystone-6/core';
 import { text, relationship, select, integer, checkbox } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
+import type { BaseAccessArgs, ListOperationAccessControl, ListConfig, BaseListTypeInfo } from '@keystone-6/core/types';
+
+// Define type for session data
+type SessionData = {
+  data?: {
+    isAdmin?: boolean;
+  };
+};
+
+// Define default access permissions
+const defaultAccess = {
+  operation: {
+    // By default, we only allow admins to mutate data
+    create: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
+    update: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
+    delete: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
+    // Read access for everyone
+    query: () => true,
+  },
+};
 
 export const lists = {
   User: list({
+    access: {
+      operation: {
+        ...defaultAccess.operation,
+        // Extra protection for user data
+        query: ({ session }) => session?.data?.isAdmin || false,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       email: text({
@@ -20,6 +47,7 @@ export const lists = {
   }),
 
   FeatureCategory: list({
+    access: defaultAccess,
     fields: {
       name: text({ validation: { isRequired: true } }),
       slug: text({ 
@@ -32,6 +60,7 @@ export const lists = {
   }),
 
   Feature: list({
+    access: defaultAccess,
     fields: {
       title: text({ validation: { isRequired: true } }),
       slug: text({ 
@@ -70,6 +99,7 @@ export const lists = {
   }),
 
   FeatureHighlight: list({
+    access: defaultAccess,
     fields: {
       title: text({ validation: { isRequired: true } }),
       description: text({ ui: { displayMode: 'textarea' } }),
@@ -91,6 +121,7 @@ export const lists = {
   }),
 
   Testimonial: list({
+    access: defaultAccess,
     fields: {
       name: text({ validation: { isRequired: true } }),
       role: text(),

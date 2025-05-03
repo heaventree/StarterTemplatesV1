@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { setupKeystone } from "./keystone";
 
 const app = express();
 app.use(express.json());
@@ -37,6 +38,18 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Initialize Keystone CMS
+  try {
+    // Only set up KeystoneJS if we're in development mode for now
+    if (process.env.NODE_ENV === 'development') {
+      log('Setting up KeystoneJS CMS...');
+      await setupKeystone(app);
+      log('KeystoneJS CMS is ready at /admin');
+    }
+  } catch (error) {
+    log(`Error setting up KeystoneJS: ${error}`);
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
