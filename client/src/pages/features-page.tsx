@@ -5,6 +5,14 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
+interface DetailedFeature {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  features: string[];
+}
+
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen flex flex-col">
@@ -268,7 +276,7 @@ const features = [
   }
 ];
 
-const detailedFeatures = [
+const detailedFeatures: DetailedFeature[] = [
   {
     id: "site-layouts",
     title: "Beautiful Site Layouts",
