@@ -5,7 +5,6 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, ArrowRight, Check } from "lucide-react";
 
-// Types
 interface FeatureHighlight {
   title: string;
   description: string;
@@ -26,21 +25,6 @@ interface FeatureOverview {
   icon: string;
   description: string;
   features: string[];
-}
-
-interface SiteBuilderFeature {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  company: string;
-  quote: string;
-  avatar: string;
 }
 
 export default function FeaturesPage() {
@@ -111,55 +95,8 @@ export default function FeaturesPage() {
     }
   ];
 
-  // Site builder features data
-  const siteBuilderFeatures: SiteBuilderFeature[] = [
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-      </svg>,
-      title: "Layout Control",
-      description: "Full control over page layouts with intuitive controls for spacing, alignment, and organization."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>,
-      title: "Global Colors",
-      description: "Set your brand colors once and apply them consistently across your entire website with ease."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>,
-      title: "Typography Settings",
-      description: "Choose from hundreds of web fonts and customize sizes, weights, and styles for a perfect typographic design."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-      </svg>,
-      title: "Mobile Optimization",
-      description: "Ensure your website looks perfect on all devices with built-in responsive design controls."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-      </svg>,
-      title: "Live Customizer",
-      description: "See changes in real-time as you customize your website with the intuitive visual editor."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>,
-      title: "Custom Widgets",
-      description: "Add functionality to your website with a wide range of widgets and content elements."
-    }
-  ];
-
   // Testimonials data
-  const testimonials: Testimonial[] = [
+  const testimonials = [
     {
       id: 1,
       name: "Sarah Johnson",
@@ -417,48 +354,11 @@ export default function FeaturesPage() {
                 </div>
               </div>
             </div>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/">
-                <Button className="px-8 py-6 rounded-full bg-[#ff6f61] text-white hover:bg-[#ff5e50] border-0 text-lg font-semibold">
-                  Explore Templates <ArrowRight className="ml-2" />
-                </Button>
-              </Link>
-              <a href="https://heaventree.ie" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="px-8 py-6 rounded-full border-2 border-[#6f42c1] text-[#6f42c1] hover:bg-[#6f42c1]/10 text-lg font-semibold">
-                  Visit Main Site
-                </Button>
-              </a>
-            </div>
           </div>
         </section>
-        
-        {/* Site Builder Features Section */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-              All-in-One Site Builder
-            </h2>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto mb-16">
-              A complete toolkit to craft a unique, visually engaging site, all from one place.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-              {siteBuilderFeatures.map((feature, index) => (
-                <div key={index} className="bg-white p-8 rounded-xl shadow-sm hover:shadow-lg transition-all border border-gray-100">
-                  <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center bg-[#f3f1ff] rounded-xl">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 text-gray-900">{feature.title}</h3>
-                  <p className="text-gray-700">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        
+
         {/* Testimonials Section */}
-        <section className="py-24 bg-[#f9f9ff]">
+        <section className="py-24 bg-white">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
