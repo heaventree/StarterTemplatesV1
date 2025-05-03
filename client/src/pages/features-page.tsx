@@ -610,6 +610,91 @@ export default function FeaturesPage() {
             </div>
           </div>
         </section>
+        
+        {/* Testimonials Section */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                What Our Customers Say
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Join thousands of web designers and developers who are already building
+                amazing websites with our templates and features.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={index}
+                  className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-center mb-6">
+                    <div className="w-14 h-14 rounded-full overflow-hidden mr-4 border-2 border-[#6f42c1]">
+                      <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        
+        {/* Final CTA Section */}
+        <section className="py-24 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
+          {/* Background pattern */}
+          <div className="absolute inset-0 z-0 opacity-10">
+            <img 
+              src="https://startertemplates.com/wp-content/uploads/2025/03/st-hero-overlay-scaled.webp" 
+              alt="Background pattern" 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                Ready to Create Amazing Websites?
+              </h2>
+              <p className="text-xl md:text-2xl mb-10 opacity-90">
+                Get started today and transform your web design workflow with our
+                powerful templates and features.
+              </p>
+              
+              <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold mb-2">280+</div>
+                    <div className="text-sm">Ready-to-use Templates</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold mb-2">50,000+</div>
+                    <div className="text-sm">Active Users</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl font-bold mb-2">4.9/5</div>
+                    <div className="text-sm">Customer Rating</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <Button className="px-8 py-6 rounded-full bg-[#ff6f61] text-white hover:bg-[#ff5e50] border-0 text-lg font-semibold">
+                  Get Started Today
+                </Button>
+                <Button variant="outline" className="px-8 py-6 rounded-full bg-transparent text-white border-white border-2 hover:bg-white/10 text-lg font-semibold">
+                  View Pricing Plans
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
       
       <Footer />
