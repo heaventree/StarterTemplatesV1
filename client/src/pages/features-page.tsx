@@ -42,13 +42,17 @@ export default function FeaturesPage() {
                 Heaventree Quickstart Templates provides all the essential tools and features 
                 to create stunning websites without any coding knowledge.
               </p>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-4">
+                Get access to powerful features for painless WordPress designing, without the high costs. 
+                With all the time you will save, it's a product that pays for itself!
+              </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {features.map((feature, index) => (
                 <div 
                   key={index} 
-                  className="bg-gray-50 p-8 rounded-lg transition-all hover:shadow-lg"
+                  className="bg-gray-50 p-8 rounded-lg transition-all hover:shadow-lg hover:translate-y-[-5px] duration-300"
                 >
                   <div className="text-[#dd4f93] mb-4">
                     {feature.icon}
@@ -68,6 +72,7 @@ export default function FeaturesPage() {
               <div 
                 key={sectionIndex} 
                 className={`flex flex-col ${sectionIndex % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} mb-20 items-center`}
+                id={section.id}
               >
                 <div className="lg:w-1/2 mb-10 lg:mb-0">
                   <img 
@@ -90,6 +95,81 @@ export default function FeaturesPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+        
+        {/* Site Builder Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              All-in-One Site Builder
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12">
+              A complete toolkit to craft a unique, visually engaging site, all from one place.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Layout Control</h3>
+                <p className="text-gray-600">Full control over page layouts with intuitive controls for spacing, alignment, and organization.</p>
+              </div>
+              
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Global Colors</h3>
+                <p className="text-gray-600">Set your brand colors once and apply them consistently across your entire website with ease.</p>
+              </div>
+              
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Typography Settings</h3>
+                <p className="text-gray-600">Choose from hundreds of web fonts and customize sizes, weights, and styles for a perfect typographic design.</p>
+              </div>
+              
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Mobile Optimization</h3>
+                <p className="text-gray-600">Ensure your website looks perfect on all devices with built-in responsive design controls.</p>
+              </div>
+              
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Live Customizer</h3>
+                <p className="text-gray-600">See changes in real-time as you customize your website with the intuitive visual editor.</p>
+              </div>
+              
+              <div className="p-6 bg-gray-50 rounded-lg shadow-sm hover:shadow-md transition-all">
+                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-50 rounded-full">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#dd4f93]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2">Custom Widgets</h3>
+                <p className="text-gray-600">Add functionality to your website with a wide range of widgets and content elements.</p>
+              </div>
+            </div>
           </div>
         </section>
         
@@ -190,6 +270,7 @@ const features = [
 
 const detailedFeatures = [
   {
+    id: "site-layouts",
     title: "Beautiful Site Layouts",
     description: "Build stunning, responsive layouts for any type of website with our ready-to-use components.",
     image: "/images/features/Build-Beautiful-Site-Layouts.png",
@@ -201,6 +282,7 @@ const detailedFeatures = [
     ]
   },
   {
+    id: "header-builder",
     title: "Advanced Header Options",
     description: "Create the perfect header for your website with our advanced customization tools.",
     image: "/images/features/sticky-header-pro-new.png",
@@ -212,6 +294,7 @@ const detailedFeatures = [
     ]
   },
   {
+    id: "footer-builder",
     title: "Custom Footer Builder",
     description: "Design custom footers that match your brand and provide all the information your visitors need.",
     image: "/images/features/Footer-Builder-Video.png",
@@ -223,6 +306,7 @@ const detailedFeatures = [
     ]
   },
   {
+    id: "blog-layouts",
     title: "Blog Layouts & Customization",
     description: "Create beautiful blog pages with multiple layout options and customization features.",
     image: "/images/features/blog-layouts.png",
@@ -234,6 +318,7 @@ const detailedFeatures = [
     ]
   },
   {
+    id: "woocommerce",
     title: "WooCommerce Integration",
     description: "Build professional e-commerce stores with our deep WooCommerce integration.",
     image: "/images/features/white-lable-visual.png",
