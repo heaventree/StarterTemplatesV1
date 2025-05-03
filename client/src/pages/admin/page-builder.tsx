@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'wouter';
 import PageBuilder from '@/components/PageBuilder';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import AdminLayout from '@/components/layouts/AdminLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -51,45 +50,39 @@ export default function PageBuilderPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <AdminLayout title="Page Builder">
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle>Page Editor</CardTitle>
+          <CardDescription>Create and edit your website pages</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="mb-4">
+            <label htmlFor="page-title" className="block text-sm font-medium mb-1">
+              Page Title
+            </label>
+            <Input
+              id="page-title"
+              value={pageTitle}
+              onChange={(e) => setPageTitle(e.target.value)}
+              className="max-w-md"
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline" onClick={handleExitEditor} disabled={isNavigating}>
+            {isNavigating ? 'Exiting...' : 'Exit Editor'}
+          </Button>
+          <Button onClick={() => handleSave(savedContent)} disabled={isSaving}>
+            {isSaving ? 'Saving...' : 'Save Page'}
+          </Button>
+        </CardFooter>
+      </Card>
       
-      <div className="container mx-auto px-4 py-8 flex-grow">
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>Page Builder</CardTitle>
-            <CardDescription>Create and edit your website pages</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="mb-4">
-              <label htmlFor="page-title" className="block text-sm font-medium text-gray-700 mb-1">
-                Page Title
-              </label>
-              <Input
-                id="page-title"
-                value={pageTitle}
-                onChange={(e) => setPageTitle(e.target.value)}
-                className="max-w-md"
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex justify-between">
-            <Button variant="outline" onClick={handleExitEditor} disabled={isNavigating}>
-              {isNavigating ? 'Exiting...' : 'Exit Editor'}
-            </Button>
-            <Button onClick={() => handleSave(savedContent)} disabled={isSaving}>
-              {isSaving ? 'Saving...' : 'Save Page'}
-            </Button>
-          </CardFooter>
-        </Card>
-        
-        <PageBuilder 
-          initialContent={savedContent}
-          onSave={handleSave}
-        />
-      </div>
-      
-      <Footer />
-    </div>
+      <PageBuilder 
+        initialContent={savedContent}
+        onSave={handleSave}
+      />
+    </AdminLayout>
   );
 }
