@@ -240,13 +240,13 @@ const testimonials = [
   {
     name: "Michael Chen",
     role: "Freelance Designer",
-    avatar: "/images/testimonials/avatar2.jpg",
+    avatar: "https://via.placeholder.com/100x100?text=Avatar2",
     quote: "As a designer, I appreciate the clean code and flexibility. It allows me to create custom websites for clients without starting from scratch."
   },
   {
     name: "Emma Williams",
     role: "E-commerce Entrepreneur",
-    avatar: "/images/testimonials/avatar3.jpg",
+    avatar: "https://via.placeholder.com/100x100?text=Avatar3",
     quote: "The WooCommerce templates are fantastic. I launched my online store in a weekend and sales have been growing steadily ever since."
   }
 ];

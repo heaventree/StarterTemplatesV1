@@ -9,6 +9,7 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Roadmap from "@/pages/Roadmap";
+import FeaturesPage from "@/pages/features-page";
 import AdminLoginPage from "@/pages/admin/login-page";
 import TemplatesPage from "@/pages/admin/templates-page";
 import CategoriesPage from "@/pages/admin/categories-page";
@@ -21,6 +22,7 @@ function Router() {
       {/* Public Routes */}
       <Route path="/" component={Home} />
       <Route path="/roadmap" component={Roadmap} />
+      <Route path="/features" component={FeaturesPage} />
       
       {/* Admin Routes */}
       <Route path="/admin/login" component={AdminLoginPage} />
