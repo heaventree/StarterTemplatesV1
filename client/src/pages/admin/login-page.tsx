@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
 
   // If already logged in, redirect to admin dashboard
   if (user) {
-    return <Redirect to="/admin/templates" />;
+    return <Redirect to="/dashboard/templates" />;
   }
 
   return (

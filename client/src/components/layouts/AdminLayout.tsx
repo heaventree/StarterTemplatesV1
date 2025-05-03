@@ -39,27 +39,27 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
     {
       name: "Templates",
       icon: <LayoutTemplate className="mr-2 h-4 w-4" />,
-      href: "/admin/templates",
+      href: "/dashboard/templates",
     },
     {
       name: "Categories",
       icon: <ListFilter className="mr-2 h-4 w-4" />,
-      href: "/admin/categories",
+      href: "/dashboard/categories",
     },
     {
       name: "Tags",
       icon: <Tag className="mr-2 h-4 w-4" />,
-      href: "/admin/tags",
+      href: "/dashboard/tags",
     },
     {
       name: "Labels",
       icon: <Tags className="mr-2 h-4 w-4" />,
-      href: "/admin/labels",
+      href: "/dashboard/labels",
     },
     {
       name: "Page Builder",
       icon: <LayoutDashboard className="mr-2 h-4 w-4" />,
-      href: "/admin/page-builder",
+      href: "/dashboard/page-builder",
     },
   ];
 
@@ -67,7 +67,7 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
     <div className="min-h-screen flex flex-col">
       <header className="border-b sticky top-0 z-30 bg-background">
         <div className="flex h-16 items-center px-4 sm:px-6">
-          <Link href="/admin/templates" className="flex items-center gap-2 font-semibold">
+          <Link href="/dashboard/templates" className="flex items-center gap-2 font-semibold">
             <LayoutTemplate className="h-6 w-6" />
             <span>Template Admin</span>
           </Link>

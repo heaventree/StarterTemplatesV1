@@ -26,12 +26,12 @@ function Router() {
       <Route path="/features" component={FeaturesPage} />
       
       {/* Admin Routes */}
-      <Route path="/admin/login" component={AdminLoginPage} />
-      <ProtectedRoute path="/admin/templates" component={TemplatesPage} />
-      <ProtectedRoute path="/admin/categories" component={CategoriesPage} />
-      <ProtectedRoute path="/admin/tags" component={TagsPage} />
-      <ProtectedRoute path="/admin/labels" component={LabelsPage} />
-      <ProtectedRoute path="/admin/page-builder" component={PageBuilderPage} />
+      <Route path="/dashboard/login" component={AdminLoginPage} />
+      <ProtectedRoute path="/dashboard/templates" component={TemplatesPage} />
+      <ProtectedRoute path="/dashboard/categories" component={CategoriesPage} />
+      <ProtectedRoute path="/dashboard/tags" component={TagsPage} />
+      <ProtectedRoute path="/dashboard/labels" component={LabelsPage} />
+      <ProtectedRoute path="/dashboard/page-builder" component={PageBuilderPage} />
       
       {/* Catch-all route */}
       <Route component={NotFound} />

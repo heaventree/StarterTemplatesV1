@@ -46,7 +46,7 @@ export default function PageBuilderPage() {
       }
     }
 
-    navigate('/admin');
+    navigate('/dashboard/templates');
   };
 
   return (
