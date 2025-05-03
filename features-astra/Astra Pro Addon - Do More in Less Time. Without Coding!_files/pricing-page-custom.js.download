@@ -1,0 +1,88 @@
+// Pricing Page tooltip Script 
+jQuery(document).ready(function () {
+  jQuery('.tooltip').tooltipster({
+    animation: 'fade',
+    delay: 100,
+    theme: ['tooltipster-noir', 'tooltipster-noir-customized'],
+    interactive: 'true',
+    side: 'right'
+  });
+  jQuery('.tooltip-right').tooltipster({
+    animation: 'fade',
+    delay: 100,
+    theme: ['tooltipster-noir', 'tooltipster-noir-customized'],
+    interactive: 'true',
+    side: 'right'
+  });
+  jQuery('.tooltip-left').tooltipster({
+    animation: 'fade',
+    delay: 100,
+    theme: ['tooltipster-noir', 'tooltipster-noir-customized'],
+    interactive: 'true',
+    side: 'left'
+  });
+  jQuery('.tooltip-top').tooltipster({
+    animation: 'fade',
+    delay: 100,
+    theme: ['tooltipster-noir', 'tooltipster-noir-customized'],
+    interactive: 'true',
+    side: 'top'
+  });
+
+  // Free Pro Load More Table Rows
+  jQuery(".load-spectra-free-pro-table-rows").click(function () {
+    jQuery(".spectra-free-pro-comparision-table").slideToggle(700);
+    jQuery(".load-spectra-free-pro-table-rows").hide();
+  });
+
+
+  // Tooltip Script
+  function applyCustomCSS() {
+    var cbReadyElement = jQuery('.cb-ready');
+    if (cbReadyElement.length > 0) {
+      var marginTopValue = -cbReadyElement.height() + 'px';
+      jQuery('<style id="customCSS">.tooltipster-base { margin-top: ' + marginTopValue + '; }</style>').appendTo('head');
+    } else {
+      jQuery('<style id="customCSS">.tooltipster-base { margin-top: 0; }</style>').appendTo('head');
+    }
+  }
+  jQuery(document).on('mouseenter', '.tooltip', function () {
+    applyCustomCSS();
+  });
+
+});
+
+
+// Table Buttons
+
+document.addEventListener('DOMContentLoaded', function () {
+  var button1 = document.getElementById("spectra-free-vs-pro-table");
+  var button2 = document.getElementById("plan-comparision");
+  var section1 = document.getElementById("hidden-astra-free-vs-pro-section");
+  var section2 = document.getElementById("hidden-comparision-table");
+
+  button1.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    section1.style.display = "block";
+    section2.style.display = "none";
+    section1.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  button2.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent default link behavior
+    section2.style.display = "block";
+    section1.style.display = "none";
+    section2.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  var buttons = document.querySelectorAll('.button-scroll-fix a[href="#"]');
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault(); // Prevent default link behavior
+      // Add your custom click event handling here
+    });
+  });
+
+
+});

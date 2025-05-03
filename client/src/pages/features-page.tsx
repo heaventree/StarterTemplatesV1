@@ -18,14 +18,14 @@ export default function FeaturesPage() {
               Heaventree Quickstart Templates
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-10">
-              Do More in Less Time. Without Coding!
+              Professional Website Templates with Powerful Features
             </p>
-            <div className="flex justify-center space-x-4">
+            <div className="flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0">
               <Button className="px-8 py-6 rounded-full bg-white text-[#8c21a1] hover:bg-gray-100 text-lg">
-                Get Started
+                View Our Templates
               </Button>
-              <Button variant="outline" className="px-8 py-6 rounded-full border-white text-white hover:bg-white/10 text-lg">
-                View Templates
+              <Button variant="outline" className="px-8 py-6 rounded-full border-2 border-white text-white hover:bg-white/10 text-lg">
+                Learn More
               </Button>
             </div>
           </div>
@@ -132,14 +132,19 @@ export default function FeaturesPage() {
         <section className="py-20 bg-gradient-to-r from-[#8c21a1] to-[#dd4f93] text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Get Started?
+              Ready to Create Your Website?
             </h2>
             <p className="text-xl max-w-3xl mx-auto mb-10">
-              Join thousands of users who are building beautiful websites with Heaventree Quickstart Templates
+              Explore our collection of professional templates and start building your dream website today with Heaventree Quickstart Templates
             </p>
-            <Button className="px-8 py-6 rounded-full bg-white text-[#8c21a1] hover:bg-gray-100 text-lg">
-              Get Started Now <ArrowRight className="ml-2" />
-            </Button>
+            <div className="flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0">
+              <Button className="px-8 py-6 rounded-full bg-white text-[#8c21a1] hover:bg-gray-100 text-lg">
+                Explore Templates <ArrowRight className="ml-2" />
+              </Button>
+              <Button variant="outline" className="px-8 py-6 rounded-full border-2 border-white text-white hover:bg-white/10 text-lg">
+                View Main Site
+              </Button>
+            </div>
           </div>
         </section>
       </main>
@@ -152,79 +157,90 @@ export default function FeaturesPage() {
 // Mock data for features
 const features = [
   {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
-    title: "Responsive Templates",
-    description: "All templates are fully responsive and look great on any device from mobile to desktop."
+    icon: <img src="/images/features/icons/Advanced-Header.svg" alt="Header Options" className="h-12 w-12" />,
+    title: "Advanced Header Options",
+    description: "Create sticky, transparent, and fully customizable headers that perfectly match your brand identity."
   },
   {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>,
-    title: "Easy Customization",
-    description: "Customize colors, fonts, layouts and more without writing a single line of code."
+    icon: <img src="/images/features/icons/footer-builder-icon.svg" alt="Footer Builder" className="h-12 w-12" />,
+    title: "Custom Footer Builder",
+    description: "Design custom footers with multiple layouts, widget areas, and branding options."
+  },
+  {
+    icon: <img src="/images/features/icons/Colors-Typography.svg" alt="Colors & Typography" className="h-12 w-12" />,
+    title: "Colors & Typography",
+    description: "Take complete control of your website's appearance with extensive color and typography options."
+  },
+  {
+    icon: <img src="/images/features/icons/Blog-Pro.svg" alt="Blog Layouts" className="h-12 w-12" />,
+    title: "Blog Layouts",
+    description: "Create beautiful blog pages with multiple layout options like grid, list, and masonry."
+  },
+  {
+    icon: <img src="/images/features/icons/WooCommerce.svg" alt="WooCommerce" className="h-12 w-12" />,
+    title: "WooCommerce Integration",
+    description: "Build professional online stores with customizable product pages, shop layouts, and more."
   },
   {
     icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
-    title: "Fast Performance",
-    description: "Optimized for speed with clean code and best practices for fast loading times."
-  },
-  {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" /></svg>,
-    title: "Multiple Page Builders",
-    description: "Compatible with popular page builders like Elementor, Gutenberg, Beaver Builder, and more."
-  },
-  {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>,
-    title: "Mobile-First Approach",
-    description: "Designed with mobile users in mind, ensuring perfect display on smartphones and tablets."
-  },
-  {
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
-    title: "Regular Updates",
-    description: "Constant updates with new features and templates to keep your website on the cutting edge."
+    title: "Performance Optimized",
+    description: "Build fast-loading websites with clean code and best practices for optimal performance."
   }
 ];
 
 const detailedFeatures = [
   {
-    title: "Stunning Ready-Made Templates",
-    description: "Choose from hundreds of professionally designed templates to kickstart your website.",
-    image: "https://via.placeholder.com/800x500?text=Templates+Feature",
+    title: "Beautiful Site Layouts",
+    description: "Build stunning, responsive layouts for any type of website with our ready-to-use components.",
+    image: "/images/features/Build-Beautiful-Site-Layouts.png",
     features: [
       "Professionally designed templates for any business or personal website",
-      "Regularly updated with fresh designs",
-      "Categorized by industry and purpose for easy selection",
-      "One-click import to get started instantly"
+      "Drag and drop layout builder for custom designs",
+      "Responsive layouts that look great on all devices",
+      "Pre-built sections that can be mixed and matched"
     ]
   },
   {
-    title: "Powerful Customization Options",
-    description: "Take complete control of your website's appearance without writing code.",
-    image: "https://via.placeholder.com/800x500?text=Customization+Feature",
+    title: "Advanced Header Options",
+    description: "Create the perfect header for your website with our advanced customization tools.",
+    image: "/images/features/sticky-header-pro-new.png",
     features: [
-      "Intuitive visual editor for real-time customization",
-      "Extensive color and typography options",
-      "Custom layouts and spacing controls",
-      "Header and footer builder with multiple styles"
+      "Sticky headers that stay visible as users scroll",
+      "Transparent headers for beautiful hero sections",
+      "Custom navigation menus with multiple style options",
+      "Mobile-friendly responsive headers"
     ]
   },
   {
-    title: "Performance Optimized",
-    description: "Build websites that load fast and perform well on all devices.",
-    image: "https://via.placeholder.com/800x500?text=Performance+Feature",
+    title: "Custom Footer Builder",
+    description: "Design custom footers that match your brand and provide all the information your visitors need.",
+    image: "/images/features/Footer-Builder-Video.png",
     features: [
-      "Lightweight and clean code for fast loading",
-      "Mobile-optimized for speed on all devices",
-      "SEO friendly structure for better rankings",
-      "Optimized image handling and lazy loading"
+      "Multiple footer layouts with customizable columns",
+      "Widget areas for dynamic content",
+      "Copyright text customization",
+      "Social media integration options"
     ]
   },
   {
-    title: "WooCommerce Ready",
-    description: "Create stunning e-commerce stores with our WooCommerce integration.",
-    image: "https://via.placeholder.com/800x500?text=WooCommerce+Feature",
+    title: "Blog Layouts & Customization",
+    description: "Create beautiful blog pages with multiple layout options and customization features.",
+    image: "/images/features/blog-layouts.png",
     features: [
-      "Beautiful product page layouts",
-      "Customizable shop pages and categories",
-      "Optimized checkout process",
+      "Multiple blog layout options (grid, list, masonry)",
+      "Custom post templates for different content types",
+      "Advanced typography and color controls",
+      "Featured posts and content organization options"
+    ]
+  },
+  {
+    title: "WooCommerce Integration",
+    description: "Build professional e-commerce stores with our deep WooCommerce integration.",
+    image: "/images/features/white-lable-visual.png",
+    features: [
+      "Beautiful product page layouts and galleries",
+      "Customizable shop pages and category displays",
+      "Optimized checkout process for higher conversions",
       "Cart and mini-cart customization options"
     ]
   }
