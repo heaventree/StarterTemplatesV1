@@ -10,6 +10,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import Roadmap from "@/pages/Roadmap";
 import FeaturesPage from "@/pages/features-page";
+import FeaturesBuilderPage from "@/pages/features-builder-page";
 import AdminLoginPage from "@/pages/admin/login-page";
 import TemplatesPage from "@/pages/admin/templates-page";
 import CategoriesPage from "@/pages/admin/categories-page";
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/roadmap" component={Roadmap} />
       <Route path="/features" component={FeaturesPage} />
+      <Route path="/features-builder" component={FeaturesBuilderPage} />
       
       {/* Admin Routes */}
       <Route path="/dashboard/login" component={AdminLoginPage} />
