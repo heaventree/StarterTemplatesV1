@@ -1,34 +1,22 @@
 import { list } from '@keystone-6/core';
 import { text, relationship, select, integer, checkbox } from '@keystone-6/core/fields';
 import { document } from '@keystone-6/fields-document';
-import type { BaseAccessArgs, ListOperationAccessControl, ListConfig, BaseListTypeInfo } from '@keystone-6/core/types';
 
-// Define type for session data
-type SessionData = {
-  data?: {
-    isAdmin?: boolean;
-  };
-};
-
-// Define default access permissions
-const defaultAccess = {
-  operation: {
-    // By default, we only allow admins to mutate data
-    create: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
-    update: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
-    delete: ({ session }: { session?: SessionData }) => session?.data?.isAdmin || false,
-    // Read access for everyone
-    query: () => true,
-  },
+// Simple function to check if a user is an admin
+const isAdmin = ({ session }: { session?: { data?: { isAdmin?: boolean } } }) => {
+  return !!session?.data?.isAdmin;
 };
 
 export const lists = {
   User: list({
     access: {
       operation: {
-        ...defaultAccess.operation,
-        // Extra protection for user data
-        query: ({ session }) => session?.data?.isAdmin || false,
+        // Only admins can create, update, or delete users
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+        // Only admins can query users
+        query: isAdmin,
       },
     },
     fields: {
@@ -47,7 +35,16 @@ export const lists = {
   }),
 
   FeatureCategory: list({
-    access: defaultAccess,
+    access: {
+      operation: {
+        // Only admins can create, update, or delete categories
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+        // Anyone can read categories
+        query: () => true,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       slug: text({ 
@@ -60,7 +57,16 @@ export const lists = {
   }),
 
   Feature: list({
-    access: defaultAccess,
+    access: {
+      operation: {
+        // Only admins can create, update, or delete features
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+        // Anyone can read features
+        query: () => true,
+      },
+    },
     fields: {
       title: text({ validation: { isRequired: true } }),
       slug: text({ 
@@ -99,7 +105,16 @@ export const lists = {
   }),
 
   FeatureHighlight: list({
-    access: defaultAccess,
+    access: {
+      operation: {
+        // Only admins can create, update, or delete highlights
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+        // Anyone can read highlights
+        query: () => true,
+      },
+    },
     fields: {
       title: text({ validation: { isRequired: true } }),
       description: text({ ui: { displayMode: 'textarea' } }),
@@ -121,7 +136,16 @@ export const lists = {
   }),
 
   Testimonial: list({
-    access: defaultAccess,
+    access: {
+      operation: {
+        // Only admins can create, update, or delete testimonials
+        create: isAdmin,
+        update: isAdmin,
+        delete: isAdmin,
+        // Anyone can read testimonials
+        query: () => true,
+      },
+    },
     fields: {
       name: text({ validation: { isRequired: true } }),
       role: text(),
