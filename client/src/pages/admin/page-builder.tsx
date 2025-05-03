@@ -1,0 +1,95 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'wouter';
+import PageBuilder from '@/components/PageBuilder';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+
+export default function PageBuilderPage() {
+  const [pageTitle, setPageTitle] = useState('Untitled Page');
+  const [savedContent, setSavedContent] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [, navigate] = useNavigate();
+
+  const handleSave = async (content: string) => {
+    try {
+      setIsSaving(true);
+
+      // Here you would make an API call to save the page content to the database
+      // For now, we'll just update the local state
+      setSavedContent(content);
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      alert('Page saved successfully!');
+    } catch (error) {
+      console.error('Error saving page:', error);
+      alert('Failed to save page. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleExitEditor = () => {
+    setIsNavigating(true);
+
+    // Ask for confirmation if there are unsaved changes
+    const hasUnsavedChanges = true; // You would need to implement actual change tracking
+    if (hasUnsavedChanges) {
+      const confirmExit = window.confirm('You have unsaved changes. Are you sure you want to exit?');
+      if (!confirmExit) {
+        setIsNavigating(false);
+        return;
+      }
+    }
+
+    navigate('/admin');
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <div className="container mx-auto px-4 py-8 flex-grow">
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Page Builder</CardTitle>
+            <CardDescription>Create and edit your website pages</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="mb-4">
+              <label htmlFor="page-title" className="block text-sm font-medium text-gray-700 mb-1">
+                Page Title
+              </label>
+              <Input
+                id="page-title"
+                value={pageTitle}
+                onChange={(e) => setPageTitle(e.target.value)}
+                className="max-w-md"
+              />
+            </div>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button variant="outline" onClick={handleExitEditor} disabled={isNavigating}>
+              {isNavigating ? 'Exiting...' : 'Exit Editor'}
+            </Button>
+            <Button onClick={() => handleSave(savedContent)} disabled={isSaving}>
+              {isSaving ? 'Saving...' : 'Save Page'}
+            </Button>
+          </CardFooter>
+        </Card>
+        
+        <PageBuilder 
+          initialContent={savedContent}
+          onSave={handleSave}
+        />
+      </div>
+      
+      <Footer />
+    </div>
+  );
+}
