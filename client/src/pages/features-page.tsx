@@ -243,7 +243,7 @@ export default function FeaturesPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                   </div>
-                  <span className="text-sm">Site Builder</span>
+                  <span className="text-sm">Section Builder</span>
                 </div>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
