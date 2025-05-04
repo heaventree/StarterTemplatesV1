@@ -219,9 +219,11 @@ export default function FeaturesPage() {
                 {/* Top Row */}
                 <div className="grid grid-cols-5 gap-8 mb-8">
                   <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-10 h-10 mb-3">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.5">
-                        <path d="M4 8h16M4 8v8a4 4 0 004 4h4M4 8V6a2 2 0 012-2h.93a2 2 0 011.664.89l.812 1.22A2 2 0 0110.07 7H12a2 2 0 012 2v5" />
+                    <div className="w-12 h-12 mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                        <path d="M4 15l16 0" />
                       </svg>
                     </div>
                     <span className="text-white text-lg font-medium">Header Builder</span>
@@ -229,8 +231,10 @@ export default function FeaturesPage() {
                   
                   <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
                     <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.5">
-                        <path d="M4 8h16M4 8v8a4 4 0 004 4h4M4 8V6a2 2 0 012-2h.93a2 2 0 011.664.89l.812 1.22A2 2 0 0110.07 7H12a2 2 0 012 2v5" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                        <path d="M4 15l16 0" />
                       </svg>
                     </div>
                     <span className="text-white text-lg font-medium">Footer Builder</span>
