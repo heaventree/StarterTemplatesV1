@@ -192,7 +192,7 @@ export default function FeaturesPage() {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
+        <section className="pt-28 pb-16 lg:pt-40 lg:pb-24 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
           {/* Hero overlay pattern */}
           <div className="absolute inset-0 z-0 opacity-20">
             <img 
@@ -205,39 +205,39 @@ export default function FeaturesPage() {
           {/* Gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#5e2eff]/80 to-[#a66fff]/80 opacity-90"></div>
           
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-lexend font-bold text-white mb-6 leading-tight">
-              Customise <span className="text-[#edf6f9]">Everything</span>
-            </h1>
-            <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
-              Do More in Less Time. Without Coding!
-            </p>
-            
-            {/* Feature Icons */}
-            <div className="flex justify-center gap-4 mb-12 flex-wrap">
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
-                <img src="/images/features/icons/Advanced-Header.svg" alt="Headers" className="h-8 w-8 mb-2" />
-                <span className="text-sm">Headers</span>
-              </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
-                <img src="/images/features/icons/footer-builder-icon.svg" alt="Footers" className="h-8 w-8 mb-2" />
-                <span className="text-sm">Footers</span>
-              </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
-                <img src="/images/features/icons/Colors-Typography.svg" alt="Colors" className="h-8 w-8 mb-2" />
-                <span className="text-sm">Colors</span>
-              </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
-                <img src="/images/features/icons/Blog-Pro.svg" alt="Blog" className="h-8 w-8 mb-2" />
-                <span className="text-sm">Blog</span>
-              </div>
-              <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
-                <img src="/images/features/icons/WooCommerce.svg" alt="WooCommerce" className="h-8 w-8 mb-2" />
-                <span className="text-sm">WooCommerce</span>
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-lexend font-bold text-white mb-6 leading-tight">
+                Customise <span className="text-[#edf6f9]">Everything</span>
+              </h1>
+              <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+                Do More in Less Time. Without Coding!
+              </p>
+              
+              {/* Feature Icons */}
+              <div className="flex justify-center gap-4 mb-12 flex-wrap">
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
+                  <img src="/images/features/icons/Advanced-Header.svg" alt="Headers" className="h-8 w-8 mb-2" />
+                  <span className="text-sm">Headers</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
+                  <img src="/images/features/icons/footer-builder-icon.svg" alt="Footers" className="h-8 w-8 mb-2" />
+                  <span className="text-sm">Footers</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
+                  <img src="/images/features/icons/Colors-Typography.svg" alt="Colors" className="h-8 w-8 mb-2" />
+                  <span className="text-sm">Colors</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
+                  <img src="/images/features/icons/Blog-Pro.svg" alt="Blog" className="h-8 w-8 mb-2" />
+                  <span className="text-sm">Blog</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-6 py-4 w-28 hover:bg-white/20 transition-all">
+                  <img src="/images/features/icons/WooCommerce.svg" alt="WooCommerce" className="h-8 w-8 mb-2" />
+                  <span className="text-sm">WooCommerce</span>
+                </div>
               </div>
             </div>
-            
-
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#5e2eff]/20 pointer-events-none"></div>
         </section>
