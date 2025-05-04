@@ -237,28 +237,7 @@ export default function FeaturesPage() {
               </div>
             </div>
             
-            {/* Stats Box */}
-            <div className="bg-white/10 backdrop-blur-md rounded-xl p-8 max-w-4xl mx-auto flex flex-col items-center">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">280+</div>
-                  <div className="text-sm">Ready-to-use Templates</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">17</div>
-                  <div className="text-sm">Feature Modules</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold mb-2">24/7</div>
-                  <div className="text-sm">Priority Support</div>
-                </div>
-              </div>
-              
-              {/* CTA Button */}
-              <Button className="mt-10 px-12 py-6 rounded-full bg-[#ff6f61] text-white hover:bg-[#ff5e50] border-0 text-lg font-semibold">
-                Get Started Today
-              </Button>
-            </div>
+
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#5e2eff]/20 pointer-events-none"></div>
         </section>
