@@ -206,8 +206,8 @@ export default function FeaturesPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#5e2eff]/80 to-[#a66fff]/80 opacity-90"></div>
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Customise Everything
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-lexend font-bold text-white mb-6 leading-tight">
+              Customise <span className="text-[#edf6f9]">Everything</span>
             </h1>
             <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
               Do More in Less Time. Without Coding!
