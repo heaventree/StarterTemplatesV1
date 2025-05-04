@@ -466,7 +466,7 @@ export default function FeaturesPage() {
                       </TooltipContent>
                     </Tooltip>
                   </div>
-              </TooltipProvider>
+                </TooltipProvider>
               </div>
             </div>
           </div>
