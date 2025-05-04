@@ -258,8 +258,13 @@ export default function FeaturesPage() {
                 </div>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 6h16" />
+                      <path d="M4 12h16" />
+                      <path d="M4 18h12" />
+                      <path d="M18 18h2" />
+                      <path d="M4 12v6" />
+                      <path d="M20 12v6" />
                     </svg>
                   </div>
                   <span className="text-sm">Advanced Header</span>
