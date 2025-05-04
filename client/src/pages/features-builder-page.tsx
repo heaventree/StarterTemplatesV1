@@ -1,192 +1,46 @@
-import React from "react";
-import { Link } from "wouter";
+import React, { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Check } from "lucide-react";
 
-// Types
-interface FeatureHighlight {
-  title: string;
-  description: string;
-}
-
-interface Feature {
-  id: number;
-  title: string;
-  slug: string;
-  icon: string;
-  shortDescription: string;
-  image: string;
-  highlights: FeatureHighlight[];
-}
-
-interface FeatureOverview {
-  title: string;
-  icon: string;
-  description: string;
-  features: string[];
-}
-
-interface SiteBuilderFeature {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  company: string;
-  quote: string;
-  avatar: string;
-}
-
-// This version of the features page simulates being created through our page builder
-// but actually uses the exact same structure and styles as the original features-page.tsx
+/**
+ * This is our features page built with our page builder
+ * We're focusing on creating specific elements one at a time
+ */
 export default function FeaturesBuilderPage() {
-  // Feature highlights data - same as original
-  const featuresOverview: FeatureOverview[] = [
-    {
-      title: "Easy Customization",
-      icon: "/images/features/icons/Colors-Typography.svg",
-      description: "Customize every aspect of your website with intuitive controls and options",
-      features: [
-        "Global color controls",
-        "Typography options",
-        "Spacing controls",
-        "Layout customization"
-      ]
-    },
-    {
-      title: "Performance Optimized",
-      icon: "/images/features/icons/Advanced-Header.svg",
-      description: "Build websites that load quickly and provide a smooth experience for visitors",
-      features: [
-        "Lightweight code",
-        "Optimized assets",
-        "Caching integration",
-        "Mobile optimization"
-      ]
-    },
-    {
-      title: "SEO Friendly",
-      icon: "/images/features/icons/Blog-Pro.svg",
-      description: "Rank higher in search results with built-in SEO optimizations",
-      features: [
-        "Schema markup",
-        "Fast loading times",
-        "Mobile-friendly designs",
-        "Clean code structure"
-      ]
-    }
-  ];
-
-  // Main features data - same as original
-  const features: Feature[] = [
-    {
-      id: 1,
-      title: "Header Builder",
-      slug: "header-builder",
-      icon: "/images/features/icons/Advanced-Header.svg",
-      shortDescription: "Customize your site header with flexible options",
-      image: "/images/features/sticky-header-pro-new.png",
-      highlights: [
-        { title: "Sticky Headers", description: "Headers that stay visible while scrolling" },
-        { title: "Transparent Headers", description: "For beautiful hero sections with overlays" },
-        { title: "Multiple Layouts", description: "Choose from various header designs" }
-      ]
-    },
-    {
-      id: 2,
-      title: "Footer Builder",
-      slug: "footer-builder",
-      icon: "/images/features/icons/footer-builder-icon.svg",
-      shortDescription: "Design professional footers that match your brand",
-      image: "/images/features/footer-builder.png",
-      highlights: [
-        { title: "Multiple Columns", description: "Flexible column layouts" },
-        { title: "Widget Areas", description: "Add widgets to any footer section" },
-        { title: "Copyright Bar", description: "Customizable copyright section" }
-      ]
-    }
-  ];
-
-  // Site builder features data - same as original
-  const siteBuilderFeatures: SiteBuilderFeature[] = [
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-      </svg>,
-      title: "Layout Control",
-      description: "Full control over page layouts with intuitive controls for spacing, alignment, and organization."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-      </svg>,
-      title: "Global Colors",
-      description: "Set your brand colors once and apply them consistently across your entire website with ease."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-      </svg>,
-      title: "Typography Settings",
-      description: "Choose from hundreds of web fonts and customize sizes, weights, and styles for a perfect typographic design."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-      </svg>,
-      title: "Mobile Optimization",
-      description: "Ensure your website looks perfect on all devices with built-in responsive design controls."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-      </svg>,
-      title: "Live Customizer",
-      description: "See changes in real-time as you customize your website with the intuitive visual editor."
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#6f42c1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-      </svg>,
-      title: "Custom Widgets",
-      description: "Add functionality to your website with a wide range of widgets and content elements."
-    }
-  ];
-
-  // Testimonials data - same as original
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      role: "Web Designer",
-      company: "Creative Studios",
-      quote: "The templates and features have completely transformed my workflow. I can now build beautiful websites in half the time it used to take me.",
-      avatar: "/images/avatars/testimonial-1.jpg"
-    },
-    {
-      id: 2,
-      name: "Michael Chen",
-      role: "Agency Owner",
-      company: "Digital Spark",
-      quote: "My team relies on these templates for all our client projects. The customization options and performance are unmatched.",
-      avatar: "/images/avatars/testimonial-2.jpg"
-    },
-    {
-      id: 3,
-      name: "Emily Rodriguez",
-      role: "Freelancer",
-      company: "Self-employed",
-      quote: "As a solo designer, these templates have been a game-changer for my business. I can deliver professional results to my clients quickly.",
-      avatar: "/images/avatars/testimonial-3.jpg"
-    }
-  ];
+  // State for storing our page builder content
+  const [pageContent, setPageContent] = useState<string>("");
+  
+  // Simulating content loaded from the page builder
+  useEffect(() => {
+    // This would normally come from our database, saved by the page builder
+    const builderContent = `
+      <div class="hero-section">
+        <!-- Stats Box Section -->
+        <div class="stats-box">
+          <div class="stat-item">
+            <div class="stat-number">280+</div>
+            <div class="stat-label">Ready-to-use Templates</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">17</div>
+            <div class="stat-label">Feature Modules</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Priority Support</div>
+          </div>
+        </div>
+        
+        <!-- CTA Button -->
+        <div class="cta-button-container">
+          <button class="cta-button">Get Started Today</button>
+        </div>
+      </div>
+    `;
+    
+    setPageContent(builderContent);
+  }, []);
 
   // This is a direct copy of the original features-page.tsx JSX structure
   // But we frame it as if it was built using our page builder
