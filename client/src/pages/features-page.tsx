@@ -215,7 +215,8 @@ export default function FeaturesPage() {
               </p>
               
               {/* Feature Icons */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-12 max-w-5xl mx-auto">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-4 max-w-5xl mx-auto">
+                {/* Top Row */}
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -228,51 +229,6 @@ export default function FeaturesPage() {
                     </svg>
                   </div>
                   <span className="text-sm">Header Builder</span>
-                </div>
-                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
-                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                    </svg>
-                  </div>
-                  <span className="text-sm">Colors & Typography</span>
-                </div>
-                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
-                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                  </div>
-                  <span className="text-sm">Section Builder</span>
-                </div>
-                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
-                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  </div>
-                  <span className="text-sm">WooCommerce</span>
-                </div>
-                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
-                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <span className="text-sm">Blog Layouts</span>
-                </div>
-                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
-                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 6h16" />
-                      <path d="M4 12h16" />
-                      <path d="M4 18h12" />
-                      <path d="M18 18h2" />
-                      <path d="M4 12v6" />
-                      <path d="M20 12v6" />
-                    </svg>
-                  </div>
-                  <span className="text-sm">Advanced Header</span>
                 </div>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
@@ -290,10 +246,10 @@ export default function FeaturesPage() {
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                   </div>
-                  <span className="text-sm">Integrations</span>
+                  <span className="text-sm">Section Builder</span>
                 </div>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
@@ -302,6 +258,55 @@ export default function FeaturesPage() {
                     </svg>
                   </div>
                   <span className="text-sm">Full Page Layouts</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
+                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm">Blog Layouts</span>
+                </div>
+              </div>
+              
+              {/* Second Row */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-12 max-w-5xl mx-auto">
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
+                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                  </div>
+                  <span className="text-sm">Colors & Typography</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
+                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm">WooCommerce</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
+                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <span className="text-sm">Integrations</span>
+                </div>
+                <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
+                  <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                      <path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                      <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                      <path d="M8.7 10.7l6.6 -3.4" />
+                      <path d="M8.7 13.3l6.6 3.4" />
+                    </svg>
+                  </div>
+                  <span className="text-sm">Social Accounts</span>
                 </div>
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
