@@ -277,12 +277,12 @@ export default function FeaturesPage() {
                 <div className="flex flex-col items-center bg-white/10 backdrop-blur-md rounded-xl px-4 py-4 hover:bg-white/20 transition-all">
                   <div className="h-8 w-8 mb-2 flex items-center justify-center text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 transform rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M4 6h16" />
-                      <path d="M4 12h16" />
-                      <path d="M4 18h12" />
-                      <path d="M18 18h2" />
-                      <path d="M4 12v6" />
-                      <path d="M20 12v6" />
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <path d="M4 8h16" />
+                      <path d="M12 20h-6a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v6" />
+                      <path d="M8 4v4" />
+                      <path d="M16 19h6" />
+                      <path d="M19 16v6" />
                     </svg>
                   </div>
                   <span className="text-sm">Footer Builder</span>
