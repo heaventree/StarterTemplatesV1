@@ -192,7 +192,7 @@ export default function FeaturesPage() {
       
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="pt-28 pb-16 lg:pt-36 lg:pb-20 bg-gradient-to-r from-[#5e2eff] to-[#a66fff] text-white relative overflow-hidden">
+        <section className="pt-28 pb-16 lg:pt-40 lg:pb-24 relative bg-gradient-to-br from-[#dd4f93] via-[#8c21a1] to-[#1e056f] overflow-hidden">
           {/* Hero overlay pattern */}
           <div className="absolute inset-0 z-0 opacity-20">
             <img 
@@ -203,7 +203,7 @@ export default function FeaturesPage() {
           </div>
           
           {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#5e2eff]/80 to-[#a66fff]/80 opacity-90"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#dd4f93]/80 via-[#8c21a1]/80 to-[#1e056f]/80 opacity-90"></div>
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-lexend font-bold text-white mb-6 leading-tight">
@@ -239,7 +239,7 @@ export default function FeaturesPage() {
             
 
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#5e2eff]/20 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1e056f]/20 pointer-events-none"></div>
         </section>
         
         {/* Features Overview Section */}
