@@ -3,7 +3,8 @@ import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ArrowRight, Check } from "lucide-react";
+import { CheckCircle2, ArrowRight, Check, Info } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 // Types
 interface FeatureHighlight {
@@ -43,7 +44,56 @@ interface Testimonial {
   avatar: string;
 }
 
+// Define tooltip content for feature cards
+interface FeatureTooltip {
+  title: string;
+  description: string;
+}
+
 export default function FeaturesPage() {
+  // Tooltip data for feature cards
+  const featureTooltips: Record<string, FeatureTooltip> = {
+    headerBuilder: {
+      title: "Header Builder",
+      description: "Design fully customizable headers with easy drag-and-drop tools. Create sticky headers, transparent headers, and multi-row layouts to enhance navigation."
+    },
+    footerBuilder: {
+      title: "Footer Builder",
+      description: "Create professional footers that match your brand. Add multiple columns, widgets, and social media links to enhance user engagement."
+    },
+    sectionBuilder: {
+      title: "Section Builder",
+      description: "Build custom page sections with drag-and-drop simplicity. Create hero sections, feature grids, testimonial sliders, and more without coding."
+    },
+    fullPageLayouts: {
+      title: "Full Page Layouts",
+      description: "Choose from dozens of pre-designed page layouts for any purpose. Easily modify them to match your brand and content needs."
+    },
+    blogLayouts: {
+      title: "Blog Layouts",
+      description: "Create stunning blog pages with various layouts including grid, list, masonry, and magazine-style displays for optimal content presentation."
+    },
+    unlimitedColours: {
+      title: "Unlimited Colours",
+      description: "Choose from unlimited color options with advanced color palettes. Set global colors that apply throughout your site for consistent branding."
+    },
+    typography: {
+      title: "Typography",
+      description: "Access hundreds of fonts and customize every aspect of your typography, including size, weight, line height, and letter spacing."
+    },
+    wooCommerce: {
+      title: "WooCommerce",
+      description: "Create stunning e-commerce stores with custom product pages, checkout experiences, and cart functionality that drives conversions."
+    },
+    integrations: {
+      title: "Integrations",
+      description: "Connect your website to popular services and tools including payment processors, email marketing platforms, and analytics services."
+    },
+    socialAccounts: {
+      title: "Social Accounts",
+      description: "Add social media integration to boost your online presence. Include share buttons, follow links, and feed displays from major platforms."
+    }
+  };
   // Feature highlights data
   const featuresOverview: FeatureOverview[] = [
     {
@@ -216,115 +266,207 @@ export default function FeaturesPage() {
               
               {/* Feature Icons */}
               <div className="w-full max-w-6xl mx-auto px-4 mb-12">
-                {/* Top Row */}
-                <div className="grid grid-cols-5 gap-8 mb-8">
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                        <path d="M4 15l16 0" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Header Builder</span>
+                <TooltipProvider>
+                  {/* Top Row */}
+                  <div className="grid grid-cols-5 gap-8 mb-8">
+                    {/* Header Builder */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                              <path d="M4 15l16 0" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Header Builder</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.headerBuilder.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.headerBuilder.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Footer Builder */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                              <path d="M4 15l16 0" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Footer Builder</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.footerBuilder.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.footerBuilder.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Section Builder */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Section Builder</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.sectionBuilder.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.sectionBuilder.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Full Page Layouts */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Full Page Layouts</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.fullPageLayouts.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.fullPageLayouts.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Blog Layouts */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Blog Layouts</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.blogLayouts.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.blogLayouts.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full transform rotate-180" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                        <path d="M4 15l16 0" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Footer Builder</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Section Builder</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Full Page Layouts</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Blog Layouts</span>
-                  </div>
-                </div>
                 
-                {/* Second Row */}
-                <div className="grid grid-cols-5 gap-8">
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Unlimited Colours</span>
+                  {/* Second Row */}
+                  <div className="grid grid-cols-5 gap-8">
+                    {/* Unlimited Colours */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Unlimited Colours</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.unlimitedColours.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.unlimitedColours.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Typography */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <path d="M4 20l3 0" />
+                              <path d="M14 20l7 0" />
+                              <path d="M6.9 15l6.9 0" />
+                              <path d="M10.2 6.3l5.8 13.7" />
+                              <path d="M5 20l6 -16l2 0l7 16" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Typography</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.typography.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.typography.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* WooCommerce */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">WooCommerce</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.wooCommerce.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.wooCommerce.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Integrations */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Integrations</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.integrations.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.integrations.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                    
+                    {/* Social Accounts */}
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all cursor-help">
+                          <div className="w-12 h-12 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                              <path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                              <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                              <path d="M8.7 10.7l6.6 -3.4" />
+                              <path d="M8.7 13.3l6.6 3.4" />
+                            </svg>
+                          </div>
+                          <span className="text-white text-lg font-medium">Social Accounts</span>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="p-4 max-w-xs bg-white/90 backdrop-blur-lg">
+                        <h3 className="font-bold text-gray-900 mb-1">{featureTooltips.socialAccounts.title}</h3>
+                        <p className="text-gray-700">{featureTooltips.socialAccounts.description}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 20l3 0" />
-                        <path d="M14 20l7 0" />
-                        <path d="M6.9 15l6.9 0" />
-                        <path d="M10.2 6.3l5.8 13.7" />
-                        <path d="M5 20l6 -16l2 0l7 16" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Typography</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">WooCommerce</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Integrations</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.2">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                        <path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                        <path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                        <path d="M8.7 10.7l6.6 -3.4" />
-                        <path d="M8.7 13.3l6.6 3.4" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Social Accounts</span>
-                  </div>
-                </div>
+              </TooltipProvider>
               </div>
             </div>
           </div>
