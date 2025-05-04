@@ -281,6 +281,20 @@ export default function FeaturesPage() {
                   
                   <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
                     <div className="w-12 h-12 mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M4 20l3 0" />
+                        <path d="M14 20l7 0" />
+                        <path d="M6.9 15l6.9 0" />
+                        <path d="M10.2 6.3l5.8 13.7" />
+                        <path d="M5 20l6 -16l2 0l7 16" />
+                      </svg>
+                    </div>
+                    <span className="text-white text-lg font-medium">Typography</span>
+                  </div>
+                  
+                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
+                    <div className="w-12 h-12 mb-4">
                       <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
@@ -309,20 +323,6 @@ export default function FeaturesPage() {
                       </svg>
                     </div>
                     <span className="text-white text-lg font-medium">Social Accounts</span>
-                  </div>
-                  
-                  <div className="flex flex-col items-center justify-center bg-white/10 backdrop-blur-md rounded-xl p-5 hover:bg-white/20 transition-all">
-                    <div className="w-12 h-12 mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M4 20l3 0" />
-                        <path d="M14 20l7 0" />
-                        <path d="M6.9 15l6.9 0" />
-                        <path d="M10.2 6.3l5.8 13.7" />
-                        <path d="M5 20l6 -16l2 0l7 16" />
-                      </svg>
-                    </div>
-                    <span className="text-white text-lg font-medium">Typography</span>
                   </div>
                 </div>
               </div>
