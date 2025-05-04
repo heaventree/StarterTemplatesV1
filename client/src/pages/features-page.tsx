@@ -409,7 +409,253 @@ export default function FeaturesPage() {
           </div>
         </section>
 
-        {/* Site Builder Section */}
+        {/* Header Builder Section */}
+        <section className="py-20 bg-[#f0f7ff]">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Craft Professional Headers
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Design personalized headers with dynamic elements and enhance navigation for an improved user experience.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+              <div>
+                <div className="relative rounded-xl overflow-hidden">
+                  <img 
+                    src="/features-astra/Astra Pro Addon - Do More in Less Time. Without Coding!_files/Header-Builder-Video.png" 
+                    alt="Header Builder" 
+                    className="rounded-xl shadow-xl max-w-full h-auto"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-xl">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="bg-white p-8 rounded-xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-6 text-gray-900">Header Builder Features</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f0f7ff] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#4a8cff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Language Switcher</h4>
+                        <p className="text-gray-600 text-sm">Add language options to make your site accessible worldwide</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#fff2f0] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#ff6b6b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Toggle Button</h4>
+                        <p className="text-gray-600 text-sm">Create responsive navigation with collapsible menu options</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f4ffef] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#66c657]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Social Links</h4>
+                        <p className="text-gray-600 text-sm">Connect your website to social profiles and grow your audience</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Footer Builder Section */}
+        <section className="py-20 bg-[#f9faff]">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Design Stunning Footers
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Create beautiful, functional footers that help visitors navigate your site and boost engagement.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+              <div className="order-2 lg:order-1">
+                <div className="bg-white p-8 rounded-xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-6 text-gray-900">Footer Builder Features</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f0f7ff] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#4a8cff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Widget Areas</h4>
+                        <p className="text-gray-600 text-sm">Add custom content blocks and organize your footer information</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#fff2f0] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#ff6b6b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Copyright Section</h4>
+                        <p className="text-gray-600 text-sm">Easily add and customize your copyright information</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f4ffef] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#66c657]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Social Media Integration</h4>
+                        <p className="text-gray-600 text-sm">Connect with your audience across all social platforms</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="order-1 lg:order-2">
+                <div className="relative rounded-xl overflow-hidden">
+                  <img 
+                    src="/features-astra/Astra Pro Addon - Do More in Less Time. Without Coding!_files/Footer-Builder-Video.png" 
+                    alt="Footer Builder" 
+                    className="rounded-xl shadow-xl max-w-full h-auto"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-xl">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Section Builder Section */}
+        <section className="py-20 bg-[#fff0fe]">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                Create Custom Page Sections
+              </h2>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Use the powerful section builder to create and customize different parts of your website with ease.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+              <div>
+                <div className="relative rounded-xl overflow-hidden">
+                  <img 
+                    src="/features-astra/Astra Pro Addon - Do More in Less Time. Without Coding!_files/Site-Builder-Video.png" 
+                    alt="Section Builder" 
+                    className="rounded-xl shadow-xl max-w-full h-auto"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center shadow-xl">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                        <path fillRule="evenodd" d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.348c1.295.712 1.295 2.573 0 3.285L7.28 19.991c-1.25.687-2.779-.217-2.779-1.643V5.653z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div className="bg-white p-8 rounded-xl shadow-lg">
+                  <h3 className="text-2xl font-bold mb-6 text-gray-900">Section Builder Features</h3>
+                  
+                  <div className="space-y-6">
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f0f7ff] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#4a8cff]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">All Layout Types</h4>
+                        <p className="text-gray-600 text-sm">Create header, footer, hooks, posts and single page layouts</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#fff2f0] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#ff6b6b]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Visual Page Builder</h4>
+                        <p className="text-gray-600 text-sm">Drag and drop elements to design your perfect page layout</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+                      <div className="w-24 shrink-0">
+                        <div className="w-16 h-16 bg-[#f4ffef] rounded-lg flex items-center justify-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#66c657]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-lg mb-1">Responsive Design</h4>
+                        <p className="text-gray-600 text-sm">Ensure your sections look perfect on all devices and screen sizes</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* Full Page Layouts Section */}
         <section className="py-20 bg-[#f9f9ff]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
